@@ -1,0 +1,11 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: gg_development
+  pool: 5
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: gg_test
+  pool: 5
+
