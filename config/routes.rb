@@ -1,4 +1,6 @@
 Gg::Application.routes.draw do
+  root to: 'landing#index'
+
   devise_for :users
 
   # The priority is based upon order of creation:
