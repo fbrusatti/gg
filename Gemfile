@@ -5,7 +5,15 @@ gem 'rails', '3.2.13'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+gem 'pg'
+
+gem 'devise'
+gem 'carrierwave'
+gem 'haml'
+gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
+                              :github => 'anjlab/bootstrap-rails'
+gem 'kaminari'
+gem 'rmagick'
 
 
 # Gems used only for assets and not required
@@ -22,17 +30,28 @@ end
 
 gem 'jquery-rails'
 
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
 
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
+group :development do
+  gem 'haml-rails'
+  gem 'better_errors'
+  gem 'brakeman',                require: false
+  gem 'letter_opener'
+  gem 'quiet_assets'
+  gem 'awesome_print'
+  gem 'debugger'
+end
 
-# Use unicorn as the app server
-# gem 'unicorn'
+group :development, :test do
+  gem 'rspec-rails', '~> 2.4', group: :development
+  gem 'factory_girl_rails', group: :development
+end
 
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'
+group :test do
+  gem 'capybara'
+  gem 'capybara-email'
+  gem 'capybara-webkit', '>= 1.0.0'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'shoulda-matchers'
+  gem 'capybara-select2'
+end
