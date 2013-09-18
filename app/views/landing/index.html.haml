@@ -1,12 +1,11 @@
-%form.form-signin
-  %h2.form-signin-heading Please sign in
-
-  %input.form-control{:autofocus => "", :placeholder => "Email address", :type => "text"}/
-
-  %input.form-control{:placeholder => "Password", :type => "password"}/
-
-  %label.checkbox
-    %input{:type => "checkbox", :value => "remember-me"}/
-    Remember me
-
-  %button.btn.btn-lg.btn-primary.btn-block{:type => "submit"} Sign in
+.landing
+  %form.form-signin
+    %h2.form-signin-heading Registrarse
+    %input.form-control{ autofocus: "",
+                         placeholder: "Direccion de Email",
+                        type: "text"}/
+    %input.form-control{ placeholder: "Contraseña", type: "password"}/
+    %label.checkbox
+      %input{ type: "checkbox", value: "remember-me"}/
+      Recordar
+    %button.btn.btn-lg.btn-primary.btn-block{ type: "submit"} Ingresar
