@@ -47,9 +47,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'capybara-email'
-  gem 'capybara-webkit', '>= 1.0.0'
+  gem 'capybara','1.1.2'
+  gem 'capybara-webkit', '0.12.0'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'shoulda-matchers'
