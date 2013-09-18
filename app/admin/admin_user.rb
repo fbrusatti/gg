@@ -8,6 +8,12 @@ ActiveAdmin.register AdminUser do
 
   filter :email
 
+  show do
+    attributes_table do
+        row(:email)
+    end
+  end
+
   form do |f|
     f.inputs I18n.t("active_admin.details_admin_user")  do
       f.input :email
