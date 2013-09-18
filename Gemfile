@@ -14,6 +14,9 @@ gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 gem 'kaminari'
 gem 'rmagick'
+# Gemfile in Rails >= 3.1
+gem 'activeadmin'
+gem "meta_search", '>= 1.1.0.pre'
 
 
 # Gems used only for assets and not required
