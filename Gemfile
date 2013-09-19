@@ -14,6 +14,9 @@ gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
                               :github => 'anjlab/bootstrap-rails'
 gem 'kaminari'
 gem 'rmagick'
+# Gemfile in Rails >= 3.1
+gem 'activeadmin'
+gem "meta_search", '>= 1.1.0.pre'
 
 
 # Gems used only for assets and not required
@@ -28,7 +31,7 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+gem 'jquery-rails','~> 2.3.0'
 
 
 group :development do
@@ -47,9 +50,8 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'capybara-email'
-  gem 'capybara-webkit', '>= 1.0.0'
+  gem 'capybara','1.1.2'
+  gem 'capybara-webkit', '0.12.0'
   gem 'database_cleaner'
   gem 'launchy'
   gem 'shoulda-matchers'
