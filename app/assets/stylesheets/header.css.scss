@@ -1,0 +1,11 @@
+@import "twitter/bootstrap";
+
+.menu-head {
+  @extend .nav;
+  @extend .nav-justified;
+}
+
+.menu-head li > a {
+  @extend .btn;
+  @extend .btn-primary;
+}
