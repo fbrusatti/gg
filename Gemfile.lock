@@ -124,6 +124,9 @@ GEM
       railties (>= 3.0.0)
     fastercsv (1.5.5)
     ffi (1.9.0)
+    font-awesome-sass-rails (3.0.2.2)
+      railties (>= 3.1.1)
+      sass-rails (>= 3.1.1)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     haml (4.0.3)
@@ -281,6 +284,7 @@ DEPENDENCIES
   debugger
   devise
   factory_girl_rails
+  font-awesome-sass-rails
   haml
   haml-rails
   jquery-rails (~> 2.3.0)
