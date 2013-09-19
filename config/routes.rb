@@ -1,7 +1,13 @@
 Gg::Application.routes.draw do
-  root to: 'landing#index'
 
+  devise_scope :user do
+    root to: 'devise/sessions#new'
+  end
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users
+  ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
