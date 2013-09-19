@@ -1,4 +1,11 @@
 es:
+  layouts:
+    header:
+      clients: Clientes
+      orders: Pedidos
+      estimates: Presupuestos
+      articles: Articulos
+      nose:
   activerecord:
     models:
       user: Usuario
@@ -9,6 +16,7 @@ es:
         created_at: Creado
         last_sign_in_at: Ultimo Ingreso
         sign_in_count: Cantidad de Ingresos
+        remember_me: Recordarme
       admin_user:
         email: Email
         current_sign_in_at:
