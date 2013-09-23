@@ -8,6 +8,7 @@ es:
       nose:
   activerecord:
     models:
+      location: Ubicación
       user: Usuario
       admin_user: Administrador
     attributes:
@@ -22,6 +23,10 @@ es:
         current_sign_in_at:
         last_sign_in_at: Ultimo Ingreso
         sign_in_count: Cantidad de Ingresos
+      location:
+        city: Ciudad
+        countri: País
+        state: Provincia  
   active_admin:
     details_user: "Detalle de Usuario"
     details_admin_user: "Detalle de Administrador"
