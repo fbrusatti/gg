@@ -54,3 +54,17 @@
   @extend .btn, .btn-lg, .btn-primary, .btn-block;
 }
 // End Form Sign in
+
+// For Errors
+// ----------
+.formErrors {
+  padding: 5px;
+  h5 { font-weight: bold; }
+  font-weight: bold;
+  ul li { color: red }
+  border: 1px solid gray
+}
+
+.field_with_errors {
+  textarea, input { border: 1px solid red}
+}
