@@ -1,3 +1,95 @@
-// Place all the styles related to the customers controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "twitter/bootstrap";
+
+// active color of the tabs
+.nav-tabs > li.active > a, .nav-tabs > li.active > a {
+  background-color: #E0DFDB !important;
+}
+
+// sub-header
+.sub-header {
+  display: block;
+}
+
+.sub-header > a{
+  margin: 5px;
+}
+
+// sub-header customer
+.customer-new {
+  @extend .btn, .btn-large, .btn-primary;
+}
+
+.customer-print {
+  @extend .btn, .btn-large, .btn-primary, .pull-right;
+}
+
+.customer-danger {
+   @extend .btn, .btn-large, .btn-danger;
+}
+
+.customer-save {
+   @extend .btn, .btn-large, .btn-primary;
+}
+
+#new_customer {
+  background-color: #E0DFDB;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+// tabs customer
+.customer-tabs {
+  @extend .nav, .nav-tabs;
+  li > a {
+    @extend .btn, .btn-large, .btn-success;
+  }
+}
+
+// form new customer data
+.new-customer {
+  @include make-row();
+  @extend .form-horizontal;
+  .input {
+    @extend .form-group;
+    label {
+      @extend .col-lg-2, .control-label;
+    }
+    input {
+      @extend .col-lg-3;
+    }
+  }
+
+  .input-group-addon {
+    font-size: 19px;
+  }
+
+}
+
+.new-customer .left, .right {
+  @include make-lg-column(6);
+  .title { font-size: 15pt;
+           margin: 20px; }
+}
+
+// handled errors
+.field_with_errors {
+  display: inline;
+}
+
+// show customer
+.show-customer {
+  background-color: #E0DFDB;
+  @include make-row();
+  @extend .form-horizontal;
+  .input {
+    @extend .form-group;
+    label {
+      @extend .col-lg-3, .control-label;
+    }
+  }
+
+  .left, .right {
+  @include make-lg-column(6);
+  .title { font-size: 15pt;
+           margin: 20px; }
+  }
+}

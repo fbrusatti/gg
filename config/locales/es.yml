@@ -26,7 +26,14 @@ es:
       location:
         city: Ciudad
         countri: País
-        state: Provincia  
+        state: Provincia
+  customers:    
+    sub_header:
+      new: Nuevo
+      cancel: Cancelar
+      print: Imprimir
+      save: Guardar
+      edit: Editar        
   active_admin:
     details_user: "Detalle de Usuario"
     details_admin_user: "Detalle de Administrador"
