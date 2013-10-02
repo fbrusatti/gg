@@ -1,0 +1,19 @@
+.sub-header
+  -if edit_or_new_page?(@customer)
+    %a.customer-save
+      %i.icon-save.icon-2x
+      = t('.save')
+    %a.customer-danger{href: "#{customers_path}"}
+      %i.icon-remove-sign.icon-2x
+      = t('.cancel')
+  -elsif show_page?(@customer)
+    %a.customer-new{ href: "#{edit_customer_path(@customer)}" }
+      %i.icon-edit.icon-2x
+      = "editar"
+  -else
+    %a.customer-new{ href: "#{new_customer_path}" }
+      %i.icon-plus-sign.icon-2x
+      = t('.new')
+    %a.customer-print{href: "#"}
+      %i.icon-print.icon-2x
+      = t('.print')

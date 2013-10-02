@@ -26,7 +26,81 @@ es:
       location:
         city: Ciudad
         countri: País
-        state: Provincia  
+        state: Provincia
+      customer:
+        name: Nombre
+        surname: Apellido
+        dni: D.N.I
+        phones: Telefonos
+        address: Dirección
+        dob: Nacimiento
+        email: Email  
+  customers:   
+    type_person:
+      customer: Cliente
+      supplier: Proveedor
+    type_iva:
+      non_registered_taxpayer: Consumidor Final 
+      tax_exempt: Excento de Iva
+      monotributista: Monotributista
+      registered_taxpayer: Responsable Inscripto
+    index:
+      list_all_customers: Listado de Clientes  
+    new:
+      customer_data: Datos Personales
+    new_customer_data:  
+      name: Nombre
+      surname: Apellido
+      address: Dirección
+      registered_name: Razón Social
+      gross_income: Ingreso Bruto
+      type_person: Tipo
+      dni: DNI
+      email: Email
+      cuit_cuil: CUIT/CUIL
+      phone: Teléfono
+      mobile_phone: Celular
+      type_iva: Tipo de IVA
+      comercial_data: Datos Comerciales
+      customer_data: Datos Personales
+    edit_customer_data:  
+      name: Nombre
+      surname: Apellido
+      address: Dirección
+      registered_name: Razón Social
+      gross_income: Ingreso Bruto
+      type_person: Tipo
+      dni: DNI
+      email: Email
+      cuit_cuil: CUIT/CUIL
+      phone: Teléfono
+      mobile_phone: Celular
+      type_iva: Tipo de IVA
+      comercial_data: Datos Comerciales
+      customer_data: Datos Personales  
+    show:
+      customer_data: Datos Personales  
+    show_customer_data:
+      name: Nombre
+      surname: Apellido
+      address: Dirección
+      registered_name: Razón Social
+      gross_income: Ingreso Bruto
+      type_person: Tipo
+      dni: DNI
+      email: Email
+      cuit_cuil: CUIT/CUIL
+      phone: Teléfono
+      mobile_phone: Celular
+      type_iva: Tipo de IVA
+      comercial_data: Datos Comerciales
+      customer_data: Datos Personales
+    sub_header:
+      new: Nuevo
+      cancel: Cancelar
+      print: Imprimir
+      save: Guardar
+      edit: Editar        
   active_admin:
     details_user: "Detalle de Usuario"
     details_admin_user: "Detalle de Administrador"
@@ -109,6 +183,13 @@ es:
       links:
         sign_in: "registrarse"
         forgot_your_password: "¿Olvidó su contraseña?"
+  flash:
+    customer: "Se ha %{message} exitosamente el Cliente"
+    error_update_form: Hubo un problema al actulizar
+    error_create_form: Hubo un problema al crear
+    created: creado
+    destroyed: borrado
+    updated: actualizado     
   views:
       pagination:
           truncate: "..."
