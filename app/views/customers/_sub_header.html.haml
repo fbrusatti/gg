@@ -7,7 +7,7 @@
       %i.icon-remove-sign.icon-2x
       = t('.cancel')
   -elsif show_page?(@customer)
-    %a.customer-new{ href: "#" }
+    %a.customer-new{ href: "#{edit_customer_path(@customer)}" }
       %i.icon-edit.icon-2x
       = "editar"
   -else
