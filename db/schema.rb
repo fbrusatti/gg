@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926145939) do
+ActiveRecord::Schema.define(:version => 20131001205446) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -59,6 +59,9 @@ ActiveRecord::Schema.define(:version => 20130926145939) do
     t.string   "address"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.string   "type_person"
+    t.string   "type_iva"
+    t.integer  "user_id"
   end
 
   create_table "locations", :force => true do |t|
