@@ -37,7 +37,8 @@ private
     customers = Customer.order("#{sort_column} #{sort_direction}")
     customers = customers.page(page).per_page(per_page)
     if params[:sSearch].present?
-      customers = customers.where("name like :search or surname like :search", search: "%#{params[:sSearch]}%")
+      customers = customers.where("name like :search or surname like :search", 
+                                  search: "%#{params[:sSearch]}%")
     end
     customers
   end

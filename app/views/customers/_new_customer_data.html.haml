@@ -35,5 +35,5 @@
       = f.text_field :registered_name, class: "form-control"    
     .input
       = f.label t('.type_iva')
-      = f.select :type_iva, CustomersHelper::TYPE_IVA.map { |i| [t("customers.type_iva.#{i}"), i] } 
+      = f.select :type_iva, type_iva_meth
     
