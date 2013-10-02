@@ -11,6 +11,9 @@
  *= require_self
  *= require_tree .
  *= require _font-awesome
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require dataTables/src/demo_table_jui
  */
 @import "twitter/bootstrap";
 
