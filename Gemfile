@@ -31,7 +31,7 @@ group :assets do
 end
 
 gem 'jquery-rails','~> 2.3.0'
-gem 'will_paginate'
+gem 'will_paginate', '>=3.0.pre3'
 
 
 group :development do

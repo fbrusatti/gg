@@ -312,4 +312,4 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   shoulda-matchers
   uglifier (>= 1.0.3)
-  will_paginate
+  will_paginate (>= 3.0.pre3)
