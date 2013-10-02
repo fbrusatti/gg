@@ -44,17 +44,21 @@
   }
 }
 
-// form new customer data
-.new-customer {
+// form new and edit customer data
+.new-customer, .edit-customer {
   @include make-row();
   @extend .form-horizontal;
   .input {
     @extend .form-group;
     label {
-      @extend .col-lg-2, .control-label;
+      @extend .col-lg-3, .control-label;
     }
     input {
-      @extend .col-lg-3;
+      @extend .col-lg-4;
+    }
+    select {
+      @extend .col-lg-4;
+      font-size: 19px;
     }
   }
 
@@ -64,10 +68,14 @@
 
 }
 
-.new-customer .left, .right {
+.new-customer .left, .right, .edit-customer .left, .right {
   @include make-lg-column(6);
   .title { font-size: 15pt;
            margin: 20px; }
+}
+
+.pretty-input {
+  @extend .form-control
 }
 
 // handled errors
