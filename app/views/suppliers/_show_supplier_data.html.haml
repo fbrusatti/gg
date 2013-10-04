@@ -1,0 +1,38 @@
+.show-supplier
+  .left
+    .title= t('.supplier_data')
+    .input
+      = label_tag t('.name')
+      = label_tag  @supplier.name ,nil , class: "form-control"
+    .input
+      = label_tag t('.surname')
+      = label_tag  @supplier.surname ,nil , class: "form-control"
+    .input
+      = label_tag t('.dni')
+      = label_tag  @supplier.dni ,nil , class: "form-control"
+    .input
+      = label_tag t('.cuit_cuil')
+      = label_tag  @supplier.cuit_cuil ,nil , class: "form-control"  
+    .input
+      = label_tag t('.address')
+      = label_tag @supplier.address, nil, class: "form-control"
+    .input
+      = label_tag t('.email')
+      = label_tag @supplier.email, nil, class: "form-control"
+    .input
+      = label_tag t('.phone')
+      = label_tag  @supplier.phone , nil, class: "form-control"
+    .input
+      = label_tag t('.mobile_phone')
+      = label_tag  @supplier.mobile_phone , nil, class: "form-control"
+  .right
+    .title= t('.comercial_data')    
+    .input
+      = label_tag t('.gross_income')
+      = label_tag @supplier.gross_income, nil, class: "form-control"
+    .input
+      = label_tag t('.registered_name')
+      = label_tag @supplier.registered_name, nil, class: "form-control"      
+    .input
+      = label_tag t('.type_iva')
+      = label_tag t("suppliers.type_iva.#{@supplier.type_iva}"), nil, class: "form-control"  

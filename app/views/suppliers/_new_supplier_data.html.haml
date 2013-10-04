@@ -1,0 +1,38 @@
+.new-supplier
+  .left
+    .title= t('.supplier_data')
+    .input
+      = f.label t('.name')
+      = f.text_field :name, class: "form-control"
+    .input
+      = f.label t('.surname')
+      = f.text_field :surname, class: "form-control"
+    .input
+      = f.label t('.dni')
+      = f.text_field :dni, class: "form-control"
+    .input
+      = f.label t('.cuit_cuil')
+      = f.text_field :cuit_cuil, class: "form-control"  
+    .input
+      = f.label t('.address')
+      = f.text_field :address, class: "form-control"
+    .input
+      = f.label t('.email')
+      = f.text_field :email, class: "form-control"
+    .input
+      = f.label t('.phone')
+      = f.text_field :phone , class: "form-control"
+    .input
+      = f.label t('.mobile_phone')
+      = f.text_field :mobile_phone , class: "form-control"
+  .right   
+    .title= t('.comercial_data')  
+    .input
+      = f.label t('.gross_income')
+      = f.text_field :gross_income, class: "form-control" 
+    .input
+      = f.label t('.registered_name')
+      = f.text_field :registered_name, class: "form-control"    
+    .input
+      = f.label t('.type_iva')
+      = f.select :type_iva, type_iva_meth, {:include_blank => false},{class: "form-control"}
