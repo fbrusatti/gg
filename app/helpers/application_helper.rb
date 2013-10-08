@@ -32,4 +32,9 @@ module ApplicationHelper
   def show_page?(object)
     current_page?(action: 'show', id: object || 0)
   end
+
+   def current_tag(tag)
+    'active' if controller_path == tag
+  end
+
 end
