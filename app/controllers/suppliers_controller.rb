@@ -15,7 +15,7 @@ class SuppliersController < ApplicationController
 
   def create
     @supplier = current_user.suppliers.build(params[:supplier])
-    @supplier.type_person = 'supplier' 
+    @supplier.type_person = 'Proveedor' 
     if @supplier.save
       flash[:success] = t('flash.supplier', message: t('flash.created'))
     end
