@@ -6,6 +6,8 @@ es:
       estimates: Presupuestos
       articles: Articulos
       suppliers: Proveedores
+      exit: Salir
+      confirm: ¿Está Seguro que desea salir?
   activerecord:
     models:
       location: Ubicación
@@ -46,6 +48,8 @@ es:
       registered_taxpayer: Responsable Inscripto
     index:
       list_all_suppliers: Listado de Proveedores  
+    edit:
+      supplier_data: Datos Personales  
     new:
       supplier_data: Datos Personales
     new_supplier_data:  
@@ -112,6 +116,8 @@ es:
       registered_taxpayer: Responsable Inscripto
     index:
       list_all_customers: Listado de Clientes  
+    edit:
+      customer_data: Datos Personales    
     new:
       customer_data: Datos Personales
     new_customer_data:  
