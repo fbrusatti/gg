@@ -1,6 +1,6 @@
-.new-customer
+.new-supplier
   .left
-    .title= t('.customer_data')
+    .title= t('.supplier_data')
     .input
       = f.label t('.name')
       = f.text_field :name, class: "pretty-input"
@@ -36,4 +36,3 @@
     .input
       = f.label t('.type_iva')
       = f.select :type_iva, type_iva_meth, {}, {class: "pretty-input"}
-    

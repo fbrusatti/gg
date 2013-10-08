@@ -14,38 +14,38 @@
   margin: 5px;
 }
 
-// sub-header customer
-.customer-new {
+// sub-header supplier
+.supplier-new {
   @extend .btn, .btn-large, .btn-primary;
 }
 
-.customer-print {
+.supplier-print {
   @extend .btn, .btn-large, .btn-primary, .pull-right;
 }
 
-.customer-danger {
+.supplier-danger {
    @extend .btn, .btn-large, .btn-danger;
 }
 
-.customer-save {
+.supplier-save {
    @extend .btn, .btn-large, .btn-primary;
 }
 
-#new_customer {
+#new_supplier {
   background-color: #E0DFDB;
   padding-left: 40px;
   padding-right: 40px;
 }
-// tabs customer
-.customer-tabs {
+// tabs supplier
+.supplier-tabs {
   @extend .nav, .nav-tabs;
   li > a {
     @extend .btn, .btn-large, .btn-success;
   }
 }
 
-// form new and edit customer data
-.new-customer, .edit-customer {
+// form new and edit supplier data
+.new-supplier, .edit-supplier {
   @include make-row();
   @extend .form-horizontal;
   .input {
@@ -67,7 +67,7 @@
 
 }
 
-.new-customer .left, .right, .edit-customer .left, .right {
+.new-supplier .left, .right, .edit-supplier .left, .right {
   @include make-lg-column(6);
   .title { font-size: 15pt;
            margin: 20px; }
@@ -82,8 +82,8 @@
   display: inline;
 }
 
-// show customer
-.show-customer {
+// show supplier
+.show-supplier {
   background-color: #E0DFDB;
   @include make-row();
   @extend .form-horizontal;

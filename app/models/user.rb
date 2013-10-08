@@ -10,5 +10,6 @@ class User < ActiveRecord::Base
 
   # == Associations
   has_many :customers
+  has_many :suppliers
 
 end

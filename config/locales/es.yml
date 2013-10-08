@@ -5,7 +5,7 @@ es:
       orders: Pedidos
       estimates: Presupuestos
       articles: Articulos
-      nose:
+      suppliers: Proveedores
   activerecord:
     models:
       location: Ubicación
@@ -34,7 +34,73 @@ es:
         phones: Telefonos
         address: Dirección
         dob: Nacimiento
-        email: Email  
+        email: Email
+  suppliers:   
+    type_person:
+      customer: Cliente
+      supplier: Proveedor
+    type_iva:
+      non_registered_taxpayer: Consumidor Final 
+      tax_exempt: Excento de Iva
+      monotributista: Monotributista
+      registered_taxpayer: Responsable Inscripto
+    index:
+      list_all_suppliers: Listado de Proveedores  
+    new:
+      supplier_data: Datos Personales
+    new_supplier_data:  
+      name: Nombre
+      surname: Apellido
+      address: Dirección
+      registered_name: Razón Social
+      gross_income: Ingreso Bruto
+      type_person: Tipo
+      dni: DNI
+      email: Email
+      cuit_cuil: CUIT/CUIL
+      phone: Teléfono
+      mobile_phone: Celular
+      type_iva: Tipo de IVA
+      comercial_data: Datos Comerciales
+      supplier_data: Datos Personales
+    edit_supplier_data:  
+      name: Nombre
+      surname: Apellido
+      address: Dirección
+      registered_name: Razón Social
+      gross_income: Ingreso Bruto
+      type_person: Tipo
+      dni: DNI
+      email: Email
+      cuit_cuil: CUIT/CUIL
+      phone: Teléfono
+      mobile_phone: Celular
+      type_iva: Tipo de IVA
+      comercial_data: Datos Comerciales
+      supplier_data: Datos Personales  
+    show:
+      supplier_data: Datos Personales  
+    show_supplier_data:
+      name: Nombre
+      surname: Apellido
+      address: Dirección
+      registered_name: Razón Social
+      gross_income: Ingreso Bruto
+      type_person: Tipo
+      dni: DNI
+      email: Email
+      cuit_cuil: CUIT/CUIL
+      phone: Teléfono
+      mobile_phone: Celular
+      type_iva: Tipo de IVA
+      comercial_data: Datos Comerciales
+      supplier_data: Datos Personales
+    sub_header:
+      new: Nuevo
+      cancel: Cancelar
+      print: Imprimir
+      save: Guardar
+      edit: Editar        
   customers:   
     type_person:
       customer: Cliente
@@ -184,6 +250,7 @@ es:
         sign_in: "registrarse"
         forgot_your_password: "¿Olvidó su contraseña?"
   flash:
+    supplier: "Se ha %{message} exitosamente el Proveedor"
     customer: "Se ha %{message} exitosamente el Cliente"
     error_update_form: Hubo un problema al actulizar
     error_create_form: Hubo un problema al crear
@@ -191,12 +258,12 @@ es:
     destroyed: borrado
     updated: actualizado     
   views:
-      pagination:
-          truncate: "..."
-          first: "Inicio"
-          previous: "Anterior"
-          next: "Siguiente"
-          last: "Último"
+    pagination:
+        truncate: "..."
+        first: "Inicio"
+        previous: "Anterior"
+        next: "Siguiente"
+        last: "Último"
   formtastic:
     yes: "Sí"
     no: "No"
