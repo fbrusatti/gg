@@ -1,4 +1,4 @@
-class CustomersDatatable
+class SuppliersDatatable
   
   delegate :params, :h, :link_to, :number_to_currency, to: :@view
 
@@ -9,8 +9,8 @@ class CustomersDatatable
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
-      iTotalRecords: Customer.count,
-      iTotalDisplayRecords: customers.total_entries,
+      iTotalRecords: Supplier.count,
+      iTotalDisplayRecords: suppliers.total_entries,
       aaData: data
     }
   end
@@ -18,29 +18,29 @@ class CustomersDatatable
 private
 
   def data
-    customers.map do |customer|
+    suppliers.map do |supplier|
       [
-        link_to(customer.name, customer),
-        h(customer.surname),
-        h(customer.dni),
-        h(customer.address),
-        h(customer.email),
+        link_to(supplier.name, supplier),
+        h(supplier.surname),
+        h(supplier.phone),
+        h(supplier.address),
+        h(supplier.email),
       ]
     end
   end
 
-  def customers
-    @customers ||= fetch_customers
+  def suppliers
+    @suppliers ||= fetch_suppliers
   end
 
-  def fetch_customers
-    customers = Customer.order("#{sort_column} #{sort_direction}")
-    customers = customers.page(page).per_page(per_page)
+  def fetch_suppliers
+    suppliers = Supplier.order("#{sort_column} #{sort_direction}")
+    suppliers = suppliers.page(page).per_page(per_page)
     if params[:sSearch].present?
-      customers = customers.where("name ilike :search or surname ilike :search", 
+      suppliers = suppliers.where("name ilike :search or surname ilike :search", 
                                   search: "%#{params[:sSearch]}%")
     end
-    customers
+    suppliers
   end
 
   def page
@@ -52,7 +52,7 @@ private
   end
 
   def sort_column
-    columns = %w[name surname dni address email]
+    columns = %w[name surname phone address email]
     columns[params[:iSortCol_0].to_i]
   end
 

@@ -15,7 +15,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = current_user.customers.build(params[:customer])
-    @customer.type_person = 'customer' 
+    @customer.type_person = 'Cliente' 
     if @customer.save
       flash[:success] = t('flash.customer', message: t('flash.created'))
     end

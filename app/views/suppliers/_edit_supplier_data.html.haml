@@ -1,6 +1,6 @@
-.new-customer
+.edit-supplier
   .left
-    .title= t('.customer_data')
+    .title= t('.supplier_data')
     .input
       = f.label t('.name')
       = f.text_field :name, class: "pretty-input"
@@ -21,19 +21,18 @@
       = f.text_field :email, class: "pretty-input"
     .input
       = f.label t('.phone')
-      = f.text_field :phone , class: "pretty-input"
+      = f.text_field :phone, class: "pretty-input"  
     .input
       = f.label t('.mobile_phone')
-      = f.text_field :mobile_phone , class: "pretty-input"
-  .right   
-    .title= t('.comercial_data')  
+      = f.text_field :mobile_phone, class: "pretty-input"  
+  .right
+    .title= t('.comercial_data')    
     .input
       = f.label t('.gross_income')
-      = f.text_field :gross_income, class: "pretty-input" 
+      = f.text_field :gross_income, class: "pretty-input"  
     .input
       = f.label t('.registered_name')
-      = f.text_field :registered_name, class: "pretty-input"    
+      = f.text_field :registered_name, class: "pretty-input"     
     .input
       = f.label t('.type_iva')
-      = f.select :type_iva, type_iva_meth, {}, {class: "pretty-input"}
-    
+      = f.select :type_iva, type_iva_meth, {},{class: "pretty-input"}
