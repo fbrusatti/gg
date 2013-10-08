@@ -31,11 +31,13 @@
    @extend .btn, .btn-large, .btn-primary;
 }
 
-#new_customer {
-  background-color: #E0DFDB;
+
+#new_customer, form[id*='edit_customer_'] {
+  background-color: #E0DFDB  ;
   padding-left: 40px;
   padding-right: 40px;
 }
+
 // tabs customer
 .customer-tabs {
   @extend .nav, .nav-tabs;
