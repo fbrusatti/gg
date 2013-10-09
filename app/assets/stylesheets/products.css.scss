@@ -1,0 +1,103 @@
+@import "twitter/bootstrap";
+
+// active color of the tabs
+.nav-tabs > li.active > a, .nav-tabs > li.active > a {
+  background-color: #E0DFDB !important;
+}
+
+// sub-header
+.sub-header {
+  display: block;
+}
+
+.sub-header > a{
+  margin: 5px;
+}
+
+// sub-header product
+.product-new {
+  @extend .btn, .btn-large, .btn-primary;
+}
+
+.product-print {
+  @extend .btn, .btn-large, .btn-primary, .pull-right;
+}
+
+.product-danger {
+   @extend .btn, .btn-large, .btn-danger;
+}
+
+.product-save {
+   @extend .btn, .btn-large, .btn-primary;
+}
+
+#new_product, form[id*='edit_product_'] {
+  background-color: #E0DFDB  ;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+// tabs product
+.product-tabs {
+  @extend .nav, .nav-tabs;
+  li > a {
+    @extend .btn, .btn-large, .btn-success;
+  }
+}
+
+// form new and edit product data
+.new-product, .edit-product {
+  @include make-row();
+  @extend .form-horizontal;
+  .input {
+    @extend .form-group;
+    label {
+      @extend .col-lg-3, .control-label;
+    }
+    input {
+      @extend .col-lg-4;
+    }
+    select {
+      @extend .col-lg-4;
+    }
+  }
+
+  .input-group-addon {
+    font-size: 19px;
+  }
+
+}
+
+.new-product .left, .right, .edit-product .left, .right {
+  @include make-lg-column(6);
+  .title { font-size: 15pt;
+           margin: 20px; }
+}
+
+.pretty-input {
+  @extend .form-control
+}
+
+// handled errors
+.field_with_errors {
+  display: inline;
+}
+
+// show product
+.show-product {
+  background-color: #E0DFDB;
+  @include make-row();
+  @extend .form-horizontal;
+  .input {
+    @extend .form-group;
+    label {
+      @extend .col-lg-3, .control-label;
+    }
+  }
+
+  .left, .right {
+  @include make-lg-column(6);
+  .title { font-size: 15pt;
+           margin: 20px; }
+  }
+}

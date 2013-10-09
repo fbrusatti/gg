@@ -1,0 +1,32 @@
+.show-product
+  .left
+    .title= t('.product_data')
+    .input
+      = label_tag t('.code')
+      = label_tag @product.code, nil, class: "pretty-input"
+    .input
+      = label_tag t('.description')
+      = label_tag @product.description, nil, class: "pretty-input"
+    .input
+      = label_tag t('.stock')
+      = label_tag @product.stock, nil, class: "pretty-input"
+    .input
+      = label_tag t('.minimun_stock')
+      = label_tag @product.minimun_stock, nil, class: "pretty-input"  
+    .input
+      = label_tag t('.gondola')
+      = label_tag @product.gondola , nil, class: "pretty-input"
+    .input
+      = label_tag t('.shelf')
+      = label_tag @product.shelf , nil, class: "pretty-input"
+  .right   
+    .title= t('.comercial_data')
+    .input
+      = label_tag t('.cost_price')
+      = label_tag @product.cost_price, nil, class: "pretty-input"
+    .input
+      = label_tag t('.list_price_one')
+      = label_tag @product.list_price_one , nil, class: "pretty-input"
+    .input
+      = label_tag t('.list_price_two')
+      = label_tag @product.list_price_two , nil, class: "pretty-input"
