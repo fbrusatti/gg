@@ -1,11 +1,24 @@
-@import "twitter/bootstrap";
-
 .menu-head {
-  @extend .nav;
-  @extend .nav-justified;
+  @extend .nav, .nav-justified;
 }
 
 .menu-head li > a {
-  @extend .btn;
-  @extend .btn-primary;
+  @extend .btn, .btn-primary;
+}
+
+.menu-head li:last-child a  {
+  @extend .btn-danger;
+}
+
+ul.menu-head {
+  a {
+    &:hover{
+      color: #418AE2;
+      background-color: #6BC9F8;
+    }
+    &.active{
+      color: #418AE2;
+      background-color: #6BC9F8;
+    }
+  }
 }

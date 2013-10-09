@@ -31,11 +31,12 @@
    @extend .btn, .btn-large, .btn-primary;
 }
 
-#new_supplier {
-  background-color: #E0DFDB;
+#new_supplier, form[id*='edit_supplier_'] {
+  background-color: #E0DFDB  ;
   padding-left: 40px;
   padding-right: 40px;
 }
+
 // tabs supplier
 .supplier-tabs {
   @extend .nav, .nav-tabs;

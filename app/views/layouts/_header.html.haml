@@ -1,29 +1,31 @@
 %ul.menu-head
   %li
-    %a{href: "#{customers_path}" }
+    %a{href: "#{customers_path}", class: current_tag('customers')}
       %i.icon-user.icon-3x
       = t('.clients')
   %li
-    %a{href: "#{suppliers_path}"}
+    %a{href: "#{suppliers_path}", class: current_tag('suppliers')}
       %i.icon-user.icon-3x
       = t('.suppliers')    
   %li
-    %a{href: "#"}
+    %a{href: "#", class: current_tag('orders')}
       %i.icon-folder-open-alt.icon-3x
       = t('.orders')
   %li
-    %a{href: "#"}
+    %a{href: "#", class: current_tag('estimates')}
       %i.icon-search.icon-3x
       = t('.estimates')
   %li
-    %a{href: "#"}
+    %a{href: "#", class: current_tag('nose')}
       %i.icon-calendar.icon-3x
       = t('.nose')
   %li
-    %a{href: "#"}
+    %a{href: "#", class: current_tag('articles')}
       %i.icon-shopping-cart.icon-3x
       = t('.articles')
   %li
-    %a{href: "#"}
-      %i.icon-paste.icon-3x
-      = t('.nose')
+    %a{href: "#{destroy_user_session_path}",
+             "data-confirm" => t('.confirm'),
+             "data-method" => "delete" }
+      %i.icon-remove-sign.icon-3x
+      = t('.exit')
