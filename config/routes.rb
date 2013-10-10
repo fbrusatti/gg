@@ -7,7 +7,8 @@ Gg::Application.routes.draw do
   resources :customers
   resources :suppliers
   resources :products
-
+  resources :categories
+  
   get '/landing_page', to: 'landing#index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
