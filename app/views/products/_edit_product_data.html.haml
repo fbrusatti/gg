@@ -30,4 +30,7 @@
     .input
       = f.label t('.list_price_two')
       = f.text_field :list_price_two , class: "pretty-input"
+    .input
+      = f.label t('.vat')
+      = f.select :vat_id, vat_meth, {}, {class: "pretty-input"}   
 

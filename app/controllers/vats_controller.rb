@@ -1,0 +1,2 @@
+class VatsController < ApplicationController
+end
