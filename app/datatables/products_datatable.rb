@@ -21,9 +21,9 @@ private
     prducts.map do |product|
       [
         link_to(product.code, product),
-        h(product.code),
         h(product.description),
         h(product.stock),
+        h(Category.find(product.category_id).name),
         h(product.list_price_one),
       ]
     end
@@ -52,7 +52,7 @@ private
   end
 
   def sort_column
-    columns = %w[code description stock list_price_one]
+    columns = %w[code description stock category list_price_one]
     columns[params[:iSortCol_0].to_i]
   end
 

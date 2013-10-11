@@ -14,6 +14,7 @@ es:
       user: Usuario
       admin_user: Administrador
       category: Categoría
+      vat: IVA
     attributes:
       user:
         email: Email
@@ -31,6 +32,11 @@ es:
         created_at: Creado
         name: Nombre
         referrer: Categoría padre 
+      vat:
+        percentaje: Porcentaje
+        start_date: Fecha de Comienzo
+        updated_at: Modificado
+        created_at: Creado  
       location:
         city: Ciudad
         countri: País
@@ -59,13 +65,15 @@ es:
     index:
       list_all_products: Lista de todos los productos
     new_product_data:
+      vat: IVA
+      category: Categoría
       supplier: Proveedor 
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
       code: Código
       cost_price: Precio de Costo
       description: Descripción
-      gondola: Gondola
+      gondola: Góndola
       list_price_one: Precio de lista 1
       list_price_three: Precio de lista 3
       list_price_two: Precio de lista 2
@@ -74,13 +82,15 @@ es:
       shelf: Estanteria
       stock: Stock            
     edit_product_data:
+      vat: IVA
+      category: Categoría
       supplier: Proveedor     
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
       code: Código
       cost_price: Precio de Costo
       description: Descripción
-      gondola: Gondola
+      gondola: Góndola
       list_price_one: Precio de lista 1
       list_price_three: Precio de lista 3
       list_price_two: Precio de lista 2
@@ -89,13 +99,15 @@ es:
       shelf: Estanteria
       stock: Stock
     show_product_data:
+      vat: IVA
+      category: Categoría
       supplier: Proveedor
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
       code: Código
       cost_price: Precio de Costo
       description: Descripción
-      gondola: Gondola
+      gondola: Góndola
       list_price_one: Precio de lista 1
       list_price_three: Precio de lista 3
       list_price_two: Precio de lista 2
