@@ -19,6 +19,9 @@
     .input
       = f.label t('.shelf')
       = f.text_field :shelf , class: "pretty-input"
+    .input
+      = f.label t('.category')
+      = f.select :category_id, category_meth, {}, {class: "pretty-input"}
   .right   
     .title= t('.comercial_data')
     .input
