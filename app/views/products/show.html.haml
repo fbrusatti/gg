@@ -1,0 +1,7 @@
+%ul.product-tabs
+  %li.active
+    %a{"data-toggle" => "tab", href: "#product-data"}
+      = t('.product_data')
+.tab-content
+  .tab-pane.active#product-data
+    = render "show_product_data"

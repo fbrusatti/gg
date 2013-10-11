@@ -1,0 +1,33 @@
+.new-product
+  .left
+    .title= t('.product_data')
+    .input
+      = f.label t('.code')
+      = f.text_field :code, class: "pretty-input"
+    .input
+      = f.label t('.description')
+      = f.text_field :description, class: "pretty-input"
+    .input
+      = f.label t('.stock')
+      = f.text_field :stock, class: "pretty-input"
+    .input
+      = f.label t('.minimun_stock')
+      = f.text_field :minimun_stock, class: "pretty-input"  
+    .input
+      = f.label t('.gondola')
+      = f.text_field :gondola , class: "pretty-input"
+    .input
+      = f.label t('.shelf')
+      = f.text_field :shelf , class: "pretty-input"
+  .right   
+    .title= t('.comercial_data')
+    .input
+      = f.label t('.cost_price')
+      = f.text_field :cost_price, class: "pretty-input"
+    .input
+      = f.label t('.list_price_one')
+      = f.text_field :list_price_one , class: "pretty-input"
+    .input
+      = f.label t('.list_price_two')
+      = f.text_field :list_price_two , class: "pretty-input"
+  

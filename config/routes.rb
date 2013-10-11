@@ -6,6 +6,7 @@ Gg::Application.routes.draw do
 
   resources :customers
   resources :suppliers
+  resources :products
 
   get '/landing_page', to: 'landing#index'
 
