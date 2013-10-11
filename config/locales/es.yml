@@ -13,6 +13,7 @@ es:
       location: Ubicación
       user: Usuario
       admin_user: Administrador
+      category: Categoría
     attributes:
       user:
         email: Email
@@ -25,6 +26,11 @@ es:
         current_sign_in_at:
         last_sign_in_at: Ultimo Ingreso
         sign_in_count: Cantidad de Ingresos
+      category:
+        updated_at: Modificado
+        created_at: Creado
+        name: Nombre
+        referrer: Categoría padre 
       location:
         city: Ciudad
         countri: País
@@ -234,6 +240,7 @@ es:
       save: Guardar
       edit: Editar        
   active_admin:
+    category: Categoría
     details_user: "Detalle de Usuario"
     details_admin_user: "Detalle de Administrador"
     dashboard: Inicio
