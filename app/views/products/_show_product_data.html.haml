@@ -33,3 +33,6 @@
     .input
       = label_tag t('.list_price_two')
       = label_tag @product.list_price_two , nil, class: "pretty-input"
+    .input
+      = label_tag t('.vat')
+      = label_tag Vat.find(@product.vat_id).percentaje, nil, {class: "pretty-input"} 
