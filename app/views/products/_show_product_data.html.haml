@@ -19,6 +19,9 @@
     .input
       = label_tag t('.shelf')
       = label_tag @product.shelf , nil, class: "pretty-input"
+    .input
+      = label_tag t('.category')
+      = label_tag Category.find(@product.category_id).name , nil, class: "pretty-input"  
   .right   
     .title= t('.comercial_data')
     .input

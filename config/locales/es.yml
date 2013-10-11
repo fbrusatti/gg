@@ -59,6 +59,7 @@ es:
     index:
       list_all_products: Lista de todos los productos
     new_product_data:
+      category: Categoría
       supplier: Proveedor 
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
@@ -74,6 +75,7 @@ es:
       shelf: Estanteria
       stock: Stock            
     edit_product_data:
+      category: Categoría
       supplier: Proveedor     
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
@@ -89,6 +91,7 @@ es:
       shelf: Estanteria
       stock: Stock
     show_product_data:
+      category: Categoría
       supplier: Proveedor
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
