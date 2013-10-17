@@ -5,7 +5,7 @@ class Customer < ActiveRecord::Base
                   :name, :phone, :registered_name, :surname, :type_iva
 
   # == Validations
-  validates_presence_of :name, :surname
+  validates_presence_of :name, :surname, :phone
   validates_format_of :email, { :allow_blank => true, 
                                 :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }                
 
