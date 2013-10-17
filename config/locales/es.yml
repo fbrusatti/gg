@@ -1,6 +1,6 @@
 es:
   layouts:
-    header:
+    header:      
       clients: Clientes
       orders: Pedidos
       estimates: Presupuestos
@@ -45,7 +45,7 @@ es:
         name: Nombre
         surname: Apellido
         dni: D.N.I
-        phones: Telefonos
+        phone: Teléfono
         address: Dirección
         dob: Nacimiento
         email: Email
