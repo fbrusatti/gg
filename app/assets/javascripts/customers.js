@@ -1,5 +1,8 @@
 $(document).ready(function() {
   $('#customers').dataTable({
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    },
     sPaginationType: "full_numbers",
     bJQueryUI: true,
     bProcessing: true,
