@@ -23,8 +23,10 @@ private
         link_to(product.code, product),
         h(product.description),
         h(product.stock),
+        h(product.minimun_stock),
         h(Category.find(product.category_id).name),
         h(product.list_price_one),
+        h(product.list_price_two),
       ]
     end
   end
@@ -52,7 +54,7 @@ private
   end
 
   def sort_column
-    columns = %w[code description stock category list_price_one]
+    columns = %w[code description stock category list_price_one list_price_two]
     columns[params[:iSortCol_0].to_i]
   end
 

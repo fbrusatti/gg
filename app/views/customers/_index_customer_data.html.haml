@@ -1,9 +1,11 @@
 %table#customers.display{"data-source" => customers_url(format: "json")}
   %thead
     %tr
-      %th Name
-      %th Surname
-      %th Dni
-      %th address
-      %th email
+      %th= t('.name')
+      %th= t('.surname')
+      %th= t('.dni')
+      %th= t('.address')
+      %th= t('.phone')
+      %th= t('.mobile_phone')
+      %th= t('.email')
   %tbody
