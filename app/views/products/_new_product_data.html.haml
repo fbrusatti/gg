@@ -12,7 +12,7 @@
       = f.text_field :stock, class: "pretty-input"
     .input
       = f.label t('.minimun_stock')
-      = f.text_field :minimun_stock, class: "pretty-input"  
+      = f.text_field :minimun_stock, class: "pretty-input"
     .input
       = f.label t('.gondola')
       = f.text_field :gondola , class: "pretty-input"
@@ -22,11 +22,9 @@
     .input
       = f.label t('.category')
       = f.select :category_id, category_meth, {}, {class: "pretty-input"}
-      %a#openBtn-category.new-category{"data-toggle" => "modal", href: "#"} 
+      %a#openBtn-category.new-category{"data-toggle" => "modal", href: "#"}
         = t('.new_category')
-      #category-modal.modal.fade{role: "dialog", tabindex: "-1"}
-        = render "new_category"
-  .right   
+  .right
     .title= t('.comercial_data')
     .input
       = f.label t('.cost_price')
@@ -39,8 +37,8 @@
       = f.text_field :list_price_two , class: "pretty-input"
     .input
       = f.label t('.vat')
-      = f.select :vat_id, vat_meth, {}, {class: "pretty-input"}  
-      %a#openBtn-vat.new-vat{"data-toggle" => "modal", href: "#"} 
+      = f.select :vat_id, vat_meth, {}, {class: "pretty-input"}
+      %a#openBtn-vat.new-vat{"data-toggle" => "modal", href: "#"}
         = t('.new_vat')
       #new_vat.modal.fade{role: "dialog", tabindex: "-1"}
         = render "new_vat"
