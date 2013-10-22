@@ -15,7 +15,9 @@ $(document).ready(function() {
   });
 
   $("a.save-category").click( function() {
-    $("#new_category").submit();
+  //$('.a.save-category').bind('ajax:success', function(){
+    //$("#new_category").submit();
+    alert("Success!");
   });
 
   $('#openBtn-category').click(function(){
