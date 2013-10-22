@@ -2,6 +2,27 @@
   %li.active
     %a{"data-toggle" => "tab", href: "#product-data"}
       = t('.product_data')
+  / %a#openBtn-category.new-category{"data-toggle" => "modal", href: "#"} 
+  /   = t('.new_category')
+  / #nueva_category.modal.fade{role: "dialog", tabindex: "-1"}  
+  /   .modal-dialog
+  /     .modal-content
+  /       .modal-header
+  /         %button.close{"data-dismiss" => "modal", type: "button"} ×
+  /         %h3 
+  /           = t('.new_category')
+  /       .modal-body
+  /       = form_for Category.new do |c|     
+  /         .input
+  /           = c.label t('.name')
+  /           = c.text_field :name, class: "pretty-input"  
+  /         .input
+  /           = c.label t('.referrer_id')
+  /           = c.select :referrer_id , category_meth, {}, class: "pretty-input"
+  /         = c.submit hidden: true 
+  /       .modal-footer
+  /         %a.save-category
+  /           = t('.save') 
 = form_for(@product) do |f|
   = errors_for(@product).html_safe
   .tab-content
