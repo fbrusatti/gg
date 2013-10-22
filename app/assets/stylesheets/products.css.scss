@@ -31,10 +31,18 @@
    @extend .btn, .btn-large, .btn-primary;
 }
 
+.save-category {
+  @extend .btn, .btn-large, .btn-primary;  
+}
+
 #new_product, form[id*='edit_product_'] {
   background-color: #E0DFDB  ;
   padding-left: 40px;
   padding-right: 40px;
+}
+
+.new-category, .new-vat {
+  @extend .btn, .btn-primary, .btn-large
 }
 
 // tabs product

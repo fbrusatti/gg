@@ -28,6 +28,7 @@ es:
         last_sign_in_at: Ultimo Ingreso
         sign_in_count: Cantidad de Ingresos
       category:
+        referrer_id: Id Categoría Padre
         updated_at: Modificado
         created_at: Creado
         name: Nombre
@@ -64,7 +65,22 @@ es:
       product_data: Datos del Producto  
     index:
       list_all_products: Lista de todos los productos
+    new_category:
+      save: Guardar
+      new_category: Nueva Categoría
+      name: Nombre
+      referrer_id: Categoría Padre
+    index_product_data:
+      code: Código
+      description: Descripción  
+      stock: Stock
+      category: Categoría
+      minimun_stock: Stock Minimo
+      list_price_one: Precio de lista 1
+      list_price_two: Precio de lista 2
     new_product_data:
+      new_category: Nueva Categoría
+      new_vat: Nuevo IVA
       vat: IVA
       category: Categoría
       supplier: Proveedor 
@@ -130,6 +146,24 @@ es:
       supplier_data: Datos Personales  
     new:
       supplier_data: Datos Personales
+    index_supplier_data:
+      today: Hoy
+      yesterday: Ayer
+      last_7_days: Ultimos 7 Dias
+      last_30_days: Ultimos 30 Dias
+      this_month: Este Mes
+      last_month: Ultimo Mes
+      delete: Se borro
+      create: Se Creo el Cliente
+      change: Se Cambio
+      add: Se Agrego
+      name: Nombre
+      surname: Apellido
+      dni: D.N.I
+      phone: Teléfono
+      address: Dirección
+      email: Email
+      mobile_phone: Celular  
     new_supplier_data:  
       name: Nombre
       surname: Apellido
@@ -183,7 +217,7 @@ es:
       print: Imprimir
       save: Guardar
       edit: Editar        
-  customers:   
+  customers:  
     type_person:
       customer: Cliente
       supplier: Proveedor
@@ -194,6 +228,24 @@ es:
       registered_taxpayer: Responsable Inscripto
     index:
       list_all_customers: Listado de Clientes  
+    index_customer_data:
+      today: Hoy
+      yesterday: Ayer
+      last_7_days: Ultimos 7 Dias
+      last_30_days: Ultimos 30 Dias
+      this_month: Este Mes
+      last_month: Ultimo Mes
+      delete: Se borro
+      create: Se Creo el Cliente
+      change: Se Cambio
+      add: Se Agrego
+      name: Nombre
+      surname: Apellido
+      dni: D.N.I
+      phone: Teléfono
+      address: Dirección
+      email: Email
+      mobile_phone: Celular
     edit:
       customer_data: Datos Personales    
     new:
@@ -335,6 +387,7 @@ es:
         sign_in: "registrarse"
         forgot_your_password: "¿Olvidó su contraseña?"
   flash:
+    category: "Se ha %{message} exitosamente la Categoría"
     product: "Se ha %{message} exitosamente el Producto"
     supplier: "Se ha %{message} exitosamente el Proveedor"
     customer: "Se ha %{message} exitosamente el Cliente"
