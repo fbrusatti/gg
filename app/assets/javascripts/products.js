@@ -14,17 +14,38 @@ $(document).ready(function() {
     $("#new_product, [id^=edit_product_]").submit();
   });
 
+  
   $("a.save-category").click( function() {
-  //$('.a.save-category').bind('ajax:success', function(){
-    //$("#new_category").submit();
-    alert("Success!");
+    $("#submit_new_cat").submit();
+  });
+
+  $("a.save-vat").click( function() {
+    $("#submit_new_vat").submit();
+  });
+
+  $(document).on('ajax:success','#new_vat', function(evt, data, status, xhr){
+    $('#vat_select')
+      .append($("<option></option>")
+      .attr("value",data.id)
+      .text(data.percentaje) 
+    );
+    console.log(data)
+  });
+
+  $(document).on('ajax:success','#new_category', function(evt, data, status, xhr){
+    $('#category_select')
+      .append($("<option></option>")
+      .attr("value",data.id)
+      .text(data.name) 
+    );
+    console.log(data)
   });
 
   $('#openBtn-category').click(function(){
-    $('#category-modal').modal({show:true})
+    $('#category-modal').modal('show')
   });
 
   $('#openBtn-vat').click(function(){
-    $('#new_vat').modal({show:true})
+    $('#vat-modal').modal('show')
   });
 })  

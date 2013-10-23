@@ -35,6 +35,10 @@
   @extend .btn, .btn-large, .btn-primary;  
 }
 
+.save-vat {
+  @extend .btn, .btn-large, .btn-primary;  
+}
+
 #new_product, form[id*='edit_product_'] {
   background-color: #E0DFDB  ;
   padding-left: 40px;

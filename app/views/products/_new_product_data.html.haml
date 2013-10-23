@@ -21,11 +21,9 @@
       = f.text_field :shelf , class: "pretty-input"
     .input
       = f.label t('.category')
-      = f.select :category_id, category_meth, {}, {class: "pretty-input"}
+      = f.select :category_id, category_meth, {}, :id => "category_select", class: "pretty-input"
       %a#openBtn-category.new-category{"data-toggle" => "modal", href: "#"} 
         = t('.new_category')
-      #category-modal.modal.fade{role: "dialog", tabindex: "-1"}
-        = render "new_category"
   .right   
     .title= t('.comercial_data')
     .input
@@ -39,8 +37,7 @@
       = f.text_field :list_price_two , class: "pretty-input"
     .input
       = f.label t('.vat')
-      = f.select :vat_id, vat_meth, {}, {class: "pretty-input"}  
+      = f.select :vat_id, vat_meth, {}, :id => "vat_select", class: "pretty-input"  
       %a#openBtn-vat.new-vat{"data-toggle" => "modal", href: "#"} 
         = t('.new_vat')
-      #new_vat.modal.fade{role: "dialog", tabindex: "-1"}
-        = render "new_vat"
+     

@@ -8,6 +8,7 @@ Gg::Application.routes.draw do
   resources :suppliers
   resources :products
   resources :categories
+  resources :vats
   
   get '/landing_page', to: 'landing#index'
 
