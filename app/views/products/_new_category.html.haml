@@ -11,8 +11,8 @@
         = c.text_field :name, class: "pretty-input"  
       .input
         = c.label t('.referrer_id')
-        = c.select :referrer_id , category_meth, {}, class: "pretty-input"
-      = c.submit hidden: true 
+        = c.select :referrer_id , category_meth, {:include_blank => ''}, class: "pretty-input"
+      = c.submit hidden: true, id: "submit_new_cat"
     .modal-footer
-      %a.save-category
+      %a.save-category{"data-dismiss" => "modal"}
         = t('.save') 

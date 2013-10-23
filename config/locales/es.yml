@@ -65,6 +65,11 @@ es:
       product_data: Datos del Producto  
     index:
       list_all_products: Lista de todos los productos
+    new_vat:
+      save: Guardar
+      new_vat: Nuevo IVA
+      percentaje: Porcentaje
+      start_date: Fecha de Inicio
     new_category:
       save: Guardar
       new_category: Nueva Categoría
@@ -387,6 +392,7 @@ es:
         sign_in: "registrarse"
         forgot_your_password: "¿Olvidó su contraseña?"
   flash:
+    vat: "Se ha %{message} exitosamente el IVA"
     category: "Se ha %{message} exitosamente la Categoría"
     product: "Se ha %{message} exitosamente el Producto"
     supplier: "Se ha %{message} exitosamente el Proveedor"

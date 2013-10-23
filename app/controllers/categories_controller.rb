@@ -11,7 +11,9 @@ class CategoriesController < ApplicationController
     if @category.save
       flash[:success] = t('flash.category', message: t('flash.created'))
     end
-    redirect_to new_product_path
+    respond_to do |format|
+      format.json { render :json => @category}
+    end
   end
 
 end
