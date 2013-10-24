@@ -19,11 +19,11 @@
   }
 
   .save-category {
-    @extend .btn, .btn-primary;  
+    @extend .btn, .btn-primary;
   }
 
   .save-vat {
-    @extend .btn, .btn-primary;  
+    @extend .btn, .btn-primary;
   }
 
   // active color of the tabs
@@ -69,10 +69,10 @@
         @extend .col-lg-3, .control-label;
       }
       input {
-        @extend .col-lg-4;
+        @extend .col-lg-6;
       }
       select {
-        @extend .col-lg-4;
+        @extend .col-lg-6;
       }
     }
 
@@ -104,9 +104,15 @@
     @extend .form-horizontal;
     .input {
       @extend .form-group;
-      label {
+      label:first-child {
         @extend .col-lg-3, .control-label;
       }
+
+      label:nth-of-type(2) {
+         @extend .col-lg-6, .control-label;
+        text-align: left;
+      }
+
     }
 
     .left, .right {

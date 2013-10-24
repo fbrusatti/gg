@@ -114,6 +114,7 @@ es:
       shelf: Estanteria
       stock: Stock
     edit_product_data:
+      money: Moneda
       vat: IVA
       category: Categoría
       supplier: Proveedor
@@ -131,6 +132,7 @@ es:
       shelf: Estanteria
       stock: Stock
     show_product_data:
+      money: Moneda
       vat: IVA
       category: Categoría
       supplier: Proveedor
