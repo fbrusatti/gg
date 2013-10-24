@@ -1,6 +1,7 @@
 class VatsController < ApplicationController
 
   respond_to :html
+  before_filter :authenticate_user!
   
   def new
     @vat = Vat.new

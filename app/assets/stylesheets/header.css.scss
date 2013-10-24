@@ -1,24 +1,26 @@
-.menu-head {
-  @extend .nav, .nav-justified;
-}
+#header {
+  .menu-head {
+    @extend .nav, .nav-justified;
+  }
 
-.menu-head li > a {
-  @extend .btn, .btn-primary;
-}
+  .menu-head li > a {
+    @extend .btn, .btn-primary;
+  }
 
-.menu-head li:last-child a  {
-  @extend .btn-danger;
-}
+  .menu-head li:last-child a  {
+    @extend .btn-danger;
+  }
 
-ul.menu-head {
-  a {
-    &:hover{
-      color: #418AE2;
-      background-color: #6BC9F8;
-    }
-    &.active{
-      color: #418AE2;
-      background-color: #6BC9F8;
+  ul.menu-head {
+    a {
+      &:hover{
+        color: #418AE2;
+        background-color: #6BC9F8;
+      }
+      &.active{
+        color: #418AE2;
+        background-color: #6BC9F8;
+      }
     }
   }
-}
+}  

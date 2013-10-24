@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 
   respond_to :html
+  before_filter :authenticate_user!
   
   def new
     @product = Product.new

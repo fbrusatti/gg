@@ -1,13 +1,14 @@
 $(document).ready(function() {
-  $('#products').dataTable({
+  $('#product-table').dataTable({
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
     },
+    asSorting: [],
     sPaginationType: "full_numbers",
     bJQueryUI: true,
     bProcessing: true,
     bServerSide: true,
-    sAjaxSource: $('#products').data('source')
+    sAjaxSource: $('#product-table').data('source')
   });  
 
   $("a.product-save").click( function() {
@@ -23,13 +24,24 @@ $(document).ready(function() {
     $("#submit_new_vat").submit();
   });
 
+  $(document).on('ajax:before', '#new_vat', function(){
+    if ($("#vat_percentaje").val() == '') {
+      return false;
+    }
+  });
+
   $(document).on('ajax:success','#new_vat', function(evt, data, status, xhr){
     $('#vat_select')
       .append($("<option></option>")
       .attr("value",data.id)
       .text(data.percentaje) 
     );
-    console.log(data)
+  });
+
+  $(document).on('ajax:before', '#new_category', function(){
+    if ($("#category_name").val() == '') {
+      return false;
+    }
   });
 
   $(document).on('ajax:success','#new_category', function(evt, data, status, xhr){
@@ -38,7 +50,6 @@ $(document).ready(function() {
       .attr("value",data.id)
       .text(data.name) 
     );
-    console.log(data)
   });
 
   $('#openBtn-category').click(function(){

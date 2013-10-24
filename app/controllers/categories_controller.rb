@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
 
   respond_to :html
+  before_filter :authenticate_user!
   
   def new
     @category = Category.new

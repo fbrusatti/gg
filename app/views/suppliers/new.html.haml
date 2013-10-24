@@ -1,10 +1,11 @@
-%ul.supplier-tabs
-  %li.active
-    %a{"data-toggle" => "tab", href: "#supplier-data"}
-      = t('.supplier_data')
-= form_for(@supplier) do |f|
-  = errors_for(@supplier).html_safe
-  .tab-content
-    .tab-pane.active#supplier-data
-      = render "new_supplier_data", f: f
-  = f.submit hidden: true
+#suppliers
+  %ul.supplier-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#supplier-data"}
+        = t('.supplier_data')
+  = form_for(@supplier) do |f|
+    = errors_for(@supplier).html_safe
+    .tab-content
+      .tab-pane.active#supplier-data
+        = render "new_supplier_data", f: f
+    = f.submit hidden: true

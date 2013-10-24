@@ -1,14 +1,15 @@
-%ul.product-tabs
-  %li.active
-    %a{"data-toggle" => "tab", href: "#product-data"}
-      = t('.product_data')
-= form_for(@product) do |f|
-  = errors_for(@product).html_safe
-  .tab-content
-    .tab-pane.active#product-data
-      = render "new_product_data", f: f
-  = f.submit hidden: true
-#category-modal.modal.fade{role: "dialog", tabindex: "-1"}
-  = render "new_category"
-#vat-modal.modal.fade{role: "dialog", tabindex: "-1"}
-  = render "new_vat"  
+#products
+  %ul.product-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#product-data"}
+        = t('.product_data')
+  = form_for(@product) do |f|
+    = errors_for(@product).html_safe
+    .tab-content
+      .tab-pane.active#product-data
+        = render "new_product_data", f: f
+    = f.submit hidden: true
+  #category-modal.modal.fade{role: "dialog", tabindex: "-1"}
+    = render "new_category"
+  #vat-modal.modal.fade{role: "dialog", tabindex: "-1"}
+    = render "new_vat"  
