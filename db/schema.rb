@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131011141125) do
+ActiveRecord::Schema.define(:version => 20131023164430) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -73,6 +73,11 @@ ActiveRecord::Schema.define(:version => 20131011141125) do
     t.integer  "user_id"
   end
 
+  add_index "customers", ["dni"], :name => "index_customers_on_dni"
+  add_index "customers", ["name"], :name => "index_customers_on_name"
+  add_index "customers", ["surname"], :name => "index_customers_on_surname"
+  add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
+
   create_table "locations", :force => true do |t|
     t.string   "state"
     t.string   "countri"
@@ -85,7 +90,6 @@ ActiveRecord::Schema.define(:version => 20131011141125) do
     t.string   "description"
     t.integer  "stock"
     t.integer  "minimun_stock"
-    t.float    "net_cost"
     t.float    "cost_price"
     t.string   "code"
     t.boolean  "active"
@@ -140,7 +144,6 @@ ActiveRecord::Schema.define(:version => 20131011141125) do
 
   create_table "vats", :force => true do |t|
     t.float    "percentaje"
-    t.date     "start_date"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
