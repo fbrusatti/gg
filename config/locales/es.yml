@@ -1,6 +1,6 @@
 es:
   layouts:
-    header:      
+    header:
       clients: Clientes
       orders: Pedidos
       estimates: Presupuestos
@@ -15,11 +15,17 @@ es:
       admin_user: Administrador
       category: Categoría
       vat: IVA
+      money: Moneda
       errors:
         message_code: "no ingresado, ingrese el código"
         message_name: "no ingresado, ingrese el nombre"
         message_surname: "no ingresado, ingrese el apellido"
     attributes:
+      money:
+        name: Nombre
+        quotation: Cotización
+        symbol: Símbolo
+        created_at: Creado
       user:
         email: Email
         created_at: Creado
@@ -36,12 +42,12 @@ es:
         updated_at: Modificado
         created_at: Creado
         name: Nombre
-        referrer: Categoría padre 
+        referrer: Categoría padre
       vat:
         percentaje: Porcentaje
         start_date: Fecha de Comienzo
         updated_at: Modificado
-        created_at: Creado  
+        created_at: Creado
       location:
         city: Ciudad
         countri: País
@@ -60,13 +66,13 @@ es:
       cancel: Cancelar
       print: Imprimir
       save: Guardar
-      edit: Editar  
+      edit: Editar
     new:
       product_data: Datos del Producto
     edit:
       product_data: Datos del Producto
     show:
-      product_data: Datos del Producto  
+      product_data: Datos del Producto
     index:
       list_all_products: Lista de todos los productos
     new_vat:
@@ -81,7 +87,7 @@ es:
       referrer_id: Categoría Padre
     index_product_data:
       code: Código
-      description: Descripción  
+      description: Descripción
       stock: Stock
       category: Categoría
       minimun_stock: Stock Minimo
@@ -89,10 +95,11 @@ es:
       list_price_two: Precio de lista 2
     new_product_data:
       new_category: Nueva Categoría
+      money: Moneda
       new_vat: Nuevo IVA
       vat: IVA
       category: Categoría
-      supplier: Proveedor 
+      supplier: Proveedor
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
       code: Código
@@ -105,11 +112,11 @@ es:
       minimun_stock: Stock Minimo
       net_cost: Costo Neto
       shelf: Estanteria
-      stock: Stock            
+      stock: Stock
     edit_product_data:
       vat: IVA
       category: Categoría
-      supplier: Proveedor     
+      supplier: Proveedor
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
       code: Código
@@ -139,20 +146,20 @@ es:
       minimun_stock: Stock Minimo
       net_cost: Costo Neto
       shelf: Estanteria
-      stock: Stock                          
-  suppliers:   
+      stock: Stock
+  suppliers:
     type_person:
       customer: Cliente
       supplier: Proveedor
     type_iva:
-      non_registered_taxpayer: Consumidor Final 
+      non_registered_taxpayer: Consumidor Final
       tax_exempt: Excento de Iva
       monotributista: Monotributista
       registered_taxpayer: Responsable Inscripto
     index:
-      list_all_suppliers: Listado de Proveedores  
+      list_all_suppliers: Listado de Proveedores
     edit:
-      supplier_data: Datos Personales  
+      supplier_data: Datos Personales
     new:
       supplier_data: Datos Personales
     index_supplier_data:
@@ -172,8 +179,8 @@ es:
       phone: Teléfono
       address: Dirección
       email: Email
-      mobile_phone: Celular  
-    new_supplier_data:  
+      mobile_phone: Celular
+    new_supplier_data:
       name: Nombre
       surname: Apellido
       address: Dirección
@@ -188,7 +195,7 @@ es:
       type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       supplier_data: Datos Personales
-    edit_supplier_data:  
+    edit_supplier_data:
       name: Nombre
       surname: Apellido
       address: Dirección
@@ -202,9 +209,9 @@ es:
       mobile_phone: Celular
       type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
-      supplier_data: Datos Personales  
+      supplier_data: Datos Personales
     show:
-      supplier_data: Datos Personales  
+      supplier_data: Datos Personales
     show_supplier_data:
       name: Nombre
       surname: Apellido
@@ -225,18 +232,18 @@ es:
       cancel: Cancelar
       print: Imprimir
       save: Guardar
-      edit: Editar        
-  customers:  
+      edit: Editar
+  customers:
     type_person:
       customer: Cliente
       supplier: Proveedor
     type_iva:
-      non_registered_taxpayer: Consumidor Final 
+      non_registered_taxpayer: Consumidor Final
       tax_exempt: Excento de Iva
       monotributista: Monotributista
       registered_taxpayer: Responsable Inscripto
     index:
-      list_all_customers: Listado de Clientes  
+      list_all_customers: Listado de Clientes
     index_customer_data:
       today: Hoy
       yesterday: Ayer
@@ -256,10 +263,10 @@ es:
       email: Email
       mobile_phone: Celular
     edit:
-      customer_data: Datos Personales    
+      customer_data: Datos Personales
     new:
       customer_data: Datos Personales
-    new_customer_data:  
+    new_customer_data:
       name: Nombre
       surname: Apellido
       address: Dirección
@@ -274,7 +281,7 @@ es:
       type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       customer_data: Datos Personales
-    edit_customer_data:  
+    edit_customer_data:
       name: Nombre
       surname: Apellido
       address: Dirección
@@ -288,9 +295,9 @@ es:
       mobile_phone: Celular
       type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
-      customer_data: Datos Personales  
+      customer_data: Datos Personales
     show:
-      customer_data: Datos Personales  
+      customer_data: Datos Personales
     show_customer_data:
       name: Nombre
       surname: Apellido
@@ -311,7 +318,7 @@ es:
       cancel: Cancelar
       print: Imprimir
       save: Guardar
-      edit: Editar        
+      edit: Editar
   active_admin:
     category: Categoría
     details_user: "Detalle de Usuario"
@@ -405,7 +412,7 @@ es:
     error_create_form: Hubo un problema al crear
     created: creado
     destroyed: borrado
-    updated: actualizado     
+    updated: actualizado
   views:
     pagination:
         truncate: "..."

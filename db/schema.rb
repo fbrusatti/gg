@@ -12,7 +12,9 @@
 # It's strongly recommended to check this file into your version control system.
 
 
+
 ActiveRecord::Schema.define(:version => 20131024211617) do
+
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -109,6 +111,14 @@ ActiveRecord::Schema.define(:version => 20131024211617) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "money", :force => true do |t|
+    t.string   "name",                                     :null => false
+    t.string   "symbol",                                   :null => false
+    t.decimal  "quotation",  :precision => 8, :scale => 2, :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+  end
+
   create_table "products", :force => true do |t|
     t.string   "description"
     t.integer  "stock"
@@ -125,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20131024211617) do
     t.datetime "updated_at",       :null => false
     t.integer  "category_id"
     t.integer  "vat_id"
+    t.integer  "money_id"
   end
 
   create_table "suppliers", :force => true do |t|
