@@ -12,7 +12,7 @@
 # It's strongly recommended to check this file into your version control system.
 
 
-ActiveRecord::Schema.define(:version => 20131023164430) do
+ActiveRecord::Schema.define(:version => 20131024211617) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -78,6 +78,28 @@ ActiveRecord::Schema.define(:version => 20131023164430) do
   add_index "customers", ["name"], :name => "index_customers_on_name"
   add_index "customers", ["surname"], :name => "index_customers_on_surname"
   add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
+
+  create_table "documents", :force => true do |t|
+    t.string   "type"
+    t.string   "number"
+    t.decimal  "recharge",          :precision => 8, :scale => 2
+    t.decimal  "amount",            :precision => 8, :scale => 2
+    t.decimal  "balance",           :precision => 8, :scale => 2
+    t.string   "state"
+    t.date     "expiration_date"
+    t.string   "payment_condition"
+    t.boolean  "active"
+    t.boolean  "annul"
+    t.integer  "customer_id"
+    t.integer  "user_id"
+    t.integer  "supplier_id"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
+  end
+
+  add_index "documents", ["number"], :name => "index_documents_on_number"
+  add_index "documents", ["type", "id"], :name => "index_documents_on_type_and_id"
+  add_index "documents", ["type"], :name => "index_documents_on_type"
 
   create_table "locations", :force => true do |t|
     t.string   "state"
