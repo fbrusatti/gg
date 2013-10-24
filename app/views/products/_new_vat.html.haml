@@ -1,0 +1,15 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", type: "button"} ×
+      %h3 
+        = t('.new_vat')
+    .modal-body
+    = form_for(Vat.new, remote: true, format: :json) do |f|     
+      .input
+        = f.label t('.percentaje')
+        = f.text_field :percentaje, class: "pretty-input"  
+      = f.submit hidden: true, id: "submit_new_vat"
+    .modal-footer
+      %a.save-vat{"data-dismiss" => "modal"}
+        = t('.save') 

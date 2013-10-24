@@ -1,7 +1,8 @@
-%ul.supplier-tabs
-  %li.active
-    %a{"data-toggle" => "tab", href: "#supplier-data"}
-      = t('.supplier_data')
-.tab-content
-  .tab-pane.active#supplier-data
-    = render "show_supplier_data"
+#suppliers
+  %ul.supplier-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#supplier-data"}
+        = t('.supplier_data')
+  .tab-content
+    .tab-pane.active#supplier-data
+      = render "show_supplier_data"

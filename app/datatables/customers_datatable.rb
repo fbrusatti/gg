@@ -24,6 +24,8 @@ private
         h(customer.surname),
         h(customer.dni),
         h(customer.address),
+        h(customer.phone),
+        h(customer.mobile_phone),
         h(customer.email),
       ]
     end
@@ -52,7 +54,7 @@ private
   end
 
   def sort_column
-    columns = %w[name surname dni address email]
+    columns = %w[name surname dni address phone mobile_phone email]
     columns[params[:iSortCol_0].to_i]
   end
 

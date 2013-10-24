@@ -1,0 +1,7 @@
+#landing-page {
+  #lastest-changes tbody tr td:first-child a {
+    color: black;
+    font-weight: bold;
+    &:hover { color: #2a6496 }
+  }
+}

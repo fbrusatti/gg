@@ -8,4 +8,7 @@ class Category < ActiveRecord::Base
   has_many :referrals, :foreign_key => :referrer_id, 
                        :class_name  => 'Category'
 
+  # == Validations
+  validates_presence_of :name                     
+
 end

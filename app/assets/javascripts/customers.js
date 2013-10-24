@@ -1,10 +1,13 @@
 $(document).ready(function() {
-  $('#customers').dataTable({
+  $('#customers-table').dataTable({
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    },
     sPaginationType: "full_numbers",
     bJQueryUI: true,
     bProcessing: true,
     bServerSide: true,
-    sAjaxSource: $('#customers').data('source')
+    sAjaxSource: $('#customers-table').data('source')
   });  
 
   $("a.customer-save").click( function() {

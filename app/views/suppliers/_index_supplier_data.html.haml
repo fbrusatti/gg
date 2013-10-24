@@ -1,9 +1,11 @@
-%table#suppliers.display{"data-source" => suppliers_url(format: "json")}
+%table#suppliers-table.display{"data-source" => suppliers_url(format: "json")}
   %thead
     %tr
-      %th Name
-      %th Surname
-      %th Phone
-      %th address
-      %th email
+      %th= t('.name')
+      %th= t('.surname')
+      %th= t('.dni')
+      %th= t('.address')
+      %th= t('.phone')
+      %th= t('.mobile_phone')
+      %th= t('.email')
   %tbody

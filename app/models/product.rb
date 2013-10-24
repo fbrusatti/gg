@@ -8,8 +8,11 @@ class Product < ActiveRecord::Base
   # == Validations
   validates_presence_of :code, :minimun_stock
 
+  # ==validations
+  validates_presence_of :code
+
   # == Associations
   has_many :categories
   has_one :vat
-
+  
 end

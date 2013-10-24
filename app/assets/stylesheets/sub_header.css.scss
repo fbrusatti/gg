@@ -1,0 +1,10 @@
+.container-sub-header {
+  .title {
+    text-align: center;
+    padding: 40px;
+    color: #418AE2
+  }
+  .title {
+    &:hover { color: #6BC9F8 }
+  }
+}
