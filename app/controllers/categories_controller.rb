@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :json
   before_filter :authenticate_user!
   
   def new
@@ -9,12 +9,8 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(params[:category])
-    if @category.save
-      flash[:success] = t('flash.category', message: t('flash.created'))
-    end
-    respond_to do |format|
-      format.json { render :json => @category}
-    end
+    flash[:success] = t('flash.category', message: t('flash.created')) if @category.save
+    respond_with(@category)
   end
 
 end

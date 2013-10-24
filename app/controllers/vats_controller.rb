@@ -1,6 +1,6 @@
 class VatsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :json
   before_filter :authenticate_user!
   
   def new
@@ -9,12 +9,8 @@ class VatsController < ApplicationController
 
   def create
     @vat = Vat.new(params[:vat])
-    if @vat.save
-      flash[:success] = t('flash.vat', message: t('flash.created'))
-    end
-    respond_to do |format|
-      format.json { render :json => @vat}
-    end
+    flash[:success] = t('flash.vat', message: t('flash.created')) if @vat.save
+    respond_with(@vat)
   end
 
 end

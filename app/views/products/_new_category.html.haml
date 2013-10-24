@@ -5,7 +5,7 @@
       %h3 
         = t('.new_category')
     .modal-body
-    = form_for(Category.new, remote: true) do |c|     
+    = form_for(Category.new, remote: true, format: :json ) do |c|    
       .input
         = c.label t('.name')
         = c.text_field :name, class: "pretty-input"  
