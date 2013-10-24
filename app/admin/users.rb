@@ -1,5 +1,7 @@
 ActiveAdmin.register User do
    index do
+    column :surname
+    column :name
     column :email
     column :created_at
     column :last_sign_in_at
@@ -7,16 +9,18 @@ ActiveAdmin.register User do
     default_actions
    end
 
-  filter :email
+  filter :surname
 
   show do
     attributes_table do
-        row(:email)
+        row(:surname)
     end
   end
 
   form do |f|
     f.inputs I18n.t("active_admin.details_user") do
+      f.input :surname
+      f.input :name
       f.input :email
       f.input :password
       f.input :password_confirmation
