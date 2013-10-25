@@ -27,7 +27,7 @@
   .right
     .title= t('.comercial_data')
     .input
-      = f.label t('.money')
+      = f.label :money
       = f.collection_select :money_id,
                             Money.all,
                             :id, :complete_name,

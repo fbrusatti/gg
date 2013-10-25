@@ -52,6 +52,21 @@ es:
         city: Ciudad
         countri: País
         state: Provincia
+      supplier:
+        name: Nombre
+        surname: Apellido
+        address: Dirección
+        registered_name: Razón Social
+        gross_income: Ingreso Bruto
+        type_person: Tipo
+        dni: DNI
+        email: Email
+        cuit_cuil: CUIT/CUIL
+        phone: Teléfono
+        mobile_phone: Celular
+        type_iva: Tipo de IVA
+        comercial_data: Datos Comerciales
+        supplier_data: Datos Personales  
       customer:
         comercial_data: Datos Comerciales
         customer_data: Datos Personales
@@ -184,33 +199,9 @@ es:
       email: Email
       mobile_phone: Celular
     new_supplier_data:
-      name: Nombre
-      surname: Apellido
-      address: Dirección
-      registered_name: Razón Social
-      gross_income: Ingreso Bruto
-      type_person: Tipo
-      dni: DNI
-      email: Email
-      cuit_cuil: CUIT/CUIL
-      phone: Teléfono
-      mobile_phone: Celular
-      type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       supplier_data: Datos Personales
     edit_supplier_data:
-      name: Nombre
-      surname: Apellido
-      address: Dirección
-      registered_name: Razón Social
-      gross_income: Ingreso Bruto
-      type_person: Tipo
-      dni: DNI
-      email: Email
-      cuit_cuil: CUIT/CUIL
-      phone: Teléfono
-      mobile_phone: Celular
-      type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       supplier_data: Datos Personales
     show:
