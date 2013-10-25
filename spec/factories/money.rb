@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :money do
-    name "MyString"
-    symbol "MyString"
+    name "ARG"
+    symbol "$"
     quotation "9.99"
   end
 end
