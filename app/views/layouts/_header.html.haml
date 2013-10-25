@@ -11,7 +11,11 @@
     %li
       %a{href: "#{products_path}", class: current_tag('products')}
         %i.icon-shopping-cart.icon-3x
-        = t('.articles')        
+        = t('.articles')
+    %li
+      %a{href: "#{options_documents_path}"}
+        %i.icon-file.icon-3x
+        = t('.documents')
     %li
       %a{href: "#", class: current_tag('orders')}
         %i.icon-folder-open-alt.icon-3x

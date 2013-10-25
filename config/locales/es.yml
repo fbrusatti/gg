@@ -6,6 +6,7 @@ es:
       estimates: Presupuestos
       articles: Articulos
       suppliers: Proveedores
+      documents: Documentos
       exit: Salir
       confirm: ¿Está Seguro que desea salir?
   activerecord:
@@ -289,6 +290,16 @@ es:
       print: Imprimir
       save: Guardar
       edit: Editar
+  documents:
+    options:
+      invoice: Factura
+      budget: Presupuesto
+      receipt: Recibo
+      purchase_order: Orden de Compra
+      predit_memo: Nota de Credito
+      debit_memo: Nota de Debito
+      order: Pedido
+      loans: Prestamo
   active_admin:
     category: Categoría
     details_user: "Detalle de Usuario"
