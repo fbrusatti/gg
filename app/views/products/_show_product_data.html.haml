@@ -12,7 +12,7 @@
       = label_tag @product.stock, nil, class: "pretty-input"
     .input
       = label_tag t('.minimun_stock')
-      = label_tag @product.minimun_stock, nil, class: "pretty-input"  
+      = label_tag @product.minimun_stock, nil, class: "pretty-input"
     .input
       = label_tag t('.gondola')
       = label_tag @product.gondola , nil, class: "pretty-input"
@@ -21,9 +21,12 @@
       = label_tag @product.shelf , nil, class: "pretty-input"
     .input
       = label_tag t('.category')
-      = label_tag Category.find(@product.category_id).name , nil, class: "pretty-input"  
-  .right   
+      = label_tag Category.find(@product.category_id).name , nil, class: "pretty-input"
+  .right
     .title= t('.comercial_data')
+    .input
+      = label_tag t('.money')
+      = label_tag @product.money.complete_name, nil, class: "pretty-input"
     .input
       = label_tag t('.cost_price')
       = label_tag @product.cost_price, nil, class: "pretty-input"
@@ -35,4 +38,4 @@
       = label_tag @product.list_price_two , nil, class: "pretty-input"
     .input
       = label_tag t('.vat')
-      = label_tag Vat.find(@product.vat_id).percentaje, nil, {class: "pretty-input"} 
+      = label_tag Vat.find(@product.vat_id).percentaje, nil, {class: "pretty-input"}
