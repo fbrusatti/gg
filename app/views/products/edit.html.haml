@@ -9,3 +9,7 @@
       .tab-pane.active#product-data
         = render "edit_product_data", f: f
     = f.submit hidden: true
+  #category-modal.modal.fade{role: "dialog", tabindex: "-1"}
+    = render "new_category"
+  #vat-modal.modal.fade{role: "dialog", tabindex: "-1"}
+    = render "new_vat"  

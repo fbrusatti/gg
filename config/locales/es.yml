@@ -96,8 +96,18 @@ es:
       print: Imprimir
       save: Guardar
       edit: Editar
+    new_product_data:
+      product_data: Datos del Producto
+      comercial_data: Datos Comerciales
+      new_category: Agregar Categoría
+      new_vat: Agregar IVA
     new:
       product_data: Datos del Producto
+    edit_product_data:
+      product_data: Datos del Producto
+      comercial_data: Datos Comerciales
+      new_category: Agregar Categoría
+      new_vat: Agregar IVA  
     edit:
       product_data: Datos del Producto
     show:
