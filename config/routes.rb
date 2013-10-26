@@ -9,8 +9,7 @@ Gg::Application.routes.draw do
   resources :products
   resources :categories
   resources :vats
-  resources :documents
-
+  resources :invoices
   get '/landing_page', to: 'landing#index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
