@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131025204517) do
+ActiveRecord::Schema.define(:version => 20131026222643) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -54,6 +54,11 @@ ActiveRecord::Schema.define(:version => 20131025204517) do
   end
 
   add_index "categories", ["referrer_id"], :name => "index_categories_on_referrer_id"
+
+  create_table "categories_products", :id => false, :force => true do |t|
+    t.integer "category_id"
+    t.integer "product_id"
+  end
 
   create_table "customers", :force => true do |t|
     t.string   "dni"
