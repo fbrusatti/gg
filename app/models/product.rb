@@ -12,9 +12,9 @@ class Product < ActiveRecord::Base
   validates_presence_of :code
 
   # == Associations
+  has_and_belongs_to_many :categories
   has_many :items
   has_many :documents, through: :items
-  has_many :categories
   belongs_to :vat
   belongs_to :money
 end
