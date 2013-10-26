@@ -2,37 +2,37 @@
   .left
     .title= t('.customer_data')
     .input
-      = f.label t('.name')
+      = f.label :name
       = f.text_field :name, class: "pretty-input"
     .input
-      = f.label t('.surname')
+      = f.label :surname
       = f.text_field :surname, class: "pretty-input"
     .input
-      = f.label t('.dni')
+      = f.label :dni
       = f.text_field :dni, class: "pretty-input"
     .input
-      = f.label t('.cuit_cuil')
+      = f.label :cuit_cuil
       = f.text_field :cuit_cuil, class: "pretty-input"  
     .input
-      = f.label t('.address')
+      = f.label :address
       = f.text_field :address, class: "pretty-input"
     .input
-      = f.label t('.email')
+      = f.label :email
       = f.text_field :email, class: "pretty-input"
     .input
-      = f.label t('.phone')
+      = f.label :phone
       = f.text_field :phone, class: "pretty-input"  
     .input
-      = f.label t('.mobile_phone')
+      = f.label :mobile_phone
       = f.text_field :mobile_phone, class: "pretty-input"  
   .right
     .title= t('.comercial_data')    
     .input
-      = f.label t('.gross_income')
+      = f.label :gross_income
       = f.text_field :gross_income, class: "pretty-input"  
     .input
-      = f.label t('.registered_name')
+      = f.label :registered_name
       = f.text_field :registered_name, class: "pretty-input"     
     .input
-      = f.label t('.type_iva')
+      = f.label :type_iva
       = f.select :type_iva, type_iva_meth, {}, {class: "pretty-input"}

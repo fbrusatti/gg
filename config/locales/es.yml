@@ -52,14 +52,58 @@ es:
         city: Ciudad
         countri: País
         state: Provincia
-      customer:
+      supplier:
         name: Nombre
         surname: Apellido
-        dni: D.N.I
-        phone: Teléfono
         address: Dirección
-        dob: Nacimiento
+        registered_name: Razón Social
+        gross_income: Ingreso Bruto
+        type_person: Tipo
+        dni: DNI
         email: Email
+        cuit_cuil: CUIT/CUIL
+        phone: Teléfono
+        mobile_phone: Celular
+        type_iva: Tipo de IVA
+        comercial_data: Datos Comerciales
+        supplier_data: Datos Personales  
+      customer:
+        comercial_data: Datos Comerciales
+        customer_data: Datos Personales
+        name: Nombre
+        surname: Apellido
+        address: Dirección
+        registered_name: Razón Social
+        gross_income: Ingreso Bruto
+        type_person: Tipo
+        dni: DNI
+        email: Email
+        cuit_cuil: CUIT/CUIL
+        phone: Teléfono
+        mobile_phone: Celular
+        type_iva: Tipo de IVA
+        comercial_data: Datos Comerciales
+        customer_data: Datos Personales
+      product:
+        new_category: Nueva Categoría
+        money: Moneda
+        new_vat: Nuevo IVA
+        vat: IVA
+        category: Categoría
+        supplier: Proveedor
+        product_data: Datos del Producto
+        comercial_data: Datos Comerciales
+        code: Código
+        cost_price: Precio de Costo
+        description: Descripción
+        gondola: Góndola
+        list_price_one: Precio de lista 1
+        list_price_three: Precio de lista 3
+        list_price_two: Precio de lista 2
+        minimun_stock: Stock Minimo
+        net_cost: Costo Neto
+        shelf: Estanteria
+        stock: Stock
   products:
     sub_header:
       new: Nuevo
@@ -67,8 +111,18 @@ es:
       print: Imprimir
       save: Guardar
       edit: Editar
+    new_product_data:
+      product_data: Datos del Producto
+      comercial_data: Datos Comerciales
+      new_category: Agregar Categoría
+      new_vat: Agregar IVA
     new:
       product_data: Datos del Producto
+    edit_product_data:
+      product_data: Datos del Producto
+      comercial_data: Datos Comerciales
+      new_category: Agregar Categoría
+      new_vat: Agregar IVA  
     edit:
       product_data: Datos del Producto
     show:
@@ -93,44 +147,6 @@ es:
       minimun_stock: Stock Minimo
       list_price_one: Precio de lista 1
       list_price_two: Precio de lista 2
-    new_product_data:
-      new_category: Nueva Categoría
-      money: Moneda
-      new_vat: Nuevo IVA
-      vat: IVA
-      category: Categoría
-      supplier: Proveedor
-      product_data: Datos del Producto
-      comercial_data: Datos Comerciales
-      code: Código
-      cost_price: Precio de Costo
-      description: Descripción
-      gondola: Góndola
-      list_price_one: Precio de lista 1
-      list_price_three: Precio de lista 3
-      list_price_two: Precio de lista 2
-      minimun_stock: Stock Minimo
-      net_cost: Costo Neto
-      shelf: Estanteria
-      stock: Stock
-    edit_product_data:
-      money: Moneda
-      vat: IVA
-      category: Categoría
-      supplier: Proveedor
-      product_data: Datos del Producto
-      comercial_data: Datos Comerciales
-      code: Código
-      cost_price: Precio de Costo
-      description: Descripción
-      gondola: Góndola
-      list_price_one: Precio de lista 1
-      list_price_three: Precio de lista 3
-      list_price_two: Precio de lista 2
-      minimun_stock: Stock Minimo
-      net_cost: Costo Neto
-      shelf: Estanteria
-      stock: Stock
     show_product_data:
       money: Moneda
       vat: IVA
@@ -183,33 +199,9 @@ es:
       email: Email
       mobile_phone: Celular
     new_supplier_data:
-      name: Nombre
-      surname: Apellido
-      address: Dirección
-      registered_name: Razón Social
-      gross_income: Ingreso Bruto
-      type_person: Tipo
-      dni: DNI
-      email: Email
-      cuit_cuil: CUIT/CUIL
-      phone: Teléfono
-      mobile_phone: Celular
-      type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       supplier_data: Datos Personales
     edit_supplier_data:
-      name: Nombre
-      surname: Apellido
-      address: Dirección
-      registered_name: Razón Social
-      gross_income: Ingreso Bruto
-      type_person: Tipo
-      dni: DNI
-      email: Email
-      cuit_cuil: CUIT/CUIL
-      phone: Teléfono
-      mobile_phone: Celular
-      type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       supplier_data: Datos Personales
     show:
@@ -266,36 +258,12 @@ es:
       mobile_phone: Celular
     edit:
       customer_data: Datos Personales
+    edit_customer_data:
+      comercial_data: Datos Comerciales
+      customer_data: Datos Personales
     new:
       customer_data: Datos Personales
     new_customer_data:
-      name: Nombre
-      surname: Apellido
-      address: Dirección
-      registered_name: Razón Social
-      gross_income: Ingreso Bruto
-      type_person: Tipo
-      dni: DNI
-      email: Email
-      cuit_cuil: CUIT/CUIL
-      phone: Teléfono
-      mobile_phone: Celular
-      type_iva: Tipo de IVA
-      comercial_data: Datos Comerciales
-      customer_data: Datos Personales
-    edit_customer_data:
-      name: Nombre
-      surname: Apellido
-      address: Dirección
-      registered_name: Razón Social
-      gross_income: Ingreso Bruto
-      type_person: Tipo
-      dni: DNI
-      email: Email
-      cuit_cuil: CUIT/CUIL
-      phone: Teléfono
-      mobile_phone: Celular
-      type_iva: Tipo de IVA
       comercial_data: Datos Comerciales
       customer_data: Datos Personales
     show:
@@ -631,4 +599,3 @@ es:
       long: ! '%A, %d de %B de %Y a las %I:%M %p'
       short: ! '%d de %b a las %H:%M hrs'
     pm: pm
-
