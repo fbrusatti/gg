@@ -6,4 +6,7 @@ class Document < ActiveRecord::Base
   belongs_to :customer
   belongs_to :user
   belongs_to :supplier
+  has_many :items
+  has_many :products, through: :items
+
 end

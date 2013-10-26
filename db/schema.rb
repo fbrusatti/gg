@@ -11,10 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-
-ActiveRecord::Schema.define(:version => 20131024211617) do
-
+ActiveRecord::Schema.define(:version => 20131025204517) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -102,6 +99,22 @@ ActiveRecord::Schema.define(:version => 20131024211617) do
   add_index "documents", ["number"], :name => "index_documents_on_number"
   add_index "documents", ["type", "id"], :name => "index_documents_on_type_and_id"
   add_index "documents", ["type"], :name => "index_documents_on_type"
+
+  create_table "items", :force => true do |t|
+    t.integer  "document_id"
+    t.integer  "product_id"
+    t.integer  "amount"
+    t.decimal  "price_cost",     :precision => 8, :scale => 2
+    t.decimal  "price_sale",     :precision => 8, :scale => 2
+    t.decimal  "price_vat",      :precision => 8, :scale => 2
+    t.decimal  "price_descount", :precision => 8, :scale => 2
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
+  end
+
+  add_index "items", ["document_id", "product_id"], :name => "index_items_on_document_id_and_product_id"
+  add_index "items", ["document_id"], :name => "index_items_on_document_id"
+  add_index "items", ["product_id"], :name => "index_items_on_product_id"
 
   create_table "locations", :force => true do |t|
     t.string   "state"
