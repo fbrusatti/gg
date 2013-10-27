@@ -24,7 +24,7 @@ private
         h(product.description),
         h(product.stock),
         h(product.minimun_stock),
-        h(Category.find(product.category_id).name),
+        h(product.categories.first.try :name),
         h(product.list_price_one),
         h(product.list_price_two),
       ]

@@ -40,15 +40,14 @@
     margin: 5px;
   }
 
-
   #new_product, form[id*='edit_product_'] {
     background-color: #E0DFDB  ;
     padding-left: 40px;
     padding-right: 40px;
   }
 
-  .new-category, .new-vat {
-    @extend .btn, .btn-primary, .btn-large
+  #openBtn-category, #openBtn-vat, .btn-modal-submit {
+    @extend .btn, .btn-primary
   }
 
   // tabs product
@@ -59,8 +58,8 @@
     }
   }
 
-  // form new and edit product data
-  .new-product, .edit-product {
+  // form new, edit and modal
+  .data-product, .modal-body {
     @include make-row();
     @extend .form-horizontal;
     .input {
@@ -82,7 +81,7 @@
 
   }
 
-  .new-product .left, .right, .edit-product .left, .right {
+  .data-product .left, .right {
     @include make-lg-column(6);
     .title { font-size: 15pt;
              margin: 20px; }
@@ -116,9 +115,9 @@
     }
 
     .left, .right {
-    @include make-lg-column(6);
-    .title { font-size: 15pt;
-             margin: 20px; }
+      @include make-lg-column(6);
+      .title { font-size: 15pt;
+               margin: 20px; }
     }
   }
 }

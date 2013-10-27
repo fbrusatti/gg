@@ -15,15 +15,6 @@ $(document).ready(function() {
     $("#new_product, [id^=edit_product_]").submit();
   });
 
-  
-  $("a.save-category").click( function() {
-    $("#submit_new_cat").submit();
-  });
-
-  $("a.save-vat").click( function() {
-    $("#submit_new_vat").submit();
-  });
-
   $(document).on('ajax:before', '#new_vat', function(){
     if ($("#vat_percentaje").val() == '') {
       return false;
@@ -31,6 +22,7 @@ $(document).ready(function() {
   });
 
   $(document).on('ajax:success','#new_vat', function(evt, data, status, xhr){
+    $('#vat-modal').modal('hide');
     $('#vat_select')
       .append($("<option></option>")
       .attr("value",data.id)
@@ -45,6 +37,7 @@ $(document).ready(function() {
   });
 
   $(document).on('ajax:success','#new_category', function(evt, data, status, xhr){
+    $('#category-modal').modal('hide');
     $('#category_select')
       .append($("<option></option>")
       .attr("value",data.id)
@@ -55,8 +48,8 @@ $(document).ready(function() {
   $('#openBtn-category').click(function(){
     $('#category-modal').modal('show')
   });
-
   $('#openBtn-vat').click(function(){
     $('#vat-modal').modal('show')
   });
-})  
+
+})// End Document
