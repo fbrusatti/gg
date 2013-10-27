@@ -2,17 +2,17 @@
   .modal-content
     .modal-header
       %button.close{"data-dismiss" => "modal", type: "button"} ×
-      %h3 
-        = t('.new_category')
-    .modal-body
-    = form_for(Category.new, remote: true, format: :json ) do |c|    
-      .input
-        = c.label t('.name')
-        = c.text_field :name, class: "pretty-input"  
-      .input
-        = c.label t('.referrer_id')
-        = c.select :referrer_id , category_meth, {:include_blank => ''}, class: "pretty-input"
-      = c.submit hidden: true, id: "submit_new_cat"
-    .modal-footer
-      %a.save-category{"data-dismiss" => "modal"}
-        = t('.save') 
+      %h3= t('.new_category')
+    = form_for(Category.new, remote: true, format: :json ) do |c|
+      .modal-body
+        .input
+          = c.label :name
+          = c.text_field :name, class: "pretty-input"
+        .input
+          = c.label t('.referrer_id')
+          = c.select :referrer_id ,
+                     category_meth,
+                     {:include_blank => ''},
+                     class: "pretty-input"
+      .modal-footer
+        = c.submit t('.save'), class: "btn-modal-submit"

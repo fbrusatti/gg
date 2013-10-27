@@ -1,4 +1,4 @@
-.new-product
+.data-product
   .left
     .title= t('.product_data')
     .input
@@ -21,8 +21,12 @@
       = f.text_field :shelf , class: "pretty-input"
     .input
       = f.label :category
-      = f.select :category_id, category_meth, {}, :id => "category_select", class: "pretty-input"
-      %a#openBtn-category.new-category{"data-toggle" => "modal", href: "#"}
+      = f.collection_select :category_ids,
+                            Category.all,
+                            :id, :name,
+                            {}, class: "pretty-input",
+                            id: "category_select"
+      %a#openBtn-category
         %i.icon-plus-sign.icon-1x
   .right
     .title= t('.comercial_data')
@@ -43,6 +47,9 @@
       = f.text_field :list_price_two , class: "pretty-input"
     .input
       = f.label :vat
-      = f.select :vat_id, vat_meth, {}, :id => "vat_select", class: "pretty-input"
-      %a#openBtn-vat.new-vat{"data-toggle" => "modal", href: "#"}
-        = t('.new_vat')
+      = f.collection_select :vat_id,
+                            Vat.all,
+                            :id, :percentaje,
+                            {}, class: "pretty-input", id: "vat_select"
+      %a#openBtn-vat
+        %i.icon-plus-sign.icon-1x

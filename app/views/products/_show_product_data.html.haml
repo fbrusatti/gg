@@ -21,7 +21,7 @@
       = label_tag @product.shelf , nil, class: "pretty-input"
     .input
       = label_tag t('.category')
-      = label_tag Category.find(@product.category_id).name , nil, class: "pretty-input"
+      = label_tag @product.categories.first.try(:name) , nil, class: "pretty-input"
   .right
     .title= t('.comercial_data')
     .input
@@ -38,4 +38,4 @@
       = label_tag @product.list_price_two , nil, class: "pretty-input"
     .input
       = label_tag t('.vat')
-      = label_tag Vat.find(@product.vat_id).percentaje, nil, {class: "pretty-input"}
+      = label_tag @product.vat.percentaje, nil, class: "pretty-input"

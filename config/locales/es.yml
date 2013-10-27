@@ -112,7 +112,7 @@ es:
       print: Imprimir
       save: Guardar
       edit: Editar
-    new_product_data:
+    product_data:
       product_data: Datos del Producto
       comercial_data: Datos Comerciales
       new_category: Agregar Categoría
@@ -128,8 +128,6 @@ es:
       product_data: Datos del Producto
     show:
       product_data: Datos del Producto
-    index:
-      list_all_products: Lista de todos los productos
     new_vat:
       save: Guardar
       new_vat: Nuevo IVA
@@ -175,8 +173,6 @@ es:
       tax_exempt: Excento de Iva
       monotributista: Monotributista
       registered_taxpayer: Responsable Inscripto
-    index:
-      list_all_suppliers: Listado de Proveedores
     edit:
       supplier_data: Datos Personales
     new:
@@ -237,8 +233,6 @@ es:
       tax_exempt: Excento de Iva
       monotributista: Monotributista
       registered_taxpayer: Responsable Inscripto
-    index:
-      list_all_customers: Listado de Clientes
     index_customer_data:
       today: Hoy
       yesterday: Ayer
