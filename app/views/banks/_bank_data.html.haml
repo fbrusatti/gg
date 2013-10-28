@@ -1,0 +1,24 @@
+.data-bank
+  .left
+    .title= t('banks.bank_data')
+    .input
+      = f.label :name
+      = f.collection_select :name,
+                            Bank.all,
+                            :id, :name,
+                            {}, class: "pretty-input"
+      %a#openBtn-bank
+        %i.icon-plus-sign.icon-1x
+    .input
+      = f.label :branch_office_number
+      = f.text_field :branch_office_number, class: "pretty-input"
+    .input
+      = f.label :address
+      = f.text_field :address, class: "pretty-input"
+    .input
+      = f.label :location
+      = f.collection_select :location_id,
+                            Location.all,
+                            :id, :complete_name,
+                            {}, class: "pretty-input"
+  .right

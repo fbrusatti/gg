@@ -1,0 +1,8 @@
+#banks
+  %ul.bank-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#bank-data"}
+        = t('.bank_data')
+  .tab-content
+    .tab-pane.active#bank-data
+      = render "show_bank_data"

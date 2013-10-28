@@ -1,0 +1,14 @@
+#banks
+  %ul.bank-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#bank-data"}
+        = t('banks.bank')
+  = form_for @bank do |f|
+    = errors_for(@bank).html_safe
+    .tab-content
+      .tab-pane.active#bank-data
+        = render "bank_data", f: f
+    = f.submit hidden: true
+
+  #bank-modal.modal.fade
+    = render "new_name"
