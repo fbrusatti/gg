@@ -6,7 +6,7 @@
       = f.collection_select :name,
                             Bank.all,
                             :id, :name,
-                            {}, class: "pretty-input"
+                            { :include_blank => true}, class: "pretty-input"
       %a#openBtn-bank
         %i.icon-plus-sign.icon-1x
     .input
@@ -20,5 +20,5 @@
       = f.collection_select :location_id,
                             Location.all,
                             :id, :complete_name,
-                            {}, class: "pretty-input"
+                            { :include_blank => true }, class: "pretty-input"
   .right
