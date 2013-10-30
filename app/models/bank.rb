@@ -17,4 +17,7 @@ class Bank < ActiveRecord::Base
     self.name = self.name.upcase
   end
 
+  def complete_name
+    "#{name} (#{branch_office_number})"
+  end
 end
