@@ -1,0 +1,29 @@
+.show-check
+  .left
+    .title= t('checks.check_data')
+    .input
+      = label_tag t('activerecord.attributes.check.amount')
+      = label_tag @check.amount,nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.check.check_number')
+      = label_tag @check.check_number, nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.check.emission_date')
+      = label_tag print_date(@check.emission_date, :date_human) ,nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.check.payment_date')
+      = label_tag print_date(@check.payment_date, :date_human) ,nil, class: "pretty-input"
+  .right
+    .title= t('checks.comercial_data')
+    .input
+      = label_tag t('activerecord.attributes.check.emisor')
+      = label_tag @check.emisor, nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.check.account')
+      = label_tag @check.account, nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.check.bank')
+      = link_bank(@check.bank)
+    .input
+      = label_tag t('activerecord.attributes.check.check_status')
+      = label_tag @check.check_status, nil, class: "pretty-input"

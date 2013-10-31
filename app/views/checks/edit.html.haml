@@ -1,0 +1,11 @@
+#checks
+  %ul.check-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#check-data"}
+        = t('checks.check')
+  = form_for @check do |f|
+    = errors_for(@check).html_safe
+    .tab-content
+      .tab-pane.active#check-data
+        = render "check_data", f: f
+    = f.submit hidden: true
