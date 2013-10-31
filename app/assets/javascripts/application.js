@@ -13,5 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require dataTables/jquery.dataTables
+//= require jquery.tokeninput
 //= require_tree .
 //= require twitter/bootstrap
