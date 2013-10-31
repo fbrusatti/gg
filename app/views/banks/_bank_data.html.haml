@@ -5,7 +5,7 @@
       = f.label :name
       = f.collection_select :name,
                             Bank.all,
-                            :id, :name,
+                            :name, :name,
                             { :include_blank => true}, class: "pretty-input"
       %a#openBtn-bank
         %i.icon-plus-sign.icon-1x

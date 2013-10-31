@@ -48,7 +48,7 @@
     if (not_exists_name(sel, name)){
       $('#bank_name')
         .append($("<option></option>")
-        .attr("value",complete_name)
+        .attr("value",name)
         .text(name)
       );
     }
