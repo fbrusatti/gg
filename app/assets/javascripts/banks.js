@@ -5,6 +5,10 @@
     });
 
   $('#openBtn-location').click(function(){
+    $('#location_city').val('');
+    $('#location_state').val('');
+    $('#location_countri').val('');
+    $("#error").html('');
     $('#location-modal').modal('show');
   });
 
@@ -14,12 +18,10 @@
     }
   });
 
-  $(document).on('ajax:error', '#new_location', function(xhr, status, error){
-    // var errors = $.parseJSON(xhr.responseText).errors
-    // $(this).append(status.responseText)
-    console.log(status.responseText);
-    console.log(error);
-    console.log(xhr);
+  $(document).on('ajax:error', '#new_location', function(event, xhr, status) {
+    var errors = jQuery.parseJSON(xhr.responseText)
+    console.log(errors)
+    $("#error").html(errors.errors[0]);
   });
 
   $(document).on('ajax:success','#new_location', function(evt, data, status, xhr){
@@ -33,21 +35,6 @@
     var sel = document.getElementById('bank_location_id');
     selectItemByValue(sel, data.city + " ("+ data.state+")");
   });
-
-  // $('.btn-modal-submit').click(function(){
-  //   $('#location-modal').modal('hide');
-  //   var sel = document.getElementById('bank_location_id');
-  //   var name = $('#location_city').val();
-  //   $('#bank_location_id')
-  //       .append($("<option></option>")
-  //       .attr("value",name)
-  //       .text(name)
-  //     );
-    // selectItemByValue(sel, name )
-    // $('#location_city').val('');
-    // $('#location_state').val('');
-    // $('#location_countri').val('');
-  // });
 
 
   $('#openBtn-bank').click(function(){

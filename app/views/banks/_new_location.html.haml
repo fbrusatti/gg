@@ -5,7 +5,7 @@
       %h3= t('.new_location')
     -locat =  Location.new
     = form_for(locat, remote: true, format: :json ) do |c|
-      = errors_for(locat).html_safe
+      .error#error
       .modal-body
         .input
           = c.label :city

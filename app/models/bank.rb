@@ -8,9 +8,12 @@ class Bank < ActiveRecord::Base
 
   # == Callbacks
   before_save :not_exist_other, :name_upcase
-  before_create :name_upcase
+
   def not_exist_other
-    !(Bank.exists?(name: :name, branch_office_number: :branch_office_number))
+    if !(Bank.where("name= ? AND branch_office_number = ?",self.name, self.branch_office_number).empty?)
+      errors.add(:complete_name,I18n.t('activerecord.models.errors.message_bank_insert'))
+      false
+    end
   end
 
   def name_upcase

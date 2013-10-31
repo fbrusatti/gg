@@ -7,7 +7,8 @@ class Location < ActiveRecord::Base
 
   def not_repeat_city
     if !(Location.where("city= ? AND countri = ? AND state = ?",self.city, self.countri, self.state).empty?)
-      errors.add(:city, "La localidad ya esta ingresada")
+      errors.add(:city, I18n.t('activerecord.models.errors.message_location_insert'))
+      false
     end
   end
 
