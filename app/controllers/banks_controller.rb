@@ -10,7 +10,7 @@ class BanksController < ApplicationController
   def create
     @bank = Bank.new(params[:bank])
     flash[:success] = t('flash.bank', message: t('flash.created')) if @bank.save
-    respond_with(@bank)
+    redirect_to new_check_path
   end
 
   def show

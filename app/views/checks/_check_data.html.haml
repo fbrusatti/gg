@@ -33,7 +33,7 @@
                             Bank.all,
                             :id, :complete_name,
                             { :include_blank => true }, class: "pretty-input"
-      %a#openBtn-bank{href: "#{new_bank_path(@check)}", class: current_tag('checks')}
+      %a#openBtn-bank{href: "#{new_bank_path()}", class: current_tag('checks')}
         %i.icon-plus-sign.icon-1x
     .input
       = f.label :check_status

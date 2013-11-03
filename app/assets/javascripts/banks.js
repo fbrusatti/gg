@@ -1,6 +1,7 @@
 
   $(document).ready(function() {
     $("a.bank-save").click( function() {
+        $("a.bank-save").attr("disabled", true);
         $("#new_bank, [id^=edit_bank_]").submit();
     });
 
@@ -20,14 +21,12 @@
 
   $(document).on('ajax:error', '#new_location', function(event, xhr, status) {
     var errors = jQuery.parseJSON(xhr.responseText)
-    console.log(errors)
     $("#error").html(errors.errors[0]);
   });
 
   $(document).on('ajax:success','#new_location', function(evt, data, status, xhr){
     $('#location-modal').modal('hide');
-    console.log(data);
-    $('#bank_location_id')
+      $('#bank_location_id')
       .append($("<option></option>")
       .attr("value",data.id)
       .text(data.city + " ("+ data.state+")")
@@ -45,7 +44,7 @@
     $('#bank-modal').modal('hide');
     var sel = document.getElementById('bank_name');
     var name = $('#new-name-bank').val().toUpperCase();
-    if (not_exists_name(sel, name)){
+    if (notExistsName(sel, name)){
       $('#bank_name')
         .append($("<option></option>")
         .attr("value",name)
@@ -65,7 +64,7 @@
     }
   }
 
-  function not_exists_name(elmnt, value){
+  function notExistsName(elmnt, value){
 
     var aReturn = true
 

@@ -10,7 +10,7 @@ class ChecksController < ApplicationController
   def create
     @check = Check.new(params[:check])
     flash[:success] = t('flash.check', message: t('flash.created')) if @check.save
-    respond_with(@check)
+    respond_with @check
   end
 
   def show
