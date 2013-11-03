@@ -1,0 +1,16 @@
+.show-bank
+  .left
+    .title= t('.bank_data')
+    .input
+      = label_tag t('activerecord.attributes.bank.name')
+      = label_tag @bank.name, nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.bank.branch_office_number')
+      = label_tag @bank.branch_office_number, nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.bank.address')
+      = label_tag @bank.address, nil, class: "pretty-input"
+    .input
+      = label_tag t('activerecord.attributes.bank.location')
+      = label_tag @bank.location.complete_name, nil, class: "pretty-input"
+  .right

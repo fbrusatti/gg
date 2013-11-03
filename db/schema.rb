@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026235950) do
+ActiveRecord::Schema.define(:version => 20131028122612) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,18 @@ ActiveRecord::Schema.define(:version => 20131026235950) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "banks", :force => true do |t|
+    t.string   "name"
+    t.string   "branch_office_number"
+    t.string   "address"
+    t.integer  "location_id"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+  end
+
+  add_index "banks", ["branch_office_number"], :name => "index_banks_on_branch_office_number"
+  add_index "banks", ["name"], :name => "index_banks_on_name"
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",  :null => false
@@ -59,6 +71,23 @@ ActiveRecord::Schema.define(:version => 20131026235950) do
     t.integer "category_id"
     t.integer "product_id"
   end
+
+  create_table "checks", :force => true do |t|
+    t.string   "check_number"
+    t.string   "account"
+    t.date     "emission_date"
+    t.date     "payment_date"
+    t.string   "emisor"
+    t.decimal  "amount",        :precision => 8, :scale => 2
+    t.string   "check_status"
+    t.boolean  "is_proper"
+    t.integer  "bank_id"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
+  end
+
+  add_index "checks", ["check_number"], :name => "index_checks_on_check_number"
+  add_index "checks", ["emisor"], :name => "index_checks_on_emisor"
 
   create_table "customers", :force => true do |t|
     t.string   "dni"

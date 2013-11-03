@@ -1,0 +1,124 @@
+@import "twitter/bootstrap";
+
+#banks {
+  // sub-header bank
+  .bank-new {
+    @extend .btn, .btn-primary;
+  }
+
+  .bank-print {
+    @extend .btn, .btn-primary, .pull-right;
+  }
+
+  .bank-danger {
+     @extend .btn, .btn-danger;
+  }
+
+  .bank-save {
+     @extend .btn, .btn-primary;
+  }
+
+  #openBtn-bank,  #openBtn-location,.btn-modal-submit {
+    @extend .btn, .btn-primary
+  }
+
+
+
+
+  // active color of the tabs
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a {
+    background-color: #E0DFDB !important;
+  }
+
+  // sub-header
+  .sub-header {
+    display: block;
+  }
+
+  .sub-header > a{
+    margin: 5px;
+  }
+
+  #new_bank, form[id*='edit_bank_'] {
+    background-color: #E0DFDB  ;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+
+  // tabs bank
+  .bank-tabs {
+    @extend .nav, .nav-tabs;
+    li > a {
+      @extend .btn, .btn-success;
+    }
+  }
+
+  // form new, edit and modal
+  .data-bank, .modal-body {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      label {
+        @extend .col-lg-3, .control-label;
+      }
+      input {
+        @extend .col-lg-6;
+      }
+      select {
+        @extend .col-lg-6;
+      }
+    }
+
+    .input-group-addon {
+      font-size: 19px;
+    }
+
+  }
+
+  .data-bank .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
+  .pretty-input {
+    @extend .form-control
+  }
+
+  // handled errors
+  .field_with_errors {
+    display: inline;
+  }
+
+  .error{
+    text-align: center;
+    color: red;
+    padding-top: 10px;
+  }
+  // show bank
+  .show-bank {
+    background-color: #E0DFDB;
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      label:first-child {
+        @extend .col-lg-3, .control-label;
+      }
+
+      label:nth-of-type(2) {
+         @extend .col-lg-6, .control-label;
+        text-align: left;
+      }
+
+    }
+
+    .left, .right {
+      @include make-lg-column(6);
+      .title { font-size: 15pt;
+               margin: 20px; }
+    }
+  }
+}

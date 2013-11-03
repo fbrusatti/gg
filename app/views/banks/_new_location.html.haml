@@ -1,0 +1,20 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", type: "button"} ×
+      %h3= t('.new_location')
+    -locat =  Location.new
+    = form_for(locat, remote: true, format: :json ) do |c|
+      .error#error
+      .modal-body
+        .input
+          = c.label :city
+          = c.text_field :city, class: "pretty-input"
+        .input
+          = c.label :state
+          = c.text_field :state, class: "pretty-input"
+        .input
+          = c.label :countri
+          = c.text_field :countri, class: "pretty-input"
+      .modal-footer
+        = c.submit t('.save'), class: "btn-modal-submit"

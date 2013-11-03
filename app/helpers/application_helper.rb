@@ -37,4 +37,11 @@ module ApplicationHelper
     'active' if controller_path == tag
   end
 
+ def print_date_time(date, format)
+    date.to_s(format) if date.present?
+ end
+
+ def print_date(date, format)
+    date.to_formatted_s(format) if date.present?
+ end
 end

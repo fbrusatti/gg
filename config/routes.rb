@@ -10,6 +10,9 @@ Gg::Application.routes.draw do
   resources :categories
   resources :vats
   resources :invoices
+  resources :banks
+  resources :checks
+  resources :locations
   resources :documents do
     collection do
       get 'options'

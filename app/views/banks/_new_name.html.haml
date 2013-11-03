@@ -1,0 +1,11 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", type: "button"} ×
+      %h3= t('.new_name')
+    .modal-body
+      .input
+        = label_tag t('.name')
+        = text_field_tag 'new-name-bank',nil, class: "pretty-input"
+    .modal-footer
+      = submit_tag t('.add'), class: "btn-modal-submit"

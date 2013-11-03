@@ -1,0 +1,8 @@
+#checks
+  %ul.check-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#check-data"}
+        = t('.check_data')
+  .tab-content
+    .tab-pane.active#check-data
+      = render "show_check_data"
