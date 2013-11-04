@@ -9,13 +9,13 @@ $(document).ready(function() {
     bProcessing: true,
     bServerSide: true,
     sAjaxSource: $('#product-table').data('source')
-  });  
+  });
 
   $("a.product-save").click( function() {
     $("#new_product, [id^=edit_product_]").submit();
   });
 
-  
+
   $("a.save-category").click( function() {
     $("#submit_new_cat").submit();
   });
@@ -34,7 +34,7 @@ $(document).ready(function() {
     $('#vat_select')
       .append($("<option></option>")
       .attr("value",data.id)
-      .text(data.percentaje) 
+      .text(data.percentaje)
     );
   });
 
@@ -48,7 +48,7 @@ $(document).ready(function() {
     $('#category_select')
       .append($("<option></option>")
       .attr("value",data.id)
-      .text(data.name) 
+      .text(data.name)
     );
   });
 
@@ -59,4 +59,4 @@ $(document).ready(function() {
   $('#openBtn-vat').click(function(){
     $('#vat-modal').modal('show')
   });
-})  
+})

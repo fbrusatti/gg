@@ -14,6 +14,8 @@
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require dataTables/src/demo_table_jui
+ *= require dataTables/extras/TableTools
+ *= require dataTables/extras/TableTools_JUI
  */
 @import "twitter/bootstrap";
 @import "header";

@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  
+
   respond_to :html
   before_filter :authenticate_user!
 
@@ -16,7 +16,7 @@ class CustomersController < ApplicationController
 
   def create
     @customer = current_user.customers.build(params[:customer])
-    @customer.type_person = 'Cliente' 
+    @customer.type_person = 'Cliente'
     if @customer.save
       flash[:success] = t('flash.customer', message: t('flash.created'))
     end
@@ -36,7 +36,10 @@ class CustomersController < ApplicationController
     if @customer.update_attributes(params[:customer])
       flash[:success] = t('flash.customer', message: t('flash.updated'))
     end
-    respond_with @customer
+    respond_to do |format|
+      format.html
+      format.json { render :nothing => true }
+    end
   end
 end
 

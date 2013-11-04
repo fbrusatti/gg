@@ -103,4 +103,12 @@
              margin: 20px; }
     }
   }
+
+  .focused td {
+    background: red;
+  }
+
+  td.focus {
+    background-color: yellow;
+  }
 }
