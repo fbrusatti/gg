@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131028122612) do
+ActiveRecord::Schema.define(:version => 20131105130759) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -126,10 +126,12 @@ ActiveRecord::Schema.define(:version => 20131028122612) do
     t.integer  "customer_id"
     t.integer  "user_id"
     t.integer  "supplier_id"
-    t.datetime "created_at",                                      :null => false
-    t.datetime "updated_at",                                      :null => false
+    t.datetime "created_at",                                                          :null => false
+    t.datetime "updated_at",                                                          :null => false
+    t.string   "creation_state",                                  :default => "init"
   end
 
+  add_index "documents", ["creation_state"], :name => "index_documents_on_creation_state"
   add_index "documents", ["number"], :name => "index_documents_on_number"
   add_index "documents", ["type", "id"], :name => "index_documents_on_type_and_id"
   add_index "documents", ["type"], :name => "index_documents_on_type"
@@ -138,12 +140,13 @@ ActiveRecord::Schema.define(:version => 20131028122612) do
     t.integer  "document_id"
     t.integer  "product_id"
     t.integer  "amount"
-    t.decimal  "price_cost",     :precision => 8, :scale => 2
-    t.decimal  "price_sale",     :precision => 8, :scale => 2
-    t.decimal  "price_vat",      :precision => 8, :scale => 2
-    t.decimal  "price_descount", :precision => 8, :scale => 2
-    t.datetime "created_at",                                   :null => false
-    t.datetime "updated_at",                                   :null => false
+    t.decimal  "price_cost",     :precision => 8,  :scale => 2
+    t.decimal  "price_sale",     :precision => 8,  :scale => 2
+    t.decimal  "price_vat",      :precision => 8,  :scale => 2
+    t.decimal  "price_descount", :precision => 8,  :scale => 2
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
+    t.decimal  "total_price",    :precision => 10, :scale => 2
   end
 
   add_index "items", ["document_id", "product_id"], :name => "index_items_on_document_id_and_product_id"
