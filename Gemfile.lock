@@ -65,6 +65,8 @@ GEM
     better_errors (1.0.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
+    bootstrap-daterangepicker-rails (0.0.7)
+      railties (>= 3.1)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
@@ -290,6 +292,7 @@ DEPENDENCIES
   anjlab-bootstrap-rails!
   awesome_print
   better_errors
+  bootstrap-daterangepicker-rails
   brakeman
   capybara (= 1.1.2)
   capybara-select2
