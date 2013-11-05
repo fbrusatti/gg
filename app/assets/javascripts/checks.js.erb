@@ -1,0 +1,191 @@
+    /***************
+    DATE-TIME-PICKER
+    ****************/
+
+$(document).ready(function(){
+
+  $('input[name="daterange"]').daterangepicker({
+      format: 'DD/MM/YYYY',
+      ranges: {
+        "<%= I18n.t('datatables.daterange.today') %>":
+          [moment(), moment()],
+        "<%= I18n.t('datatables.daterange.yesterday') %>":
+          [moment().subtract('days', 1),moment().subtract('days', 1)],
+        "<%= I18n.t('datatables.daterange.last_7_days') %>":
+          [moment().subtract('days', 6), moment()],
+        "<%= I18n.t('datatables.daterange.last_30_days') %>":
+          [moment().subtract('days', 29), moment()],
+        "<%= I18n.t('datatables.daterange.this_month') %>":
+          [moment().startOf('month'), moment().endOf('month')],
+        "<%= I18n.t('datatables.daterange.last_month') %>":
+          [moment().subtract('month', 1).startOf('month'),moment().subtract('month', 1).endOf('month')]
+        },
+      startDate: moment().subtract('days', 29),
+      endDate: moment()
+    },
+    function(start, end) {
+      $('#reportrange span').html(start.format + '-' + end);
+    }
+  );
+
+
+  $('.check_date_time_picker').datetimepicker({
+    language: 'es',
+    pickDate: true,
+    pickTime: false,
+    maskInput: true,
+    pick12HourFormat: true,
+    pickSeconds: false,
+    format: 'dd/MM/yyyy',
+    startDate: 1910,
+    endDate: Infinity
+  });
+
+  $("a.check-save").click(function() {
+    $("a.check-save").attr("disabled", true);
+    $("#new_check, [id^=edit_check_]").submit();
+  });
+
+
+  /*********
+    DATA-TABLE
+    **********/
+
+  // function principal to show
+  // ---------------------------
+  var oTable, bMyChecks;
+  bMyChecks = false;
+  // oTable = $('#check-history').dataTable({
+  //   sPaginationType: "full_numbers",
+  //   bJQueryUI: true,
+  //   bProcessing: true,
+  //   bServerSide: true,
+  //   oLanguage: {
+  //       sUrl: "/datatables/spanish.txt"
+  //   },
+  //   sAjaxSource: $('#check-history').data('source'),
+  //   bAutoWidth: false,
+  //   aoColumns: [
+  //     { "sWidth": "45%", "bSearchable": false },
+  //     { "sWidth": "10%", "sClass": "center", "bSearchable": true },
+  //     { "sWidth": "10%", "bSearchable": true }
+  //   ]
+  // });
+
+  // function principal to index
+  // ---------------------------
+  var oTable, bMyChecks;
+  bMyChecks = false;
+  oTable = $('#checks-table').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    oLanguage: {
+        sUrl: "/datatables/spanish.txt"
+    },
+    sAjaxSource: $('#checks-table').data('source'),
+    aaSorting: [[ 0, "desc" ]],
+    fnInitComplete: function(oSettings, json){
+      // Add a select menu for each TH element in the table footer
+      $("thead tr th").each( function (i) {
+          $('select', this).change( function () {
+            oTable.fnFilter($(this).val(),i);
+           });
+      });
+
+      var emission_column = 4;
+      var payment_column = 5;
+      $('#emission_date').on('input', function() {
+          if ($(this).val() == "")
+          {
+            oTable.fnFilter($('#emission_date').val(), emission_column);
+          }
+
+      });
+
+      $('#payment_date').on('input', function() {
+          if ($(this).val() == "")
+          {
+            oTable.fnFilter($('#payment_date').val(), payment_column);
+          }
+
+      });
+
+      $('button').click( function () {
+        setTimeout(function () {
+          oTable.fnFilter($('#emission_date').val(), emission_column);
+        }, 1);
+        setTimeout(function () {
+          oTable.fnFilter($('#payment_date').val(), payment_column);
+        }, 1);
+      });
+
+      $('.ranges ul > li').click( function () {
+        setTimeout(function () {
+          oTable.fnFilter($('#emission_date').val(), emission_column);
+        }, 1);
+        setTimeout(function () {
+          oTable.fnFilter($('#payment_date').val(), payment_column);
+        }, 1);
+       });
+
+    },
+    aoColumns: aColumnsOptions,
+  });
+
+  // row select
+  // ----------
+  var giRedraw = false
+  // Add a click handler to the rows - this could be used as a callback
+  $("#checks-table tbody").click(function(event) {
+    $(oTable.fnSettings().aoData).each(function (){
+      $(this.nTr).removeClass('row_selected');
+    });
+    $(event.target.parentNode).addClass('row_selected');
+  });
+  // Add a click handler for the delete row
+  $('#delete').click( function() {
+    var anSelected = fnGetSelected( oTable );
+    oTable.fnDeleteRow( anSelected[0] );
+  } );
+
+  rowSelected(oTable,"#checks-table");
+  datatableKeyboard("#checks-table");
+
+});// END-$(document)
+
+  /*********
+  DATA-TABLE
+  **********/
+
+
+var aColumnsOptions =
+    [
+      { "sWidth": "10%", "sClass": "center", "bSearchable": true },
+      { "sWidth": "10%", "bSearchable": true },
+      { "sWidth": "10%", "bSearchable": true },
+      { "sWidth": "20%", "bSearchable": true },
+      { "sWidth": "10%", "bSearchable": true },
+      { "sWidth": "10%", "bSearchable": true },
+      { "sWidth": "10%", "sClass": "center", "bSearchable": true },
+    ]
+
+// Get the rows which are currently selected
+function fnGetSelected( oTableLocal )
+{
+  var aReturn = new Array();
+  var aTrs = oTableLocal.fnGetNodes();
+
+  for ( var i=0 ; i<aTrs.length ; i++ )
+  {
+    if ( $(aTrs[i]).hasClass('row_selected') )
+    {
+      aReturn.push( aTrs[i] );
+    }
+  }
+  return aReturn;
+}
+
+
+// --- end data-table ----

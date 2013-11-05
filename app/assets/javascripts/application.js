@@ -17,3 +17,5 @@
 //= require jquery.tokeninput
 //= require_tree .
 //= require twitter/bootstrap
+//= require moment
+//= require daterangepicker
