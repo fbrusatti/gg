@@ -18,4 +18,4 @@
 //= require_tree .
 //= require twitter/bootstrap
 //= require moment
-//= require daterangepicker
+//= require daterangepicker.js

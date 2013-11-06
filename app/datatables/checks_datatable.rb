@@ -61,7 +61,7 @@ private
     if params[:sSearch_6].present?
       checks = checks.where(:check_status =>params[:sSearch_6])
     end
-    checks
+    checks.includes(:bank)
   end
 
   def page

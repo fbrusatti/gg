@@ -1,9 +1,9 @@
-    /***************
-    DATE-TIME-PICKER
-    ****************/
 
 $(document).ready(function(){
 
+    /***************
+    DATE-RANGE-PICKER
+    ****************/
   $('input[name="daterange"]').daterangepicker({
       format: 'DD/MM/YYYY',
       ranges: {
@@ -28,7 +28,9 @@ $(document).ready(function(){
     }
   );
 
-
+    /***************
+    DATE-TIME-PICKER
+    ****************/
   $('.check_date_time_picker').datetimepicker({
     language: 'es',
     pickDate: true,
@@ -41,39 +43,19 @@ $(document).ready(function(){
     endDate: Infinity
   });
 
+    /***************
+    BUTTON SAVE-EDIT
+    ****************/
   $("a.check-save").click(function() {
     $("a.check-save").attr("disabled", true);
     $("#new_check, [id^=edit_check_]").submit();
   });
 
 
-  /*********
+   /*********
     DATA-TABLE
-    **********/
+   **********/
 
-  // function principal to show
-  // ---------------------------
-  var oTable, bMyChecks;
-  bMyChecks = false;
-  // oTable = $('#check-history').dataTable({
-  //   sPaginationType: "full_numbers",
-  //   bJQueryUI: true,
-  //   bProcessing: true,
-  //   bServerSide: true,
-  //   oLanguage: {
-  //       sUrl: "/datatables/spanish.txt"
-  //   },
-  //   sAjaxSource: $('#check-history').data('source'),
-  //   bAutoWidth: false,
-  //   aoColumns: [
-  //     { "sWidth": "45%", "bSearchable": false },
-  //     { "sWidth": "10%", "sClass": "center", "bSearchable": true },
-  //     { "sWidth": "10%", "bSearchable": true }
-  //   ]
-  // });
-
-  // function principal to index
-  // ---------------------------
   var oTable, bMyChecks;
   bMyChecks = false;
   oTable = $('#checks-table').dataTable({
@@ -96,32 +78,13 @@ $(document).ready(function(){
 
       var emission_column = 4;
       var payment_column = 5;
-      $('#emission_date').on('input', function() {
-          if ($(this).val() == "")
-          {
-            oTable.fnFilter($('#emission_date').val(), emission_column);
-          }
 
-      });
+      //  If remove all number, filter with empty date
+      filterEmptyDate($('#emission_date'),emission_column,oTable);
+      filterEmptyDate($('#payment_date'),payment_column,oTable)
 
-      $('#payment_date').on('input', function() {
-          if ($(this).val() == "")
-          {
-            oTable.fnFilter($('#payment_date').val(), payment_column);
-          }
 
-      });
-
-      $('button').click( function () {
-        setTimeout(function () {
-          oTable.fnFilter($('#emission_date').val(), emission_column);
-        }, 1);
-        setTimeout(function () {
-          oTable.fnFilter($('#payment_date').val(), payment_column);
-        }, 1);
-      });
-
-      $('.ranges ul > li').click( function () {
+      $('button, .ranges ul > li').click( function () {
         setTimeout(function () {
           oTable.fnFilter($('#emission_date').val(), emission_column);
         }, 1);
@@ -129,9 +92,8 @@ $(document).ready(function(){
           oTable.fnFilter($('#payment_date').val(), payment_column);
         }, 1);
        });
-
     },
-    aoColumns: aColumnsOptions,
+    aoColumns: aColumnsOptions
   });
 
   // row select
@@ -155,37 +117,23 @@ $(document).ready(function(){
 
 });// END-$(document)
 
-  /*********
-  DATA-TABLE
-  **********/
-
 
 var aColumnsOptions =
-    [
-      { "sWidth": "10%", "sClass": "center", "bSearchable": true },
-      { "sWidth": "10%", "bSearchable": true },
-      { "sWidth": "10%", "bSearchable": true },
-      { "sWidth": "20%", "bSearchable": true },
-      { "sWidth": "10%", "bSearchable": true },
-      { "sWidth": "10%", "bSearchable": true },
-      { "sWidth": "10%", "sClass": "center", "bSearchable": true },
-    ]
+  [
+    {"sClass": "center", "bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"sClass": "center", "bSearchable": true },
+  ]
 
-// Get the rows which are currently selected
-function fnGetSelected( oTableLocal )
-{
-  var aReturn = new Array();
-  var aTrs = oTableLocal.fnGetNodes();
-
-  for ( var i=0 ; i<aTrs.length ; i++ )
-  {
-    if ( $(aTrs[i]).hasClass('row_selected') )
-    {
-      aReturn.push( aTrs[i] );
-    }
-  }
-  return aReturn;
+// Filter with empty date , if remove all number
+function filterEmptyDate (obj, column, oTable){
+  obj.on('input', function() {
+      if ($(this).val() == ""){
+        oTable.fnFilter(obj.val(), column);
+      }
+  });
 }
-
-
-// --- end data-table ----
