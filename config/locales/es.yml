@@ -11,7 +11,7 @@ es:
     remove: Borrar
     sub_header:
       save_finish: Guardar
-      save_building: En Construccion
+      save_building: En Construcción
       cancel: Cancelar
       invoice: Factura
     new:
@@ -382,7 +382,7 @@ es:
   token_input:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
-    hintText_surname: "Ingrese el codigo del producto"
+    hintText_surname: "Ingrese el código del producto"
     searchingText: "Buscando"
   active_admin:
     category: Categoría
