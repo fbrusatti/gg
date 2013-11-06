@@ -200,6 +200,22 @@ es:
     bank: Banco
     bank_data: Datos del Banco
     comercial_data: Datos Comerciales
+      document:
+        customer: Nombre
+  token_input:
+    noResultsText: "No hay resultado"
+    hintText: "Ingrese el nombre"
+    hintText_surname: "Ingrese el apellido"
+    searchingText: "Buscando"
+  receipts:
+    data_receipt:
+      id: Id
+      customer_id: Id Cliente
+      amount: Monto
+      balance: balance
+      type_vat: Tipo de IVA
+      registered_name: Razón Social
+      date: Fecha
   products:
     sub_header:
       new: Nuevo

@@ -14,6 +14,8 @@ Gg::Application.routes.draw do
   resources :banks
   resources :checks
   resources :locations
+  resources :receipts
+
   resources :documents do
     collection do
       get 'options'

@@ -1,0 +1,3 @@
+class Receipt < Document
+
+end

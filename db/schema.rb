@@ -107,11 +107,6 @@ ActiveRecord::Schema.define(:version => 20131105130759) do
     t.integer  "user_id"
   end
 
-  add_index "customers", ["dni"], :name => "index_customers_on_dni"
-  add_index "customers", ["name"], :name => "index_customers_on_name"
-  add_index "customers", ["surname"], :name => "index_customers_on_surname"
-  add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
-
   create_table "documents", :force => true do |t|
     t.string   "type"
     t.string   "number"
@@ -173,6 +168,7 @@ ActiveRecord::Schema.define(:version => 20131105130759) do
     t.string   "description"
     t.integer  "stock"
     t.integer  "minimun_stock"
+    t.float    "net_cost"
     t.float    "cost_price"
     t.string   "code"
     t.boolean  "active"

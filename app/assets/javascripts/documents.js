@@ -8,6 +8,9 @@ $(document).ready(function() {
     if(button == 50 || button == 98 ) { //2
       $("a#budget").on("click", function() { location.href = this.href; }).click();
     }
+    if(button == 51 || button == 99 ) { //3
+      $("a#receipt").on("click", function() { location.href = this.href; }).click();
+    }
   });
 
 });

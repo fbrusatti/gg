@@ -11,5 +11,6 @@ class Customer < ActiveRecord::Base
 
   # == Associations
   belongs_to :user
+  has_many :invoices
 
 end

@@ -1,0 +1,32 @@
+#receipts
+  %ul.receipts-tabs
+    %li.active
+      %a{'data-toggle' => 'tab', href: '#data'}
+        Datos
+    %li
+      %a{'data-toggle' => 'tab', href: '#items'}
+        Listas
+    %li
+      %a{'data-toggle' => 'tab', href: '#pay'}
+        Forma de pagos
+    %li
+      %a{'data-toggle' => 'tab', href: '#preview'}
+        Vista Previa
+
+  = form_for @receipt do |f|
+    = errors_for(@receipt).html_safe
+    .receipts-tabs-content
+      #data.tab-pane.active
+        = render 'data_receipt', f: f
+      #items.tab-pane
+        .table= render 'current_items_receipt'
+        .panel= render 'panel_edit_items'
+        .total-price
+          .text Total $
+          .price
+        .table= render 'products/index_product_data'
+        .panel= render 'panel_add_items'
+      #pay.tab-pane
+      #preview.tab-pane
+
+    = f.submit hidden: true

@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   
-  respond_to :html
+  respond_to :html, :js, :json
   before_filter :authenticate_user!
 
   def new
@@ -8,9 +8,17 @@ class CustomersController < ApplicationController
   end
 
   def index
-    respond_to do |format|
-      format.html
-      format.json { render json: CustomersDatatable.new(view_context) }
+    if params[:q].present?
+      @customers = Customer.where("name ilike ?", "%#{params[:q]}%")
+      respond_to do |format|
+        format.html
+        format.json { render :json => @customers.map(&:attributes) } 
+      end
+    else     
+      respond_to do |format|
+        format.html
+        format.json { render :json => CustomersDatatable.new(view_context) }
+      end        
     end
   end
 
@@ -25,6 +33,10 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    respond_with @customer do |format|
+      respond = InvoicesDatatable.new(view_context, @customer)
+      format.json { render json: {table: respond, customer: @customer}}
+    end
   end
 
   def edit
@@ -38,5 +50,5 @@ class CustomersController < ApplicationController
     end
     respond_with @customer
   end
-end
 
+end

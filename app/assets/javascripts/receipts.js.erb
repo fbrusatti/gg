@@ -1,0 +1,65 @@
+$(document).ready(function() {
+
+  var customer_id = 0;
+
+  $('#receipt_customer_tokens').tokenInput('/customers.json', {
+    crossDomain: false,
+    prePopulate: $('#receipt_customer_token').data('pre'),
+    theme: "facebook",
+    tokenLimit: "1",
+    noResultsText: "I18n.t('.token_input.noResultsText')",
+    hintText: "<%= I18n.t('.token_input.hintText')%>",
+    searchingText: "<%= I18n.t('.token_input.searchingText')%>",
+    resultsFormatter: function(item){
+      return "<li><p style='color: black' >" + item.name
+      + " " + item.surname +  ". DNI: " + item.dni + " </p> </li>" },
+    tokenFormatter: function(item) {
+      return "<li><p>" + (item.name + " " +
+      item.surname ).substring(0,22)+ ". DNI: " + item.dni + " </p> </li>" }
+  });
+
+  var table = $('#invoices-table').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    bDestroy: true,
+    sAjaxSource: "/customers/" + customer_id,
+    sScrollY: "200",
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    }
+  });
+
+  $("#receipt_customer_tokens").on("change", function(){ 
+    if ( $("#receipt_customer_tokens").val() == "" ) {
+      $("#type_vat_label").text("");
+      $("#registered_name_label").text("");    
+      table.fnClearTable();
+    } else {
+      customer_id = ($("#receipt_customer_tokens").tokenInput("get"))[0].id ;
+      $.ajax({
+          type: "GET",
+          url: "/customers/" + customer_id,
+          dataType: "json"
+      })
+      .done(function(data, textStatus, xhr){
+        // console.log(data.table);
+        // console.log(data);
+        var oSettings = table.fnSettings();
+        // console.log(oSettings);
+        oSettings.sAjaxSource = "/customers/" + customer_id;
+        // console.log(oSettings.sAjaxSource);  
+        // oSettings.sAjaxSource ="/customers/" + customer_id;
+        oSettings.iDisplayLength = 10;
+        oSettings.iDisplayStart = 0;
+        
+        table.fnDraw(data.table);
+
+        $("#type_vat_label").text(data.customer.type_iva);
+        $("#registered_name_label").text(data.customer.registered_name);      
+      });  
+    }   
+  });
+
+});

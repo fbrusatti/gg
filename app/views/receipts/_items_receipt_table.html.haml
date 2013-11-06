@@ -1,0 +1,11 @@
+%table#product-table.display{"data-source" => products_url(format: "json")}
+  %thead
+    %tr
+      %th= t('products.index_product_data.code')
+      %th= t('products.index_product_data.description')
+      %th= t('products.index_product_data.stock')
+      %th= t('products.index_product_data.minimun_stock')
+      %th= t('products.index_product_data.category')
+      %th= t('products.index_product_data.list_price_one')
+      %th= t('products.index_product_data.list_price_two')
+  %tbody

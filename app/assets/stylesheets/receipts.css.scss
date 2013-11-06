@@ -1,0 +1,82 @@
+@import "twitter/bootstrap";
+
+#receipts {
+
+  .receipts-tabs {
+    @extend .nav, .nav-tabs;
+    li > a {
+      @extend .btn, .btn-primary;
+      &:hover {
+        color: #418AE2;
+        background-color: #6BC9F8;
+      }
+    }
+  }
+
+  .receipts-tabs-content { @extend .tab-content }
+
+  .title-sub-header {
+    text-align: center;
+    font-size:30px;
+    margin-top: 10px
+  }
+
+  #items{
+    margin-left: 5px;
+    margin-right: 5px;
+    .table { @extend .col-lg-10 }
+    .panel { @extend .col-sm-1 }
+    .total-price { @extend .col-lg-2, .col-lg-offset-8 }
+    .total-price .text {
+      display: inline;
+      font-size: 20px
+    }
+    .total-price .price  {
+      display: inline;
+      font-size: 20px;
+      border: 1px solid gray;
+      background-color: white
+    }
+  }
+
+  #items .panel {
+    margin-top: 10px;
+    border-radius: 10px ;
+    border: 1px solid gray;
+    a > i { padding: 5px }
+    text-align: center
+  }
+
+  .pretty-input {
+    @extend .form-control
+  }
+
+  .data-receipt {
+    @extend .form-horizontal;
+    @include make-row();
+    .left, .right {
+      @include make-lg-column(6);
+      .title { font-size: 15pt; margin: 20px;}
+    }
+    .input {
+      @extend .form-group;
+    }
+    .text_label {
+      @extend .col-lg-3, .control-label;
+    }  
+    .show_label {
+      width:50%;
+      float:left;
+    }
+    .input select, input, textarea {
+      @extend .col-lg-6;
+      resize: none;
+    }
+    .token_field {
+      width:50%;
+      float:left;
+    }
+  }
+
+  #items div.dataTables_wrapper { padding-top: 10px }
+}
