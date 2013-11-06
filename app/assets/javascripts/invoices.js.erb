@@ -1,0 +1,104 @@
+<%# @encoding: UTF-8 %>
+$(document).ready(function() {
+
+  // variables
+  // ---------
+  var tItems; // table invoice-items
+  var searchProduct; //token input
+
+  // handle buttons sub header
+  // -------------------------
+  $("a.invoice-save-finish").click(function() {
+    $("a.invoice-save-finish").attr("disabled", true);
+    $("a.invoice-save-building").attr("disabled", true);
+    $('#invoice_creation_state').val('finish');
+    $("[id^=edit_invoice_]").submit();
+  });
+  $("a.invoice-save-building").click(function() {
+    $("a.invoice-save-building").attr("disabled", true);
+    $("a.invoice-save-finish").attr("disabled", true);
+    $('#invoice_creation_state').val('building');
+    $("[id^=edit_invoice_]").submit();
+  });
+  // table of items
+  // --------------
+  var partialSum;
+  tItems = $('#invoices #items-invoice').dataTable({
+    bJQueryUI: true,
+    bServerSide: true,
+    bFilter: false,
+    bPaginate: false,
+    bLengthChange: false,
+    bInfo: false,
+    sAjaxSource: $('#invoices #items-invoice').data('source'),
+    sScrollY: "400",
+    aoColumns: aColumnsOptions,
+    fnCreatedRow: function(nRow, aData, iDataIndex){
+      if (iDataIndex == 0)
+        partialSum = 0;
+      if (iDataIndex < tItems.fnSettings().fnRecordsTotal())
+        partialSum += parseFloat(aData[7]);
+      // set the price in view
+      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 )
+        $('.total-price .price').html(partialSum.toFixed(2));
+    },
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    }
+  });
+  // token input
+  // -----------
+  searchProduct = $('#invoices #product_tokens').tokenInput('/products.json', {
+    theme: 'facebook',
+    tokenLimit: "1",
+    resultsFormatter: function(item){
+      var code, description, p1, p2;
+      code = "<%= I18n.t('activerecord.attributes.product.code') %>: " + item.code;
+      description = "<%= I18n.t('activerecord.attributes.product.description') %>: "
+                    + item.description;
+      p1 = "<p style='color: black; font-size:20px' >" + code + " </p>";
+      p2 = "<p style='color: black; border-bottom: 1px solid black; font-size:16px'>"
+            + description + " </p>";
+      return '<li>' + p1 + p2 + '</li>';
+    },
+    propertyToSearch: 'code',
+    noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    searchingText: "<%= I18n.t('.token_input.searchingText')%>"
+  });
+  // handle items
+  // ------------
+  $('#invoices #product_tokens').on( "change", function(){
+    $.ajax({
+      type: "POST",
+      url: "/items",
+      dataType: "json",
+      data: { product: this.value, invoice: this.getAttribute('data-invoice') }
+    })
+    .done(function(data, textStatus, xhr){
+      searchProduct.tokenInput("clear");
+      tItems.fnDraw();
+    });
+  });
+  $(document).on('ajax:success', '#invoices .delete-item',
+  function(evt, data, status, xhr){
+    var htmlNum = $(this).closest('tr').find("td:nth-child(8n)").html();
+    partialSum -= parseFloat(htmlNum);
+    $('.total-price .price').html(partialSum.toFixed(2));
+    $(this).closest('tr').fadeOut().remove();
+  });
+
+});// document
+
+var aColumnsOptions =
+  [
+    { "sClass": "center", "bSortable": false },
+    { "bSortable": false },
+    { "sClass": "center", "bSortable": false },
+    { "sClass": "center", "bSortable": false },
+    { "sClass": "center", "bSortable": false },
+    { "sClass": "center", "bSortable": false },
+    { "bSortable": false },
+    { "sClass": "center", "bSortable": false },
+    { "sClass": "center", "bSortable": false }
+  ]

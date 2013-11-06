@@ -1,0 +1,30 @@
+#invoices
+  %ul.invoices-tabs
+    %li
+      %a{'data-toggle' => 'tab', href: '#data'}= t('.data')
+    %li.active
+      %a{'data-toggle' => 'tab', href: '#items'}= t('.list')
+    %li
+      %a{'data-toggle' => 'tab', href: '#pay'}= t('.pay_mode')
+    %li
+      %a{'data-toggle' => 'tab', href: '#preview'}= t('.preview')
+
+  = form_for @invoice do |f|
+    = errors_for(@invoice).html_safe
+    .invoices-tabs-content
+      #data.tab-pane
+      #items.tab-pane.active
+        .token_field
+          .title= t('.search_products')
+          = text_field_tag :product_tokens,
+                         nil,
+                         class: "pretty-input",
+                         'data-invoice' => @invoice.id
+        .table= render 'current_items_invoice'
+        .total-price
+          .text= t('.total_price')
+          .price 0
+      #pay.tab-pane
+      #preview.tab-pane
+      = f.text_field :creation_state, hidden: true
+    = f.submit hidden: true

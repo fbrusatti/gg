@@ -1,0 +1,13 @@
+%table#items-invoice.display{"data-source" => invoice_url(@invoice, format: "json")}
+  %thead
+    %tr
+      %th= t('activerecord.attributes.product.code')
+      %th= t('activerecord.attributes.product.description')
+      %th= t('activerecord.attributes.item.amount')
+      %th= t('activerecord.attributes.item.price_cost')
+      %th= t('activerecord.attributes.item.price_sale')
+      %th= t('activerecord.attributes.item.price_descount')
+      %th= t('activerecord.attributes.item.price_vat')
+      %th= t('activerecord.attributes.item.total_price')
+      %th= t('invoices.remove')
+  %tbody
