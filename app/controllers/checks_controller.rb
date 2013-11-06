@@ -3,6 +3,13 @@ class ChecksController < ApplicationController
   respond_to :html, :json
   before_filter :authenticate_user!
 
+  def index
+   respond_to do |format|
+      format.html
+      format.json { render json: ChecksDatatable.new(view_context) }
+    end
+  end
+
   def new
     @check = Check.new
   end

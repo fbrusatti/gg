@@ -1,4 +1,12 @@
 es:
+  datatables:
+    daterange:
+      today: Hoy
+      yesterday: Ayer
+      last_7_days: Ultimos 7 Dias
+      last_30_days: Ultimos 30 Dias
+      this_month: Este Mes
+      last_month: Ultimo Mes
   layouts:
     header:
       clients: Clientes
@@ -141,6 +149,8 @@ es:
       returned: Devuelto
       in_folder: En carpeta
       charged: Cobrado
+    index:
+      last_date: Ultimas Fechas
   banks:
     new_location:
       new_location: Nueva localidad

@@ -1,0 +1,123 @@
+
+$(document).ready(function(){
+
+    /***************
+    DATE-RANGE-PICKER
+    ****************/
+  $('input[name="daterange"]').daterangepicker({
+      format: 'DD/MM/YYYY',
+      ranges: {
+        "<%= I18n.t('datatables.daterange.today') %>":
+          [moment(), moment()],
+        "<%= I18n.t('datatables.daterange.yesterday') %>":
+          [moment().subtract('days', 1),moment().subtract('days', 1)],
+        "<%= I18n.t('datatables.daterange.last_7_days') %>":
+          [moment().subtract('days', 6), moment()],
+        "<%= I18n.t('datatables.daterange.last_30_days') %>":
+          [moment().subtract('days', 29), moment()],
+        "<%= I18n.t('datatables.daterange.this_month') %>":
+          [moment().startOf('month'), moment().endOf('month')],
+        "<%= I18n.t('datatables.daterange.last_month') %>":
+          [moment().subtract('month', 1).startOf('month'),moment().subtract('month', 1).endOf('month')]
+        },
+      startDate: moment().subtract('days', 29),
+      endDate: moment()
+    },
+    function(start, end) {
+      $('#reportrange span').html(start.format + '-' + end);
+    }
+  );
+
+    /***************
+    DATE-TIME-PICKER
+    ****************/
+  $('.check_date_time_picker').datetimepicker({
+    language: 'es',
+    pickDate: true,
+    pickTime: false,
+    maskInput: true,
+    pick12HourFormat: true,
+    pickSeconds: false,
+    format: 'dd/MM/yyyy',
+    startDate: 1910,
+    endDate: Infinity
+  });
+
+    /***************
+    BUTTON SAVE-EDIT
+    ****************/
+  $("a.check-save").click(function() {
+    $("a.check-save").attr("disabled", true);
+    $("#new_check, [id^=edit_check_]").submit();
+  });
+
+
+   /*********
+    DATA-TABLE
+   **********/
+
+  var oTable, bMyChecks;
+  bMyChecks = false;
+  oTable = $('#checks-table').dataTable({
+    sPaginationType: "full_numbers",
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    oLanguage: {
+        sUrl: "/datatables/spanish.txt"
+    },
+    sAjaxSource: $('#checks-table').data('source'),
+    aaSorting: [[ 0, "desc" ]],
+    fnInitComplete: function(oSettings, json){
+      // Add a select menu for each TH element in the table footer
+      $("thead tr th").each( function (i) {
+          $('select', this).change( function () {
+            oTable.fnFilter($(this).val(),i);
+           });
+      });
+
+      var emission_column = 4;
+      var payment_column = 5;
+
+      //  If remove all number, filter with empty date
+      filterEmptyDate($('#emission_date'),emission_column,oTable);
+      filterEmptyDate($('#payment_date'),payment_column,oTable)
+
+
+      $('button, .ranges ul > li').click( function () {
+        setTimeout(function () {
+          oTable.fnFilter($('#emission_date').val(), emission_column);
+        }, 1);
+        setTimeout(function () {
+          oTable.fnFilter($('#payment_date').val(), payment_column);
+        }, 1);
+       });
+    },
+    aoColumns: aColumnsOptions
+  });
+
+  rowSelected(oTable,"#checks-table");
+  datatableKeyboard("#checks-table");
+
+});// END-$(document)
+
+
+var aColumnsOptions =
+  [
+    {"sClass": "center", "bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"bSearchable": true },
+    {"sClass": "center", "bSearchable": true },
+  ]
+
+// Filter with empty date , if remove all number
+function filterEmptyDate (obj, column, oTable){
+  obj.on('input', function() {
+      if ($(this).val() == ""){
+        oTable.fnFilter(obj.val(), column);
+      }
+  });
+}

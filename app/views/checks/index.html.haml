@@ -1,0 +1,29 @@
+#checks
+  %table#checks-table.display{"data-source" => checks_url(format:"json")}
+    %thead
+      %tr
+        %th
+        %th
+        %th
+        %th= select_tag nil,
+                        options_from_collection_for_select(Bank.all, "id", "complete_name"),
+                        {include_blank: true ,class: "pretty-input-data-table"}
+        %th= text_field_tag nil, nil,class: "pretty-input-data-table",id: 'emission_date',
+                            type: "text",
+                            name: "daterange",
+                            placeholder: t('.last_date')
+        %th= text_field_tag nil, nil,class: "pretty-input-data-table", id: 'payment_date',
+                            type: "text",
+                            name: "daterange",
+                            placeholder: t('.last_date')
+        %th= select_tag nil, options_for_select(check_status), {include_blank: true ,class: "pretty-input-data-table"}
+      %tr
+        %th=t('activerecord.attributes.check.check_number')
+        %th=t('activerecord.attributes.check.account')
+        %th=t('activerecord.attributes.check.emisor')
+        %th=t('activerecord.attributes.check.bank')
+        %th=t('activerecord.attributes.check.emission_date')
+        %th=t('activerecord.attributes.check.payment_date')
+        %th=t('activerecord.attributes.check.check_status')
+    %tbody
+    %tfoot
