@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :json
   before_filter :authenticate_user!
-  
+
   def new
     @product = Product.new
   end
@@ -10,7 +10,21 @@ class ProductsController < ApplicationController
   def index
     respond_to do |format|
       format.html
-      format.json { render json: ProductsDatatable.new(view_context) }
+      format.json do
+        respond={}
+        if params[:q].present?
+          respond = Product.joins(:categories)
+                           .where('minimun_stock < stock')
+                           .where("code ilike :q or
+                                   categories.name ilike :q or
+                                   description ilike :q",
+                                  q: "%#{params[:q]}%").map(&:attributes)
+        end
+        if params[:sEcho].present?
+          respond = ProductsDatatable.new(view_context)
+        end
+        render json: respond
+     end
     end
   end
 

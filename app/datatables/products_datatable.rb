@@ -1,5 +1,5 @@
 class ProductsDatatable
-  
+
   delegate :params, :h, :link_to, :number_to_currency, to: :@view
 
   def initialize(view)
@@ -10,7 +10,7 @@ class ProductsDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Product.count,
-      iTotalDisplayRecords: prducts.total_entries,
+      iTotalDisplayRecords: products.total_entries,
       aaData: data
     }
   end
@@ -18,7 +18,7 @@ class ProductsDatatable
 private
 
   def data
-    prducts.map do |product|
+    products.map do |product|
       [
         link_to(product.code, product),
         h(product.description),
@@ -31,18 +31,21 @@ private
     end
   end
 
-  def prducts
-    @prducts ||= fetch_prducts
+  def products
+    @products ||= fetch_products
   end
 
-  def fetch_prducts
-    prducts = Product.order("#{sort_column} #{sort_direction}")
-    prducts = prducts.page(page).per_page(per_page)
+  def fetch_products
+    products = Product.order("#{sort_column} #{sort_direction} nulls last")
+    products = products.page(page).per_page(per_page)
     if params[:sSearch].present?
-      prducts = prducts.where("code ilike :search or description ilike :search", 
-                                  search: "%#{params[:sSearch]}%")
+      products = products.joins(:categories)
+      products = products.where("products.description ilike :search
+                                 or categories.name ilike :search
+                                 or products.code ilike :search",
+                                 search: "%#{params[:sSearch]}%")
     end
-    prducts
+    products.includes(:categories)
   end
 
   def page
@@ -54,7 +57,7 @@ private
   end
 
   def sort_column
-    columns = %w[code description stock category list_price_one list_price_two]
+    columns = %w[code description stock minimun_stock category list_price_one list_price_two]
     columns[params[:iSortCol_0].to_i]
   end
 

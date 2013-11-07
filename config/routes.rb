@@ -9,6 +9,7 @@ Gg::Application.routes.draw do
   resources :products
   resources :categories
   resources :vats
+  resources :items
   resources :invoices
   resources :banks
   resources :checks

@@ -1,0 +1,13 @@
+#invoices
+  .sub-header
+    -if edit_or_new_page?(@invoice)
+      %a.invoice-save-finish
+        %i.icon-save.icon-2x
+        = t('.save_finish')
+      %a.invoice-save-building
+        %i.icon-save.icon-2x
+        = t('.save_building')
+      %a.invoice-danger{href: "#{options_documents_path}"}
+        %i.icon-remove-sign.icon-2x
+        = t('.cancel')
+    .title-sub-header= t('.invoice')

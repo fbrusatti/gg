@@ -7,6 +7,20 @@ es:
       last_30_days: Ultimos 30 Dias
       this_month: Este Mes
       last_month: Ultimo Mes
+  invoices:
+    remove: Borrar
+    sub_header:
+      save_finish: Guardar
+      save_building: En Construccion
+      cancel: Cancelar
+      invoice: Factura
+    new:
+      data: Datos
+      list: Lista
+      pay_mode: Forma de Pago
+      preview: Vista Previa
+      search_products: Buscar Productos
+      total_price: Total $
   layouts:
     header:
       clients: Clientes
@@ -20,6 +34,7 @@ es:
       confirm: ¿Está Seguro que desea salir?
   activerecord:
     models:
+      invoice: Factura
       location: Ubicación
       user: Usuario
       admin_user: Administrador
@@ -52,6 +67,13 @@ es:
         branch_office_number: Número de sucursal
         location: Localidad
         complete_name: Nombre completo
+      item:
+        amount: Cantidad
+        price_cost: Precio de Costo
+        price_sale: Precio de venta
+        price_vat: Iva
+        price_descount: Descuento
+        total_price: Precio Total
       money:
         name: Nombre
         quotation: Cotización
@@ -357,6 +379,11 @@ es:
       debit_memo: Nota de Debito
       order: Pedido
       loans: Prestamo
+  token_input:
+    noResultsText: "No hay resultado"
+    hintText: "Ingrese el nombre"
+    hintText_surname: "Ingrese el codigo del producto"
+    searchingText: "Buscando"
   active_admin:
     category: Categoría
     details_user: "Detalle de Usuario"
