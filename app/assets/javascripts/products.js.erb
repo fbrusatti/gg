@@ -10,9 +10,9 @@ $(document).ready(function() {
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
-      return "<li><p style='color: black' >" + item.name+" ("+ item.referrer.name+")"+ " </p> </li>" },
+      return "<li><p style='color: black' >" + item.name+ item.referrer+ " </p> </li>" },
     tokenFormatter: function(item) {
-      return "<li><p>" + item.name+" ("+ item.referrer.name+")"+ " </p> </li>" }
+      return "<li><p>" + item.name+ item.referrer+ " </p> </li>" }
   });
 
   $('#product-table').dataTable({
