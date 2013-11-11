@@ -4,9 +4,6 @@
       %a{'data-toggle' => 'tab', href: '#data'}
         Datos
     %li
-      %a{'data-toggle' => 'tab', href: '#items'}
-        Listas
-    %li
       %a{'data-toggle' => 'tab', href: '#pay'}
         Forma de pagos
     %li
@@ -18,15 +15,8 @@
     .receipts-tabs-content
       #data.tab-pane.active
         = render 'data_receipt', f: f
-      #items.tab-pane
-        .table= render 'current_items_receipt'
-        .panel= render 'panel_edit_items'
-        .total-price
-          .text Total $
-          .price
-        .table= render 'products/index_product_data'
-        .panel= render 'panel_add_items'
       #pay.tab-pane
+        = render 'pay_receipt', f: f
       #preview.tab-pane
 
     = f.submit hidden: true

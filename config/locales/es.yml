@@ -84,6 +84,12 @@ es:
         price_vat: Iva %
         price_descount: Descuento %
         total_price: Sub Total $
+      receipt:
+        cash: Efectivo
+        amount_cash: Monto Efectivo
+        amount_check: Monto Cheque
+        check: Cheque
+        check_pay: Pago en Cheque
       money:
         name: Nombre
         quotation: Cotización
@@ -208,6 +214,11 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    transactions:
+      cash: Efectivo
+      amount: Monto
+      check: Cheque
+      check_pay: Pago en Cheque
     data_receipt:
       id: Id
       customer_id: Id Cliente
