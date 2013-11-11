@@ -24,12 +24,11 @@ private
         h(item.product.code),
         h(item.product.description),
         h(item.amount),
-        h(item.price_cost),
-        h(item.product.list_price_one),
+        h(net_cost(item)),
         h(item.price_descount),
         h(item.price_vat),
         h(price_total(item)),
-        h(remove(item))
+        h(actions(item))
       ]
     end
   end
@@ -41,18 +40,26 @@ private
   def price_total item
     ncost = net_cost item
     tprice = ncost - ncost * item.price_descount / 100
-    tprice - tprice * item.price_vat / 100
+    tprice += tprice * item.price_vat / 100
+    tprice = (tprice * item.amount).round 2
+    item.total_price = tprice
+    tprice
   end
 
   def net_cost item
     item.price_cost + (item.price_sale * item.price_cost) / 100
   end
 
-  def remove item
-    link_to (content_tag :i, nil, class: "icon-remove icon-2x"),
+  def actions item
+    remove = link_to (content_tag :i, nil, class: "icon-remove icon-2x"),
             item,
             method: :delete,
             remote: true,
             class: 'delete-item'
+    edit = link_to (content_tag :i, nil, class: "icon-pencil icon-2x"),
+            item,
+            remote: true,
+            class: 'open-edit-item-modal'
+    edit + remove
   end
 end

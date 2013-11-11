@@ -1,22 +1,36 @@
 class ItemsController < ApplicationController
-  respond_to :js, :json
+  respond_to :js, :json, :html
   before_filter :authenticate_user!
 
-  def create
+  def new
     @product = Product.find params[:product]
-    @item = Item.create(price_cost: @product.cost_price || 0,
-                        price_sale: @product.list_price_one || 0,
-                        price_vat: @product.vat.try(:percentaje) || 0,
-                        price_descount: 0,
-                        product_id: params[:product],
-                        document_id: params[:invoice],
-                        amount: 1)
-    respond_with @item
+    @document = Invoice.find params[:invoice]
+    @item = Item.new
+    render partial: 'add_item'
+  end
+
+  def create
+    @item = Item.create params[:item]
+    render nothing: true
   end
 
   def destroy
     @item = Item.find params[:id]
     @item.destroy
+    respond_with @item do |format|
+      format.js { render nothing: true }
+    end
+  end
+
+  def show
+    @item = Item.find params[:id]
+    @product = @item.product
+    render partial: 'edit_item'
+  end
+
+  def update
+    @item = Item.find params[:id]
+    @item.update_attributes params[:item]
     respond_with @item do |format|
       format.js { render nothing: true }
     end

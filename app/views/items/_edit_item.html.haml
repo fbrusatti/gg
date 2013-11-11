@@ -1,0 +1,22 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", type: "button"} ×
+      %h3= "#{I18n.t('items.modal.title_edit')}: #{@item.product_code}"
+    = form_for @item, remote: true do |i|
+      .modal-body
+        .stock
+          .input
+            = i.label :amount
+            = i.number_field :amount
+          .input
+            = i.label t('items.modal.stock')
+            = i.label @product.stock
+        .input
+          = i.label :price_sale
+          = i.select :price_sale, list_prices(@product), {}, class: 'pretty-input'
+        .input
+          = i.label :price_descount
+          = i.number_field :price_descount, class: 'pretty-input'
+      .modal-footer
+        = i.submit t('items.modal.edit_item'), class: 'modal-submit'

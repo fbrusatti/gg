@@ -31,13 +31,13 @@ $(document).ready(function() {
     bLengthChange: false,
     bInfo: false,
     sAjaxSource: $('#invoices #items-invoice').data('source'),
-    sScrollY: "400",
+    sScrollY: "300",
     aoColumns: aColumnsOptions,
     fnCreatedRow: function(nRow, aData, iDataIndex){
       if (iDataIndex == 0)
         partialSum = 0;
       if (iDataIndex < tItems.fnSettings().fnRecordsTotal())
-        partialSum += parseFloat(aData[7]);
+        partialSum += parseFloat(aData[6]);
       // set the price in view
       if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 )
         $('.total-price .price').html(partialSum.toFixed(2));
@@ -46,6 +46,7 @@ $(document).ready(function() {
       sUrl: "/datatables/spanish.txt"
     }
   });
+
   // token input
   // -----------
   searchProduct = $('#invoices #product_tokens').tokenInput('/products.json', {
@@ -66,26 +67,51 @@ $(document).ready(function() {
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>"
   });
+
   // handle items
   // ------------
   $('#invoices #product_tokens').on( "change", function(){
     $.ajax({
-      type: "POST",
-      url: "/items",
-      dataType: "json",
+      type: "GET",
+      url: "/items/new",
+      dataType: "html",
       data: { product: this.value, invoice: this.getAttribute('data-invoice') }
     })
     .done(function(data, textStatus, xhr){
       searchProduct.tokenInput("clear");
-      tItems.fnDraw();
+      $('#new-item-modal').html(data);
+      $('#new-item-modal').modal('show');
     });
   });
+
+  // Modal add Item
+  $(document).on('ajax:success', '#invoices #new_item',
+  function(evt, data, status, xhr){
+    $('#new-item-modal').modal('hide');
+    tItems.fnDraw();
+  });
+
+  // Delete an Item from Invoice
   $(document).on('ajax:success', '#invoices .delete-item',
   function(evt, data, status, xhr){
-    var htmlNum = $(this).closest('tr').find("td:nth-child(8n)").html();
+    var htmlNum = $(this).closest('tr').find("td:nth-child(7n)").html();
     partialSum -= parseFloat(htmlNum);
     $('.total-price .price').html(partialSum.toFixed(2));
     $(this).closest('tr').fadeOut().remove();
+  });
+
+  // Modal edit item
+  $(document).on('ajax:success', '#invoices .open-edit-item-modal',
+  function(evt, data, status, xhr){
+    $('#edit-item-modal').html(data);
+    $('#edit-item-modal').modal('show');
+  });
+
+  // Modal edit item
+  $(document).on('ajax:success', '#invoices [id^=edit_item_]',
+  function(evt, data, status, xhr){
+    $('#edit-item-modal').modal('hide');
+    tItems.fnDraw();
   });
 
 });// document
@@ -94,7 +120,6 @@ var aColumnsOptions =
   [
     { "sClass": "center", "bSortable": false },
     { "bSortable": false },
-    { "sClass": "center", "bSortable": false },
     { "sClass": "center", "bSortable": false },
     { "sClass": "center", "bSortable": false },
     { "sClass": "center", "bSortable": false },
