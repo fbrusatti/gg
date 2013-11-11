@@ -11,7 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131105130759) do
+
+ActiveRecord::Schema.define(:version => 20131111212220) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -124,6 +125,8 @@ ActiveRecord::Schema.define(:version => 20131105130759) do
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
     t.string   "creation_state",                                  :default => "init"
+    t.decimal  "amount_cash",       :precision => 8, :scale => 2
+    t.decimal  "amount_check",      :precision => 8, :scale => 2
   end
 
   add_index "documents", ["creation_state"], :name => "index_documents_on_creation_state"
