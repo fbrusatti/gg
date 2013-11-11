@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
 
   # == Accesors
-  attr_accessible :name, :referrer_id
+  attr_accessible :name, :referrer_id, :referrer
 
   # == Associations
   belongs_to :referrer, :class_name => 'Category'

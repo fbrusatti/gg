@@ -12,7 +12,7 @@ $(document).ready(function() {
     resultsFormatter: function(item){
       return "<li><p style='color: black' >" + item.name+" ("+ item.referrer.name+")"+ " </p> </li>" },
     tokenFormatter: function(item) {
-      return "<li><p>" + item.name+" ("+ item.referrer.name+")"+ " </p> </li>" }
+      return "<li><p>" + item.name+ (item.referrer==null? "":"("+item.referrer.name+")") + " </p> </li>" }
   });
 
   $('#product-table').dataTable({
