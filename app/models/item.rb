@@ -7,4 +7,9 @@ class Item < ActiveRecord::Base
   # == Associations
   belongs_to :document
   belongs_to :product
+
+  def product_code
+    self.product.code
+  end
+
 end

@@ -1,4 +1,11 @@
 es:
+  items:
+    modal:
+      title_add: Agregando
+      title_edit: Editando
+      stock: Stock Disponible
+      add_item: Agregar
+      edit_item: Editar
   datatables:
     daterange:
       today: Hoy
@@ -8,10 +15,11 @@ es:
       this_month: Este Mes
       last_month: Ultimo Mes
   invoices:
-    remove: Borrar
+    unit_price: Precio Unitario
+    remove: Acciones
     sub_header:
-      save_finish: Guardar
-      save_building: En Construccion
+      save_finish: Confirmar
+      save_building: En Construcción
       cancel: Cancelar
       invoice: Factura
     new:
@@ -73,7 +81,7 @@ es:
         price_sale: Precio de venta
         price_vat: Iva
         price_descount: Descuento
-        total_price: Precio Total
+        total_price: Sub Total
       money:
         name: Nombre
         quotation: Cotización
@@ -382,7 +390,7 @@ es:
   token_input:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
-    hintText_surname: "Ingrese el codigo del producto"
+    hintText_surname: "Ingrese el código del producto"
     searchingText: "Buscando"
   active_admin:
     category: Categoría
