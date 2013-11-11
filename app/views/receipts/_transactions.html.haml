@@ -1,0 +1,24 @@
+.transaction
+  .thorizontal
+    .tlabel
+      = f.label t('.cash')
+    .tcheck
+      .tcheckbox
+        = check_box_tag "cash"
+  .thorizontal
+    .tlabel
+      = f.label :amount_cash
+    .tinput
+      = f.text_field :amount_cash, class: "pretty-input"     
+.transaction
+  .thorizontal
+    .tlabel
+      = f.label t('.check')
+    .tcheck
+      .tcheckbox
+        = check_box_tag "check"
+  .thorizontal
+    .tlabel
+      = f.label :amount_check
+    .tinput
+      = f.text_field :amount_check, class: "pretty-input"

@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-  var customer_id = 0;
-
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
     prePopulate: $('#receipt_customer_token').data('pre'),
@@ -18,48 +16,111 @@ $(document).ready(function() {
       item.surname ).substring(0,22)+ ". DNI: " + item.dni + " </p> </li>" }
   });
 
-  var table = $('#invoices-table').dataTable({
-    sPaginationType: "full_numbers",
-    bJQueryUI: true,
-    bProcessing: true,
-    bServerSide: true,
-    bDestroy: true,
-    sAjaxSource: "/customers/" + customer_id,
-    sScrollY: "200",
-    oLanguage: {
-      sUrl: "/datatables/spanish.txt"
-    }
-  });
-
   $("#receipt_customer_tokens").on("change", function(){ 
     if ( $("#receipt_customer_tokens").val() == "" ) {
       $("#type_vat_label").text("");
-      $("#registered_name_label").text("");    
-      table.fnClearTable();
+      $("#registered_name_label").text(""); 
+      console.log(fnGetSelected(invoice_table));   
     } else {
       customer_id = ($("#receipt_customer_tokens").tokenInput("get"))[0].id ;
       $.ajax({
           type: "GET",
           url: "/customers/" + customer_id,
-          dataType: "json"
+          dataType: "json",
       })
       .done(function(data, textStatus, xhr){
-        // console.log(data.table);
-        // console.log(data);
-        var oSettings = table.fnSettings();
-        // console.log(oSettings);
-        oSettings.sAjaxSource = "/customers/" + customer_id;
-        // console.log(oSettings.sAjaxSource);  
-        // oSettings.sAjaxSource ="/customers/" + customer_id;
-        oSettings.iDisplayLength = 10;
-        oSettings.iDisplayStart = 0;
-        
-        table.fnDraw(data.table);
-
         $("#type_vat_label").text(data.customer.type_iva);
         $("#registered_name_label").text(data.customer.registered_name);      
+        var invoice_table = $('#invoices-table').dataTable({
+          sPaginationType: "full_numbers",
+          bJQueryUI: true,
+          bProcessing: true,
+          bServerSide: true,
+          bDestroy: true,
+          sAjaxSource: "/customers/" + customer_id,
+          sAjaxDataProp: "table.aaData",
+          sScrollY: "200",
+          oLanguage: {
+            sUrl: "/datatables/spanish.txt"
+          }  
+        });
+        multiSelectedRow(invoice_table, "#invoices-table");
       });  
     }   
   });
+  
+  hiddenInputs();
+// changes the visibility of transactions inputs
+  $("#cash, #check").on('click', function(e){
+    $(this).parents(".thorizontal").siblings().toggle("show");
+  });
 
 });
+  
+function validateTransactions(){
+  var cash, check, tinput, cash_ok, check_ok;
+  cash_ok = true; check_ok = true;
+  check = $('#check');
+  cash = $('#cash');
+  if (cash.prop('checked')){
+    tinput = cash.parents(".thorizontal").siblings().children(".tinput");
+    tinput.children().each( function(i, e){
+      cash_ok =  cash_ok && $(e).val() !=""
+    })
+  }
+  if (check.prop('checked')){
+    tinput = check.parents(".thorizontal").siblings().children(".tinput");
+    tinput.children().each( function(i, e){
+      check_ok =  check_ok && $(e).val() !=""
+    })
+  }
+  return cash_ok && check_ok
+}
+
+
+// clean up the input and select fields that aren't checked
+function cleanUpTransactionFields() {
+ var check, cash, tinput;
+  check = $('#check');
+  cash = $('#cash');
+  if (!cash.prop('checked')){
+    tinput = cash.parents(".thorizontal").siblings().children(".tinput");
+    tinput.children().each( function(i, e){
+      $(e).val("");
+    })
+  }
+  if (!check.prop('checked')){
+    tinput = check.parents(".thorizontal").siblings().children(".tinput");
+    tinput.children().each( function(i, e){
+      $(e).val("");
+    })
+  }
+}
+
+function hiddenInputs () {
+  var check, cash;
+  check = $('#check');
+  cash = $('#cash');
+  if (!check.prop('checked')){
+    check.parents(".thorizontal").siblings().hide();
+  }
+  if (!cash.prop('checked')) {
+    cash.parents(".thorizontal").siblings().hide();
+  }
+}
+
+function loadPreview(input) {
+  inputFile = "#" + input.id;
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function (e, input) {
+    $(inputFile).next()
+      .attr('src', e.target.result)
+      .width(200)
+      .height(200);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+
