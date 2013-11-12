@@ -15,7 +15,7 @@ class ChecksController < ApplicationController
     respond_with(@checks) do |format|
       format.html {
         if request.xhr?
-          render :partial => "check_data"
+          render partial: 'check_data'
         end
       }
     end

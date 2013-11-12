@@ -58,12 +58,11 @@ $(document).ready(function() {
     $(this).parents(".thorizontal").siblings().toggle("show");
     $.ajax({
       type: "GET",
-      url: "/checks",
+      url: "/checks/new",
       dataType: "html",
-      data: { check: $('#check-form')[0] }
+      // data: { check: $('#check-form')[0] }
     }).done(function(data, textStatus, xhr){
-      $('#check-form').html(data);
-      //$('#check-form').show();
+      $('#check-form-server').html(data);
     });
   });
 

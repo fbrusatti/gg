@@ -5,4 +5,7 @@
   .right
     .title Efectivo  
     = render 'cash_transaction', f: f
-      
+#check-form
+  = form_for Check.new do |f|
+    #check-form-server
+    = f.submit hidden: true
