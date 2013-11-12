@@ -10,9 +10,11 @@ $(document).ready(function() {
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
-      return "<li><p style='color: black' >" + item.name+" ("+ item.referrer.name+")"+ " </p> </li>" },
+      var referrer = (item.referrer==null? "":"("+item.referrer.name+")")
+      return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
     tokenFormatter: function(item) {
-      return "<li><p>" + item.name+ (item.referrer==null? "":"("+item.referrer.name+")") + " </p> </li>" }
+      var referrer = (item.referrer==null? "":"("+item.referrer.name+")")
+      return "<li><p>" + item.name+ referrer+ " </p> </li>" }
   });
 
   $('#product-table').dataTable({

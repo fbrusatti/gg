@@ -11,5 +11,10 @@ class Category < ActiveRecord::Base
 
   # == Validations
   validates_presence_of :name
+  validates_uniqueness_of :name
+
+  # == Scope
+  scope :root, -> {where(referrer_id: nil)}
+
 
 end

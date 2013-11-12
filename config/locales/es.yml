@@ -1,4 +1,8 @@
 es:
+  categories:
+    index:
+      category_data: Información de Categorías
+      categories: Categorías
   items:
     errors:
       stock: Error. La cantidad es mayor al stock disponible o no ingreso ninguna

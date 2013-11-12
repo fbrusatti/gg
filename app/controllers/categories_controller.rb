@@ -6,16 +6,11 @@ class CategoriesController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html
-      # if params[:q].present?
-        @categories = Category.joins(:referrer)
-        format.json { render json: @categories.where(
+      format.html { render html: @categories =Category.all}
+      format.json { render json: Category.where(
                                     "categories.name ILIKE ?",
                                     "%#{params[:q]}%").to_json(:include => :referrer)
                                     }
-      # else
-      #   # format.json { render json: PropertiesDatatable.new(view_context) }
-      # end
     end
   end
 

@@ -1,0 +1,14 @@
+#categories
+  %ul.category-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#category-data"}
+        = t('.category_data')
+  .tree.well
+    %ul
+      %li
+        %span
+          %i.icon-folder-open
+          = t('.categories')
+          %a{href: ""} sss
+          =build_tree().html_safe
+
