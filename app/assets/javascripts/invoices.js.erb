@@ -114,6 +114,19 @@ $(document).ready(function() {
     tItems.fnDraw();
   });
 
+  // verify amount in modals
+  $(document).on('click', '#invoices .modal-submit',
+  function(evt){
+    var amount, stock, modal;
+    modal = '#invoices  #' + $(this).closest('form').prop('id');
+    amount = $(modal + ' #item_amount').val();
+    stock = $(modal + ' #current-stock').html();
+    if (parseInt(amount)  > parseInt(stock) || parseInt(amount) == 0) {
+      alert("<%= I18n.t('items.errors.stock') %>");
+      evt.preventDefault();
+    }
+  });
+
 });// document
 
 var aColumnsOptions =
