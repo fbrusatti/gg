@@ -206,19 +206,23 @@ es:
     bank: Banco
     bank_data: Datos del Banco
     comercial_data: Datos Comerciales
-      document:
-        customer: Nombre
+  document:
+    customer: Nombre
   token_input:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    pay_receipt:
+      amount: Total
+    cash_transaction:
+      amount_cash: Monto Efectivo
+      amount: Total
+      cash: Efectivo  
     transactions:
-      cash: Efectivo
-      amount: Monto
       check: Cheque
-      check_pay: Pago en Cheque
+      amount_check: Monto Cheque
     data_receipt:
       id: Id
       customer_id: Id Cliente
@@ -227,6 +231,7 @@ es:
       type_vat: Tipo de IVA
       registered_name: Razón Social
       date: Fecha
+      customer: Cliente
   products:
     sub_header:
       new: Nuevo
