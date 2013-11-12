@@ -1,5 +1,7 @@
 es:
   items:
+    errors:
+      stock: Error. La cantidad es mayor al stock disponible o no ingreso ninguna
     modal:
       title_add: Agregando
       title_edit: Editando
@@ -77,11 +79,11 @@ es:
         complete_name: Nombre completo
       item:
         amount: Cantidad
-        price_cost: Precio de Costo
+        price_cost: Precio de Costo $
         price_sale: Precio de venta
-        price_vat: Iva
-        price_descount: Descuento
-        total_price: Sub Total
+        price_vat: Iva %
+        price_descount: Descuento %
+        total_price: Sub Total $
       money:
         name: Nombre
         quotation: Cotización
