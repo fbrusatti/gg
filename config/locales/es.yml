@@ -85,6 +85,7 @@ es:
         price_descount: Descuento %
         total_price: Sub Total $
       receipt:
+        customer: Cliente
         cash: Efectivo
         amount_cash: Monto Efectivo
         amount_check: Monto Cheque
@@ -214,7 +215,13 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    new:
+      data: Datos
+      pay_form: Forma de Pago
+      preview: Vista Previa
     pay_receipt:
+      check_pay: Pago en Cheque
+      cash_pay: Pago en Efectivo
       amount: Total
     cash_transaction:
       amount_cash: Monto Efectivo
@@ -224,6 +231,8 @@ es:
       check: Cheque
       amount_check: Monto Cheque
     data_receipt:
+      customer_data: Datos del Cliente
+      receipt_data: Datos del Recibo
       id: Id
       customer_id: Id Cliente
       amount: Monto

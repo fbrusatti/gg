@@ -2,13 +2,13 @@
   %ul.receipts-tabs
     %li.active
       %a{'data-toggle' => 'tab', href: '#data'}
-        Datos
+        = t('.data')
     %li
       %a{'data-toggle' => 'tab', href: '#pay'}
-        Forma de pagos
+        = t('.pay_form')
     %li
       %a{'data-toggle' => 'tab', href: '#preview'}
-        Vista Previa
+        = t('.preview')
 
   = form_for @receipt do |f|
     = errors_for(@receipt).html_safe
@@ -18,6 +18,9 @@
       #pay.tab-pane
         = render 'pay_receipt', f: f
       #preview.tab-pane
-
     = f.submit hidden: true
-    
+  #data-check
+    = form_for Check.new do |f|
+      #new-check
+        = render 'data_check', f: f
+      = f.submit hidden: true  

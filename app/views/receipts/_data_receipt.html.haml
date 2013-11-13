@@ -1,6 +1,7 @@
 .data-receipt
   .left
-    .title Cliente
+    .title 
+      = t('.customer_data')
     .input
       .text_label
         = f.label :customer
@@ -17,7 +18,8 @@
       .show_label
         = label_tag "", nil, id: "registered_name_label",  class: "pretty-input"
   .right
-    .title Datos del Recibo
+    .title 
+      =t('.receipt_data')
     .input
       .text_label
         = label_tag t('.date')

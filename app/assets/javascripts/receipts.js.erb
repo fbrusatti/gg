@@ -17,9 +17,11 @@ $(document).ready(function() {
   });
 
   $("#receipt_customer_tokens").on("change", function(){ 
+    $('#invoices-table').show();
     if ( $("#receipt_customer_tokens").val() == "" ) {
       $("#type_vat_label").text("");
       $("#registered_name_label").text(""); 
+      $('#invoices-table').hide();
     } else {
       customer_id = ($("#receipt_customer_tokens").tokenInput("get"))[0].id ;
       $.ajax({
@@ -47,23 +49,27 @@ $(document).ready(function() {
       });  
     }   
   });
+
+  $('#openBtn-bank').click(function(){
+    $('#bank-modal').modal('show');
+  });
   
   hiddenInputs();
+
   // changes the visibility of transactions inputs
   $("#cash").on('click', function(e){
     $(this).parents(".thorizontal").siblings().toggle("show");
   });
 
   $("#check").on('click', function(e){
-    $(this).parents(".thorizontal").siblings().toggle("show");
-    $.ajax({
-      type: "GET",
-      url: "/checks/new",
-      dataType: "html",
-      // data: { check: $('#check-form')[0] }
-    }).done(function(data, textStatus, xhr){
-      $('#check-form-server').html(data);
-    });
+    var check = $("#check");         
+    if (check.prop('checked')) {
+      $(this).parents(".thorizontal").siblings().toggle("show");
+      $('#data-check').show("slow");
+    } else {
+      $('#data-check').hide("slow");
+      check.parents(".thorizontal").siblings().hide();
+    }  
   });
 
   $("#receipt_amount_check, #receipt_amount_cash").on('change', function(){
@@ -77,52 +83,14 @@ $(document).ready(function() {
   })
 
 });
-  
-function validateTransactions(){
-  var cash, check, tinput, cash_ok, check_ok;
-  cash_ok = true; check_ok = true;
-  check = $('#check');
-  cash = $('#cash');
-  if (cash.prop('checked')){
-    tinput = cash.parents(".thorizontal").siblings().children(".tinput");
-    tinput.children().each( function(i, e){
-      cash_ok =  cash_ok && $(e).val() !=""
-    })
-  }
-  if (check.prop('checked')){
-    tinput = check.parents(".thorizontal").siblings().children(".tinput");
-    tinput.children().each( function(i, e){
-      check_ok =  check_ok && $(e).val() !=""
-    })
-  }
-  return cash_ok && check_ok
-}
-
-
-// clean up the input and select fields that aren't checked
-function cleanUpTransactionFields() {
- var check, cash, tinput;
-  check = $('#check');
-  cash = $('#cash');
-  if (!cash.prop('checked')){
-    tinput = cash.parents(".thorizontal").siblings().children(".tinput");
-    tinput.children().each( function(i, e){
-      $(e).val("");
-    })
-  }
-  if (!check.prop('checked')){
-    tinput = check.parents(".thorizontal").siblings().children(".tinput");
-    tinput.children().each( function(i, e){
-      $(e).val("");
-    })
-  }
-}
 
 function hiddenInputs () {
   var check, cash;
   check = $('#check');
   cash = $('#cash');
   if (!check.prop('checked')){
+    $('#data-check').hide();
+    $('#invoices-table').hide();
     check.parents(".thorizontal").siblings().hide();
   }
   if (!cash.prop('checked')) {
@@ -130,18 +98,5 @@ function hiddenInputs () {
   }
 }
 
-function loadPreview(input) {
-  inputFile = "#" + input.id;
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-    reader.onload = function (e, input) {
-    $(inputFile).next()
-      .attr('src', e.target.result)
-      .width(200)
-      .height(200);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
 
 
