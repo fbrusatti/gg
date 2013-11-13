@@ -85,10 +85,10 @@ es:
         price_descount: Descuento %
         total_price: Sub Total $
       receipt:
-        customer: Cliente
         price_vat: Iva
         price_descount: Descuento
         total_price: Precio Total
+        customer: Cliente
         cash: Efectivo
         amount_cash: Monto Efectivo
         amount_check: Monto Cheque

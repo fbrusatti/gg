@@ -120,5 +120,34 @@
              margin: 20px; }
   }
 
+  /*Style of new check*/
+  .data-check, .modal-body {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      label {
+        @extend .col-lg-3, .control-label;
+      }
+      input {
+        @extend .col-lg-6;
+      }
+      select {
+        @extend .col-lg-6;
+      }
+    }
+
+    .input-group-addon {
+      font-size: 19px;
+    }
+
+  }
+
+  .data-check .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
   #items div.dataTables_wrapper { padding-top: 10px }
 }
