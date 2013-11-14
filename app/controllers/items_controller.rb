@@ -5,6 +5,7 @@ class ItemsController < ApplicationController
   def new
     @product = Product.find params[:product]
     @document = Invoice.find params[:invoice]
+    @partial_stock = calculate_partial_stock(@document, @product)
     @item = Item.new
     render partial: 'add_item'
   end
@@ -24,7 +25,9 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find params[:id]
+    @document = @item.document
     @product = @item.product
+    @partial_stock = calculate_partial_stock(@document, @product)
     render partial: 'edit_item'
   end
 
@@ -35,4 +38,10 @@ class ItemsController < ApplicationController
       format.js { render nothing: true }
     end
   end
+
+  private
+    def calculate_partial_stock(invoice, product)
+      products = invoice.items.select { |i| i.product == product }
+      products.inject(0) { |sum, p| sum + p.amount }
+    end
 end

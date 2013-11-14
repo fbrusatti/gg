@@ -11,12 +11,13 @@
             = i.number_field :amount
           .input
             = i.label t('items.modal.stock')
-            = i.label @product.stock
+            = i.label "#{@product.stock - @partial_stock +  @item.amount}",
+                      id: 'current-stock'
         .input
           = i.label :price_sale
           = i.select :price_sale, list_prices(@product), {}, class: 'pretty-input'
         .input
           = i.label :price_descount
-          = i.number_field :price_descount, class: 'pretty-input'
+          = i.number_field :price_descount, class: 'pretty-input', step: 'any'
       .modal-footer
         = i.submit t('items.modal.edit_item'), class: 'modal-submit'
