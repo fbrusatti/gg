@@ -5,7 +5,7 @@ $(document).ready(function() {
     prePopulate: $('#receipt_customer_token').data('pre'),
     theme: "facebook",
     tokenLimit: "1",
-    noResultsText: "I18n.t('.token_input.noResultsText')",
+    noResultsText: "<%= I18n.t('.token_input.noResultsText')%>",
     hintText: "<%= I18n.t('.token_input.hintText')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){

@@ -8,18 +8,24 @@ class CustomersController < ApplicationController
   end
 
   def index
-    if params[:q].present?
-      @customers = Customer.where("name ilike ?", "%#{params[:q]}%")
-      respond_to do |format|
-        format.html
-        format.json { render :json => @customers.map(&:attributes) } 
-      end
-    else     
-      respond_to do |format|
-        format.html
-        format.json { render :json => CustomersDatatable.new(view_context) }
-      end        
-    end
+    respond = params[:q] ? Customer.where("name ilike ?", "%#{params[:q]}%").map(&:attributes) 
+                     : CustomersDatatable.new(view_context)
+    respond_to do |format|
+      format.html
+      format.json { render :json =>  respond }
+    end  
+    # if params[:q].present?
+    #   @customers = Customer.where("name ilike ?", "%#{params[:q]}%")
+    #   respond_to do |format|
+    #     format.html
+    #     format.json { render :json => @customers.map(&:attributes) } 
+    #   end
+    # else     
+    #   respond_to do |format|
+    #     format.html
+    #     format.json { render :json => CustomersDatatable.new(view_context) }
+    #   end        
+    # end
   end
 
   def create

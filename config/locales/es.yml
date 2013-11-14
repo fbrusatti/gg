@@ -215,6 +215,8 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    sub_header:
+      receipt: Recibos
     new:
       data: Datos
       pay_form: Forma de Pago
