@@ -7,8 +7,10 @@
     %ul
       %li
         %span
-          %i.icon-folder-open
+          %i.icon-arrow-down.icon-2x
           = t('.categories')
-          %a{href: ""} sss
+          %a{href: ""}
           =build_tree().html_safe
 
+  #category-modal.modal.fade
+    = render "new_category"

@@ -25,10 +25,43 @@
     @extend .btn, .btn-primary;
   }
 
+  .btn-modal-submit {
+    @extend .btn, .btn-primary
+  }
+
+
   // active color of the tabs
   .nav-tabs > li.active > a, .nav-tabs > li.active > a {
     background-color: #E0DFDB !important;
   }
+
+  .pretty-input {
+    @extend .form-control
+  }
+
+    // form new, edit and modal
+  .data-category, .modal-body {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      label {
+        @extend .col-lg-3, .control-label;
+      }
+      input {
+        @extend .col-lg-6;
+      }
+      select {
+        @extend .col-lg-6;
+      }
+    }
+
+    .input-group-addon {
+      font-size: 19px;
+    }
+
+  }
+
 
   // sub-header
   .sub-header {
