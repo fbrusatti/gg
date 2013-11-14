@@ -1,5 +1,13 @@
 es:
+  sub_header:
+      new: Nuevo
+      cancel: Cancelar
+      print: Imprimir
+      save: Guardar
+      edit: Editar
   categories:
+    new_category: Nueva Categoría
+    add: Agregar
     index:
       category_data: Información de Categorías
       categories: Categorías
