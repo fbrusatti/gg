@@ -17,35 +17,36 @@ $(document).ready(function() {
   });
 
   $("#receipt_customer_tokens").on("change", function(){ 
+    var customerId;
     $('#invoices-table').show();
-    if ( $("#receipt_customer_tokens").val() == "" ) {
+    if (this.value == "") {
       $("#type_vat_label").text("");
       $("#registered_name_label").text(""); 
       $('#invoices-table').hide();
     } else {
-      customer_id = ($("#receipt_customer_tokens").tokenInput("get"))[0].id ;
+      customerId = this.value;
       $.ajax({
           type: "GET",
-          url: "/customers/" + customer_id,
+          url: "/customers/" + customerId,
           dataType: "json",
       })
       .done(function(data, textStatus, xhr){
         $("#type_vat_label").text(data.customer.type_iva);
         $("#registered_name_label").text(data.customer.registered_name);      
-        var invoice_table = $('#invoices-table').dataTable({
+        var invoiceTable = $('#invoices-table').dataTable({
           sPaginationType: "full_numbers",
           bJQueryUI: true,
           bProcessing: true,
           bServerSide: true,
           bDestroy: true,
-          sAjaxSource: "/customers/" + customer_id,
+          sAjaxSource: "/customers/" + customerId,
           sAjaxDataProp: "table.aaData",
           sScrollY: "200",
           oLanguage: {
             sUrl: "/datatables/spanish.txt"
           }  
         });
-        multiSelectedRow(invoice_table, "#invoices-table");
+        multiSelectedRow(invoiceTable, "#invoices-table");
       });  
     }   
   });
@@ -73,12 +74,12 @@ $(document).ready(function() {
   });
 
   $("#receipt_amount_check, #receipt_amount_cash").on('change', function(){
-    var amount_check = 0, amount_cash = 0, amount = 0;
+    var amountCheck = 0, amountCash = 0, amount = 0;
     if ($("#receipt_amount_cash").val() != "")
-      amount_cash = parseFloat($("#receipt_amount_cash").val());
+      amountCash = parseFloat($("#receipt_amount_cash").val());
     if ($("#receipt_amount_check").val() != 0)
-      amount_check = parseFloat($("#receipt_amount_check").val());
-    amount = amount_cash + amount_check;
+      amountCheck = parseFloat($("#receipt_amount_check").val());
+    amount = amountCash + amountCheck;
     $("#amount").text(amount);
   })
 
