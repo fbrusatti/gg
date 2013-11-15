@@ -230,6 +230,8 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    data_check:
+      save: Guardar
     sub_header:
       receipt: Recibos
     new:
