@@ -54,6 +54,10 @@ $(document).ready(function() {
   $('#openBtn-bank').click(function(){
     $('#bank-modal').modal('show');
   });
+
+  $("a.button-save").click(function(){
+    $("#new_check").submit();
+  });
   
   hiddenInputs();
 

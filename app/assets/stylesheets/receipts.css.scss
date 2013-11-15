@@ -2,8 +2,14 @@
 
 #receipts {
 
-  #openBtn-bank{
+  #openBtn-bank {
     @extend .btn, .btn-primary
+  }
+
+  .button-save {
+    @extend .btn, .btn-primary;
+    margin-right: 5px;
+    @extend .col-lg-2, .col-lg-offset-7
   }
 
   .receipts-tabs {
