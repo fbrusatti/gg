@@ -9,23 +9,11 @@ class CustomersController < ApplicationController
 
   def index
     respond = params[:q] ? Customer.where("name ilike ?", "%#{params[:q]}%").map(&:attributes) 
-                     : CustomersDatatable.new(view_context)
+                         : CustomersDatatable.new(view_context)
     respond_to do |format|
       format.html
       format.json { render :json =>  respond }
     end  
-    # if params[:q].present?
-    #   @customers = Customer.where("name ilike ?", "%#{params[:q]}%")
-    #   respond_to do |format|
-    #     format.html
-    #     format.json { render :json => @customers.map(&:attributes) } 
-    #   end
-    # else     
-    #   respond_to do |format|
-    #     format.html
-    #     format.json { render :json => CustomersDatatable.new(view_context) }
-    #   end        
-    # end
   end
 
   def create
@@ -40,8 +28,8 @@ class CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     respond_with @customer do |format|
-      respond = InvoicesDatatable.new(view_context, @customer)
-      format.json { render json: {table: respond, customer: @customer}}
+      json_table = InvoicesDatatable.new(view_context, @customer)
+      format.json { render json: {table: json_table, customer: @customer}}
     end
   end
 
