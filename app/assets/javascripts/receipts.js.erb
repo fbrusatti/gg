@@ -58,12 +58,13 @@ $(document).ready(function() {
   $("a.button-save").click(function(){
     $("#new_check").submit();
   });
-
+  
   $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
-    // console.log(data);
-    $('#table-of-check')
-      .append('<tr><td>data.check_number</td> <td>data.emisor</td></tr')
-  });  
+    $('#table-of-check').append(data);
+    $('#table-of-check tr:last').effect("highlight", {}, 3000);
+    $('#table-of-check').show("slow");
+    $('#new_check')[0].reset();
+  });
   
   hiddenInputs();
 
@@ -100,6 +101,7 @@ function hiddenInputs () {
   check = $('#check');
   cash = $('#cash');
   if (!check.prop('checked')){
+    $('#table-of-check').hide();
     $('#data-check').hide();
     $('#invoices-table').hide();
     check.parents(".thorizontal").siblings().hide();
@@ -108,6 +110,7 @@ function hiddenInputs () {
     cash.parents(".thorizontal").siblings().hide();
   }
 }
+
 
 
 

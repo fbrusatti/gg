@@ -178,6 +178,10 @@ es:
         shelf: Estanteria
         stock: Stock
   checks:
+    new_check:
+      destroy: Eliminar
+      show: Ver
+      edit: Editar
     sub_header:
       new: Nuevo
       cancel: Cancelar
