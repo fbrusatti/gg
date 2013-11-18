@@ -16,6 +16,10 @@ class ChecksController < ApplicationController
 
   def create
     @check = Check.new(params[:check])
+<<<<<<< HEAD
+=======
+    # flash[:success] = t('flash.check', message: t('flash.created')) if 
+>>>>>>> Add table of receipts
     @check.save
     respond_to do |format|
       format.html { render partial: "new_check"}
@@ -43,5 +47,9 @@ class ChecksController < ApplicationController
   def destroy
     @check = Check.find(params[:id])
     @check.destroy
+<<<<<<< HEAD
   end  
+=======
+  end
+>>>>>>> Add table of receipts
 end

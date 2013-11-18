@@ -38,6 +38,7 @@ $(document).ready(function() {
   });
 
   var amountCheck = 0;
+
   $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
     $('#table-of-check').append(data);
     $('#table-of-check tr:last').effect("highlight", {}, 3000);
@@ -129,3 +130,4 @@ function hiddenInputs () {
     cash.parents(".thorizontal").siblings().hide();
   }
 }
+

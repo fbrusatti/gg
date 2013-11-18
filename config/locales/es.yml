@@ -201,7 +201,11 @@ es:
         category_ids: Categoria
   checks:
     new_check:
+<<<<<<< HEAD
       delete: Eliminar
+=======
+      destroy: Eliminar
+>>>>>>> Add table of receipts
       show: Ver
       edit: Editar
     sub_header:
