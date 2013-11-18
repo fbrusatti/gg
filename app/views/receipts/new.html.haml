@@ -20,7 +20,9 @@
       #preview.tab-pane
     = f.submit hidden: true
   #data-check
-    = form_for Check.new do |f|
+    = form_for(Check.new, remote: true, format: :json) do |f|
       #new-check
         = render 'data_check', f: f
       = f.submit hidden: true  
+  #table-check
+    = render 'table_check'

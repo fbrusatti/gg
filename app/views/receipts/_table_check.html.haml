@@ -1,0 +1,17 @@
+%table.table#table-of-check.table-bordered.table-striped
+  %thead
+    %tr
+      %th= t('.Numero')
+      %th= t('.Emisor')
+      %th= t('.Monto')
+
+  %tbody
+    - Check.all.map do |check|
+      %tr
+        %td= check.check_number
+        %td= check.emisor
+        %td
+          = link_to 'show', check, :class => 'btn'
+          = link_to 'edit', edit_check_path(check), :class => 'btn btn-primary'
+          = link_to 'destroy', check_path(check), method: :delete, confirm: "Are you sure?", :class => 'btn btn-danger'
+  
