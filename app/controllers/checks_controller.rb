@@ -4,7 +4,7 @@ class ChecksController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-   respond_to do |format|
+    respond_to do |format|
       format.html
       format.json { render json: ChecksDatatable.new(view_context) }
     end
@@ -17,7 +17,11 @@ class ChecksController < ApplicationController
   def create
     @check = Check.new(params[:check])
     flash[:success] = t('flash.check', message: t('flash.created')) if @check.save
-    respond_with @check
+    respond_to do |format|
+      format.html
+      format.json { render json: @check }
+    end
+    # respond_with @check
   end
 
   def show
