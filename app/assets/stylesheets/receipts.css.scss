@@ -12,6 +12,18 @@
     @extend .col-lg-2, .col-lg-offset-7
   }
 
+  .button-show {
+    @extend .btn, .btn-default;
+  }
+
+  .button-edit {
+    @extend .btn, .btn-primary;
+  }
+
+  .button-delete {
+    @extend .btn, .btn-danger;
+  }
+
   .receipts-tabs {
     @extend .nav, .nav-tabs;
     li > a {

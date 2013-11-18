@@ -16,12 +16,13 @@ class ChecksController < ApplicationController
 
   def create
     @check = Check.new(params[:check])
-    flash[:success] = t('flash.check', message: t('flash.created')) if @check.save
+    # flash[:success] = t('flash.check', message: t('flash.created')) if 
+    @check.save
     respond_to do |format|
-      format.html
+      format.html { render partial: "new_check"}
       format.json { render json: @check }
+      format.js
     end
-    # respond_with @check
   end
 
   def show
@@ -38,5 +39,10 @@ class ChecksController < ApplicationController
       flash[:success] = t('flash.check', message: t('flash.updated'))
     end
     respond_with @check
+  end
+
+  def destroy
+    @check = Check.find(params[:id])
+    @check.destroy
   end
 end
