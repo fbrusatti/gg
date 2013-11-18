@@ -1,4 +1,5 @@
 class Document < ActiveRecord::Base
+  
   # == Accesors
   attr_accessible :type, :number, :recharge, :amount, :balance, :state,
                   :expiration_date, :payment_condition, :active, :annul,
@@ -12,7 +13,8 @@ class Document < ActiveRecord::Base
   belongs_to :supplier
   has_many :items
   has_many :products, through: :items
-
+  has_many :check
+  
   def customer_tokens=(ids)
       self.customer_id = ids
   end    

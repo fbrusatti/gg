@@ -58,6 +58,12 @@ $(document).ready(function() {
   $("a.button-save").click(function(){
     $("#new_check").submit();
   });
+
+  $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
+    // console.log(data);
+    $('#table-of-check')
+      .append('<tr><td>data.check_number</td> <td>data.emisor</td></tr')
+  });  
   
   hiddenInputs();
 
