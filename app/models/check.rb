@@ -13,7 +13,6 @@ class Check < ActiveRecord::Base
   # ==Associations
   belongs_to :bank
   belongs_to :document
-  # acts_as_list scope: :document
 
   def correct_date
     if emission_date > payment_date

@@ -16,7 +16,6 @@ class ChecksController < ApplicationController
 
   def create
     @check = Check.new(params[:check])
-    # flash[:success] = t('flash.check', message: t('flash.created')) if 
     @check.save
     respond_to do |format|
       format.html { render partial: "new_check"}

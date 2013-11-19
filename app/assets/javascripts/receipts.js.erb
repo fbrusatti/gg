@@ -55,15 +55,22 @@ $(document).ready(function() {
     $('#bank-modal').modal('show');
   });
 
+  var amountAux;
   $("a.button-save").click(function(){
     $("#new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
   });
   
+  var amountCheck = 0;
   $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
     $('#table-of-check').append(data);
     $('#table-of-check tr:last').effect("highlight", {}, 3000);
     $('#table-of-check').show("slow");
     $('#new_check')[0].reset();
+    amountCheck = amountCheck + amountAux;
+    $("#receipt_amount_check").text(amountCheck);
+    amount = amountCash + amountCheck;
+    $("#amount").text(amount);
   });
   
   hiddenInputs();
@@ -84,12 +91,9 @@ $(document).ready(function() {
     }  
   });
 
-  $("#receipt_amount_check, #receipt_amount_cash").on('change', function(){
-    var amountCheck = 0, amountCash = 0, amount = 0;
-    if ($("#receipt_amount_cash").val() != "")
-      amountCash = parseFloat($("#receipt_amount_cash").val());
-    if ($("#receipt_amount_check").val() != 0)
-      amountCheck = parseFloat($("#receipt_amount_check").val());
+  var amountCash = 0, amount = 0;
+  $("#receipt_amount_cash").on('change', function(){
+    amountCash = parseFloat(this.value);
     amount = amountCash + amountCheck;
     $("#amount").text(amount);
   })
