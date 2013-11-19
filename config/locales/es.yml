@@ -244,6 +244,7 @@ es:
       pay_form: Forma de Pago
       preview: Vista Previa
     pay_receipt:
+      amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
       amount: Total

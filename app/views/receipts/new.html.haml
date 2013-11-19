@@ -6,9 +6,6 @@
     %li
       %a{'data-toggle' => 'tab', href: '#pay'}
         = t('.pay_form')
-    %li
-      %a{'data-toggle' => 'tab', href: '#preview'}
-        = t('.preview')
 
   = form_for @receipt do |f|
     = errors_for(@receipt).html_safe
