@@ -116,6 +116,11 @@ function deleteRow(btn) {
   row.parentNode.removeChild(row);
 }
 
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+
 function hiddenInputs () {
   var check, cash;
   check = $('#check');
