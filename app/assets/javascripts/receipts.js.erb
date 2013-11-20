@@ -55,7 +55,7 @@ $(document).ready(function() {
     $('#bank-modal').modal('show');
   });
 
-  var amountAux;
+  var amountAux, showCheckTable = false
   $("a.button-save").click(function(){
     $("#new_check").submit();
     amountAux = parseFloat($('#check_amount').val());
@@ -67,10 +67,11 @@ $(document).ready(function() {
     $('#table-of-check tr:last').effect("highlight", {}, 3000);
     $('#table-of-check').show("slow");
     $('#new_check')[0].reset();
+    showCheckTable = true;
     amountCheck = amountCheck + amountAux;
-    $("#receipt_amount_check").text(amountCheck);
+    $("#receipt_amount_check").text("$ " + amountCheck);
     amount = amountCash + amountCheck;
-    $("#amount").text(amount);
+    $("#amount").text("$ " + amount);
   });
   
   hiddenInputs();
@@ -78,6 +79,20 @@ $(document).ready(function() {
   // changes the visibility of transactions inputs
   $("#cash").on('click', function(e){
     $(this).parents(".thorizontal").siblings().toggle("show");
+  });
+
+  $("#pay-tab").on('click', function(){
+    if ($("#check").prop('checked')) {
+      $('#data-check').show("slow");
+    }
+    if (showCheckTable) {
+      $('#table-of-check').show("slow");
+    }
+  });
+
+  $("#data-tab").on('click', function(){
+    $('#data-check').hide();
+    $('#table-of-check').hide();
   });
 
   $("#check").on('click', function(e){
@@ -95,10 +110,15 @@ $(document).ready(function() {
   $("#receipt_amount_cash").on('change', function(){
     amountCash = parseFloat(this.value);
     amount = amountCash + amountCheck;
-    $("#amount").text(amount);
+    $("#amount").text("$ " + amount);
   })
 
 });
+
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
 
 function hiddenInputs () {
   var check, cash;
