@@ -43,5 +43,5 @@ class ChecksController < ApplicationController
   def destroy
     @check = Check.find(params[:id])
     @check.destroy
-  end
+  end  
 end

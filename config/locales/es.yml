@@ -191,7 +191,7 @@ es:
         stock: Stock
   checks:
     new_check:
-      destroy: Eliminar
+      delete: Eliminar
       show: Ver
       edit: Editar
     sub_header:
