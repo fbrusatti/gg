@@ -1,10 +1,10 @@
 #receipts
   %ul.receipts-tabs
     %li.active
-      %a{'data-toggle' => 'tab', href: '#data'}
+      %a{'data-toggle' => 'tab', href: '#data', id: 'data-tab'}
         = t('.data')
     %li
-      %a{'data-toggle' => 'tab', href: '#pay'}
+      %a{'data-toggle' => 'tab', href: '#pay', id: 'pay-tab'}
         = t('.pay_form')
 
   = form_for @receipt do |f|
