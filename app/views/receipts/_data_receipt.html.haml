@@ -1,0 +1,37 @@
+.data-receipt
+  .left
+    .title 
+      = t('.customer_data')
+    .input
+      .text_label
+        = f.label :customer
+      .token_field
+        = f.text_field :customer_tokens, class: "pretty-input"
+    .input
+      .text_label
+        = label_tag t('.type_vat')
+      .show_label
+        = label_tag "", nil, id: "type_vat_label",  class: "pretty-input"
+    .input
+      .text_label
+        = label_tag t('.registered_name')
+      .show_label
+        = label_tag "", nil, id: "registered_name_label",  class: "pretty-input"
+  .right
+    .title 
+      =t('.receipt_data')
+    .input
+      .text_label
+        = label_tag t('.date')
+      .show_label
+        = label_tag print_date(Time.now(), :date), nil, id: "date_label", class: "pretty-input"          
+
+%table#invoices-table.display{"data-source" => customers_url(format: "json")}
+  %thead
+    %tr
+      %th= t('.id')
+      %th= t('.customer_id')
+      %th= t('.amount')
+      %th= t('.balance')
+  %tbody
+      

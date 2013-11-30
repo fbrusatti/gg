@@ -1,3 +1,14 @@
+// multi select row of datatable
+function multiSelectedRow(oTable, idTable){
+  var giRedraw = false
+  // Add a click handler to the rows - this could be used as a callback
+  $( idTable + " tbody").click(function(event) {
+    if ($(event.target).closest('tr').hasClass('row_selected'))
+      $(event.target).closest('tr').removeClass('row_selected');
+    else
+      $(event.target).closest('tr').addClass('row_selected');
+  });
+}
 
 // select row of datatable
 function rowSelected(oTable, idTable){

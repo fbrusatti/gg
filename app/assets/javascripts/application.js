@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-datetimepicker.min
+//= require jquery.tokeninput.js
 //= require dataTables/jquery.dataTables
 //= require jquery.tokeninput
 //= require_tree .

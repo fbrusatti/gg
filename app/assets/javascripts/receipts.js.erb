@@ -1,0 +1,103 @@
+$(document).ready(function() {
+
+  $('#receipt_customer_tokens').tokenInput('/customers.json', {
+    crossDomain: false,
+    prePopulate: $('#receipt_customer_token').data('pre'),
+    theme: "facebook",
+    tokenLimit: "1",
+    noResultsText: "<%= I18n.t('.token_input.noResultsText')%>",
+    hintText: "<%= I18n.t('.token_input.hintText')%>",
+    searchingText: "<%= I18n.t('.token_input.searchingText')%>",
+    resultsFormatter: function(item){
+      return "<li><p style='color: black' >" + item.name
+      + " " + item.surname +  ". DNI: " + item.dni + " </p> </li>" },
+    tokenFormatter: function(item) {
+      return "<li><p>" + (item.name + " " +
+      item.surname ).substring(0,22)+ ". DNI: " + item.dni + " </p> </li>" }
+  });
+
+  $("#receipt_customer_tokens").on("change", function(){ 
+    var customerId;
+    $('#invoices-table').show();
+    if (this.value == "") {
+      $("#type_vat_label").text("");
+      $("#registered_name_label").text(""); 
+      $('#invoices-table').hide();
+    } else {
+      customerId = this.value;
+      $.ajax({
+          type: "GET",
+          url: "/customers/" + customerId,
+          dataType: "json",
+      })
+      .done(function(data, textStatus, xhr){
+        $("#type_vat_label").text(data.customer.type_iva);
+        $("#registered_name_label").text(data.customer.registered_name);      
+        var invoiceTable = $('#invoices-table').dataTable({
+          sPaginationType: "full_numbers",
+          bJQueryUI: true,
+          bProcessing: true,
+          bServerSide: true,
+          bDestroy: true,
+          sAjaxSource: "/customers/" + customerId,
+          sAjaxDataProp: "table.aaData",
+          sScrollY: "200",
+          oLanguage: {
+            sUrl: "/datatables/spanish.txt"
+          }  
+        });
+        multiSelectedRow(invoiceTable, "#invoices-table");
+      });  
+    }   
+  });
+
+  $('#openBtn-bank').click(function(){
+    $('#bank-modal').modal('show');
+  });
+  
+  hiddenInputs();
+
+  // changes the visibility of transactions inputs
+  $("#cash").on('click', function(e){
+    $(this).parents(".thorizontal").siblings().toggle("show");
+  });
+
+  $("#check").on('click', function(e){
+    var check = $("#check");         
+    if (check.prop('checked')) {
+      $(this).parents(".thorizontal").siblings().toggle("show");
+      $('#data-check').show("slow");
+    } else {
+      $('#data-check').hide("slow");
+      check.parents(".thorizontal").siblings().hide();
+    }  
+  });
+
+  $("#receipt_amount_check, #receipt_amount_cash").on('change', function(){
+    var amountCheck = 0, amountCash = 0, amount = 0;
+    if ($("#receipt_amount_cash").val() != "")
+      amountCash = parseFloat($("#receipt_amount_cash").val());
+    if ($("#receipt_amount_check").val() != 0)
+      amountCheck = parseFloat($("#receipt_amount_check").val());
+    amount = amountCash + amountCheck;
+    $("#amount").text(amount);
+  })
+
+});
+
+function hiddenInputs () {
+  var check, cash;
+  check = $('#check');
+  cash = $('#cash');
+  if (!check.prop('checked')){
+    $('#data-check').hide();
+    $('#invoices-table').hide();
+    check.parents(".thorizontal").siblings().hide();
+  }
+  if (!cash.prop('checked')) {
+    cash.parents(".thorizontal").siblings().hide();
+  }
+}
+
+
+
