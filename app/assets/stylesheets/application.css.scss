@@ -12,6 +12,7 @@
  *= require token-input-facebook
  *= require bootstrap-datetimepicker.min
  *= require_tree .
+ *= require token-input-bootstrappy
  *= require _font-awesome
  *= require jquery.ui.core
  *= require jquery.ui.theme
@@ -21,6 +22,7 @@
 @import "twitter/bootstrap";
 @import "header";
 @import "invoices";
+
 
 // Start Form Sign
 .form-signin {

@@ -10,6 +10,14 @@ class InvoicesController < ApplicationController
     end
   end
 
+
+  def index
+    respond_to do |format|
+      format.html
+      format.json { render json: InvoicesDatatable.new(view_context) }
+    end
+  end
+
   # creation_state: init by default
   def new
     @invoice = Invoice.create unless request.xhr?
