@@ -40,7 +40,7 @@
     $('#bank-modal').modal('show');
   });
 
-  $('.btn-modal-submit').click(function(){
+  $('#add-new-name').click(function(){
     $('#bank-modal').modal('hide');
     var sel = document.getElementById('bank_name');
     var name = $('#new-name-bank').val().toUpperCase();

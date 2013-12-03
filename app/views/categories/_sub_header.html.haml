@@ -1,0 +1,20 @@
+#categories
+  .sub-header
+    -if edit_or_new_page?(@category)
+      %a.category-save
+        %i.icon-save.icon-2x
+        = t('sub_header.save')
+      %a.category-danger{href: "#{categories_path}"}
+        %i.icon-remove-sign.icon-2x
+        = t('sub_header.cancel')
+    -elsif show_page?(@category)
+      %a.category-new{ href: "#{edit_category_path(@category)}" }
+        %i.icon-edit.icon-2x
+        = "editar"
+    -else
+      %a.category-new{ href: "#" ,id: "category-new"}
+        %i.icon-plus-sign.icon-2x
+        = t('sub_header.new')
+      %a.category-print{href: "#"}
+        %i.icon-print.icon-2x
+        = t('sub_header.print')

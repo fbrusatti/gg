@@ -96,6 +96,21 @@
     display: inline;
   }
 
+  .token_field {
+    @extend .form-control;
+    padding: 0px 0px;
+    width:50%;
+    float:left;
+    .token-input-list-facebook{
+      width: 100%;
+      border: 0px;
+      .token-input-token-facebook{
+        font-size: 13px;
+      }
+    }
+
+  }
+
   // show product
   .show-product {
     background-color: #E0DFDB;

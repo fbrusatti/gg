@@ -1,0 +1,16 @@
+#categories
+  %ul.category-tabs
+    %li.active
+      %a{"data-toggle" => "tab", href: "#category-data"}
+        = t('.category_data')
+  .tree.well
+    %ul
+      %li
+        %span
+          %i.icon-arrow-down.icon-2x
+          = t('.categories')
+          %a{href: ""}
+          =build_tree().html_safe
+
+  #category-modal.modal.fade
+    = render "new_category"

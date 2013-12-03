@@ -21,11 +21,8 @@
       = f.text_field :shelf , class: "pretty-input"
     .input
       = f.label :category
-      = f.collection_select :category_ids,
-                            Category.all,
-                            :id, :name,
-                            {}, class: "pretty-input",
-                            id: "category_select"
+      .token_field
+        = f.text_field :category_tokens,"data-pre" => edit_category, class: "pretty-input"
       %a#openBtn-category
         %i.icon-plus-sign.icon-1x
   .right
