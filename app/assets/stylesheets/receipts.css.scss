@@ -2,8 +2,26 @@
 
 #receipts {
 
-  #openBtn-bank{
+  #openBtn-bank {
     @extend .btn, .btn-primary
+  }
+
+  .button-save {
+    @extend .btn, .btn-primary;
+    margin-right: 5px;
+    @extend .col-lg-2, .col-lg-offset-7
+  }
+
+  .button-show {
+    @extend .btn, .btn-default;
+  }
+
+  .button-edit {
+    @extend .btn, .btn-primary;
+  }
+
+  .button-delete {
+    @extend .btn, .btn-danger;
   }
 
   .receipts-tabs {
@@ -89,6 +107,35 @@
     .transaction .thorizontal .tlabel { @extend .col-lg-1, .col-sm-offset-1 }
     .transaction .thorizontal .tinput { @extend .col-sm-5, .col-sm-offset-1 }
     .transaction .thorizontal .tamount { @extend .col-sm-3, .col-sm-offset-1 }
+  }
+
+  /*Style of new check*/
+  .data-check, .modal-body {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      label {
+        @extend .col-lg-3, .control-label;
+      }
+      input {
+        @extend .col-lg-6;
+      }
+      select {
+        @extend .col-lg-6;
+      }
+    }
+
+    .input-group-addon {
+      font-size: 19px;
+    }
+
+  }
+
+  .data-check .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
   }
 
   /*Style of new check*/

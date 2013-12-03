@@ -97,6 +97,9 @@ es:
         price_descount: Descuento %
         total_price: Sub Total $
       receipt:
+        price_vat: Iva
+        price_descount: Descuento
+        total_price: Precio Total
         customer: Cliente
         cash: Efectivo
         amount_cash: Monto Efectivo
@@ -187,6 +190,10 @@ es:
         shelf: Estanteria
         stock: Stock
   checks:
+    new_check:
+      delete: Eliminar
+      show: Ver
+      edit: Editar
     sub_header:
       new: Nuevo
       cancel: Cancelar
@@ -227,6 +234,8 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    data_check:
+      save: Guardar
     sub_header:
       receipt: Recibos
     new:
@@ -234,6 +243,7 @@ es:
       pay_form: Forma de Pago
       preview: Vista Previa
     pay_receipt:
+      amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
       amount: Total
