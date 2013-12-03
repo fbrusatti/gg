@@ -17,7 +17,6 @@ module CategoriesHelper
       html<< "\t\t</li>\n"
       html<< "\t</ul>\n"
     end
-    puts(html)
     html
   end
 

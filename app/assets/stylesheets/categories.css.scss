@@ -1,9 +1,6 @@
 @import "twitter/bootstrap";
 #categories{
  // sub-header category
-  .category-new {
-    @extend .btn, .btn-primary;
-  }
 
   .category-print {
     @extend .btn, .btn-primary, .pull-right;
@@ -13,20 +10,8 @@
      @extend .btn, .btn-danger;
   }
 
-  .category-save {
+  .category-save, .save-category, .save-vat , .category-new, .btn-modal-submit{
      @extend .btn, .btn-primary;
-  }
-
-  .save-category {
-    @extend .btn, .btn-primary;
-  }
-
-  .save-vat {
-    @extend .btn, .btn-primary;
-  }
-
-  .btn-modal-submit {
-    @extend .btn, .btn-primary
   }
 
 
