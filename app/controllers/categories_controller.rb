@@ -2,7 +2,18 @@ class CategoriesController < ApplicationController
 
   respond_to :html, :json
   before_filter :authenticate_user!
-  
+
+
+  def index
+    respond_to do |format|
+      format.html { render html: @categories =Category.all}
+      format.json { render json: Category.where(
+                                    "categories.name ILIKE ?",
+                                    "%#{params[:q]}%").to_json(:include => :referrer)
+                                    }
+    end
+  end
+
   def new
     @category = Category.new
   end
