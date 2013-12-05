@@ -10,6 +10,7 @@
   = form_for @receipt do |f|
     = errors_for(@receipt).html_safe
     = f.hidden_field :check_ids, value: []
+    = f.hidden_field :invoice_ids, value: []
     .receipts-tabs-content
       #data.tab-pane.active
         = render 'data_receipt', f: f
