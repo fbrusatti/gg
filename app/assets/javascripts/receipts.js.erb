@@ -1,5 +1,9 @@
 $(document).ready(function() {
 
+   $("a.receipt-save").click( function() {
+    $("#new_receipt, [id^=edit_receipt_]").submit();
+  });
+
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
     prePopulate: $('#receipt_customer_token').data('pre'),
@@ -17,14 +21,15 @@ $(document).ready(function() {
     onAdd: function(data){ fillCustomerData(data) }
   });
 
-  $("#receipt_customer_tokens").on("change", function(){
+  var invoiceTable;
+  $("#receipt_customer_tokens").on("change", function(){ 
     var customerId;
     $('#invoices-table').show();
     if (this.value == "") {
       $("#type_vat_label").text("");
       $("#registered_name_label").text("");
       $('#invoices-table').hide();
-    }
+    }  
   });
 
   $('#openBtn-bank').click(function(){
@@ -33,6 +38,7 @@ $(document).ready(function() {
 
   var amountAux, showCheckTable = false
   $("a.button-save").click(function(){
+    invoicesSelected(invoiceTable);
     $("#new_check").submit();
     amountAux = parseFloat($('#check_amount').val());
   });
@@ -44,6 +50,17 @@ $(document).ready(function() {
     $('#table-of-check tr:last').effect("highlight", {}, 3000);
     $('#table-of-check').show("slow");
     $('#new_check')[0].reset();
+    
+    var ids = $('#receipt_check_ids').val();
+    if (ids == "[]") {
+      ids = $(data).data("check-id");
+    } else {
+      ids = ids.replace(/\[/, "");
+      ids = ids.replace(/\]/, "");
+      ids = ids + "," + $(data).data("check-id");
+    }
+   
+    $('#receipt_check_ids').val("["+ ids +"]");
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
     $("#receipt_amount_check").text("$ " + amountCheck);
@@ -114,6 +131,22 @@ function fillCustomerData(customer){
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
+}
+
+function invoicesSelected(oTable) {
+  var invoices_id = $('#receipt_invoice_ids').val();
+  var invoices = fnGetSelected(oTable);
+  var index = invoices.length;
+  for (var i = 0; i < index; i++) {
+     if (invoices_id == "[]") {
+      invoices_id = invoices[i][0];
+    } else {
+      invoices_id = invoices_id.replace(/\[/, "");
+      invoices_id = invoices_id.replace(/\]/, "");
+      invoices_id = invoices_id + "," + invoices[i][0];
+    }
+  };
+  $('#receipt_invoice_ids').val("[" + invoices_id + "]");
 }
 
 function deleteRow(btn) {
