@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-   $("a.receipt-save").click( function() {
+  $("a.receipt-save").click( function() {
+    invoicesSelected(invoiceTable);
     $("#new_receipt, [id^=edit_receipt_]").submit();
   });
 
@@ -38,7 +39,6 @@ $(document).ready(function() {
 
   var amountAux, showCheckTable = false
   $("a.button-save").click(function(){
-    invoicesSelected(invoiceTable);
     $("#new_check").submit();
     amountAux = parseFloat($('#check_amount').val());
   });
@@ -50,7 +50,6 @@ $(document).ready(function() {
     $('#table-of-check tr:last').effect("highlight", {}, 3000);
     $('#table-of-check').show("slow");
     $('#new_check')[0].reset();
-    
     var ids = $('#receipt_check_ids').val();
     if (ids == "[]") {
       ids = $(data).data("check-id");
@@ -59,8 +58,7 @@ $(document).ready(function() {
       ids = ids.replace(/\]/, "");
       ids = ids + "," + $(data).data("check-id");
     }
-   
-    $('#receipt_check_ids').val("["+ ids +"]");
+    $('#receipt_check_ids').val(ids);
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
     $("#receipt_amount_check").text("$ " + amountCheck);
@@ -146,7 +144,7 @@ function invoicesSelected(oTable) {
       invoices_id = invoices_id + "," + invoices[i][0];
     }
   };
-  $('#receipt_invoice_ids').val("[" + invoices_id + "]");
+  $('#receipt_invoice_ids').val(invoices_id);
 }
 
 function deleteRow(btn) {
