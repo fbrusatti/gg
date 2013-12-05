@@ -3,7 +3,8 @@ class Document < ActiveRecord::Base
   # == Accesors
   attr_accessible :type, :number, :recharge, :amount, :balance, :state,
                   :expiration_date, :payment_condition, :active, :annul,
-                  :creation_state, :customer_tokens, :amount_cash
+                  :creation_state, :customer_tokens, :amount_cash, :document_id,
+                  :check_ids, :invoice_ids
   
   attr_reader :customer_tokens
 

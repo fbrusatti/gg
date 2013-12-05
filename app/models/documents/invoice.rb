@@ -2,6 +2,10 @@ class Invoice < Document
   # == Callbakcs
   after_save :descount_amount, if: Proc.new { |i| i.creation_state == 'finish' }
 
+  # == Associations
+  has_many :payments
+  has_many :receipts, :through => :payments
+
   # == Accesors
   attr_accessible :product_tokens, :customer_tokens
   attr_reader :product_tokens, :customer_tokens
