@@ -6,6 +6,31 @@
     @extend .btn, .btn-primary
   }
 
+  .sub-header {
+    display: block;
+  }
+
+  .sub-header > a{
+    margin: 5px;
+  }
+
+  // sub-header receipt
+  .receipt-new {
+    @extend .btn, .btn-primary;
+  }
+
+  .receipt-print {
+    @extend .btn, .btn-primary, .pull-right;
+  }
+
+  .receipt-danger {
+     @extend .btn, .btn-danger;
+  }
+
+  .receipt-save {
+     @extend .btn, .btn-primary;
+  }
+
   .button-save {
     @extend .btn, .btn-primary;
     margin-right: 5px;
