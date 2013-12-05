@@ -1,7 +1,6 @@
 @import "twitter/bootstrap";
 
 #invoices {
-
   // sub header
   // ----------
   .sub-header {
@@ -41,7 +40,6 @@
   }
   .invoices-tabs-content { @extend .tab-content }
 
-
   // items
   // -----
   #items{
@@ -70,8 +68,23 @@
   .token_field{
     margin: 10px;
     .title { font-size: 20px }
-    .token-input-list-facebook, .title { display: inline-block }
+    .token-input-list-facebook, .title { display: inline-block; vertical-align: middle }
   }
+
+  .line-separator {
+    height: 1px;
+    background: #717171;
+    border-bottom: 1px solid #313030;
+  }
+
+  // partial _customer
+  // -----------------
+  #items #customer { @extend .container }
+  #items #customer { @extend .row }
+  #items #customer .column { @extend .col-md-4 }
+  #items #customer .data { @extend .row }
+  #items #customer .data > p:first-child { @extend .col-md-2; padding-left: 5px }
+  #items #customer .data p.pretty-input { @extend .col-md-9 }
 
   // Modals
   // ------

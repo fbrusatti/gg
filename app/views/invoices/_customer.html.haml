@@ -2,3 +2,28 @@
   .title= t('.search_customer')
   = f.text_field :customer_tokens,
                  class: "pretty-input"
+#customer
+  .column
+    .data
+      = simple_format t('.sr')
+      = simple_format "", class: "pretty-input", id: 'sr'
+    .data
+      = simple_format t('.address')
+      = simple_format  "", class: "pretty-input", id: 'address'
+    .data
+      = simple_format t('.iva')
+      = simple_format "", class: "pretty-input", id: 'iva'
+  .column
+    .data
+      = simple_format t('.cuit_cuil')
+      = simple_format  "", class: "pretty-input", id: 'cuit_cuil'
+  .column
+    .data
+      = simple_format t('.gross_income')
+      = simple_format "", class: "pretty-input", id: 'gross_income'
+    .data
+      = simple_format t('.phone')
+      = simple_format "", class: "pretty-input", id: 'phone'
+    .data
+      = simple_format t('.cellphone')
+      = simple_format "", class: "pretty-input", id: 'cellphone'
