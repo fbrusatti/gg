@@ -4,7 +4,22 @@ $(document).ready(function() {
   // variables
   // ---------
   var tItems; // table invoice-items
-  var searchProduct; //token input
+  var searchProduct, searchCustomer; //token input
+
+  // token input to customer
+  // -----------------------
+  searchCustomer = $('#invoices #invoice_customer_tokens');
+  searchCustomer.tokenInput('/customers.json', {
+    theme: 'facebook',
+    tokenLimit: "1",
+    resultsFormatter: function(customer){
+      var compleName = customer.name + " " + customer.surname + "(" + customer.dni + ")";
+      return "<p style='color: black; font-size:20px' >" + compleName + " </p>";
+    },
+    noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    searchicodengText: "<%= I18n.t('.token_input.searchingText')%>"
+  });
 
   // handle buttons sub header
   // -------------------------
@@ -47,8 +62,8 @@ $(document).ready(function() {
     }
   });
 
-  // token input
-  // -----------
+  // token input to products
+  // -----------------------
   searchProduct = $('#invoices #product_tokens').tokenInput('/products.json', {
     theme: 'facebook',
     tokenLimit: "1",

@@ -1,7 +1,5 @@
 #invoices
   %ul.invoices-tabs
-    %li
-      %a{'data-toggle' => 'tab', href: '#data'}= t('.data')
     %li.active
       %a{'data-toggle' => 'tab', href: '#items'}= t('.list')
     %li
@@ -12,8 +10,9 @@
   = form_for @invoice do |f|
     = errors_for(@invoice).html_safe
     .invoices-tabs-content
-      #data.tab-pane
       #items.tab-pane.active
+        .customer
+          = render 'customer', f: f
         .token_field
           .title= t('.search_products')
           = text_field_tag :product_tokens,

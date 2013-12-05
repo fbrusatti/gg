@@ -37,12 +37,14 @@ es:
       cancel: Cancelar
       invoice: Factura
     new:
-      data: Datos
       list: Lista
       pay_mode: Forma de Pago
       preview: Vista Previa
       search_products: Buscar Productos
+      search_customer: Buscar Cliente
       total_price: Total $
+    customer:
+      search_customer: Buscar Cliente
   layouts:
     header:
       clients: Clientes

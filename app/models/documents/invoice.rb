@@ -3,11 +3,15 @@ class Invoice < Document
   after_save :descount_amount, if: Proc.new { |i| i.creation_state == 'finish' }
 
   # == Accesors
-  attr_accessible :product_tokens
-  attr_reader :product_tokens
+  attr_accessible :product_tokens, :customer_tokens
+  attr_reader :product_tokens, :customer_tokens
 
   def product_tokens=(id)
     self.product_id = id
+  end
+
+  def customer_tokens=(id)
+    self.customer_id = id
   end
 
   private
