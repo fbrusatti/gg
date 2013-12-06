@@ -243,6 +243,14 @@ es:
       data: Datos
       pay_form: Forma de Pago
       preview: Vista Previa
+    table_check:
+      number: Numero
+      emmiter: Emisor
+      date_of_emission: Fecha de Emision
+      day_of_pay: Fecha de pago
+      amount: Monto
+      state: Estado
+      actions: Acciones
     pay_receipt:
       amount_check: Monto Cheque
       check_pay: Pago en Cheque

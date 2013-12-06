@@ -55,8 +55,6 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
-    acts_as_list (0.3.0)
-      activerecord (>= 3.0)
     addressable (2.3.5)
     arbre (1.0.1)
       activesupport (>= 3.0.0)
@@ -291,7 +289,6 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
-  acts_as_list
   anjlab-bootstrap-rails!
   awesome_print
   better_errors
