@@ -1,14 +1,11 @@
 #receipts
   %ul.receipts-tabs
     %li.active
-      %a{'data-toggle' => 'tab', href: '#data'}
+      %a{'data-toggle' => 'tab', href: '#data', id: 'data-tab'}
         = t('.data')
     %li
-      %a{'data-toggle' => 'tab', href: '#pay'}
+      %a{'data-toggle' => 'tab', href: '#pay', id: 'pay-tab'}
         = t('.pay_form')
-    %li
-      %a{'data-toggle' => 'tab', href: '#preview'}
-        = t('.preview')
 
   = form_for @receipt do |f|
     = errors_for(@receipt).html_safe
@@ -20,7 +17,8 @@
       #preview.tab-pane
     = f.submit hidden: true
   #data-check
-    = form_for Check.new do |f|
+    = form_for(Check.new, remote: true, format: :html) do |f|
       #new-check
         = render 'data_check', f: f
-      = f.submit hidden: true  
+      = f.submit hidden: true
+  = render 'table_check'

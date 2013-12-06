@@ -39,4 +39,8 @@
       = f.label :check_status
       = f.select :check_status, check_status,
                           { :include_blank => true }, class: "pretty-input"
+    .input
+      %a.button-save
+        %i.icon-save.icon-1x
+          = t('.save')                      
 
