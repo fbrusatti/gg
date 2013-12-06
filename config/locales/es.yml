@@ -186,6 +186,7 @@ es:
         net_cost: Costo Neto
         shelf: Estanteria
         stock: Stock
+        category_ids: Categoria
   checks:
     sub_header:
       new: Nuevo
@@ -240,7 +241,7 @@ es:
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total
-      cash: Efectivo  
+      cash: Efectivo
     transactions:
       check: Cheque
       amount_check: Monto Cheque
