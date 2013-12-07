@@ -1,19 +1,16 @@
 #invoices
   %ul.invoices-tabs
-    %li
-      %a{'data-toggle' => 'tab', href: '#data'}= t('.data')
     %li.active
-      %a{'data-toggle' => 'tab', href: '#items'}= t('.list')
+      %a{'data-toggle' => 'tab', href: '#items'}= t('.data')
     %li
       %a{'data-toggle' => 'tab', href: '#pay'}= t('.pay_mode')
-    %li
-      %a{'data-toggle' => 'tab', href: '#preview'}= t('.preview')
 
   = form_for @invoice do |f|
     = errors_for(@invoice).html_safe
     .invoices-tabs-content
-      #data.tab-pane
       #items.tab-pane.active
+        = render 'customer', f: f
+        .line-separator
         .token_field
           .title= t('.search_products')
           = text_field_tag :product_tokens,

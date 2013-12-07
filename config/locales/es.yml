@@ -38,11 +38,20 @@ es:
       invoice: Factura
     new:
       data: Datos
-      list: Lista
       pay_mode: Forma de Pago
       preview: Vista Previa
       search_products: Buscar Productos
+      search_customer: Buscar Cliente
       total_price: Total $
+    customer:
+      search_customer: Buscar Cliente
+      sr: Señores
+      address: Domicilio
+      cuit_cuil: C.U.I.T
+      gross_income: Ing. Brutos
+      iva: I.V.A
+      phone: Telefono
+      cellphone: Celular
   layouts:
     header:
       clients: Clientes
