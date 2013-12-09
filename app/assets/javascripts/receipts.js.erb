@@ -5,6 +5,7 @@ $(document).ready(function() {
     $("#new_receipt, [id^=edit_receipt_]").submit();
   });
 
+  var invoiceTable;
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
     prePopulate: $('#receipt_customer_token').data('pre'),
@@ -22,9 +23,7 @@ $(document).ready(function() {
     onAdd: function(data){ fillCustomerData(data) }
   });
 
-  var invoiceTable;
   $("#receipt_customer_tokens").on("change", function(){ 
-    var customerId;
     $('#invoices-table').show();
     if (this.value == "") {
       $("#type_vat_label").text("");
@@ -105,26 +104,25 @@ $(document).ready(function() {
     $("#amount").text("$ " + amount);
   })
 
+  function fillCustomerData(customer){
+    $("#type_vat_label").text(customer.type_iva);
+    $("#registered_name_label").text(customer.registered_name);
+    invoiceTable = $('#invoices-table').dataTable({
+      sPaginationType: "full_numbers",
+      bJQueryUI: true,
+      bProcessing: true,
+      bServerSide: true,
+      bDestroy: true,
+      sAjaxSource: "/customers/" + customer.id,
+      sAjaxDataProp: "table.aaData",
+      sScrollY: "200",
+      oLanguage: {
+        sUrl: "/datatables/spanish.txt"
+      }
+    });
+    multiSelectedRow(invoiceTable, "#invoices-table");
+  }
 });// End Document
-
-function fillCustomerData(customer){
-  $("#type_vat_label").text(customer.type_iva);
-  $("#registered_name_label").text(customer.registered_name);
-  var invoiceTable = $('#invoices-table').dataTable({
-    sPaginationType: "full_numbers",
-    bJQueryUI: true,
-    bProcessing: true,
-    bServerSide: true,
-    bDestroy: true,
-    sAjaxSource: "/customers/" + customer.id,
-    sAjaxDataProp: "table.aaData",
-    sScrollY: "200",
-    oLanguage: {
-      sUrl: "/datatables/spanish.txt"
-    }
-  });
-  multiSelectedRow(invoiceTable, "#invoices-table");
-}
 
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
