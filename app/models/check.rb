@@ -2,7 +2,8 @@ class Check < ActiveRecord::Base
 
   # == Accesors
   attr_accessible :check_number , :account, :emission_date, :payment_date, 
-                  :emisor, :amount, :check_status ,:is_proper ,:bank_id
+                  :emisor, :amount, :check_status ,:is_proper ,:bank_id,
+                  :document_id
 
 
   # ==validations

@@ -247,6 +247,11 @@ es:
     data_check:
       save: Guardar
     sub_header:
+      new: Nuevo
+      cancel: Cancelar
+      print: Imprimir
+      save: Guardar
+      edit: Editar
       receipt: Recibos
     new:
       data: Datos
@@ -568,6 +573,7 @@ es:
     customer: "Se ha %{message} exitosamente el Cliente"
     bank: "Se ha %{message} exitosamente el Banco"
     check: "Se ha %{message} exitosamente el Cheque"
+    receipt: "Se ha %{message} exitosamente el Recibo"
     location: "Se ha %{message} exitosamente la Localidad"
     error_update_form: Hubo un problema al actulizar
     error_create_form: Hubo un problema al crear

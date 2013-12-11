@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+  $("a.receipt-save").click( function() {
+    invoicesSelected(invoiceTable);
+    $("#new_receipt, [id^=edit_receipt_]").submit();
+  });
+
+  var invoiceTable;
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
     prePopulate: $('#receipt_customer_token').data('pre'),
@@ -18,7 +24,6 @@ $(document).ready(function() {
   });
 
   $("#receipt_customer_tokens").on("change", function(){
-    var customerId;
     $('#invoices-table').show();
     if (this.value == "") {
       $("#type_vat_label").text("");
@@ -38,11 +43,19 @@ $(document).ready(function() {
   });
 
   var amountCheck = 0;
+
   $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
     $('#table-of-check').append(data);
     $('#table-of-check tr:last').effect("highlight", {}, 3000);
     $('#table-of-check').show("slow");
     $('#new_check')[0].reset();
+    var ids = $('#receipt_check_ids').val();
+    if (ids == "") {
+      ids = $(data).data("check-id");
+    } else {
+      ids = ids + "," + $(data).data("check-id");
+    }
+    $('#receipt_check_ids').val(ids);
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
     $("#receipt_amount_check").text("$ " + amountCheck);
@@ -89,25 +102,43 @@ $(document).ready(function() {
     $("#amount").text("$ " + amount);
   })
 
+  function fillCustomerData(customer){
+    $("#type_vat_label").text(customer.type_iva);
+    $("#registered_name_label").text(customer.registered_name);
+    invoiceTable = $('#invoices-table').dataTable({
+      sPaginationType: "full_numbers",
+      bJQueryUI: true,
+      bProcessing: true,
+      bServerSide: true,
+      bDestroy: true,
+      sAjaxSource: "/customers/" + customer.id,
+      sAjaxDataProp: "table.aaData",
+      sScrollY: "200",
+      oLanguage: {
+        sUrl: "/datatables/spanish.txt"
+      }
+    });
+    multiSelectedRow(invoiceTable, "#invoices-table");
+  }
 });// End Document
 
-function fillCustomerData(customer){
-  $("#type_vat_label").text(customer.type_iva);
-  $("#registered_name_label").text(customer.registered_name);
-  var invoiceTable = $('#invoices-table').dataTable({
-    sPaginationType: "full_numbers",
-    bJQueryUI: true,
-    bProcessing: true,
-    bServerSide: true,
-    bDestroy: true,
-    sAjaxSource: "/customers/" + customer.id,
-    sAjaxDataProp: "table.aaData",
-    sScrollY: "200",
-    oLanguage: {
-      sUrl: "/datatables/spanish.txt"
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+
+function invoicesSelected(oTable) {
+  var invoice_ids = $('#receipt_invoice_ids').val();
+  var invoices = fnGetSelected(oTable);
+  var index = invoices.length;
+  for (var i = 0; i < index; i++) {
+    if (invoice_ids == "") {
+      invoice_ids = invoices[i][0];
+    } else {
+      invoice_ids = invoice_ids + "," + invoices[i][0];
     }
-  });
-  multiSelectedRow(invoiceTable, "#invoices-table");
+  };
+  $('#receipt_invoice_ids').val(invoice_ids);
 }
 
 function deleteRow(btn) {
@@ -129,3 +160,4 @@ function hiddenInputs () {
     cash.parents(".thorizontal").siblings().hide();
   }
 }
+

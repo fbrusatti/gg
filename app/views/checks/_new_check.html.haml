@@ -1,4 +1,4 @@
-%tr
+%tr{"data-check-id" => @check.id}
   %td= @check.check_number
   %td= @check.emisor
   %td= @check.emission_date
@@ -12,4 +12,3 @@
       = t('.edit')
     %a.button-delete{ onclick: "deleteRow(this)" }  
       = t('.delete')
-    
