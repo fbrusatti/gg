@@ -1,8 +1,10 @@
 class Document < ActiveRecord::Base
+
   # == Accesors
   attr_accessible :type, :number, :recharge, :amount, :balance, :state,
                   :expiration_date, :payment_condition, :active, :annul,
-                  :creation_state, :customer_tokens, :amount_cash, :amount_check
+                  :creation_state, :customer_tokens, :amount_cash, :document_id,
+                  :check_ids, :invoice_ids
   
   attr_reader :customer_tokens
 
@@ -12,9 +14,10 @@ class Document < ActiveRecord::Base
   belongs_to :supplier
   has_many :items
   has_many :products, through: :items
+  has_many :checks
 
   def customer_tokens=(ids)
       self.customer_id = ids
-  end    
+  end
 
 end

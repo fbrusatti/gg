@@ -1,5 +1,11 @@
 $(document).ready(function() {
 
+  $("a.receipt-save").click( function() {
+    invoicesSelected(invoiceTable);
+    $("#new_receipt, [id^=edit_receipt_]").submit();
+  });
+
+  var invoiceTable;
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
     prePopulate: $('#receipt_customer_token').data('pre'),
@@ -13,48 +19,50 @@ $(document).ready(function() {
       + " " + item.surname +  ". DNI: " + item.dni + " </p> </li>" },
     tokenFormatter: function(item) {
       return "<li><p>" + (item.name + " " +
-      item.surname ).substring(0,22)+ ". DNI: " + item.dni + " </p> </li>" }
+      item.surname ).substring(0,22)+ ". DNI: " + item.dni + " </p> </li>" },
+    onAdd: function(data){ fillCustomerData(data) }
   });
 
-  $("#receipt_customer_tokens").on("change", function(){ 
-    var customerId;
+  $("#receipt_customer_tokens").on("change", function(){
     $('#invoices-table').show();
     if (this.value == "") {
       $("#type_vat_label").text("");
-      $("#registered_name_label").text(""); 
+      $("#registered_name_label").text("");
       $('#invoices-table').hide();
-    } else {
-      customerId = this.value;
-      $.ajax({
-          type: "GET",
-          url: "/customers/" + customerId,
-          dataType: "json",
-      })
-      .done(function(data, textStatus, xhr){
-        $("#type_vat_label").text(data.customer.type_iva);
-        $("#registered_name_label").text(data.customer.registered_name);      
-        var invoiceTable = $('#invoices-table').dataTable({
-          sPaginationType: "full_numbers",
-          bJQueryUI: true,
-          bProcessing: true,
-          bServerSide: true,
-          bDestroy: true,
-          sAjaxSource: "/customers/" + customerId,
-          sAjaxDataProp: "table.aaData",
-          sScrollY: "200",
-          oLanguage: {
-            sUrl: "/datatables/spanish.txt"
-          }  
-        });
-        multiSelectedRow(invoiceTable, "#invoices-table");
-      });  
-    }   
+    }
   });
 
   $('#openBtn-bank').click(function(){
     $('#bank-modal').modal('show');
   });
-  
+
+  var amountAux, showCheckTable = false
+  $("a.button-save").click(function(){
+    $("#new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
+  });
+
+  var amountCheck = 0;
+
+  $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
+    $('#table-of-check').append(data);
+    $('#table-of-check tr:last').effect("highlight", {}, 3000);
+    $('#table-of-check').show("slow");
+    $('#new_check')[0].reset();
+    var ids = $('#receipt_check_ids').val();
+    if (ids == "") {
+      ids = $(data).data("check-id");
+    } else {
+      ids = ids + "," + $(data).data("check-id");
+    }
+    $('#receipt_check_ids').val(ids);
+    showCheckTable = true;
+    amountCheck = amountCheck + amountAux;
+    $("#receipt_amount_check").text("$ " + amountCheck);
+    amount = amountCash + amountCheck;
+    $("#amount").text("$ " + amount);
+  });
+
   hiddenInputs();
 
   // changes the visibility of transactions inputs
@@ -62,34 +70,88 @@ $(document).ready(function() {
     $(this).parents(".thorizontal").siblings().toggle("show");
   });
 
+  $("#pay-tab").on('click', function(){
+    if ($("#check").prop('checked')) {
+      $('#data-check').show("slow");
+    }
+    if (showCheckTable) {
+      $('#table-of-check').show("slow");
+    }
+  });
+
+  $("#data-tab").on('click', function(){
+    $('#data-check').hide();
+    $('#table-of-check').hide();
+  });
+
   $("#check").on('click', function(e){
-    var check = $("#check");         
+    var check = $("#check");
     if (check.prop('checked')) {
       $(this).parents(".thorizontal").siblings().toggle("show");
       $('#data-check').show("slow");
     } else {
       $('#data-check').hide("slow");
       check.parents(".thorizontal").siblings().hide();
-    }  
+    }
   });
 
-  $("#receipt_amount_check, #receipt_amount_cash").on('change', function(){
-    var amountCheck = 0, amountCash = 0, amount = 0;
-    if ($("#receipt_amount_cash").val() != "")
-      amountCash = parseFloat($("#receipt_amount_cash").val());
-    if ($("#receipt_amount_check").val() != 0)
-      amountCheck = parseFloat($("#receipt_amount_check").val());
+  var amountCash = 0, amount = 0;
+  $("#receipt_amount_cash").on('change', function(){
+    amountCash = parseFloat(this.value);
     amount = amountCash + amountCheck;
-    $("#amount").text(amount);
+    $("#amount").text("$ " + amount);
   })
 
-});
+  function fillCustomerData(customer){
+    $("#type_vat_label").text(customer.type_iva);
+    $("#registered_name_label").text(customer.registered_name);
+    invoiceTable = $('#invoices-table').dataTable({
+      sPaginationType: "full_numbers",
+      bJQueryUI: true,
+      bProcessing: true,
+      bServerSide: true,
+      bDestroy: true,
+      sAjaxSource: "/customers/" + customer.id,
+      sAjaxDataProp: "table.aaData",
+      sScrollY: "200",
+      oLanguage: {
+        sUrl: "/datatables/spanish.txt"
+      }
+    });
+    multiSelectedRow(invoiceTable, "#invoices-table");
+  }
+});// End Document
+
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
+
+function invoicesSelected(oTable) {
+  var invoice_ids = $('#receipt_invoice_ids').val();
+  var invoices = fnGetSelected(oTable);
+  var index = invoices.length;
+  for (var i = 0; i < index; i++) {
+    if (invoice_ids == "") {
+      invoice_ids = invoices[i][0];
+    } else {
+      invoice_ids = invoice_ids + "," + invoices[i][0];
+    }
+  };
+  $('#receipt_invoice_ids').val(invoice_ids);
+}
+
+function deleteRow(btn) {
+  var row = btn.parentNode.parentNode;
+  row.parentNode.removeChild(row);
+}
 
 function hiddenInputs () {
   var check, cash;
   check = $('#check');
   cash = $('#cash');
   if (!check.prop('checked')){
+    $('#table-of-check').hide();
     $('#data-check').hide();
     $('#invoices-table').hide();
     check.parents(".thorizontal").siblings().hide();
@@ -98,6 +160,4 @@ function hiddenInputs () {
     cash.parents(".thorizontal").siblings().hide();
   }
 }
-
-
 

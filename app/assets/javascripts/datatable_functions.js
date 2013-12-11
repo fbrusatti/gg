@@ -33,7 +33,7 @@ function fnGetSelected( oTableLocal ){
   var aTrs = oTableLocal.fnGetNodes();
   for ( var i=0 ; i<aTrs.length ; i++ ){
     if ( $(aTrs[i]).hasClass('row_selected') ){
-      aReturn.push( aTrs[i] );
+      aReturn.push( oTableLocal.fnGetData( aTrs[i] ) );
     }
   }
   return aReturn;

@@ -4,7 +4,7 @@ class ChecksController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-   respond_to do |format|
+    respond_to do |format|
       format.html
       format.json { render json: ChecksDatatable.new(view_context) }
     end
@@ -16,8 +16,12 @@ class ChecksController < ApplicationController
 
   def create
     @check = Check.new(params[:check])
-    flash[:success] = t('flash.check', message: t('flash.created')) if @check.save
-    respond_with @check
+    @check.save
+    respond_to do |format|
+      format.html { render partial: "new_check"}
+      format.json { render json: @check }
+      format.js
+    end
   end
 
   def show
@@ -35,4 +39,10 @@ class ChecksController < ApplicationController
     end
     respond_with @check
   end
+
+  def destroy
+    @check = Check.find(params[:id])
+    @check.destroy
+  end
+  
 end

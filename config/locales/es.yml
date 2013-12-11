@@ -38,11 +38,20 @@ es:
       invoice: Factura
     new:
       data: Datos
-      list: Lista
       pay_mode: Forma de Pago
       preview: Vista Previa
       search_products: Buscar Productos
+      search_customer: Buscar Cliente
       total_price: Total $
+    customer:
+      search_customer: Buscar Cliente
+      sr: Señores
+      address: Domicilio
+      cuit_cuil: C.U.I.T
+      gross_income: Ing. Brutos
+      iva: I.V.A
+      phone: Telefono
+      cellphone: Celular
   layouts:
     header:
       clients: Clientes
@@ -97,6 +106,9 @@ es:
         price_descount: Descuento %
         total_price: Sub Total $
       receipt:
+        price_vat: Iva
+        price_descount: Descuento
+        total_price: Precio Total
         customer: Cliente
         cash: Efectivo
         amount_cash: Monto Efectivo
@@ -186,7 +198,12 @@ es:
         net_cost: Costo Neto
         shelf: Estanteria
         stock: Stock
+        category_ids: Categoria
   checks:
+    new_check:
+      delete: Eliminar
+      show: Ver
+      edit: Editar
     sub_header:
       new: Nuevo
       cancel: Cancelar
@@ -227,20 +244,36 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    data_check:
+      save: Guardar
     sub_header:
+      new: Nuevo
+      cancel: Cancelar
+      print: Imprimir
+      save: Guardar
+      edit: Editar
       receipt: Recibos
     new:
       data: Datos
       pay_form: Forma de Pago
       preview: Vista Previa
+    table_check:
+      number: Numero
+      emmiter: Emisor
+      date_of_emission: Fecha de Emision
+      day_of_pay: Fecha de pago
+      amount: Monto
+      state: Estado
+      actions: Acciones
     pay_receipt:
+      amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
       amount: Total
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total
-      cash: Efectivo  
+      cash: Efectivo
     transactions:
       check: Cheque
       amount_check: Monto Cheque
@@ -540,6 +573,7 @@ es:
     customer: "Se ha %{message} exitosamente el Cliente"
     bank: "Se ha %{message} exitosamente el Banco"
     check: "Se ha %{message} exitosamente el Cheque"
+    receipt: "Se ha %{message} exitosamente el Recibo"
     location: "Se ha %{message} exitosamente la Localidad"
     error_update_form: Hubo un problema al actulizar
     error_create_form: Hubo un problema al crear
