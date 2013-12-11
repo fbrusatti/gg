@@ -23,13 +23,13 @@ $(document).ready(function() {
     onAdd: function(data){ fillCustomerData(data) }
   });
 
-  $("#receipt_customer_tokens").on("change", function(){ 
+  $("#receipt_customer_tokens").on("change", function(){
     $('#invoices-table').show();
     if (this.value == "") {
       $("#type_vat_label").text("");
       $("#registered_name_label").text("");
       $('#invoices-table').hide();
-    }  
+    }
   });
 
   $('#openBtn-bank').click(function(){
@@ -50,11 +50,9 @@ $(document).ready(function() {
     $('#table-of-check').show("slow");
     $('#new_check')[0].reset();
     var ids = $('#receipt_check_ids').val();
-    if (ids == "[]") {
+    if (ids == "") {
       ids = $(data).data("check-id");
     } else {
-      ids = ids.replace(/\[/, "");
-      ids = ids.replace(/\]/, "");
       ids = ids + "," + $(data).data("check-id");
     }
     $('#receipt_check_ids').val(ids);
@@ -130,19 +128,17 @@ function deleteRow(btn) {
 }
 
 function invoicesSelected(oTable) {
-  var invoices_id = $('#receipt_invoice_ids').val();
+  var invoice_ids = $('#receipt_invoice_ids').val();
   var invoices = fnGetSelected(oTable);
   var index = invoices.length;
   for (var i = 0; i < index; i++) {
-     if (invoices_id == "[]") {
-      invoices_id = invoices[i][0];
+    if (invoice_ids == "") {
+      invoice_ids = invoices[i][0];
     } else {
-      invoices_id = invoices_id.replace(/\[/, "");
-      invoices_id = invoices_id.replace(/\]/, "");
-      invoices_id = invoices_id + "," + invoices[i][0];
+      invoice_ids = invoice_ids + "," + invoices[i][0];
     }
   };
-  $('#receipt_invoice_ids').val(invoices_id);
+  $('#receipt_invoice_ids').val(invoice_ids);
 }
 
 function deleteRow(btn) {
