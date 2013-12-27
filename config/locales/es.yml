@@ -244,6 +244,9 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    errors:
+      not_customer: Debe seleccionar un Cliente para realizar el recibo
+      not_amount: No puede realizar un recibo con monto nulo. Seleccione pago en cheque o efectivo
     data_check:
       save: Guardar
     sub_header:
@@ -580,6 +583,7 @@ es:
     created: creado
     destroyed: borrado
     updated: actualizado
+    select_customer: Debe seleccionar un cliente
   views:
     pagination:
         truncate: "..."
