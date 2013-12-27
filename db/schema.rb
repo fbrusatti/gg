@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111212220) do
+ActiveRecord::Schema.define(:version => 20131204213618) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.integer  "bank_id"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
+    t.integer  "document_id"
   end
 
   add_index "checks", ["check_number"], :name => "index_checks_on_check_number"
@@ -164,6 +165,14 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.decimal  "quotation",  :precision => 8, :scale => 2, :null => false
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "payments", :force => true do |t|
+    t.integer  "amount"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "invoice_id"
+    t.integer  "receipt_id"
   end
 
   create_table "products", :force => true do |t|
