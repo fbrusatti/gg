@@ -1,8 +1,10 @@
 $(document).ready(function() {
 
   $("a.receipt-save").click( function() {
-    invoicesSelected(invoiceTable);
-    $("#new_receipt, [id^=edit_receipt_]").submit();
+    if (checkProperties()) {
+      invoicesSelected(invoiceTable);  
+      $("#new_receipt, [id^=edit_receipt_]").submit();
+    } 
   });
 
   var invoiceTable;
@@ -122,6 +124,16 @@ $(document).ready(function() {
   }
 });// End Document
 
+function checkProperties () {
+  if ($("#receipt_customer_tokens").val() == "") {
+    alert("<%= I18n.t('.receipts.errors.not_customer')%>");
+  } else if (($("#receipt_amount_cash").val() == "") && ($("#receipt_amount_cash").val() == "")) {
+    alert("<%= I18n.t('.receipts.errors.not_amount')%>");
+  } else {
+    return true;
+  } 
+}
+
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
   row.parentNode.removeChild(row);
@@ -139,11 +151,6 @@ function invoicesSelected(oTable) {
     }
   };
   $('#receipt_invoice_ids').val(invoice_ids);
-}
-
-function deleteRow(btn) {
-  var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
 }
 
 function hiddenInputs () {
