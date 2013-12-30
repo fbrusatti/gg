@@ -136,7 +136,15 @@ function checkProperties () {
 
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
-  row.parentNode.removeChild(row);
+  checkDelete = $(row).data('check-id');
+  $.ajax({
+    type: "DELETE",
+    url: "/checks/" + checkDelete,
+    dataType: "json",
+  })
+  .done(function(data, textStatus, xhr){
+    row.parentNode.removeChild(row);    
+  });
 }
 
 function invoicesSelected(oTable) {

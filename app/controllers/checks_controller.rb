@@ -43,6 +43,7 @@ class ChecksController < ApplicationController
   def destroy
     @check = Check.find(params[:id])
     @check.destroy
+    respond_with @check
   end
   
 end
