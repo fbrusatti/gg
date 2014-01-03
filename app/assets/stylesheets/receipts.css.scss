@@ -31,6 +31,10 @@
      @extend .btn, .btn-primary;
   }
 
+  .receipt-cancel {
+     @extend .btn, .btn-primary;
+  }
+
   .button-save {
     @extend .btn, .btn-primary;
     margin-right: 5px;

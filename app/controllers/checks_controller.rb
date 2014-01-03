@@ -41,8 +41,8 @@ class ChecksController < ApplicationController
   end
 
   def destroy
-    @check = Check.find(params[:id])
-    @check.destroy
+    ids = params[:id].split(",")
+    ids.map { |c| Check.find(c).destroy }
     respond_with @check
   end
   

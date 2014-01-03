@@ -7,6 +7,21 @@ $(document).ready(function() {
     } 
   });
 
+  $("a.receipt-cancel").click( function() {
+    if ($('#receipt_check_ids').val() != "") {
+      $.ajax({
+        type: "DELETE",
+        url: "/checks/" + $('#receipt_check_ids').val(),
+        dataType: "json",
+      })
+      .done(function(data, textStatus, xhr){
+        window.location.replace(Routes.options_documents_path());
+      });
+    } else {
+      window.location.replace(Routes.options_documents_path());
+    }
+  })
+
   var invoiceTable;
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
