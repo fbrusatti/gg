@@ -17,6 +17,7 @@ gem "meta_search", '>= 1.1.0.pre'
 gem 'font-awesome-sass-rails'
 gem 'thin'
 gem 'bootstrap-daterangepicker-rails'
+gem "js-routes"
 
 
 # Gems used only for assets and not required
