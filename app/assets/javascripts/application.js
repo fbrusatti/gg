@@ -20,4 +20,3 @@
 //= require twitter/bootstrap
 //= require moment
 //= require daterangepicker.js
-//= require js-routes
