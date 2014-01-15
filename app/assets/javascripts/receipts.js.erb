@@ -14,12 +14,8 @@ $(document).ready(function() {
         url: "/checks/" + $('#receipt_check_ids').val(),
         dataType: "json",
       })
-      .done(function(data, textStatus, xhr){
-        window.location.replace(Routes.options_documents_path());
-      });
-    } else {
-      window.location.replace(Routes.options_documents_path());
     }
+    $(this).unbind('click');  
   })
 
   var invoiceTable;
@@ -75,8 +71,10 @@ $(document).ready(function() {
     $('#receipt_check_ids').val(ids);
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
-    $("#receipt_amount_check").text("$ " + amountCheck);
+    $("#receipt_amount_check").val(amountCheck);
+    $("#receipt_amount_check").text("$ " + amountCheck)
     amount = amountCash + amountCheck;
+    $("#amount").val(amount);
     $("#amount").text("$ " + amount);
   });
 
@@ -116,6 +114,7 @@ $(document).ready(function() {
   $("#receipt_amount_cash").on('change', function(){
     amountCash = parseFloat(this.value);
     amount = amountCash + amountCheck;
+    $("#amount").val(amount);
     $("#amount").text("$ " + amount);
   })
 
@@ -152,13 +151,21 @@ function checkProperties () {
 function deleteRow(btn) {
   var row = btn.parentNode.parentNode;
   checkDelete = $(row).data('check-id');
+  amountDeleted = parseFloat($('#check-amount').val());
   $.ajax({
     type: "DELETE",
     url: "/checks/" + checkDelete,
     dataType: "json",
   })
   .done(function(data, textStatus, xhr){
-    row.parentNode.removeChild(row);    
+    row.parentNode.removeChild(row);
+    amountCheck = parseFloat($("#receipt_amount_check").val()) ;
+    amountCheck = amountCheck - amountDeleted;
+    $("#receipt_amount_check").val(amountCheck);
+    $("#receipt_amount_check").text("$ " + amountCheck);
+    amount = parseFloat($("#amount").val()) - amountDeleted;
+    $("#amount").val(amount);
+    $("#amount").text("$" + amount);
   });
 }
 
