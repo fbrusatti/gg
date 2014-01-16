@@ -162,6 +162,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (4.0.5)
       railties (>= 3.1.0)
+    js-routes (0.9.6)
+      rails (>= 3.2)
     json (1.8.0)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -309,6 +311,7 @@ DEPENDENCIES
   jquery-datatables-rails!
   jquery-rails (~> 2.3.0)
   jquery-ui-rails
+  js-routes
   kaminari
   launchy
   letter_opener
