@@ -15,24 +15,13 @@
   }
 
   // sub-header receipt
-  .receipt-new {
-    @extend .btn, .btn-primary;
-  }
-
-  .receipt-print {
-    @extend .btn, .btn-primary, .pull-right;
-  }
-
-  .receipt-danger {
-     @extend .btn, .btn-danger;
-  }
 
   .receipt-save {
      @extend .btn, .btn-primary;
   }
 
   .receipt-cancel {
-     @extend .btn, .btn-primary;
+     @extend .btn, .btn-danger;
   }
 
   .button-save {

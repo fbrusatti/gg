@@ -2,20 +2,25 @@ $(document).ready(function() {
 
   $("a.receipt-save").click( function() {
     if (checkProperties()) {
-      invoicesSelected(invoiceTable);  
+      invoicesSelected(invoiceTable);
       $("#new_receipt, [id^=edit_receipt_]").submit();
-    } 
+    }
   });
 
-  $("a.receipt-cancel").click( function() {
-    if ($('#receipt_check_ids').val() != "") {
-      $.ajax({
-        type: "DELETE",
-        url: "/checks/" + $('#receipt_check_ids').val(),
-        dataType: "json",
-      })
+  $("a.receipt-cancel").click( function(event) {
+    event.preventDefault();
+    var path = this.href;
+    if ($('#receipt_check_ids').val() == "") {
+      window.location.href= path
+      return;
     }
-    $(this).unbind('click');  
+    $.ajax({
+      type: "DELETE",
+      url: "/checks/" + $('#receipt_check_ids').val(),
+      dataType: "json",
+    }).done(function(data, textStatus, xhr){
+      window.location.href= path
+    })
   })
 
   var invoiceTable;
@@ -142,7 +147,7 @@ function checkProperties () {
     alert("<%= I18n.t('.receipts.errors.not_amount')%>");
   } else {
     return true;
-  } 
+  }
 }
 
 function deleteRow(btn) {
