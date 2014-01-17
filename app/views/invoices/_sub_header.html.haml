@@ -7,7 +7,7 @@
       %a.invoice-save-building
         %i.icon-save.icon-2x
         = t('.save_building')
-      %a.invoice-danger{href: "#{options_documents_path}"}
+      %a.invoice-danger#cancel-invoice{href: "#{options_documents_path}"}
         %i.icon-remove-sign.icon-2x
         = t('.cancel')
     .title-sub-header= t('.invoice')

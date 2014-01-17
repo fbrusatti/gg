@@ -15,6 +15,19 @@ $(document).ready(function() {
     $('#invoice_creation_state').val('building');
     $("[id^=edit_invoice_]").submit();
   });
+  // delete the inovice and its items
+  $(document).on('click', 'a#cancel-invoice', function(event){
+    event.preventDefault();
+    var path = this.href;
+    var invoiceId = $('#invoices #product_tokens').data('invoice');
+    $.ajax({
+      type: "DELETE",
+      url: "/invoices/" + invoiceId,
+      dataType: "json"
+    }).done(function(data, textStatus, xhr){
+      window.location.href= path
+    })
+  });
 
   // variables
   // ---------
