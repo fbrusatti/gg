@@ -34,7 +34,7 @@ es:
     sub_header:
       save_finish: Confirmar
       save_building: En Construcción
-      cancel: Cancelar
+      cancel: Borrar
       invoice: Factura
     new:
       data: Datos
