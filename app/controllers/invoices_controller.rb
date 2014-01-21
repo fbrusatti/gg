@@ -20,7 +20,7 @@ class InvoicesController < ApplicationController
 
   # creation_state: init by default
   def new
-    @invoice = Invoice.create unless request.xhr?
+    @invoice = current_user.invoices.create unless request.xhr?
     respond_with @invoice
   end
 
