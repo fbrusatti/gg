@@ -69,8 +69,11 @@ $(document).ready(function() {
       if (iDataIndex < tItems.fnSettings().fnRecordsTotal())
         partialSum += parseFloat(aData[6]);
       // set the price in view
-      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 )
+      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 ) {
         $('.total-price .price').html(partialSum.toFixed(2));
+        // form input to amount
+        $('#invoice_amount').val(partialSum.toFixed(2));
+      }
     },
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
@@ -168,8 +171,6 @@ $(document).ready(function() {
     $("#cellphone", $scope).html( customer.mobile_phone )
   }
 });// document
-
-
 
 var aColumnsOptions =
   [
