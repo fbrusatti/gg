@@ -1,30 +1,34 @@
 #invoices
-  %ul.invoices-tabs
-    %li.active
-      %a{'data-toggle' => 'tab', href: '#items'}= t('.data')
-    %li
-      %a{'data-toggle' => 'tab', href: '#pay'}= t('.pay_mode')
+  .form-container
 
-  = form_for @invoice do |f|
-    = errors_for(@invoice).html_safe
-    .invoices-tabs-content
-      #items.tab-pane.active
-        = render 'customer', f: f
-        .line-separator
-        .token_field
-          .title= t('.search_products')
-          = text_field_tag :product_tokens,
-                         nil,
-                         class: "pretty-input",
-                         'data-invoice' => @invoice.id
-        .table= render 'current_items_invoice'
-        .total-price
-          .text= t('.total_price')
-          .price 0
-      #pay.tab-pane
-      #preview.tab-pane
-      = f.text_field :creation_state, hidden: true
-      = f.text_field :amount, hidden: true
-    = f.submit hidden: true
-  #new-item-modal.modal.fade
-  #edit-item-modal.modal.fade
+    %ul.invoices-tabs
+      %li.active
+        %a{'data-toggle' => 'tab', href: '#items'}= t('.data')
+      %li
+        %a{'data-toggle' => 'tab', href: '#pay'}= t('.pay_mode')
+
+    = form_for @invoice do |f|
+      = errors_for(@invoice).html_safe
+
+      .invoices-tabs-content
+        #items.tab-pane.active
+          = render 'customer', f: f
+          .line-separator
+          .data
+            .label
+              .title= t('.search_products')
+            .information
+              = text_field_tag :product_tokens,
+                             nil,
+                             class: "pretty-input",
+                             'data-invoice' => @invoice.id
+          .table= render 'current_items_invoice'
+          .total-price
+            .text= t('.total_price')
+            .price 0
+        #pay.tab-pane
+        = f.text_field :creation_state, hidden: true
+        = f.text_field :amount, hidden: true
+      = f.submit hidden: true
+    #new-item-modal.modal.fade
+    #edit-item-modal.modal.fade

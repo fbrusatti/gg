@@ -161,7 +161,7 @@ $(document).ready(function() {
   });
 
   function fillCustomerData(customer){
-    var $scope = $("#customer .column");
+    var $scope = $(".show-customer");
     $("#sr", $scope).html( customer.name + " " + customer.surname );
     $("#address", $scope).html( customer.address );
     $("#iva", $scope).html( customer.type_iva );

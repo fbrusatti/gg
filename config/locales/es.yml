@@ -37,6 +37,7 @@ es:
       cancel: Borrar
       invoice: Factura
     new:
+      date: Fecha
       data: Datos
       pay_mode: Forma de Pago
       preview: Vista Previa
