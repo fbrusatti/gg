@@ -12,7 +12,9 @@ class CustomersController < ApplicationController
       format.html
       format.json do
         if params[:q].present?
-          data = Customer.where("name ILIKE :search or surname ILIKE :search",
+          data = Customer.where("name ILIKE :search or
+                                 surname ILIKE :search or
+                                 dni ILIKE :search",
                                 search: "%#{params[:q]}%")
         else
           data = CustomersDatatable.new(view_context)

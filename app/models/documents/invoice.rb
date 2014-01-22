@@ -1,6 +1,8 @@
 class Invoice < Document
   # == Callbakcs
+  before_save :generate_number, if: Proc.new { |i| i.creation_state == 'finish' }
   after_save :descount_amount, if: Proc.new { |i| i.creation_state == 'finish' }
+
 
   # == Associations
   has_many :payments
@@ -24,5 +26,10 @@ class Invoice < Document
         i.product.stock -= i.amount
         i.product.save
       end
+    end
+
+    def generate_number
+      result = Invoice.connection.execute("SELECT nextval('number_no_seq')")
+      self.number = result[0]['nextval']
     end
 end
