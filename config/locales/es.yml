@@ -36,6 +36,8 @@ es:
       save_building: En Construcción
       cancel: Borrar
       invoice: Factura
+      confirm_msg_1: ¿Está seguro que desea confirmar la operación?
+      confirm_msg_2: Si la confirma ya no podrá modificarla y de haber stock vinculado se modificará.
     new:
       date: Fecha
       data: Datos
