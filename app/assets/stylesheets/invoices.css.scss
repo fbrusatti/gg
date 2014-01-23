@@ -75,6 +75,8 @@
   .show-customer .panel-search { @extend .row }
   .show-customer .panel-4 { @extend .col-md-4 }
   .show-customer .panel-6 { @extend .col-md-6 }
+  .show-customer .panel-2 { @extend .col-md-2 }
+  .highlight { @extend .label, .label-primary }
 
   // price
   .total-price {

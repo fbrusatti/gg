@@ -27,6 +27,7 @@
             .text= t('.total_price')
             .price 0
         #pay.tab-pane
+        = f.text_field :invoice_type, value: 'A', hidden: true
         = f.text_field :creation_state, hidden: true
         = f.text_field :amount, hidden: true
       = f.submit hidden: true

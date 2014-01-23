@@ -13,6 +13,11 @@
           = simple_format t('invoices.new.date')
         .information
           = simple_format @invoice.updated_at.strftime('%m/%d/%Y'), class: 'pretty-input'
+    .panel-2.highlight
+      .data
+        .label
+          = simple_format t('invoices.new.type')
+        .label A
   .panel-search
     .panel-4
       .data
