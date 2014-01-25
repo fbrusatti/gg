@@ -1,6 +1,18 @@
 class Invoice < Document
+
+  # creation_state  - The different status are:
+  #                   'init' by default
+  #                   'building'
+  #                   'finish'
+  #
+  # state  - The different status are:
+  #           'confirmed'
+  #           'paid'
+  #           'canceled'
+  #           'partially_paid'
+
   # == Callbakcs
-  before_save :generate_number, if: Proc.new { |i| i.creation_state == 'finish' }
+  before_save :generate_number, :change_state, if: Proc.new { |i| i.creation_state == 'finish' }
   after_save :descount_amount, if: Proc.new { |i| i.creation_state == 'finish' }
 
 
@@ -31,5 +43,9 @@ class Invoice < Document
     def generate_number
       result = Invoice.connection.execute("SELECT nextval('number_no_seq')")
       self.number = result[0]['nextval']
+    end
+
+    def change_state
+      self.state = 'confirmed'
     end
 end

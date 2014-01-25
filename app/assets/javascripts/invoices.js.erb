@@ -7,7 +7,16 @@ $(document).ready(function() {
     $("a.invoice-save-finish").attr("disabled", true);
     $("a.invoice-save-building").attr("disabled", true);
     $('#invoice_creation_state').val('finish');
-    $("[id^=edit_invoice_]").submit();
+    var msg = "<%= I18n.t('invoices.sub_header.confirm_msg_1') %>"
+    msg = msg + "<%= I18n.t('invoices.sub_header.confirm_msg_2') %>"
+    if(confirm(msg)) {
+      $("[id^=edit_invoice_]").submit();
+    }
+    else {
+      $("a.invoice-save-finish").attr("disabled", false);
+      $("a.invoice-save-building").attr("disabled", false);
+      $('#invoice_creation_state').val('init');
+    }
   });
   $("a.invoice-save-building").click(function() {
     $("a.invoice-save-building").attr("disabled", true);
@@ -161,7 +170,7 @@ $(document).ready(function() {
   });
 
   function fillCustomerData(customer){
-    var $scope = $("#customer .column");
+    var $scope = $(".show-customer");
     $("#sr", $scope).html( customer.name + " " + customer.surname );
     $("#address", $scope).html( customer.address );
     $("#iva", $scope).html( customer.type_iva );

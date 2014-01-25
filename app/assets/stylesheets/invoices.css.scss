@@ -1,6 +1,7 @@
 @import "twitter/bootstrap";
 
 #invoices {
+
   // sub header
   // ----------
   .sub-header {
@@ -16,15 +17,10 @@
   .sub-header > a{
     margin: 5px;
   }
-  .invoice-danger {
-     @extend .btn, .btn-danger;
-  }
-  .invoice-save-finish {
-     @extend .btn, .btn-success;
-  }
-  .invoice-save-building {
-     @extend .btn, .btn-primary;
-  }
+  .invoice-danger { @extend .btn, .btn-danger }
+  .invoice-save-finish { @extend .btn, .btn-success }
+  .invoice-save-building { @extend .btn, .btn-primary
+ }
 
   // Tabs
   // ----
@@ -40,51 +36,61 @@
   }
   .invoices-tabs-content { @extend .tab-content }
 
-  // items
-  // -----
-  #items{
-    margin-left: 5px;
-    margin-right: 5px;
-    .table { @extend .col-lg-10 }
-    .total-price { @extend .col-sm-1 }
-    .total-price .text {
-      display: inline;
-      font-size: 20px
-    }
-    .total-price .price  {
-      display: inline;
-      font-size: 20px;
-    }
-  }
-  #items .total-price {
-    margin-top: 10px;
-    border-radius: 10px ;
-    border: 1px solid gray;
-    a > i { padding: 5px }
-    text-align: center
-  }
-  #items div.dataTables_wrapper { padding-top: 10px }
-
-  .token_field{
-    margin: 10px;
-    .title { font-size: 20px }
-    .token-input-list-facebook, .title { display: inline-block; vertical-align: middle }
-  }
-
   .line-separator {
     height: 1px;
     background: #717171;
     border-bottom: 1px solid #313030;
+    margin-bottom: 10px;
   }
 
-  // partial _customer
-  // -----------------
-  #items #customer { @extend .container }
-  #items #customer { @extend .row }
-  #items #customer .column { @extend .col-md-4 }
-  #items #customer .data { @extend .row }
-  #items #customer .data > p:first-child { @extend .col-md-2; padding-left: 5px }
-  #items #customer .data p.pretty-input { @extend .col-md-9 }
+  // new invoice
+  // -----------
+  .form-container { @extend .container; width: 98% }
+  .pretty-input { @extend .form-control }
+
+  #items .data { @extend .row }
+  #items .data .label {
+    @extend .col-md-2;
+    vertical-align: middle;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+  }
+  #items .data .information { @extend .col-md-8 }
+
+  // table
+  .table { margin-top: 10px;}
+
+  // customer info
+  .show-customer { margin-top: 10px }
+  .show-customer .data { @extend .row }
+  .show-customer .data .label {
+    @extend .col-md-2, .col-md-offset-1;
+    vertical-align: middle;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+  }
+  .show-customer .data .information { @extend .col-md-8 }
+  .show-customer .panel-search { @extend .row }
+  .show-customer .panel-4 { @extend .col-md-4 }
+  .show-customer .panel-6 { @extend .col-md-6 }
+  .show-customer .panel-2 { @extend .col-md-2 }
+  .highlight { @extend .label, .label-primary }
+
+  // price
+  .total-price {
+    text-align: right;
+    background-color: gray;
+  }
+  .total-price .text, .price {
+    display: inline;
+    font-weight: bold;
+    color: black;
+    font-size: 25px;
+    padding: 5px;
+  }
+
 
   // Modals
   // ------
@@ -110,5 +116,6 @@
     }
   }
   .modal-submit { @extend .btn, .btn-primary }
-  .pretty-input { @extend .form-control }
+
 }
+
