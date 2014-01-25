@@ -179,6 +179,31 @@ $(document).ready(function() {
     $("#phone", $scope).html( customer.phone )
     $("#cellphone", $scope).html( customer.mobile_phone )
   }
+
+
+  // index invoice
+  //
+  var invoicesTable;
+  invoicesTable = $('#invoices #invoices_table').dataTable({
+    sPaginationType: "full_numbers",
+    // bAutoWidth: false,
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    sAjaxSource: $('#invoices #invoices_table').data('source'),
+    "aaSorting": [[ 5, "desc" ]],
+    fnInitComplete: function(oSettings, json){
+      $("thead th").each( function (i) {
+          $('select', this).change( function () {
+            invoicesTable.fnFilter($(this).val(),i);
+           });
+      });
+    },
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    }
+  });
+
 });// document
 
 var aColumnsOptions =

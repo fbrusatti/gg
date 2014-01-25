@@ -117,5 +117,14 @@
   }
   .modal-submit { @extend .btn, .btn-primary }
 
+  // index invoice
+  // -------------
+  .index-container { @extend .container; width: 98% }
+  .index-row { @extend .row }
+  .pretty-input-datatable { @extend .form-control }
+  .primary { @extend .label-primary }
+  .success { @extend .label-success }
+  .default { @extend .label-default }
+  .info { @extend .label-info }
 }
 
