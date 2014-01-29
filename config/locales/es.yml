@@ -29,6 +29,18 @@ es:
       this_month: Este Mes
       last_month: Ultimo Mes
   invoices:
+    states:
+      confirmed: Confirmada
+      paid: Pagada
+      canceled: Cancelada
+      partially_paid: Parcialmente Paga
+    index:
+      number: Numero
+      type: Tipo
+      customer: Cliente
+      state: Estado
+      total: Monto
+      date: Fecha
     unit_price: Precio Unitario
     remove: Acciones
     sub_header:
@@ -39,6 +51,7 @@ es:
       confirm_msg_1: ¿Está seguro que desea confirmar la operación?
       confirm_msg_2: Si la confirma ya no podrá modificarla y de haber stock vinculado se modificará.
     new:
+      type: Tipo
       date: Fecha
       data: Datos
       pay_mode: Forma de Pago

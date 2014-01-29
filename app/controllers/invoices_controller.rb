@@ -10,11 +10,10 @@ class InvoicesController < ApplicationController
     end
   end
 
-
   def index
     respond_to do |format|
       format.html
-      format.json { render json: InvoicesDatatable.new(view_context) }
+      format.json { render json: AllInvoicesDatatable.new(view_context) }
     end
   end
 
