@@ -17,19 +17,19 @@
 
   // sub-header customer
   .customer-new {
-    @extend .btn, .btn-primary;
+    @extend .btn, .btn-xs, .btn-primary;
   }
 
   .customer-print {
-    @extend .btn, .btn-primary, .pull-right;
+    @extend .btn, .btn-primary, .btn-xs, .pull-right;
   }
 
   .customer-danger {
-     @extend .btn, .btn-danger;
+     @extend .btn, .btn-xs, .btn-danger;
   }
 
   .customer-save {
-     @extend .btn, .btn-primary;
+     @extend .btn, .btn-xs, .btn-primary;
   }
 
 
