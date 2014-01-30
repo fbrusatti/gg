@@ -17,11 +17,11 @@
   // sub-header receipt
 
   .receipt-save {
-     @extend .btn, .btn-primary;
+     @extend .btn, .btn-xs, .btn-primary;
   }
 
   .receipt-cancel {
-     @extend .btn, .btn-danger;
+     @extend .btn, .btn-xs, .btn-danger;
   }
 
   .button-save {
@@ -45,7 +45,7 @@
   .receipts-tabs {
     @extend .nav, .nav-tabs;
     li > a {
-      @extend .btn, .btn-primary;
+      @extend .btn, .btn-xs, .btn-primary;
       &:hover {
         color: #418AE2;
         background-color: #6BC9F8;
@@ -62,32 +62,6 @@
   }
 
   form#new_receipt, #data-check { @extend .container }
-
-  #items{
-    margin-left: 5px;
-    margin-right: 5px;
-    .table { @extend .col-lg-10 }
-    .panel { @extend .col-sm-1 }
-    .total-price { @extend .col-lg-2, .col-lg-offset-8 }
-    .total-price .text {
-      display: inline;
-      font-size: 20px
-    }
-    .total-price .price  {
-      display: inline;
-      font-size: 20px;
-      border: 1px solid gray;
-      background-color: white
-    }
-  }
-
-  #items .panel {
-    margin-top: 10px;
-    border-radius: 10px ;
-    border: 1px solid gray;
-    a > i { padding: 5px }
-    text-align: center
-  }
 
   .pretty-input {
     @extend .form-control

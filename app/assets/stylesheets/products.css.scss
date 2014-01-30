@@ -1,29 +1,31 @@
 @import "twitter/bootstrap";
 
 #products {
+  
   // sub-header product
+  
   .product-new {
-    @extend .btn, .btn-primary;
+    @extend .btn, .btn-xs, .btn-primary;
   }
 
   .product-print {
-    @extend .btn, .btn-primary, .pull-right;
+    @extend .btn, .btn-primary, .btn-xs, .pull-right;
   }
 
   .product-danger {
-     @extend .btn, .btn-danger;
+     @extend .btn, .btn-xs, .btn-danger;
   }
 
   .product-save {
-     @extend .btn, .btn-primary;
+     @extend .btn, .btn-xs, .btn-primary;
   }
 
   .save-category {
-    @extend .btn, .btn-primary;
+    @extend .btn, .btn-xs, .btn-primary;
   }
 
   .save-vat {
-    @extend .btn, .btn-primary;
+    @extend .btn, .btn-xs, .btn-primary;
   }
 
   // active color of the tabs

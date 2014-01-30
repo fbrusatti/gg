@@ -8,26 +8,36 @@
     display: block;
     padding: 5px;
   }
+
   .title-sub-header {
     padding-left: 30px;
     font-size:30px;
     margin-top: 10px;
     display: inline
   }
+
   .sub-header > a{
     margin: 5px;
   }
-  .invoice-danger { @extend .btn, .btn-danger }
-  .invoice-save-finish { @extend .btn, .btn-success }
-  .invoice-save-building { @extend .btn, .btn-primary
- }
+
+  .invoice-danger { 
+    @extend .btn, .btn-xs, .btn-danger 
+  }
+
+  .invoice-save-finish { 
+    @extend .btn, .btn-xs, .btn-success 
+  }
+  
+  .invoice-save-building { 
+    @extend .btn, .btn-xs, .btn-primary
+  }
 
   // Tabs
   // ----
   .invoices-tabs {
     @extend .nav, .nav-tabs;
     li > a {
-      @extend .btn, .btn-primary;
+      @extend .btn, .btn-xs, .btn-primary;
       &:hover {
         color: #418AE2;
         background-color: #6BC9F8;
