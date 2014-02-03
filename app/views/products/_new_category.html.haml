@@ -9,10 +9,9 @@
           = c.label :name
           = c.text_field :name, class: "pretty-input"
         .input
-          = c.label t('.referrer_id')
-          = c.collection_select :referrer_id,
-                            Category.all,
-                            :id, :name,
-                            { :include_blank => true }, class: "pretty-input"
+          = c.label t('.referrer_id')  
+          .token_field 
+            = c.text_field :referrer_id
       .modal-footer
         = c.submit t('.save'), class: "btn-modal-submit"
+
