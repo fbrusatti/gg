@@ -33,11 +33,11 @@ $(document).ready(function() {
     hintText: "<%= I18n.t('.token_input.hintText')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
-      return "<li><p style='color: black' >" + item.name
-      + " " + item.surname +  ". DNI: " + item.dni + " </p> </li>" },
+      return "<li><p style='color: black' >" + item.surname
+      + " " + item.name +  " (" + item.registered_name + ") </p> </li>" },
     tokenFormatter: function(item) {
-      return "<li><p>" + (item.name + " " +
-      item.surname ).substring(0,22)+ ". DNI: " + item.dni + " </p> </li>" },
+      return "<li><p>" + (item.surname + " " +
+      item.name ).substring(0,22)+ " (" + item.registered_name + ") </p> </li>" },
     onAdd: function(data){ fillCustomerData(data) }
   });
 
