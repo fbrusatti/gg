@@ -501,6 +501,7 @@ es:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
     hintText_surname: "Ingrese el código del producto"
+    hintText_category: "Ingrese el nombre de la categoria"
     searchingText: "Buscando"
   active_admin:
     category: Categoría
