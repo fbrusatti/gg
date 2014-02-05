@@ -17,6 +17,6 @@
 //= require dataTables/jquery.dataTables
 //= require jquery.tokeninput
 //= require_tree .
-//= require twitter/bootstrap
+//= require bootstrap
 //= require moment
-//= require daterangepicker.js
+
