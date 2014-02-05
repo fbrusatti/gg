@@ -20,12 +20,12 @@ private
   def data
     customers.map do |customer|
       [
-        link_to(customer.name, customer),
-        h(customer.surname),
+        link_to(customer.surname, customer),
+        h(customer.name),
+        h(customer.registered_name),
         h(customer.dni),
         h(customer.address),
         h(customer.phone),
-        h(customer.mobile_phone),
         h(customer.email),
       ]
     end
@@ -39,7 +39,9 @@ private
     customers = Customer.order("#{sort_column} #{sort_direction}")
     customers = customers.page(page).per_page(per_page)
     if params[:sSearch].present?
-      customers = customers.where("name ilike :search or surname ilike :search", 
+      customers = customers.where("name ilike :search or surname ilike :search
+                                  or registered_name ilike :search or dni ilike 
+                                  :search", 
                                   search: "%#{params[:sSearch]}%")
     end
     customers
@@ -54,7 +56,7 @@ private
   end
 
   def sort_column
-    columns = %w[name surname dni address phone mobile_phone email]
+    columns = %w[name surname registered_name dni address phone email]
     columns[params[:iSortCol_0].to_i]
   end
 

@@ -437,6 +437,7 @@ es:
       registered_taxpayer: Responsable Inscripto
     index_customer_data:
       today: Hoy
+      registered_name: Razón Social
       yesterday: Ayer
       last_7_days: Ultimos 7 Dias
       last_30_days: Ultimos 30 Dias
@@ -500,6 +501,7 @@ es:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
     hintText_surname: "Ingrese el código del producto"
+    hintText_category: "Ingrese el nombre de la categoria"
     searchingText: "Buscando"
   active_admin:
     category: Categoría

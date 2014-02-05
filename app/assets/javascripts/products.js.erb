@@ -23,8 +23,9 @@ $(document).ready(function() {
     prePopulate: $('#category_referrer_id').data('pre'),
     theme: "facebook",
     tokenLimit: "1",
+    minChars: "3",
     noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
-    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    hintText: "<%= I18n.t('.token_input.hintText_category')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
       var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");

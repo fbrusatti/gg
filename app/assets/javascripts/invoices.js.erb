@@ -49,10 +49,13 @@ $(document).ready(function() {
   searchCustomer.tokenInput('/customers.json', {
     theme: 'facebook',
     tokenLimit: "1",
+    minChars: "3",
     resultsFormatter: function(customer){
-      var compleName = customer.name + " " + customer.surname + "(" + customer.dni + ")";
-      return "<li> <p style='color: black; font-size:20px' >" + compleName + " </p> </li>";
-    },
+      var compleName = customer.name + " " + customer.surname + "(" + customer.registered_name + ")";
+      return "<li> <p style='color: black; font-size:20px' >" + compleName + " </p> </li>"; },
+    tokenFormatter: function(item) {
+      return "<li><p>" + (item.surname + " " +
+      item.name ).substring(0,22)+ " (" + item.registered_name + ") </p> </li>" },
     noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchicodengText: "<%= I18n.t('.token_input.searchingText')%>",

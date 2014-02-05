@@ -14,7 +14,8 @@ class CustomersController < ApplicationController
         if params[:q].present?
           data = Customer.where("name ILIKE :search or
                                  surname ILIKE :search or
-                                 dni ILIKE :search",
+                                 dni ILIKE :search or
+                                 registered_name ILIKE :search",
                                 search: "%#{params[:q]}%")
         else
           data = CustomersDatatable.new(view_context)
