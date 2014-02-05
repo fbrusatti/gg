@@ -1,10 +1,10 @@
-@import "twitter/bootstrap";
+@import "bootstrap";
 
 div.token-input-dropdown-facebook { z-index: 1900 !important; }
 #products {
 
   // sub-header product
-  
+
   .product-new {
     @extend .btn, .btn-xs, .btn-primary;
   }

@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
                   :category_ids, :categories, :category_tokens
 
   # == Validations
-  validates_presence_of :code, :minimun_stock, :category_ids
+  validates_presence_of :code, :minimun_stock, :category_ids, :description
 
   # == Associations
   has_and_belongs_to_many :categories

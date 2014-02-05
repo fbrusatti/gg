@@ -1,3 +1,4 @@
+@import "bootstrap";
 #header {
   .menu-head {
     @extend .nav, .nav-justified;
@@ -25,4 +26,4 @@
       }
     }
   }
-}  
+}

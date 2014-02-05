@@ -51,7 +51,7 @@ $(document).ready(function() {
     tokenLimit: "1",
     minChars: "3",
     resultsFormatter: function(customer){
-      var compleName = customer.name + " " + customer.surname + "(" + customer.registered_name + ")";
+      var compleName = customer.surname + " " + customer.name + "(" + customer.registered_name + ")";
       return "<li> <p style='color: black; font-size:20px' >" + compleName + " </p> </li>"; },
     tokenFormatter: function(item) {
       return "<li><p>" + (item.surname + " " +

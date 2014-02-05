@@ -1,4 +1,4 @@
-@import "twitter/bootstrap";
+@import "bootstrap";
 
 #invoices {
 
@@ -20,15 +20,15 @@
     margin: 5px;
   }
 
-  .invoice-danger { 
-    @extend .btn, .btn-xs, .btn-danger 
+  .invoice-danger {
+    @extend .btn, .btn-xs, .btn-danger
   }
 
-  .invoice-save-finish { 
-    @extend .btn, .btn-xs, .btn-success 
+  .invoice-save-finish {
+    @extend .btn, .btn-xs, .btn-success
   }
-  
-  .invoice-save-building { 
+
+  .invoice-save-building {
     @extend .btn, .btn-xs, .btn-primary
   }
 

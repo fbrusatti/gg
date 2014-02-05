@@ -461,7 +461,7 @@ es:
       customer_data: Datos Personales
     new:
       customer_data: Datos Personales
-    new_customer_data:
+    customer_data:
       comercial_data: Datos Comerciales
       customer_data: Datos Personales
     show:
