@@ -7,14 +7,17 @@
 /*
  *= require token-input-facebook
  *= require bootstrap-datetimepicker.min
-  *= require token-input-bootstrappy
+ *= require token-input-bootstrappy
  *= require _font-awesome
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require dataTables/src/demo_table_jui
  */
 @import "bootstrap";
-
+/*
+ *= require daterangepicker
+ */
+ 
 // Start Form Sign
 .form-signin {
   max-width: 330px;
