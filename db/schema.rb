@@ -109,11 +109,6 @@ ActiveRecord::Schema.define(:version => 20140129135842) do
     t.integer  "user_id"
   end
 
-  add_index "customers", ["dni"], :name => "index_customers_on_dni"
-  add_index "customers", ["name"], :name => "index_customers_on_name"
-  add_index "customers", ["surname"], :name => "index_customers_on_surname"
-  add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
-
   create_table "documents", :force => true do |t|
     t.string   "type"
     t.integer  "number"
@@ -130,10 +125,10 @@ ActiveRecord::Schema.define(:version => 20140129135842) do
     t.integer  "supplier_id"
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
-    t.string   "invoice_type"
     t.decimal  "amount_cash",                                     :default => 0.0
     t.decimal  "amount_check",                                    :default => 0.0
     t.string   "creation_state",                                  :default => "init"
+    t.string   "invoice_type"
   end
 
   add_index "documents", ["creation_state"], :name => "index_documents_on_creation_state"
@@ -175,9 +170,9 @@ ActiveRecord::Schema.define(:version => 20140129135842) do
   end
 
   create_table "payments", :force => true do |t|
-    t.decimal  "amount",     :precision => 8, :scale => 2
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.integer  "amount"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "invoice_id"
     t.integer  "receipt_id"
   end
@@ -186,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20140129135842) do
     t.string   "description"
     t.integer  "stock"
     t.integer  "minimun_stock"
+    t.float    "net_cost"
     t.float    "cost_price"
     t.string   "code"
     t.boolean  "active"

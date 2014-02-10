@@ -9,3 +9,5 @@
       %th= t('.list_price_one')
       %th= t('.list_price_two')
   %tbody
+:javascript
+  datatableKeyboard("#product-table", "#category-modal, #vat-modal");
