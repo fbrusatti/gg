@@ -1,18 +1,22 @@
 <%# @encoding: UTF-8 %>
 $(document).ready(function() {
 
-  // variables
-  // ---------
-  var tItems; // table invoice-items
-  var searchProduct; //token input
-
   // handle buttons sub header
   // -------------------------
   $("a.invoice-save-finish").click(function() {
     $("a.invoice-save-finish").attr("disabled", true);
     $("a.invoice-save-building").attr("disabled", true);
     $('#invoice_creation_state').val('finish');
-    $("[id^=edit_invoice_]").submit();
+    var msg = "<%= I18n.t('invoices.sub_header.confirm_msg_1') %>"
+    msg = msg + "<%= I18n.t('invoices.sub_header.confirm_msg_2') %>"
+    if(confirm(msg)) {
+      $("[id^=edit_invoice_]").submit();
+    }
+    else {
+      $("a.invoice-save-finish").attr("disabled", false);
+      $("a.invoice-save-building").attr("disabled", false);
+      $('#invoice_creation_state').val('init');
+    }
   });
   $("a.invoice-save-building").click(function() {
     $("a.invoice-save-building").attr("disabled", true);
@@ -20,6 +24,44 @@ $(document).ready(function() {
     $('#invoice_creation_state').val('building');
     $("[id^=edit_invoice_]").submit();
   });
+  // delete the inovice and its items
+  $(document).on('click', 'a#cancel-invoice', function(event){
+    event.preventDefault();
+    var path = this.href;
+    var invoiceId = $('#invoices #product_tokens').data('invoice');
+    $.ajax({
+      type: "DELETE",
+      url: "/invoices/" + invoiceId,
+      dataType: "json"
+    }).done(function(data, textStatus, xhr){
+      window.location.href= path
+    })
+  });
+
+  // variables
+  // ---------
+  var tItems; // table invoice-items
+  var searchProduct, searchCustomer; //token input
+
+  // token input to customer
+  // -----------------------
+  searchCustomer = $('#invoices #invoice_customer_tokens');
+  searchCustomer.tokenInput('/customers.json', {
+    theme: 'facebook',
+    tokenLimit: "1",
+    minChars: "3",
+    resultsFormatter: function(customer){
+      var compleName = customer.surname + " " + customer.name + "(" + customer.registered_name + ")";
+      return "<li> <p style='color: black; font-size:20px' >" + compleName + " </p> </li>"; },
+    tokenFormatter: function(item) {
+      return "<li><p>" + (item.surname + " " +
+      item.name ).substring(0,22)+ " (" + item.registered_name + ") </p> </li>" },
+    noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    searchicodengText: "<%= I18n.t('.token_input.searchingText')%>",
+    onAdd: function(customer){ fillCustomerData(customer) }
+  });
+
   // table of items
   // --------------
   var partialSum;
@@ -39,16 +81,19 @@ $(document).ready(function() {
       if (iDataIndex < tItems.fnSettings().fnRecordsTotal())
         partialSum += parseFloat(aData[6]);
       // set the price in view
-      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 )
+      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 ) {
         $('.total-price .price').html(partialSum.toFixed(2));
+        // form input to amount
+        $('#invoice_amount').val(partialSum.toFixed(2));
+      }
     },
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
     }
   });
 
-  // token input
-  // -----------
+  // token input to products
+  // -----------------------
   searchProduct = $('#invoices #product_tokens').tokenInput('/products.json', {
     theme: 'facebook',
     tokenLimit: "1",
@@ -124,6 +169,41 @@ $(document).ready(function() {
     if (parseInt(amount)  > parseInt(stock) || parseInt(amount) == 0) {
       alert("<%= I18n.t('items.errors.stock') %>");
       evt.preventDefault();
+    }
+  });
+
+  function fillCustomerData(customer){
+    var $scope = $(".show-customer");
+    $("#sr", $scope).html( customer.name + " " + customer.surname );
+    $("#address", $scope).html( customer.address );
+    $("#iva", $scope).html( customer.type_iva );
+    $("#cuit_cuil", $scope).html( customer.cuit_cuil );
+    $("#gross_income", $scope).html( customer.gross_income);
+    $("#phone", $scope).html( customer.phone )
+    $("#cellphone", $scope).html( customer.mobile_phone )
+  }
+
+
+  // index invoice
+  //
+  var invoicesTable;
+  invoicesTable = $('#invoices #invoices_table').dataTable({
+    sPaginationType: "full_numbers",
+    // bAutoWidth: false,
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    sAjaxSource: $('#invoices #invoices_table').data('source'),
+    "aaSorting": [[ 5, "desc" ]],
+    fnInitComplete: function(oSettings, json){
+      $("thead th").each( function (i) {
+          $('select', this).change( function () {
+            invoicesTable.fnFilter($(this).val(),i);
+           });
+      });
+    },
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
     }
   });
 

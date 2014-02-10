@@ -1,40 +1,32 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.13'
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', '3.2.15'
 gem 'pg'
 gem 'devise'
 gem 'carrierwave'
 gem 'haml'
-gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
-                              :github => 'anjlab/bootstrap-rails'
 gem 'kaminari'
 gem 'rmagick'
-# Gemfile in Rails >= 3.1
 gem 'activeadmin'
 gem "meta_search", '>= 1.1.0.pre'
 gem 'font-awesome-sass-rails'
 gem 'thin'
 gem 'bootstrap-daterangepicker-rails'
-
+gem "js-routes"
+gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'jquery-rails', '~> 2.3.0'
+gem "yui-compressor", "~> 0.12.0"
+gem 'will_paginate', '>=3.0.pre3'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
+  gem 'uglifier'
   gem 'jquery-datatables-rails', :github => 'rweng/jquery-datatables-rails'
   gem 'jquery-ui-rails'
 end
-
-gem 'jquery-rails','~> 2.3.0'
-gem 'will_paginate', '>=3.0.pre3'
 
 
 group :development do

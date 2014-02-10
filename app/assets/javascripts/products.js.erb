@@ -1,3 +1,4 @@
+<%# @encoding: UTF-8 %>
 $(document).ready(function() {
 
     // token to category
@@ -10,10 +11,30 @@ $(document).ready(function() {
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
-      return "<li><p style='color: black' >" + item.name+ item.referrer+ " </p> </li>" },
+      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+      return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
     tokenFormatter: function(item) {
-      return "<li><p>" + item.name+ item.referrer+ " </p> </li>" }
+      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+      return "<li><p>" + item.name+ referrer+ " </p> </li>" }
   });
+
+  $('#category_referrer_id').tokenInput('/categories.json', {
+    crossDomain: false,
+    prePopulate: $('#category_referrer_id').data('pre'),
+    theme: "facebook",
+    tokenLimit: "1",
+    minChars: "3",
+    noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+    hintText: "<%= I18n.t('.token_input.hintText_category')%>",
+    searchingText: "<%= I18n.t('.token_input.searchingText')%>",
+    resultsFormatter: function(item){
+      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+      return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
+    tokenFormatter: function(item) {
+      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+      return "<li><p>" + item.name+ referrer+ " </p> </li>" }
+  });
+
 
   $('#product-table').dataTable({
     oLanguage: {
@@ -53,6 +74,7 @@ $(document).ready(function() {
   });
 
   $(document).on('ajax:success','#new_category', function(evt, data, status, xhr){
+    $('#category_referrer_id').tokenInput("clear");
     $('#category-modal').modal('hide');
   });
 

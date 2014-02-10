@@ -1,3 +1,4 @@
+@import "bootstrap";
 #header {
   .menu-head {
     @extend .nav, .nav-justified;
@@ -5,6 +6,8 @@
 
   .menu-head li > a {
     @extend .btn, .btn-primary;
+    padding: 0px;
+    border-radius: 0px;
   }
 
   .menu-head li:last-child a  {
@@ -23,4 +26,4 @@
       }
     }
   }
-}  
+}

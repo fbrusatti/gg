@@ -1,0 +1,24 @@
+#invoices
+  .index-container
+    .index-row
+      %table#invoices_table.display{ "data-source" => invoices_url(format: "json") }
+        %thead
+          %tr
+            %th
+            %th= select_tag :invoice_type,
+                            options_for_select(invoice_type),
+                            { include_blank: true, class: 'pretty-input-datatable' }
+            %th
+            %th= select_tag :state,
+                            options_for_select(states),
+                            { include_blank: true, class: 'pretty-input-datatable' }
+            %th
+            %th
+          %tr
+            %th= t('.number')
+            %th= t('.type')
+            %th= t('.customer')
+            %th= t('.state')
+            %th= t('.total')
+            %th= t('.date')
+        %tbody
