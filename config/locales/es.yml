@@ -59,6 +59,9 @@ es:
       search_products: Buscar Productos
       search_customer: Buscar Cliente
       total_price: Total $
+    new_customer:
+      new_customer: Agregar Cliente
+      save: Guardar  
     customer:
       search_customer: Buscar Cliente
       sr: Señores

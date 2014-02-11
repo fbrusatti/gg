@@ -129,6 +129,14 @@ $(document).ready(function() {
     });
   });
 
+  $('#openBtn-customer').click(function(){
+    $('#customer-modal').modal('show')
+  });
+
+  $(document).on('ajax:success','#new_customer', function(evt, data, status, xhr){
+    $('#customer-modal').modal('hide');
+  });
+
   // Modal add Item
   $(document).on('ajax:success', '#invoices #new_item',
   function(evt, data, status, xhr){

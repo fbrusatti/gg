@@ -4,9 +4,10 @@
       .data
         .label
           .title= t('.search_customer')
-        .information
-          = f.text_field :customer_tokens,
-                         class: "pretty-input"
+        .token_field
+          = f.text_field :customer_tokens, class: "pretty-input"
+        %a#openBtn-customer
+          %i.icon-plus-sign.icon-1x
     .panel-4
       .data
         .label
