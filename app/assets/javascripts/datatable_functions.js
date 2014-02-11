@@ -40,33 +40,37 @@ function fnGetSelected( oTableLocal ){
 }
 
 // handle the datatable with keyboard
-function datatableKeyboard(idTable){
+// example idModals: "#calculator-modal, #contract-modal"
+function datatableKeyboard(idTable, idModals){
   $(document).keydown(function (event) {
-    var currentRow = $( idTable + ' .row_selected').get(0);
-    switch(event.keyCode){
-      case 9: // tab
-        event.preventDefault();
-        $( idTable + '_filter input').focus();
-        break;
-      case 40: //arrow down
-        if ($(currentRow).next().length != 0) {
-          $(currentRow).next().addClass("row_selected");
-          $(currentRow).removeClass("row_selected");
-        }
-        break;
-      case 38: //arrow up
-        if ($(currentRow).prev().length != 0) {
-          $(currentRow).prev().addClass("row_selected");
-          $(currentRow).removeClass("row_selected");
-        }
-        break;
-      case 13: //enter
-        var row = $(".row_selected td:first a");
-        if (row.length) {
-          row[0].click()
-        }
-        break;
-     }
+    // prevent row enter when some modal was open
+    if (!($(idModals).hasClass('in'))){
+      var currentRow = $( idTable + ' .row_selected').get(0);
+      switch(event.keyCode){
+        case 9: // tab
+          event.preventDefault();
+          $( idTable + '_filter input').focus();
+          break;
+        case 40: //arrow down
+          if ($(currentRow).next().length != 0) {
+            $(currentRow).next().addClass("row_selected");
+            $(currentRow).removeClass("row_selected");
+          }
+          break;
+        case 38: //arrow up
+          if ($(currentRow).prev().length != 0) {
+            $(currentRow).prev().addClass("row_selected");
+            $(currentRow).removeClass("row_selected");
+          }
+          break;
+        case 13: //enter
+          var row = $(".row_selected td:first a");
+          if (row.length) {
+            row[0].click()
+          }
+          break;
+      }
+    }
   });
   // select the first datatable's row when enter is pressed
   $(document).on('keyup', idTable + '_filter input', function(event){
@@ -76,3 +80,5 @@ function datatableKeyboard(idTable){
     }
   });
 }
+
+
