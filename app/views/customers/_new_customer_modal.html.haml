@@ -1,0 +1,11 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", type: "button"} ×
+      %h3= t('.new_customer')
+    = form_for(Customer.new, remote: true, format: :json ) do |f|
+      .modal-body
+        = render "customer_data", f: f
+      .modal-footer
+        = f.submit t('.save'), class: 'modal-submit'
+

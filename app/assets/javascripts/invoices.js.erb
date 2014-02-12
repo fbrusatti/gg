@@ -130,7 +130,15 @@ $(document).ready(function() {
   });
 
   $('#openBtn-customer').click(function(){
-    $('#customer-modal').modal('show')
+    $.ajax({
+      type: "GET",
+      url: "/customers/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#customer-modal').html(data);
+      $('#customer-modal').modal('show');
+    })
   });
 
   $(document).on('ajax:success','#new_customer', function(evt, data, status, xhr){

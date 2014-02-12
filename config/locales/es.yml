@@ -59,9 +59,6 @@ es:
       search_products: Buscar Productos
       search_customer: Buscar Cliente
       total_price: Total $
-    new_customer:
-      new_customer: Agregar Cliente
-      save: Guardar  
     customer:
       search_customer: Buscar Cliente
       sr: Señores
@@ -430,6 +427,9 @@ es:
       save: Guardar
       edit: Editar
   customers:
+    new_customer_modal:
+      new_customer: Agregar Cliente
+      save: Guardar  
     type_person:
       customer: Cliente
       supplier: Proveedor
