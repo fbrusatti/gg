@@ -5,6 +5,9 @@ class CustomersController < ApplicationController
 
   def new
     @customer = Customer.new
+    if request.xhr?
+      render partial: 'new_customer_modal'
+    end  
   end
 
   def index

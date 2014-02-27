@@ -104,6 +104,9 @@
 
   // Modals
   // ------
+  .new-customer {
+    .title { font-size: 15pt }
+  }  
   .modal-body { @extend .form-horizontal }
   .modal-body > .input {
     @extend .form-group;

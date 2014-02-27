@@ -427,6 +427,9 @@ es:
       save: Guardar
       edit: Editar
   customers:
+    new_customer_modal:
+      new_customer: Agregar Cliente
+      save: Guardar  
     type_person:
       customer: Cliente
       supplier: Proveedor
