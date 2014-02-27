@@ -5,7 +5,16 @@ es:
       print: Imprimir
       save: Guardar
       edit: Editar
+  vats:
+    new_vat_modal:
+      new_vat: Nuevo IVA
+      percentaje: Porcentaje
+      save: Agregar    
   categories:
+    new_category_modal:
+      new_category: Nueva Categoría
+      save: Agregar
+      referrer_id: Categoria Padre    
     new_category: Nueva Categoría
     add: Agregar
     index:
