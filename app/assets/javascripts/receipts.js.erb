@@ -51,8 +51,20 @@ $(document).ready(function() {
     }
   });
 
-  $('#openBtn-bank').click(function(){
-    $('#bank-modal').modal('show');
+  $('#receipts #openBtn-bank').click(function(){
+    $.ajax({
+      type: "GET",
+      url: "/banks/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#bank-modal').html(data);
+      $('#bank-modal').modal('show');
+    })
+  });
+
+  $(document).on('ajax:success', '#new_bank', function(evt, data, status, xhr){
+    $('#bank-modal').modal('hide');
   });
 
   var amountAux, showCheckTable = false
