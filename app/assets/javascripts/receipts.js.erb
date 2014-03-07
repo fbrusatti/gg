@@ -57,17 +57,17 @@ $(document).ready(function() {
 
   var amountAux, showCheckTable = false
   $("a.button-save").click(function(){
-    $("#new_check").submit();
+    $("#receipts #new_check").submit();
     amountAux = parseFloat($('#check_amount').val());
   });
 
   var amountCheck = 0;
 
-  $(document).on('ajax:success','#new_check', function(evt, data, status, xhr){
-    $('#table-of-check').append(data);
-    $('#table-of-check tr:last').effect("highlight", {}, 3000);
-    $('#table-of-check').show("slow");
-    $('#new_check')[0].reset();
+  $(document).on('ajax:success','#receipts #new_check', function(evt, data, status, xhr){
+    $('#receipts #table-of-check').append(data);
+    $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
+    $('#receipts #table-of-check').show("slow");
+    $('#receipts #new_check')[0].reset();
     var ids = $('#receipt_check_ids').val();
     if (ids == "") {
       ids = $(data).data("check-id");
@@ -77,39 +77,39 @@ $(document).ready(function() {
     $('#receipt_check_ids').val(ids);
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
-    $("#receipt_amount_check").text(amountCheck)
+    $("#receipts #amount_check").text(amountCheck)
     amount = amountCash + amountCheck;
-    $("#amount").text(amount);
+    $("#receipts #amount").text(amount);
   });
 
   hiddenInputs();
 
   // changes the visibility of transactions inputs
-  $("#cash").on('click', function(e){
+  $("#receipts #cash").on('click', function(e){
     $(this).parents(".thorizontal").siblings().toggle("show");
   });
 
-  $("#pay-tab").on('click', function(){
-    if ($("#check").prop('checked')) {
-      $('#data-check').show("slow");
+  $("#receipts #pay-tab").on('click', function(){
+    if ($("#receipts #check").prop('checked')) {
+      $('#receipts #data-check').show("slow");
     }
     if (showCheckTable) {
-      $('#table-of-check').show("slow");
+      $('#receipts #table-of-check').show("slow");
     }
   });
 
   $("#data-tab").on('click', function(){
-    $('#data-check').hide();
-    $('#table-of-check').hide();
+    $('#receipts #data-check').hide();
+    $('#receipts #table-of-check').hide();
   });
 
-  $("#check").on('click', function(e){
-    var check = $("#check");
+  $("#receipts #check").on('click', function(e){
+    var check = $("#receipts #check");
     if (check.prop('checked')) {
       $(this).parents(".thorizontal").siblings().toggle("show");
-      $('#data-check').show("slow");
+      $('#receipts #data-check').show("slow");
     } else {
-      $('#data-check').hide("slow");
+      $('#receipts #data-check').hide("slow");
       check.parents(".thorizontal").siblings().hide();
     }
   });
@@ -118,7 +118,7 @@ $(document).ready(function() {
   $("#receipt_amount_cash").on('change', function(){
     amountCash = parseFloat(this.value);
     amount = amountCash + amountCheck;
-    $("#amount").text(amount);
+    $("#receipts #amount").text(amount);
   })
 
   function fillCustomerData(customer){
@@ -162,9 +162,9 @@ function deleteRow(btn) {
   })
   .done(function(data, textStatus, xhr){
     row.parentNode.removeChild(row);
-    amountCheck = parseFloat($("#receipt_amount_check").text()) ;
+    amountCheck = parseFloat($("#amount_check").text()) ;
     amountCheck = amountCheck - amountDeleted;
-    $("#receipt_amount_check").text(amountCheck);
+    $("#amount_check").text(amountCheck);
     amount = parseFloat($("#amount").text()) - amountDeleted;
     $("#amount").text(amount);
   });
@@ -186,11 +186,11 @@ function invoicesSelected(oTable) {
 
 function hiddenInputs () {
   var check, cash;
-  check = $('#check');
-  cash = $('#cash');
+  check = $('#receipts #check');
+  cash = $('#receipts #cash');
   if (!check.prop('checked')){
-    $('#table-of-check').hide();
-    $('#data-check').hide();
+    $('#receipts #table-of-check').hide();
+    $('#receipts #data-check').hide();
     $('#invoices-table').hide();
     check.parents(".thorizontal").siblings().hide();
   }

@@ -3,13 +3,15 @@
 
     %ul.invoices-tabs
       %li.active
-        %a{'data-toggle' => 'tab', href: '#items'}= t('.data')
+        %a{'data-toggle' => 'tab', href: '#items', id: 'items-tab'}
+          = t('.data')
       %li
-        %a{'data-toggle' => 'tab', href: '#pay'}= t('.pay_mode')
+        %a{'data-toggle' => 'tab', href: '#pay', id: 'pay-tab'}
+          = t('.pay_mode')
 
     = form_for @invoice do |f|
       = errors_for(@invoice).html_safe
-
+      = f.hidden_field :check_ids, value: ""  
       .invoices-tabs-content
         #items.tab-pane.active
           = render 'customer', f: f
@@ -27,10 +29,17 @@
             .text= t('.total_price')
             .price 0
         #pay.tab-pane
+          = render 'pay_invoice', f: f
         = f.text_field :invoice_type, value: 'A', hidden: true
         = f.text_field :creation_state, hidden: true
         = f.text_field :amount, hidden: true
       = f.submit hidden: true
+    #data-check
+      = form_for(Check.new, remote: true, format: :html) do |f|
+        #new-check
+          = render 'data_check', f: f
+        = f.submit hidden: true
+    = render 'table_check'  
     #new-item-modal.modal.fade
     #edit-item-modal.modal.fade
     #customer-modal.modal.fade
