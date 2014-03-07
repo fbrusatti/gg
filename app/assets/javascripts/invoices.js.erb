@@ -157,6 +157,22 @@ $(document).ready(function() {
     $('#customer-modal').modal('hide');
   });
 
+  $('#invoices #openBtn-bank').click(function(){
+    $.ajax({
+      type: "GET",
+      url: "/banks/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#bank-modal').html(data);
+      $('#bank-modal').modal('show');
+    })
+  });
+
+  $(document).on('ajax:success', '#invoices #new_bank', function(evt, data, status, xhr){
+    $('#bank-modal').modal('hide');
+  });
+
   // Modal add Item
   $(document).on('ajax:success', '#invoices #new_item',
   function(evt, data, status, xhr){

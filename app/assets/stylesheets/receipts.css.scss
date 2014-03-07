@@ -2,7 +2,7 @@
 
 #receipts {
 
-  #openBtn-bank {
+  #openBtn-bank, #open-new-name, #openBtn-location {
     @extend .btn, .btn-primary
   }
 
@@ -164,4 +164,32 @@
   #table-of-check { @extend .table, .table-bordered, .table-striped }
 
   #items div.dataTables_wrapper { padding-top: 10px }
+
+
+  /* Modals */
+  .new-bank {
+    .title { font-size: 15pt }
+  }  
+  .modal-body { @extend .form-horizontal }
+  .modal-body > .input {
+    @extend .form-group;
+    label:first-child { @extend .col-lg-3, .control-label }
+    label:nth-of-type(2) { @extend .col-lg-4, .control-label }
+    input, select { @extend .col-lg-4 }
+  }
+  .modal-body .stock .input {
+    display: inline-block;
+    padding: 4px;
+    margin-bottom: 15px;
+    label:first-child { display: inline; font-weight:bold }
+    label:nth-of-type(2), input {
+      display: inline;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      height: 34px;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+  }
+  .modal-submit { @extend .btn, .btn-primary }
 }

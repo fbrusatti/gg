@@ -5,6 +5,9 @@ class BanksController < ApplicationController
 
   def new
     @bank = Bank.new
+    if request.xhr?
+      render partial: 'new_bank_modal'
+    end  
   end
 
   def create
