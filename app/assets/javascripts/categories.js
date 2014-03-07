@@ -15,20 +15,4 @@ $(document).ready(function() {
     });
   });
 
-
-  $(document).on('ajax:before', '#new_category', function(){
-    if ($("#category_name").val() == '') {
-      return false;
-    }
-  });
-
-  $(document).on('ajax:success','#new_category', function(evt, data, status, xhr){
-    $('#category-modal').modal('hide');
-  });
-
-  $('#category-new').click(function(){
-    $('#category_name').val('');
-    $('#category-modal').modal('show')
-  });
-
 })// End Document

@@ -18,24 +18,6 @@ $(document).ready(function() {
       return "<li><p>" + item.name+ referrer+ " </p> </li>" }
   });
 
-  $('#category_referrer_id').tokenInput('/categories.json', {
-    crossDomain: false,
-    prePopulate: $('#category_referrer_id').data('pre'),
-    theme: "facebook",
-    tokenLimit: "1",
-    minChars: "3",
-    noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
-    hintText: "<%= I18n.t('.token_input.hintText_category')%>",
-    searchingText: "<%= I18n.t('.token_input.searchingText')%>",
-    resultsFormatter: function(item){
-      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
-      return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
-    tokenFormatter: function(item) {
-      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
-      return "<li><p>" + item.name+ referrer+ " </p> </li>" }
-  });
-
-
   $('#product-table').dataTable({
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
@@ -79,11 +61,44 @@ $(document).ready(function() {
   });
 
   $('#openBtn-category').click(function(){
-    $('#category_name').val('');
-    $('#category-modal').modal('show')
+    $.ajax({
+      type: "GET",
+      url: "/categories/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#category_name').val('');
+      $('#category-modal').html(data);
+      $('#category_referrer_id').tokenInput('/categories.json', {
+        crossDomain: false,
+        prePopulate: $('#category_referrer_id').data('pre'),
+        theme: "facebook",
+        tokenLimit: "1",
+        minChars: "3",
+        noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+        hintText: "<%= I18n.t('.token_input.hintText_category')%>",
+        searchingText: "<%= I18n.t('.token_input.searchingText')%>",
+        resultsFormatter: function(item){
+          var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+          return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
+        tokenFormatter: function(item) {
+          var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+          return "<li><p>" + item.name+ referrer+ " </p> </li>" }
+      });
+      $('#category-modal').modal('show');
+    })  
   });
+
   $('#openBtn-vat').click(function(){
-    $('#vat-modal').modal('show')
+    $.ajax({
+      type: "GET",
+      url: "/vats/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#vat-modal').html(data);
+      $('#vat-modal').modal('show');
+    })
   });
 
 })// End Document
