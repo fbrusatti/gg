@@ -51,7 +51,7 @@ $(document).ready(function() {
     }
   });
 
-  $('#receipts #openBtn-bank').click(function(){
+  $(document).on("click", "a#openBtn-bank", function(){
     $.ajax({
       type: "GET",
       url: "/banks/new",
@@ -65,15 +65,15 @@ $(document).ready(function() {
 
   $(document).on('ajax:success', '#new_bank', function(evt, data, status, xhr){
     $('#bank-modal').modal('hide');
+    console.log(data);
+    $('#check_bank_id')
+      .append($("<option></option>")
+      .attr("value",data.id)
+      .text(data.name + " (" + data.branch_office_number + ")")
+    );  
   });
 
-  var amountAux, showCheckTable = false
-  $("a.button-save").click(function(){
-    $("#receipts #new_check").submit();
-    amountAux = parseFloat($('#check_amount').val());
-  });
-
-  var amountCheck = 0;
+  var amountAux, showCheckTable = false, amountCheck = 0;
 
   $(document).on('ajax:success','#receipts #new_check', function(evt, data, status, xhr){
     $('#receipts #table-of-check').append(data);
@@ -102,6 +102,7 @@ $(document).ready(function() {
   });
 
   $("#receipts #pay-tab").on('click', function(){
+    // $("#receipts #amount").text(calculateAmount(invoiceTable));
     if ($("#receipts #check").prop('checked')) {
       $('#receipts #data-check').show("slow");
     }
@@ -115,8 +116,43 @@ $(document).ready(function() {
     $('#receipts #table-of-check').hide();
   });
 
+  var ajaxCheckResponded = false;
   $("#receipts #check").on('click', function(e){
     var check = $("#receipts #check");
+    if (ajaxCheckResponded == false) {
+      $.ajax({
+        type: "GET",
+        url: "/checks/new",
+        dataType: "html"
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-check').html(data);
+        $('#new-check').show('slow');
+        ajaxCheckRespond = true;
+        $('input[name="daterange"]').daterangepicker({
+          format: 'DD/MM/YYYY',
+          ranges: {
+            "<%= I18n.t('datatables.daterange.today') %>":
+              [moment(), moment()],
+            "<%= I18n.t('datatables.daterange.yesterday') %>":
+              [moment().subtract('days', 1),moment().subtract('days', 1)],
+            "<%= I18n.t('datatables.daterange.last_7_days') %>":
+              [moment().subtract('days', 6), moment()],
+            "<%= I18n.t('datatables.daterange.last_30_days') %>":
+              [moment().subtract('days', 29), moment()],
+            "<%= I18n.t('datatables.daterange.this_month') %>":
+              [moment().startOf('month'), moment().endOf('month')],
+            "<%= I18n.t('datatables.daterange.last_month') %>":
+              [moment().subtract('month', 1).startOf('month'),moment().subtract('month', 1).endOf('month')]
+          },
+          startDate: moment().subtract('days', 29),
+          endDate: moment()
+        },
+        function(start, end) {
+          $('#reportrange span').html(start.format + '-' + end);
+        });
+      })
+    }  
     if (check.prop('checked')) {
       $(this).parents(".thorizontal").siblings().toggle("show");
       $('#receipts #data-check').show("slow");
@@ -125,6 +161,11 @@ $(document).ready(function() {
       check.parents(".thorizontal").siblings().hide();
     }
   });
+
+  $(document).on("click", "a.button-save", function(){
+    $("#receipts #new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
+  });  
 
   var amountCash = 0, amount = 0;
   $("#receipt_amount_cash").on('change', function(){
@@ -151,6 +192,7 @@ $(document).ready(function() {
     });
     multiSelectedRow(invoiceTable, "#invoices-table");
   }
+
 });// End Document
 
 function checkProperties () {
@@ -182,6 +224,22 @@ function deleteRow(btn) {
   });
 }
 
+function editCheck(btn) {
+  var row = btn.parentNode.parentNode;
+  checkUpdate = $(row).data('check-id');
+  amountUpdated = parseFloat($('#check-amount').val());
+  $.ajax({
+    type: "GET",
+    url: "/checks/" + checkUpdate,
+    dataType: "html",
+  })
+  .done(function(data, textStatus, xhr){
+    $('#new-check').html(data);
+    $('#new-check').show('slow');
+  });
+
+}
+
 function invoicesSelected(oTable) {
   var invoice_ids = $('#receipt_invoice_ids').val();
   var invoices = fnGetSelected(oTable);
@@ -194,6 +252,16 @@ function invoicesSelected(oTable) {
     }
   };
   $('#receipt_invoice_ids').val(invoice_ids);
+}
+
+function calculateAmount(oTable) {
+  var total = 0;
+  var invoices = fnGetSelected(oTable);
+  var index = invoices.length;
+  for (var i = 0; i < index; i++) {
+    total = total + parseFloat(invoices[i][3]);
+  }
+  return total;
 }
 
 function hiddenInputs () {

@@ -258,9 +258,11 @@ es:
         category_ids: Categoria
   checks:
     new_check:
+      save: Guardar
+    new_check_row:
       delete: Eliminar
       show: Ver
-      edit: Editar
+      edit: Editar  
     sub_header:
       new: Nuevo
       cancel: Cancelar
