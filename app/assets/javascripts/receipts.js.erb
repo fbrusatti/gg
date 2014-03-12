@@ -129,27 +129,16 @@ $(document).ready(function() {
         $('#new-check').html(data);
         $('#new-check').show('slow');
         ajaxCheckRespond = true;
-        $('input[name="daterange"]').daterangepicker({
-          format: 'DD/MM/YYYY',
-          ranges: {
-            "<%= I18n.t('datatables.daterange.today') %>":
-              [moment(), moment()],
-            "<%= I18n.t('datatables.daterange.yesterday') %>":
-              [moment().subtract('days', 1),moment().subtract('days', 1)],
-            "<%= I18n.t('datatables.daterange.last_7_days') %>":
-              [moment().subtract('days', 6), moment()],
-            "<%= I18n.t('datatables.daterange.last_30_days') %>":
-              [moment().subtract('days', 29), moment()],
-            "<%= I18n.t('datatables.daterange.this_month') %>":
-              [moment().startOf('month'), moment().endOf('month')],
-            "<%= I18n.t('datatables.daterange.last_month') %>":
-              [moment().subtract('month', 1).startOf('month'),moment().subtract('month', 1).endOf('month')]
-          },
-          startDate: moment().subtract('days', 29),
-          endDate: moment()
-        },
-        function(start, end) {
-          $('#reportrange span').html(start.format + '-' + end);
+        $('.check_date_time_picker').datetimepicker({
+          language: 'es',
+          pickDate: true,
+          pickTime: false,
+          maskInput: true,
+          pick12HourFormat: true,
+          pickSeconds: false,
+          format: 'dd/MM/yyyy',
+          startDate: 1910,
+          endDate: Infinity
         });
       })
     }  
@@ -164,6 +153,13 @@ $(document).ready(function() {
 
   $(document).on("click", "a.button-save", function(){
     $("#receipts #new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
+  });
+
+  var checkToUpdateId;
+  $(document).on("click", "a.button-update", function(){
+    checkToUpdateId = $("#check-update-id").val();
+    $("#receipts #edit_check_" + checkToUpdateId).submit();
     amountAux = parseFloat($('#check_amount').val());
   });  
 
@@ -216,7 +212,7 @@ function deleteRow(btn) {
   })
   .done(function(data, textStatus, xhr){
     row.parentNode.removeChild(row);
-    amountCheck = parseFloat($("#amount_check").text()) ;
+    amountCheck = parseFloat($("#amount_check").text());
     amountCheck = amountCheck - amountDeleted;
     $("#amount_check").text(amountCheck);
     amount = parseFloat($("#amount").text()) - amountDeleted;
@@ -230,14 +226,59 @@ function editCheck(btn) {
   amountUpdated = parseFloat($('#check-amount').val());
   $.ajax({
     type: "GET",
-    url: "/checks/" + checkUpdate,
+    url: "/checks/" + checkUpdate + "/edit",
     dataType: "html",
   })
   .done(function(data, textStatus, xhr){
     $('#new-check').html(data);
     $('#new-check').show('slow');
-  });
+    row.parentNode.removeChild(row);
+    amountCheck = parseFloat($("#amount_check").text());
+    amountCheck = amountCheck - amountUpdated;
+    $("#amount_check").text(amountCheck);
+    amount = parseFloat($("#amount").text()) - amountUpdated;
+    $("#amount").text(amount);
+    // chargeListenerOfEditCheck($("#check_update_id").text())
 
+    var editFormCheck = '#edit_check_' + $("#check-update-id").val();
+    $(document).on('ajax:success', editFormCheck, function(evt, data, status, xhr){
+      $('#receipts #table-of-check').append(data);
+      $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
+      $('#receipts #table-of-check').show("slow");
+      $(editFormCheck)[0].reset();
+      var amountCheck = parseFloat($("#amount_check").text());
+      var amountAux = parseFloat($("#check-amount").val());
+      var amountCash = parseFloat($("#receipt_amount_cash").val());
+      amountCheck = amountCheck + amountAux;
+      $("#receipts #amount_check").text(amountCheck)
+      var amount = amountCash + amountCheck;
+      console.log(amount, amountCash, amountCheck, amountAux);
+      $("#receipts #amount").text(amount);
+      $.ajax({
+        type: "GET",
+        url: "/checks/new",
+        dataType: "html",
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-check').html(data);
+        $('#new-check').show('slow');
+      }); 
+    });
+  });  
+}
+
+function chargeListenerOfEditCheck(check_id) {
+  var editFormCheck = '#edit_check_' + check_id;
+  $(document).on('ajax:success', editFormCheck, function(evt, data, status, xhr){
+    $('#receipts #table-of-check').append(data);
+    $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
+    $('#receipts #table-of-check').show("slow");
+    $(editFormCheck)[0].reset();
+    amountCheck = amountCheck + amountAux;
+    $("#receipts #amount_check").text(amountCheck)
+    amount = amountCash + amountCheck;
+    $("#receipts #amount").text(amount);
+  }); 
 }
 
 function invoicesSelected(oTable) {

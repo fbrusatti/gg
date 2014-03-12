@@ -41,7 +41,8 @@
         = f.select :check_status, check_status,
                             { :include_blank => true }, class: "pretty-input"
       .input
-        %a.button-save
+        %a.button-update
           %i.icon-save.icon-1x
-            = t('.save')              
+            = t('.save')           
     = f.submit hidden: true
+       

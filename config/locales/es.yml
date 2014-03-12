@@ -257,6 +257,8 @@ es:
         stock: Stock
         category_ids: Categoria
   checks:
+    update_check:
+      save: Actualizar
     new_check:
       save: Guardar
     new_check_row:
