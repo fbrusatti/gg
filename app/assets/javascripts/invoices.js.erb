@@ -342,7 +342,6 @@ var aColumnsOptions =
   ]
 
 function deleteRowInvoice(btn) {
-  console.log("ahora estoy andando bien");
   var row = btn.parentNode.parentNode;
   checkDelete = $(row).data('check-id');
   amountDeleted = parseFloat($('#invoices #check-amount').val());
@@ -357,7 +356,6 @@ function deleteRowInvoice(btn) {
     amountCheck = amountCheck - amountDeleted;
     $("#amount_check").text(amountCheck);
     amountCash = parseFloat($("#invoice_amount_cash").val());
-    console.log(amountCash, amountDeleted)
     amountCash = amountCash + amountDeleted;
     $("#invoice_amount_cash").val(amountCash.toFixed(2));
   });
