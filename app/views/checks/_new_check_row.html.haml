@@ -10,7 +10,7 @@
       = t('.show')
     %a.button-edit{ onclick: "editCheck(this)" }
       = t('.edit')
-    %a.button-delete{ onclick: "deleteRow(this)" }  
+    %a.button-delete{ id: "delete-check" }  
       = t('.delete')
 %input{id: "check-amount", type: "hidden", value: @check.amount}
 %input{id: "check-update-id", type: "hidden", value: @check.id}  

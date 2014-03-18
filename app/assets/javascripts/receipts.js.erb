@@ -78,6 +78,7 @@ $(document).ready(function() {
     $('#receipts #table-of-check').append(data);
     $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
     $('#receipts #table-of-check').show("slow");
+    $('#delete-check').attr("onclick", "deleteRow(this)");
     $('#receipts #new_check')[0].reset();
     var ids = $('#receipt_check_ids').val();
     if (ids == "") {
