@@ -669,6 +669,12 @@ es:
     cancel: "Cancelar"
     reset: "Restablecer %{model}"
     required: "requerido"
+  faker:
+    name:
+      name: ["Juan", "Pedro", "Gustavo", "Horacio"]
+      surname: ["Perez", "Maradona", "Ceratti", "Kirchner"]
+      phone: ["464666", "4641444", "4646636", "4678654"]
+      email: [abc@hotmail.com, def@gmail.com, ghi@yahoo.com]
   date:
     abbr_day_names:
     - dom
