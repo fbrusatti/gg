@@ -1,3 +1,12 @@
 #receipts
   .title-sub-header
     = t('.receipt')
+  .sub-header
+    -if edit_or_new_page?(@receipt)
+      %a.receipt-save
+        %i.icon-save.icon-2x
+        = t('.save')
+      %a.receipt-cancel{ href: "#{options_documents_path}" }
+        %i.icon-remove-sign.icon-2x
+        = t('.cancel')
+        

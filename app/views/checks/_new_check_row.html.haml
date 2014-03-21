@@ -1,0 +1,16 @@
+%tr{"data-check-id" => @check.id}
+  %td= @check.check_number
+  %td= @check.emisor
+  %td= @check.emission_date
+  %td= @check.payment_date
+  %td= @check.amount
+  %td= @check.check_status
+  %td
+    %a.button-show{ href: @check }
+      = t('.show')
+    %a.button-edit{ onclick: "editCheck(this)" }
+      = t('.edit')
+    %a.button-delete{ id: "delete-check" }  
+      = t('.delete')
+%input{id: "check-amount", type: "hidden", value: @check.amount}
+%input{id: "check-update-id", type: "hidden", value: @check.id}  

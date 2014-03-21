@@ -5,6 +5,9 @@ class VatsController < ApplicationController
   
   def new
     @vat = Vat.new
+    if request.xhr?
+      render partial: 'new_vat_modal'
+    end  
   end
 
   def create

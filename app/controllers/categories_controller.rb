@@ -16,6 +16,9 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    if request.xhr?
+      render partial: 'new_category_modal'
+    end  
   end
 
   def create
