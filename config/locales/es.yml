@@ -4,6 +4,9 @@ es:
       category: [ Remera, Buzo, Pant Corto, Pant largo, Medias ]
       category_id: [ 1, 2, 3 ]
       description: [ Descripcion 1, Descripcion 2, Descripcion3 ]
+      money: [ peso, dolar ]
+      symbol: [ $, U$S]
+      vat: [ 1.21, 3.21 ]
   sub_header:
       new: Nuevo
       cancel: Cancelar

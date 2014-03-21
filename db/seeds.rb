@@ -11,16 +11,16 @@ def create_customer
   name = Faker::Name.first_name
   Customer.create(name: name,
                   surname: Faker::Name.last_name,
-                  phone: Faker::PhoneNumber.phone_number,
-                  email: Faker::Internet.email(name))
+                  phone:   Faker::PhoneNumber.phone_number,
+                  email:   Faker::Internet.email(name))
 end  
 
 def create_supplier
   name = Faker::Name.first_name
   Supplier.create(name: name,
                   surname: Faker::Name.last_name,
-                  phone: Faker::PhoneNumber.phone_number,
-                  email: Faker::Internet.email(name))
+                  phone:   Faker::PhoneNumber.phone_number,
+                  email:   Faker::Internet.email(name))
 end
 
 def create_category
@@ -29,12 +29,29 @@ def create_category
   end
 end  
 
+def create_money_and_vat
+  Money.create(name:      Faker::Name.money,
+               quotation: Faker::Number.digit,
+               symbol:    Faker::Name.symbol)
+  Vat.create(percentaje:  Faker::Name.vat)
+end
+
+
 def create_product
-  Product.create(code: Faker::Number.number(4),
-                 minimun_stock: Faker::Number.digit,
-                 category_ids: Category.last.id,
-                 description: Faker::Name.description)
+  min_stock = Faker::Number.digit
+  Product.create(code:           Faker::Number.number(4),
+                 minimun_stock:  Faker::Number.digit,
+                 category_ids:   Category.last.id,
+                 description:    Faker::Name.description,
+                 money_id:       Money.last.id,
+                 vat_id:         Vat.last.id,
+                 cost_price:     Faker::Number.number(2).to_f,
+                 minimun_stock:  min_stock,
+                 stock:          min_stock.to_i + 2,
+                 list_price_one: Faker::Number.number(2).to_f)
+
 end  
+
 
 2.times do |t|
   puts "iteration #{t+1} of 2 for the seed"
@@ -44,6 +61,8 @@ end
   puts "Suppliers created"
   create_category
   puts "Categories created"
+  create_money_and_vat
+  puts "Money and Vat created"
   create_product
   puts "Products created"
 end
