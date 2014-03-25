@@ -91,9 +91,15 @@
     @extend .form-horizontal;
     .input {
       @extend .form-group;
-      label {
+      label:first-child {
         @extend .col-lg-3, .control-label;
       }
+
+      label:nth-of-type(2) {
+         @extend .col-lg-6, .control-label;
+        text-align: left;
+      }
+
     }
 
     .left, .right {
