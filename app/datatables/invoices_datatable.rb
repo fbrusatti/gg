@@ -21,7 +21,7 @@ private
   def data
     invoices_list.map do |invoice|
       [
-        link_to(invoice.id, invoice),
+        h(invoice.id),
         h(invoice.customer_id),
         h(invoice.amount),
         h(invoice.balance)

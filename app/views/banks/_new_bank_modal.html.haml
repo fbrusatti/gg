@@ -1,0 +1,25 @@
+.modal-dialog
+  .modal-content
+    .modal-header
+      %button.close{"data-dismiss" => "modal", type: "button"} ×
+      %h3= t('.new_bank')
+    = form_for(Bank.new, remote: true, format: :json ) do |f|
+      = errors_for(@bank).html_safe
+      .modal-body
+        .input
+          = f.label :name
+          = f.text_field :name, class: "pretty-input"
+        .input
+          = f.label :branch_office_number
+          = f.text_field :branch_office_number, class: "pretty-input"
+        .input
+          = f.label :address
+          = f.text_field :address, class: "pretty-input"
+        .input
+          = f.label :location
+          = f.collection_select :location_id,
+                                Location.all,
+                                :id, :complete_name,
+                                { :include_blank => true }, class: "pretty-input"
+      .modal-footer
+        = f.submit t('.save'), class: 'modal-submit'

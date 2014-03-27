@@ -1,0 +1,13 @@
+.transaction
+  .thorizontal
+    .tlabel
+      = f.label t('.check')
+    .tcheck
+      .tcheckbox
+        = check_box_tag "invoice_check"
+  .thorizontal
+    .tlabel
+      = label_tag t('.amount_check')
+    .tamount
+      = label_tag "", nil, id: "amount_check", class: "pretty-input"      
+      

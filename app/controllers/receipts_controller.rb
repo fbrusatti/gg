@@ -6,13 +6,15 @@ class ReceiptsController < ApplicationController
 
   def new
     @receipt = Receipt.new
-    respond_to do |format|
-      format.html
-      format.json { render json: ProductsDatatable.new(view_context) }
-    end
   end
 
   def create
+    @receipt = Receipt.new(params[:receipt])
+    @receipt.amount = @receipt.amount_cash + @receipt.amount_check
+    if @receipt.save
+      flash[:success] = t('flash.receipt', message: t('flash.created'))
+    end
+    redirect_to options_documents_path
   end
 
 end

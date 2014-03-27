@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  attr_accessible :city, :countri, :state
+  attr_accessible :city, :countri, :state, :zipcode
 
   validate :not_repeat_city
 

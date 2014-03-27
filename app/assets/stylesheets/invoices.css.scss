@@ -1,4 +1,4 @@
-@import "twitter/bootstrap";
+@import "bootstrap";
 
 #invoices {
 
@@ -8,23 +8,50 @@
     display: block;
     padding: 5px;
   }
+
   .title-sub-header {
     padding-left: 30px;
     font-size:30px;
     margin-top: 10px;
     display: inline
   }
+
   .sub-header > a{
     margin: 5px;
   }
+
   .invoice-danger {
-     @extend .btn, .btn-danger;
+    @extend .btn, .btn-xs, .btn-danger
   }
+
   .invoice-save-finish {
-     @extend .btn, .btn-success;
+    @extend .btn, .btn-xs, .btn-success
   }
+
   .invoice-save-building {
-     @extend .btn, .btn-primary;
+    @extend .btn, .btn-xs, .btn-primary
+  }
+
+  #openBtn-bank {
+    @extend .btn, .btn-primary
+  }
+
+  .button-save-check {
+    @extend .btn, .btn-primary;
+    margin-right: 5px;
+    @extend .col-lg-2, .col-lg-offset-7
+  } 
+
+  .button-show {
+    @extend .btn, .btn-default;
+  }
+
+  .button-edit {
+    @extend .btn, .btn-primary;
+  }
+
+  .button-delete {
+    @extend .btn, .btn-danger;
   }
 
   // Tabs
@@ -32,7 +59,7 @@
   .invoices-tabs {
     @extend .nav, .nav-tabs;
     li > a {
-      @extend .btn, .btn-primary;
+      @extend .btn, .btn-xs, .btn-primary;
       &:hover {
         color: #418AE2;
         background-color: #6BC9F8;
@@ -41,40 +68,67 @@
   }
   .invoices-tabs-content { @extend .tab-content }
 
+  .line-separator {
+    height: 1px;
+    background: #717171;
+    border-bottom: 1px solid #313030;
+    margin-bottom: 10px;
+  }
 
-  // items
-  // -----
-  #items{
-    margin-left: 5px;
-    margin-right: 5px;
-    .table { @extend .col-lg-10 }
-    .total-price { @extend .col-sm-1 }
-    .total-price .text {
-      display: inline;
-      font-size: 20px
-    }
-    .total-price .price  {
-      display: inline;
-      font-size: 20px;
-    }
-  }
-  #items .total-price {
-    margin-top: 10px;
-    border-radius: 10px ;
-    border: 1px solid gray;
-    a > i { padding: 5px }
-    text-align: center
-  }
-  #items div.dataTables_wrapper { padding-top: 10px }
+  // new invoice
+  // -----------
+  .form-container { @extend .container; width: 98% }
+  .pretty-input { @extend .form-control }
 
-  .token_field{
-    margin: 10px;
-    .title { font-size: 20px }
-    .token-input-list-facebook, .title { display: inline-block }
+  #items .data { @extend .row }
+  #items .data .label {
+    @extend .col-md-2;
+    vertical-align: middle;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
   }
+  #items .data .information { @extend .col-md-8 }
+
+  // table
+  .table { margin-top: 10px;}
+
+  // customer info
+  .show-customer { margin-top: 10px }
+  .show-customer .data { @extend .row }
+  .show-customer .data .label {
+    @extend .col-md-2, .col-md-offset-1;
+    vertical-align: middle;
+    font-weight: bold;
+    color: black;
+    font-size: 15px;
+  }
+  .show-customer .data .information { @extend .col-md-8 }
+  .show-customer .panel-search { @extend .row }
+  .show-customer .panel-4 { @extend .col-md-4 }
+  .show-customer .panel-6 { @extend .col-md-6 }
+  .show-customer .panel-2 { @extend .col-md-2 }
+  .highlight { @extend .label, .label-primary }
+
+  // price
+  .total-price {
+    text-align: right;
+    background-color: gray;
+  }
+  .total-price .text, .price {
+    display: inline;
+    font-weight: bold;
+    color: black;
+    font-size: 25px;
+    padding: 5px;
+  }
+
 
   // Modals
   // ------
+  .new-customer {
+    .title { font-size: 15pt }
+  }  
   .modal-body { @extend .form-horizontal }
   .modal-body > .input {
     @extend .form-group;
@@ -97,5 +151,90 @@
     }
   }
   .modal-submit { @extend .btn, .btn-primary }
-  .pretty-input { @extend .form-control }
+
+  // index invoice
+  // -------------
+  .index-container { @extend .container; width: 98% }
+  .index-row { @extend .row }
+  .pretty-input-datatable { @extend .form-control }
+  .primary { @extend .label-primary }
+  .success { @extend .label-success }
+  .default { @extend .label-default }
+  .info { @extend .label-info }
+
+  // Pay invoice
+  // ------------
+  .pay-invoice {
+    @extend .form-horizontal;
+    @include make-row();
+    .left, .right {
+      @include make-lg-column(6);
+      .title { font-size: 15pt; margin: 20px;}
+    }
+    .input {
+      @extend .form-group;
+    }
+    .text_label {
+      @extend .col-lg-3, .control-label;
+    }
+    .show_label {
+      width:50%;
+      float:left;
+    }
+    .input select, input, textarea {
+      @extend .col-lg-6;
+      resize: none;
+    }
+    .token_field {
+      width:50%;
+      float:left;
+    }
+    .transaction { @extend .form-horizontal }
+    .topenLabel { @extend .col-lg-2, .col-sm-offset-1 }
+    .transaction .thorizontal { @extend .form-group }
+    .transaction .tcheck { @extend .col-lg-2 }
+    .transaction .tcheckbox { @extend .checkbox }
+    .transaction .tinput > label { @extend .control-label }
+    .transaction .thorizontal .tlabel { @extend .col-lg-1, .col-sm-offset-1 }
+    .transaction .thorizontal .tinput { @extend .col-sm-5, .col-sm-offset-1 }
+    .transaction .thorizontal .tamount { @extend .col-sm-3, .col-sm-offset-1 }
+  }  
+
+  .data-check .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
+  /*Style of new check*/
+  .data-check, .modal-body {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      label {
+        @extend .col-lg-3, .control-label;
+      }
+      input {
+        @extend .col-lg-6;
+      }
+      select {
+        @extend .col-lg-6;
+      }
+    }
+
+    .input-group-addon {
+      font-size: 19px;
+    }
+
+  }
+
+  .data-check .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
+  #table-of-check { @extend .table, .table-bordered, .table-striped }
 }
+

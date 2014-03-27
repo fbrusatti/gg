@@ -1,0 +1,61 @@
+.show-customer
+  .panel-search
+    .panel-6
+      .data
+        .label
+          .title= t('.search_customer')
+        .information.input-group
+          = f.text_field :customer_tokens, class: "pretty-input"
+        %span.input-group-addon
+          %a#openBtn-customer.glyphicon.glyphicon-plus 
+    .panel-4
+      .data
+        .label
+          = simple_format t('invoices.new.date')
+        .information
+          = simple_format @invoice.updated_at.strftime('%m/%d/%Y'), class: 'pretty-input'
+    .panel-2.highlight
+      .data
+        .label
+          = simple_format t('invoices.new.type')
+        .label A
+  .panel-search
+    .panel-4
+      .data
+        .label
+          = simple_format t('.sr')
+        .information
+          = simple_format "", class: "pretty-input", id: 'sr'
+      .data
+        .label
+          = simple_format t('.address')
+        .information
+          = simple_format  "", class: "pretty-input", id: 'address'
+      .data
+        .label
+          = simple_format t('.iva')
+        .information
+          = simple_format "", class: "pretty-input", id: 'iva'
+    .panel-4
+      .data
+        .label
+          = simple_format t('.cuit_cuil')
+        .information
+          = simple_format  "", class: "pretty-input", id: 'cuit_cuil'
+
+      .data
+        .label
+          = simple_format t('.gross_income')
+        .information
+          = simple_format "", class: "pretty-input", id: 'gross_income'
+    .panel-4
+      .data
+        .label
+          = simple_format t('.phone')
+        .information
+          = simple_format "", class: "pretty-input", id: 'phone'
+      .data
+        .label
+          = simple_format t('.cellphone')
+        .information
+          = simple_format "", class: "pretty-input", id: 'cellphone'
