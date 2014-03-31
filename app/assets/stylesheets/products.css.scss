@@ -94,6 +94,12 @@ div.token-input-dropdown-facebook { z-index: 1900 !important; }
     @extend .form-control
   }
 
+  .pretty-input-data-table {
+    height :25px !important;
+    padding:1px 12px !important;
+    @extend .form-control;
+  }
+
   // handled errors
   .field_with_errors {
     display: inline;

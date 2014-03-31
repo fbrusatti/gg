@@ -18,16 +18,37 @@ $(document).ready(function() {
       return "<li><p>" + item.name+ referrer+ " </p> </li>" }
   });
 
-  $('#product-table').dataTable({
+  var oTable, search_category, search_description, search_code; 
+  oTable = $('#product-table').dataTable({
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
     },
-    asSorting: [],
+    aaSorting: [[ 0, "desc" ]],
     sPaginationType: "full_numbers",
+    bAutoWidth: false,
     bJQueryUI: true,
     bProcessing: true,
     bServerSide: true,
-    sAjaxSource: $('#product-table').data('source')
+    sAjaxSource: $('#product-table').data('source'),
+    fnInitComplete: function(oSettings, json) {
+      $("thead th").each( function ( i ) {
+        $('select', this).change( function () {
+          oTable.fnFilter( $(this).val(),i);
+        });
+        $('input', this).change( function () {
+          search_category = $('input[name="search_category"]').val();
+          search_code = $('input[name="search_code"]').val();
+          search_description = $('input[name="search_description"]').val();
+          oTable.fnFilter($(this).val(),i);
+        });
+      });
+    },
+    aoColumns: aColumnsOptions,
+    "fnServerParams": function ( aoData ) {
+      aoData.push( { "name": "search_code", "value": search_code } );
+      aoData.push( { "name": "search_description", "value": search_description } );
+      aoData.push( { "name": "search_category", "value": search_category } );
+    }    
   });
 
   $("a.product-save").click( function() {
@@ -102,3 +123,17 @@ $(document).ready(function() {
   });
 
 })// End Document
+
+var aColumnsOptions =
+  [
+    { "sWidth": "1%", "sClass": "center", "bSearchable": true },
+    { "sWidth": "7%", "bSearchable": true },
+    { "sWidth": "5%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true }
+  ]
+

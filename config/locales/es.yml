@@ -404,6 +404,11 @@ es:
       minimun_stock: Stock Minimo
       list_price_one: Precio de lista 1
       list_price_two: Precio de lista 2
+      gondola: Gondola
+      shelf: Estanteria
+      find_category: Categoría
+      find_code: Código
+      find_description: Descripción
     show_product_data:
       money: Moneda
       vat: IVA
