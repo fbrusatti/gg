@@ -14,7 +14,6 @@ class Receipt < Document
 
   def verify_conditions(invoice)
     if (invoice.balance != 0) 
-      debugger
       new_balance = (invoice.balance - self.amount)
       if (new_balance < 0) 
         invoice.balance = 0;

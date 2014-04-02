@@ -76,7 +76,7 @@ $(document).ready(function() {
 
   // table of items
   // --------------
-  var partialSum;
+  var partialSum = 0;
   tItems = $('#invoices #items-invoice').dataTable({
     bJQueryUI: true,
     bServerSide: true,
@@ -95,6 +95,7 @@ $(document).ready(function() {
       // set the price in view
       if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 ) {
         $('.total-price .price').html(partialSum.toFixed(2));
+        $('#amount').text(partialSum.toFixed(2));
         // form input to amount
         $('#invoice_amount').val(partialSum.toFixed(2));
       }
@@ -186,6 +187,7 @@ $(document).ready(function() {
     var htmlNum = $(this).closest('tr').find("td:nth-child(7n)").html();
     partialSum -= parseFloat(htmlNum);
     $('.total-price .price').html(partialSum.toFixed(2));
+    $('#amount').text(partialSum.toFixed(2));
     $(this).closest('tr').fadeOut().remove();
   });
 
@@ -267,6 +269,7 @@ $(document).ready(function() {
     $('#invoices #table-of-check').append(data);
     $('#invoices #table-of-check tr:last').effect("highlight", {}, 3000);
     $('#invoices #table-of-check').show("slow");
+    $('#delete-check').attr("onclick", "deleteRowInvoice(this)");
     $('#invoices #new_check')[0].reset();
     var ids = $('#invoice_check_ids').val();
     if (ids == "") {
@@ -278,19 +281,22 @@ $(document).ready(function() {
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
     $("#invoices #amount_check").text(amountCheck)
-    amount = amountCash + amountCheck;
-    $("#invoices #amount").text(amount);
+    amountCash = partialSum - amountCheck;
+    if (amountCash < 0)
+      $("#invoice_amount_cash").val(0);  
+    $("#invoice_amount_cash").val(amountCash.toFixed(2))
   });
 
   var amountCash = 0, amount = 0;
   $("#invoice_amount_cash").on('change', function(){
     amountCash = parseFloat(this.value);
-    amount = amountCash + amountCheck;
-    $("#invoices #amount").text(amount);
   })
 
   // changes the visibility of transactions inputs
+  var partialAmount = 0;
   $("#invoice_cash").on('click', function(e){
+    partialAmount = partialSum - amountCheck;
+    $('#invoice_amount_cash').val(partialAmount);
     $(this).parents(".thorizontal").siblings().toggle("show");
   });
 
@@ -335,7 +341,7 @@ var aColumnsOptions =
     { "sClass": "center", "bSortable": false }
   ]
 
-function deleteRow(btn) {
+function deleteRowInvoice(btn) {
   var row = btn.parentNode.parentNode;
   checkDelete = $(row).data('check-id');
   amountDeleted = parseFloat($('#invoices #check-amount').val());
@@ -349,8 +355,9 @@ function deleteRow(btn) {
     amountCheck = parseFloat($("#amount_check").text()) ;
     amountCheck = amountCheck - amountDeleted;
     $("#amount_check").text(amountCheck);
-    amount = parseFloat($("#invoices #amount").text()) - amountDeleted;
-    $("#amount").text(amount);
+    amountCash = parseFloat($("#invoice_amount_cash").val());
+    amountCash = amountCash + amountDeleted;
+    $("#invoice_amount_cash").val(amountCash.toFixed(2));
   });
 }
 

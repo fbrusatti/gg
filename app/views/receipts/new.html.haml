@@ -19,9 +19,6 @@
       #preview.tab-pane
     = f.submit hidden: true
   #data-check
-    = form_for(Check.new, remote: true, format: :html) do |f|
-      #new-check
-        = render 'data_check', f: f
-      = f.submit hidden: true
+    #new-check
   = render 'table_check'
   #bank-modal.modal.fade

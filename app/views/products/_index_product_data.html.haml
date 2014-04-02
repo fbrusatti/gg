@@ -1,13 +1,25 @@
 %table#product-table.display{"data-source" => products_url(format: "json")}
   %thead
     %tr
+      %th= text_field_tag "search_code", nil, 
+                                      { placeholder: t('.find_code'),
+                                        class: "pretty-input-data-table" }
+      %th= text_field_tag "search_description", nil,
+                                              { placeholder: t('.find_description'),
+                                                class: "pretty-input-data-table" }
+      %th= text_field_tag "search_category", nil,
+                                            { placeholder: t('.find_category'),
+                                              class: "pretty-input-data-table" }
+    %tr
       %th= t('.code')
       %th= t('.description')
+      %th= t('.category')
       %th= t('.stock')
       %th= t('.minimun_stock')
-      %th= t('.category')
       %th= t('.list_price_one')
       %th= t('.list_price_two')
+      %th= t('.gondola')
+      %th= t('.shelf')
   %tbody
 :javascript
   datatableKeyboard("#product-table", "#category-modal, #vat-modal");

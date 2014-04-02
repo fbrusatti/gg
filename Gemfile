@@ -17,6 +17,7 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'jquery-rails', '~> 2.3.0'
 gem "yui-compressor", "~> 0.12.0"
 gem 'will_paginate', '>=3.0.pre3'
+gem 'faker'
 
 # Gems used only for assets and not required
 # in production environments by default.
