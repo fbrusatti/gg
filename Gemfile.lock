@@ -86,9 +86,6 @@ GEM
     capybara-select2 (0.0.8)
       capybara
       rspec
-    capybara-webkit (0.12.0)
-      capybara (>= 1.0.0, < 1.2)
-      json
     carrierwave (0.9.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -296,7 +293,6 @@ DEPENDENCIES
   brakeman
   capybara (= 1.1.2)
   capybara-select2
-  capybara-webkit (= 0.12.0)
   carrierwave
   coffee-rails (~> 3.2.1)
   database_cleaner
