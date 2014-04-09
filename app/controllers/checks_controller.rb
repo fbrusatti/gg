@@ -21,7 +21,7 @@ class ChecksController < ApplicationController
     @check = Check.new(params[:check])
     @check.save
     respond_to do |format|
-      format.html { render partial: "new_check_row"}
+      format.html { render partial: "new_check_row" }
       format.json { render json: @check }
       format.js
     end
@@ -40,12 +40,13 @@ class ChecksController < ApplicationController
 
   def update
     @check = Check.find(params[:id])
-    @check.update_attributes(params[:check])
-    respond_to do |format|
-      format.html { render partial: "new_check_row"}
-      format.json { render json: @check }
-      format.js
-    end 
+    if @check.update_attributes(params[:check])
+      respond_to do |format|
+        format.html { render partial: "new_check_row" }
+        format.json { render json: @check }
+        format.js
+      end
+    end   
   end
 
   def destroy

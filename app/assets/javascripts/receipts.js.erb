@@ -102,7 +102,6 @@ $(document).ready(function() {
   });
 
   $("#receipts #pay-tab").on('click', function(){
-    // $("#receipts #amount").text(calculateAmount(invoiceTable));
     if ($("#receipts #check").prop('checked')) {
       $('#receipts #data-check').show("slow");
     }
@@ -156,10 +155,8 @@ $(document).ready(function() {
     amountAux = parseFloat($('#check_amount').val());
   });
 
-  var checkToUpdateId;
   $(document).on("click", "a.button-update", function(){
-    checkToUpdateId = $("#check-update-id").val();
-    $("#receipts #edit_check_" + checkToUpdateId).submit();
+    $("#receipts #edit_check_" + checkUpdate).submit();
     amountAux = parseFloat($('#check_amount').val());
   });  
 
@@ -220,6 +217,7 @@ function deleteRow(btn) {
   });
 }
 
+var checkUpdate;
 function editCheck(btn) {
   var row = btn.parentNode.parentNode;
   checkUpdate = $(row).data('check-id');
@@ -238,7 +236,7 @@ function editCheck(btn) {
     $("#amount_check").text(amountCheck);
     amount = parseFloat($("#amount").text()) - amountUpdated;
     $("#amount").text(amount);
-    var editFormCheck = '#edit_check_' + $("#check-update-id").val();
+    var editFormCheck = '#edit_check_' + checkUpdate;
     $(document).on('ajax:success', editFormCheck, function(evt, data, status, xhr){
       $('#receipts #table-of-check').append(data);
       $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
