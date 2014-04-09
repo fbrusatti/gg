@@ -1,12 +1,15 @@
 es:
   faker:
     name:
-      category: [ Remera, Buzo, Pant Corto, Pant largo, Medias ]
+      category: [ Remera, Buzo, Pant Corto, Pant largo, Medias, Pechera, Musculosa, Calza, Remera Termicam, Zapatilla, Botines, Guante Arquero, Vendas, Gorro ]
       category_id: [ 1, 2, 3 ]
-      description: [ Descripcion 1, Descripcion 2, Descripcion3 ]
+      description: [ Pantalon Rojo, Pantalon Verde, Pantalon Azul, Pantalon Negro, Pantalon Blanco, Remera Roja, Remera Verde, Remera Azul, Remera Negra, Remera Roja, Remera Blanca ]
       money: [ peso, dolar ]
       symbol: [ $, U$S]
       vat: [ 1.21, 3.21 ]
+      cuit_cuil: [ 20 12345678 1, 20 12987678 4, 20 98765432 5, 24 98712365 7, 24 10293847 6 ]
+      type_iva: [ Consumidor Final, Excento de Iva, Monotributista, Responsable Inscripto ]
+      bank: [ Banco Nacion, Banco Cordoba, HSBC, Santander Rio, Standar Bank, Credicop ]
   sub_header:
       new: Nuevo
       cancel: Cancelar
