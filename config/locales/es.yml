@@ -63,6 +63,7 @@ es:
       amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
+      card_pay: Pago en Tarjeta
       amount: Total
     cash_transaction:
       amount_cash: Monto Efectivo
@@ -71,6 +72,9 @@ es:
     check_transactions:
       check: Cheque
       amount_check: Monto Cheque
+    card_transactions:
+      card: Tarjeta
+      amount_card: Monto Tarjeta
     states:
       confirmed: Confirmada
       paid: Pagada
@@ -171,6 +175,7 @@ es:
         cash: Efectivo
         amount_cash: Monto Efectivo
         amount_check: Monto Cheque
+        amount_card: Monto Tarjeta
         check: Cheque
         check_pay: Pago en Cheque
       receipt:
