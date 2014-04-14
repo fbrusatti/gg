@@ -15,6 +15,7 @@ Gg::Application.routes.draw do
   resources :checks
   resources :locations
   resources :receipts
+  resources :cards
 
   resources :documents do
     collection do

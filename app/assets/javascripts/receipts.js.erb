@@ -51,6 +51,41 @@ $(document).ready(function() {
     }
   });
 
+  $(document).on("click", "a#openBtn-name-card", function(){
+    $('#card-modal').modal('show');
+  });
+
+  $('#add-new-name-card').click(function(){
+    $('#card-modal').modal('hide');
+    var sel = document.getElementById('card_name');
+    var name = $('#new-name-card').val().toUpperCase();
+    if (notExistsName(sel, name)){
+      $('#card_name')
+        .append($("<option></option>")
+        .attr("value",name)
+        .text(name)
+      );
+    }
+    selectItemByValue(sel, name )
+    $('#new-name-card').val('');
+  });
+
+  function selectItemByValue(elmnt, value){
+    for(var i=0; i < elmnt.options.length; i++) {
+      if(elmnt.options[i].text == value)
+        elmnt.selectedIndex = i;
+    }
+  }
+
+  function notExistsName(elmnt, value){
+    var aReturn = true
+    for(var i=0; i < elmnt.options.length; i++) {
+      if(elmnt.options[i].text == value)
+        aReturn = false;
+    }
+    return aReturn;
+  }
+
   $(document).on("click", "a#openBtn-bank", function(){
     $.ajax({
       type: "GET",
@@ -70,6 +105,31 @@ $(document).ready(function() {
       .attr("value",data.id)
       .text(data.name + " (" + data.branch_office_number + ")")
     );  
+  });
+
+  $(document).on("click", "a.button-save-card", function(){
+    $("#receipts #new_card").submit();
+  });
+
+  var showCardTable = false;
+  $(document).on('ajax:success','#receipts #new_card', function(evt, data, status, xhr){
+    $('#receipts #table-of-card').append(data);
+    $('#receipts #table-of-card tr:last').effect("highlight", {}, 3000);
+    $('#receipts #table-of-card').show("slow");
+    $('#delete-card').attr("onclick", "deleteRow(this)");
+    $('#receipts #new_card')[0].reset();
+    var ids = $('#receipt_card_ids').val();
+    if (ids == "") {
+      ids = $(data).data("card-id");
+    } else {
+      ids = ids + "," + $(data).data("card-id");
+    }
+    $('#receipt_card_ids').val(ids);
+    showCardTable = true;
+    // amountCheck = amountCheck + amountAux;
+    // $("#receipts #amount_check").text(amountCheck)
+    // amount = amountCash + amountCheck;
+    // $("#receipts #amount").text(amount);
   });
 
   var amountAux, showCheckTable = false, amountCheck = 0;
@@ -113,6 +173,41 @@ $(document).ready(function() {
   $("#data-tab").on('click', function(){
     $('#receipts #data-check').hide();
     $('#receipts #table-of-check').hide();
+  });
+
+  var ajaxCardResponded = false;
+  $("#receipts #receipt_card").on('click', function(e){
+    var card = $("#receipts #receipt_card");
+    if (ajaxCardResponded == false) {
+      $.ajax({
+        type: "GET",
+        url: "/cards/new",
+        dataType: "html"
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-card').html(data);
+        $('#new-card').show('slow');
+        ajaxCheckRespond = true;
+        $('.card_date_time_picker').datetimepicker({
+          language: 'es',
+          pickDate: true,
+          pickTime: false,
+          maskInput: true,
+          pick12HourFormat: true,
+          pickSeconds: false,
+          format: 'dd/MM/yyyy',
+          startDate: 1910,
+          endDate: Infinity
+        });
+      })
+    } 
+    if (card.prop('checked')) {
+      $(this).parents(".thorizontal").siblings().toggle("show");
+      $('#receipts #data-card').show("slow");
+    } else {
+      $('#receipts #data-card').hide("slow");
+      check.parents(".thorizontal").siblings().hide();
+    }
   });
 
   var ajaxCheckResponded = false;
@@ -289,6 +384,7 @@ function hiddenInputs () {
   var check, cash;
   check = $('#receipts #check');
   cash = $('#receipts #cash');
+  card = $('#receipts #receipt_card');
   if (!check.prop('checked')){
     $('#receipts #table-of-check').hide();
     $('#receipts #data-check').hide();
@@ -297,6 +393,10 @@ function hiddenInputs () {
   }
   if (!cash.prop('checked')) {
     cash.parents(".thorizontal").siblings().hide();
+  }
+  if (!card.prop('checked')) {
+    $('#receipts #table-of-card').hide();
+    card.parents(".thorizontal").siblings().hide();
   }
 }
 

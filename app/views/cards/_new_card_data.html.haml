@@ -1,0 +1,37 @@
+.data-card
+  = form_for(Card.new, remote: true, format: :html) do |f|
+    .left
+      .title= t('cards.card_data')
+      .input
+        = f.label :name
+        = f.collection_select :name,
+                            Card.all,
+                            :name, :name,
+                            { :include_blank => true}, class: "pretty-input"
+        %a#openBtn-name-card
+          %i.icon-plus-sign.icon-1x
+      .input
+        = f.label :type_card
+        = f.select :type_card, card_type,
+                    { :include_blank => true }, class: "pretty-input"
+      .input
+        = f.label :amount
+        = f.number_field :amount, class: "pretty-input"
+    .right
+      .title= t('cards.additional_data')
+      .input
+        = f.label :number
+        = f.text_field :number, class: "pretty-input"
+      .input
+        = f.label :code
+        = f.text_field :code, class: "pretty-input"
+      .input
+        = f.label :expirate_at
+        .card_date_time_picker
+          = f.text_field :expirate_at, { class: "pretty-input",
+                                        value: print_date(f.object.expirate_at, :date_human) }
+          %span.input-group-addon.glyphicon.glyphicon-calendar  
+      .input
+        %a.button-save-card
+          %i.icon-save.icon-1x
+            = t('.save')          

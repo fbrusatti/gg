@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140327134814) do
+ActiveRecord::Schema.define(:version => 20140414144752) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,6 +57,17 @@ ActiveRecord::Schema.define(:version => 20140327134814) do
 
   add_index "banks", ["branch_office_number"], :name => "index_banks_on_branch_office_number"
   add_index "banks", ["name"], :name => "index_banks_on_name"
+
+  create_table "cards", :force => true do |t|
+    t.string   "type_card"
+    t.decimal  "amount"
+    t.string   "number"
+    t.string   "name"
+    t.string   "code"
+    t.date     "expirate_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"

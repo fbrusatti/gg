@@ -15,6 +15,7 @@ class Document < ActiveRecord::Base
   has_many :items, dependent: :destroy
   has_many :products, through: :items
   has_many :checks
+  has_many :cards
 
   def customer_tokens=(ids)
       self.customer_id = ids

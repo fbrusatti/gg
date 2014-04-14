@@ -2,7 +2,7 @@
 
 #receipts {
 
-  #openBtn-bank, #open-new-name, #openBtn-location {
+  #openBtn-bank, #open-new-name, #openBtn-location, #openBtn-name-card {
     @extend .btn, .btn-primary
   }
 
@@ -24,7 +24,7 @@
      @extend .btn, .btn-xs, .btn-danger;
   }
 
-  .button-save, .button-update {
+  .button-save, .button-update, .button-save-card {
     @extend .btn, .btn-primary;
     margin-right: 5px;
     @extend .col-lg-2, .col-lg-offset-7
@@ -61,17 +61,44 @@
     margin-top: 10px
   }
 
-  form#new_receipt, #data-check { @extend .container }
+  form#new_receipt, #data-check, #data-card { @extend .container }
 
   .pretty-input {
     @extend .form-control
   }
 
-  .data-receipt, .pay-receipt {
+  .data-receipt {
     @extend .form-horizontal;
     @include make-row();
     .left, .right {
       @include make-lg-column(6);
+      .title { font-size: 15pt; margin: 20px;}
+    }
+    .input {
+      @extend .form-group;
+    }
+    .text_label {
+      @extend .col-lg-3, .control-label;
+    }
+    .show_label {
+      width:50%;
+      float:left;
+    }
+    .input select, input, textarea {
+      @extend .col-lg-6;
+      resize: none;
+    }
+    .token_field {
+      width:50%;
+      float:left;
+    }
+  }
+
+  .pay-receipt {
+    @extend .form-horizontal;
+    @include make-row();
+    .left, .right, .center {
+      @include make-lg-column(4);
       .title { font-size: 15pt; margin: 20px;}
     }
     .input {
@@ -103,8 +130,14 @@
     .transaction .thorizontal .tamount { @extend .col-sm-3, .col-sm-offset-1 }
   }
 
+  .data-check .left, .right, .center {
+    @include make-lg-column(4);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
   /*Style of new check*/
-  .data-check, .modal-body {
+  .data-check, .data-card, .modal-body {
     @include make-row();
     @extend .form-horizontal;
     .input {
@@ -132,36 +165,15 @@
              margin: 20px; }
   }
 
-  /*Style of new check*/
-  .data-check, .modal-body {
-    @include make-row();
-    @extend .form-horizontal;
-    .input {
-      @extend .form-group;
-      label {
-        @extend .col-lg-3, .control-label;
-      }
-      input {
-        @extend .col-lg-6;
-      }
-      select {
-        @extend .col-lg-6;
-      }
-    }
-
-    .input-group-addon {
-      font-size: 19px;
-    }
-
-  }
-
-  .data-check .left, .right {
+  .data-card .left, .right {
     @include make-lg-column(6);
     .title { font-size: 15pt;
              margin: 20px; }
   }
 
   #table-of-check { @extend .table, .table-bordered, .table-striped }
+
+  #table-of-card { @extend .table, .table-bordered, .table-striped }
 
   #items div.dataTables_wrapper { padding-top: 10px }
 
