@@ -8,9 +8,9 @@
   %td
     %a.button-show{ href: @check }
       = t('.show')
-    %a.button-edit{ onclick: "editCheck(this)" }
-      = t('.edit')
-    %a.button-delete{ id: "delete-check" }  
+    / %a.button-edit{ onclick: "editCheck(this)" }
+    /   = t('.edit')
+    %a.button-delete{ id: "delete-check", onclick: "deleteRow(this)" }  
       = t('.delete')
 %input{id: "check-amount", type: "hidden", value: @check.amount}
 %input{id: "check-update-id", type: "hidden", value: @check.id}  
