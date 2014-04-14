@@ -12,8 +12,9 @@ class Invoice < Document
   #           'partially_paid'
 
   # == Callbakcs
-  before_save :generate_number, :change_state, if: Proc.new { |i| i.creation_state == 'finish' }
-  after_save :descount_amount, if: Proc.new { |i| i.creation_state == 'finish' }
+  before_save :generate_number, :set_expiration_date, :set_payment_condition,
+               :change_state, if: Proc.new { |i| i.creation_state == 'finish' }
+  after_save :descount_amount,  if: Proc.new { |i| i.creation_state == 'finish' }
 
 
   # == Associations
@@ -47,5 +48,9 @@ class Invoice < Document
 
     def change_state
       self.state = 'confirmed'
+    end
+
+    def set_expiration_date
+      self.expiration_date = Date.today + 30.day
     end
 end

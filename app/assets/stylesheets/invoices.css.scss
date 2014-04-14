@@ -40,7 +40,7 @@
     @extend .btn, .btn-primary;
     margin-right: 5px;
     @extend .col-lg-2, .col-lg-offset-7
-  } 
+  }
 
   .button-show {
     @extend .btn, .btn-default;
@@ -96,6 +96,17 @@
   // customer info
   .show-customer { margin-top: 10px }
   .show-customer .data { @extend .row }
+  #typeIva.squarelight {
+    @extend .col-md-4, .col-md-offset-1;
+    @extend .highlight;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 30px !important;
+    color: white !important;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    padding: 2px;
+  }
   .show-customer .data .label {
     @extend .col-md-2, .col-md-offset-1;
     vertical-align: middle;
@@ -103,6 +114,7 @@
     color: black;
     font-size: 15px;
   }
+
   .show-customer .data .information { @extend .col-md-8 }
   .show-customer .panel-search { @extend .row }
   .show-customer .panel-4 { @extend .col-md-4 }
@@ -128,7 +140,7 @@
   // ------
   .new-customer {
     .title { font-size: 15pt }
-  }  
+  }
   .modal-body { @extend .form-horizontal }
   .modal-body > .input {
     @extend .form-group;
@@ -167,8 +179,8 @@
   .pay-invoice {
     @extend .form-horizontal;
     @include make-row();
-    .left, .right {
-      @include make-lg-column(6);
+    .left, .right ,.center{
+      @include make-lg-column(4);
       .title { font-size: 15pt; margin: 20px;}
     }
     .input {
@@ -198,7 +210,7 @@
     .transaction .thorizontal .tlabel { @extend .col-lg-1, .col-sm-offset-1 }
     .transaction .thorizontal .tinput { @extend .col-sm-5, .col-sm-offset-1 }
     .transaction .thorizontal .tamount { @extend .col-sm-3, .col-sm-offset-1 }
-  }  
+  }
 
   .data-check .left, .right {
     @include make-lg-column(6);

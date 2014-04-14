@@ -47,7 +47,7 @@ $(document).ready(function() {
       }).done(function(data, textStatus, xhr){
         window.location.href= path;
       });
-    });  
+    });
   });
 
   // variables
@@ -86,7 +86,7 @@ $(document).ready(function() {
     bInfo: false,
     sAjaxSource: $('#invoices #items-invoice').data('source'),
     sScrollY: "300",
-    aoColumns: aColumnsOptions,
+    aoColumns: aColumnsOptionsItem,
     fnCreatedRow: function(nRow, aData, iDataIndex){
       if (iDataIndex == 0)
         partialSum = 0;
@@ -227,7 +227,21 @@ $(document).ready(function() {
     $("#gross_income", $scope).html( customer.gross_income);
     $("#phone", $scope).html( customer.phone )
     $("#cellphone", $scope).html( customer.mobile_phone )
+    setTypeIva(customer);
   }
+
+  function setTypeIva(customer){
+    var $scope = $(".show-customer");
+    if (isA(customer.type_iva)) {
+      $("#typeIva", $scope).html("A");
+      $("#invoice_invoice_type").val("A");
+    }else{
+      $("#typeIva", $scope).html("B");
+      $("#invoice_invoice_type").val("B");
+    }
+  }
+
+
 
 
   // index invoice
@@ -283,7 +297,7 @@ $(document).ready(function() {
     $("#invoices #amount_check").text(amountCheck)
     amountCash = partialSum - amountCheck;
     if (amountCash < 0)
-      $("#invoice_amount_cash").val(0);  
+      $("#invoice_amount_cash").val(0);
     $("#invoice_amount_cash").val(amountCash.toFixed(2))
   });
 
@@ -329,7 +343,7 @@ $(document).ready(function() {
 
 });// document
 
-var aColumnsOptions =
+var aColumnsOptionsItem =
   [
     { "sClass": "center", "bSortable": false },
     { "bSortable": false },
@@ -339,7 +353,7 @@ var aColumnsOptions =
     { "bSortable": false },
     { "sClass": "center", "bSortable": false },
     { "sClass": "center", "bSortable": false }
-  ]
+  ];
 
 function deleteRowInvoice(btn) {
   var row = btn.parentNode.parentNode;
@@ -373,4 +387,11 @@ function hiddenInputsInvoice () {
   if (!cash.prop('checked')) {
     cash.parents(".thorizontal").siblings().hide();
   }
-}  
+}
+function isA (type_iva){
+  var a_message = "<%= I18n.t 'customers.type_iva.registered_taxpayer' %>"
+  if  (type_iva == a_message)
+    return true
+  else
+    return false
+}

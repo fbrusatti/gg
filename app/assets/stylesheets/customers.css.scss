@@ -70,7 +70,7 @@
 
   }
 
-  .new-customer .left, .right, .edit-customer .left, .right {
+  .new-customer .left, .right, .edit-customer .left, .if-right {
     @include make-lg-column(6);
     .title { font-size: 15pt;
              margin: 20px; }

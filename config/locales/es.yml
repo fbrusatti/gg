@@ -20,12 +20,12 @@ es:
     new_vat_modal:
       new_vat: Nuevo IVA
       percentaje: Porcentaje
-      save: Agregar    
+      save: Agregar
   categories:
     new_category_modal:
       new_category: Nueva Categoría
       save: Agregar
-      referrer_id: Categoria Padre    
+      referrer_id: Categoria Padre
     new_category: Nueva Categoría
     add: Agregar
     index:
@@ -63,6 +63,7 @@ es:
       amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
+      card_pay: Pago en Tarjeta
       amount: Total
     cash_transaction:
       amount_cash: Monto Efectivo
@@ -71,6 +72,9 @@ es:
     check_transactions:
       check: Cheque
       amount_check: Monto Cheque
+    card_transactions:
+      card: Tarjeta
+      amount_card: Monto Tarjeta
     states:
       confirmed: Confirmada
       paid: Pagada
@@ -171,8 +175,9 @@ es:
         cash: Efectivo
         amount_cash: Monto Efectivo
         amount_check: Monto Cheque
+        amount_card: Monto Tarjeta
         check: Cheque
-        check_pay: Pago en Cheque  
+        check_pay: Pago en Cheque
       receipt:
         price_vat: Iva
         price_descount: Descuento
@@ -232,18 +237,18 @@ es:
       customer:
         comercial_data: Datos Comerciales
         customer_data: Datos Personales
-        name: Nombre
-        surname: Apellido
+        name: Nombre*
+        surname: Apellido*
         address: Dirección
         registered_name: Razón Social
         gross_income: Ingreso Bruto
         type_person: Tipo
         dni: DNI
         email: Email
-        cuit_cuil: CUIT/CUIL
-        phone: Teléfono
+        cuit_cuil: CUIT/CUIL*
+        phone: Teléfono*
         mobile_phone: Celular
-        type_iva: Tipo de IVA
+        type_iva: Tipo de IVA*
         comercial_data: Datos Comerciales
         customer_data: Datos Personales
       product:
@@ -275,7 +280,7 @@ es:
     new_check_row:
       delete: Eliminar
       show: Ver
-      edit: Editar  
+      edit: Editar
     sub_header:
       new: Nuevo
       cancel: Cancelar
@@ -493,7 +498,7 @@ es:
   customers:
     new_customer_modal:
       new_customer: Agregar Cliente
-      save: Guardar  
+      save: Guardar
     type_person:
       customer: Cliente
       supplier: Proveedor

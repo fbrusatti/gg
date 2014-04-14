@@ -16,4 +16,9 @@ class Customer < ActiveRecord::Base
   def name_to_invoice
     registered_name || "#{name} #{surname}"
   end
+
+
+  def is_A
+    self.type_iva == t("customers.type_iva.registered_taxpayer")
+  end
 end
