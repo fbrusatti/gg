@@ -241,7 +241,6 @@ function editCheck(btn) {
       $('#receipts #table-of-check').append(data);
       $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
       $('#receipts #table-of-check').show("slow");
-      $(editFormCheck)[0].reset();
       var amountCheck = parseFloat($("#amount_check").text());
       var amountAux = parseFloat($("#check-amount").val());
       var amountCash = parseFloat($("#receipt_amount_cash").val());
