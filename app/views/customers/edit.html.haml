@@ -7,5 +7,5 @@
     = errors_for(@customer).html_safe
     .tab-content
       .tab-pane.active#customer-data
-        = render "edit_customer_data", f: f
+        = render "customer_data", f: f
     = f.submit hidden: true

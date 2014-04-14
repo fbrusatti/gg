@@ -7,6 +7,8 @@ $(document).ready(function() {
     bJQueryUI: true,
     bProcessing: true,
     bServerSide: true,
+    bAutoWidth: false,
+    "aaSorting": [[ 0, "desc" ]],
     sAjaxSource: $('#customers-table').data('source')
   });  
 

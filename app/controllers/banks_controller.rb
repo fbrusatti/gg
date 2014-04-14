@@ -5,12 +5,17 @@ class BanksController < ApplicationController
 
   def new
     @bank = Bank.new
+    if request.xhr?
+      render partial: 'new_bank_modal'
+    end  
   end
 
   def create
     @bank = Bank.new(params[:bank])
-    flash[:success] = t('flash.bank', message: t('flash.created')) if @bank.save
-    redirect_to new_check_path
+    @bank.save
+    respond_to do |format|
+      format.json { render json: @bank }
+    end  
   end
 
   def show

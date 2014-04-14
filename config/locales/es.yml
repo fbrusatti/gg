@@ -1,11 +1,31 @@
 es:
+  faker:
+    name:
+      category: [ Remera, Buzo, Pant Corto, Pant largo, Medias, Pechera, Musculosa, Calza, Remera Termicam, Zapatilla, Botines, Guante Arquero, Vendas, Gorro ]
+      category_id: [ 1, 2, 3 ]
+      description: [ Pantalon Rojo, Pantalon Verde, Pantalon Azul, Pantalon Negro, Pantalon Blanco, Remera Roja, Remera Verde, Remera Azul, Remera Negra, Remera Roja, Remera Blanca ]
+      money: [ peso, dolar ]
+      symbol: [ $, U$S]
+      vat: [ 1.21, 3.21 ]
+      cuit_cuil: [ 20 12345678 1, 20 12987678 4, 20 98765432 5, 24 98712365 7, 24 10293847 6 ]
+      type_iva: [ Consumidor Final, Excento de Iva, Monotributista, Responsable Inscripto ]
+      bank: [ Banco Nacion, Banco Cordoba, HSBC, Santander Rio, Standar Bank, Credicop ]
   sub_header:
       new: Nuevo
       cancel: Cancelar
       print: Imprimir
       save: Guardar
       edit: Editar
+  vats:
+    new_vat_modal:
+      new_vat: Nuevo IVA
+      percentaje: Porcentaje
+      save: Agregar    
   categories:
+    new_category_modal:
+      new_category: Nueva Categoría
+      save: Agregar
+      referrer_id: Categoria Padre    
     new_category: Nueva Categoría
     add: Agregar
     index:
@@ -29,20 +49,67 @@ es:
       this_month: Este Mes
       last_month: Ultimo Mes
   invoices:
+    data_check:
+      save: Guardar
+    table_check:
+      number: Numero
+      emmiter: Emisor
+      date_of_emission: Fecha de Emision
+      day_of_pay: Fecha de pago
+      amount: Monto
+      state: Estado
+      actions: Acciones
+    pay_invoice:
+      amount_check: Monto Cheque
+      check_pay: Pago en Cheque
+      cash_pay: Pago en Efectivo
+      amount: Total
+    cash_transaction:
+      amount_cash: Monto Efectivo
+      amount: Total
+      cash: Efectivo
+    check_transactions:
+      check: Cheque
+      amount_check: Monto Cheque
+    states:
+      confirmed: Confirmada
+      paid: Pagada
+      canceled: Cancelada
+      partially_paid: Parcialmente Paga
+    index:
+      number: Numero
+      type: Tipo
+      customer: Cliente
+      state: Estado
+      total: Monto
+      date: Fecha
     unit_price: Precio Unitario
     remove: Acciones
     sub_header:
       save_finish: Confirmar
       save_building: En Construcción
-      cancel: Cancelar
+      cancel: Borrar
       invoice: Factura
+      confirm_msg_1: ¿Está seguro que desea confirmar la operación?
+      confirm_msg_2: Si la confirma ya no podrá modificarla y de haber stock vinculado se modificará.
     new:
+      type: Tipo
+      date: Fecha
       data: Datos
-      list: Lista
       pay_mode: Forma de Pago
       preview: Vista Previa
       search_products: Buscar Productos
+      search_customer: Buscar Cliente
       total_price: Total $
+    customer:
+      search_customer: Buscar Cliente
+      sr: Señores
+      address: Domicilio
+      cuit_cuil: C.U.I.T
+      gross_income: Ing. Brutos
+      iva: I.V.A
+      phone: Telefono
+      cellphone: Celular
   layouts:
     header:
       clients: Clientes
@@ -96,7 +163,20 @@ es:
         price_vat: Iva %
         price_descount: Descuento %
         total_price: Sub Total $
+      invoice:
+        price_vat: Iva
+        price_descount: Descuento
+        total_price: Precio Total
+        customer: Cliente
+        cash: Efectivo
+        amount_cash: Monto Efectivo
+        amount_check: Monto Cheque
+        check: Cheque
+        check_pay: Pago en Cheque  
       receipt:
+        price_vat: Iva
+        price_descount: Descuento
+        total_price: Precio Total
         customer: Cliente
         cash: Efectivo
         amount_cash: Monto Efectivo
@@ -186,7 +266,16 @@ es:
         net_cost: Costo Neto
         shelf: Estanteria
         stock: Stock
+        category_ids: Categoria
   checks:
+    update_check:
+      save: Actualizar
+    new_check:
+      save: Guardar
+    new_check_row:
+      delete: Eliminar
+      show: Ver
+      edit: Editar  
     sub_header:
       new: Nuevo
       cancel: Cancelar
@@ -203,6 +292,9 @@ es:
     index:
       last_date: Ultimas Fechas
   banks:
+    new_bank_modal:
+      save: Guardar
+      new_bank: Agregar Banco
     new_location:
       new_location: Nueva localidad
       save: Agregar
@@ -227,21 +319,40 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    errors:
+      not_customer: Debe seleccionar un Cliente para realizar el recibo
+      not_amount: No puede realizar un recibo con monto nulo. Seleccione pago en cheque o efectivo
+    data_check:
+      save: Guardar
     sub_header:
+      new: Nuevo
+      cancel: Borrar
+      print: Imprimir
+      save: Guardar
+      edit: Editar
       receipt: Recibos
     new:
       data: Datos
       pay_form: Forma de Pago
       preview: Vista Previa
+    table_check:
+      number: Numero
+      emmiter: Emisor
+      date_of_emission: Fecha de Emision
+      day_of_pay: Fecha de pago
+      amount: Monto
+      state: Estado
+      actions: Acciones
     pay_receipt:
+      amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
       amount: Total
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total
-      cash: Efectivo  
-    transactions:
+      cash: Efectivo
+    check_transactions:
       check: Cheque
       amount_check: Monto Cheque
     data_receipt:
@@ -296,6 +407,11 @@ es:
       minimun_stock: Stock Minimo
       list_price_one: Precio de lista 1
       list_price_two: Precio de lista 2
+      gondola: Gondola
+      shelf: Estanteria
+      find_category: Categoría
+      find_code: Código
+      find_description: Descripción
     show_product_data:
       money: Moneda
       vat: IVA
@@ -375,6 +491,9 @@ es:
       save: Guardar
       edit: Editar
   customers:
+    new_customer_modal:
+      new_customer: Agregar Cliente
+      save: Guardar  
     type_person:
       customer: Cliente
       supplier: Proveedor
@@ -385,6 +504,7 @@ es:
       registered_taxpayer: Responsable Inscripto
     index_customer_data:
       today: Hoy
+      registered_name: Razón Social
       yesterday: Ayer
       last_7_days: Ultimos 7 Dias
       last_30_days: Ultimos 30 Dias
@@ -408,7 +528,7 @@ es:
       customer_data: Datos Personales
     new:
       customer_data: Datos Personales
-    new_customer_data:
+    customer_data:
       comercial_data: Datos Comerciales
       customer_data: Datos Personales
     show:
@@ -448,6 +568,7 @@ es:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
     hintText_surname: "Ingrese el código del producto"
+    hintText_category: "Ingrese el nombre de la categoria"
     searchingText: "Buscando"
   active_admin:
     category: Categoría
@@ -540,12 +661,14 @@ es:
     customer: "Se ha %{message} exitosamente el Cliente"
     bank: "Se ha %{message} exitosamente el Banco"
     check: "Se ha %{message} exitosamente el Cheque"
+    receipt: "Se ha %{message} exitosamente el Recibo"
     location: "Se ha %{message} exitosamente la Localidad"
     error_update_form: Hubo un problema al actulizar
     error_create_form: Hubo un problema al crear
     created: creado
     destroyed: borrado
     updated: actualizado
+    select_customer: Debe seleccionar un cliente
   views:
     pagination:
         truncate: "..."

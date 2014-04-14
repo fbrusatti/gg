@@ -1,0 +1,9 @@
+.pay-invoice
+  .left
+    .title 
+      = t('.check_pay')
+    = render 'check_transactions', f: f
+  .right
+    .title
+      = t('.cash_pay')  
+    = render 'cash_transaction', f: f

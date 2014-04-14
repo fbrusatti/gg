@@ -2,6 +2,9 @@
   .left
     .title= t('.customer_data')
     .input
+      = label_tag t('.registered_name')
+      = label_tag @customer.registered_name, nil, class: "pretty-input"
+    .input
       = label_tag t('.name')
       = label_tag  @customer.name ,nil , class: "pretty-input"
     .input
@@ -11,28 +14,27 @@
       = label_tag t('.dni')
       = label_tag  @customer.dni ,nil , class: "pretty-input"
     .input
-      = label_tag t('.cuit_cuil')
-      = label_tag  @customer.cuit_cuil ,nil , class: "pretty-input"  
-    .input
       = label_tag t('.address')
       = label_tag @customer.address, nil, class: "pretty-input"
-    .input
-      = label_tag t('.email')
-      = label_tag @customer.email, nil, class: "pretty-input"
     .input
       = label_tag t('.phone')
       = label_tag  @customer.phone , nil, class: "pretty-input"
     .input
       = label_tag t('.mobile_phone')
       = label_tag  @customer.mobile_phone , nil, class: "pretty-input"
+
   .right
-    .title= t('.comercial_data')    
+    .title= t('.comercial_data')
+    .input
+      = label_tag t('.type_iva')
+      = label_tag @customer.type_iva, nil, class: "pretty-input"
+    .input
+      = label_tag t('.cuit_cuil')
+      = label_tag  @customer.cuit_cuil ,nil , class: "pretty-input"
     .input
       = label_tag t('.gross_income')
       = label_tag @customer.gross_income, nil, class: "pretty-input"
     .input
-      = label_tag t('.registered_name')
-      = label_tag @customer.registered_name, nil, class: "pretty-input"      
-    .input
-      = label_tag t('.type_iva')
-      = label_tag @customer.type_iva, nil, class: "pretty-input"  
+      = label_tag t('.email')
+      = label_tag @customer.email, nil, class: "pretty-input"
+
