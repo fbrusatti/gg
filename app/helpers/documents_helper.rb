@@ -1,10 +1,10 @@
 module DocumentsHelper
-
   STATES = %w(init finish building)
   DOCUMENT_TYPE = %w(A B C)
   DOCUMENT_NAME = %w(Invoice Receipt)
   BALANCE_TYPE = %w(debts not_debts)
   ANNUL_STATUS = %w(annul not_annul)
+
   def document_states
     STATES.map { |s| [I18n.t("invoices.states.#{s}"), s]}
   end
@@ -30,6 +30,14 @@ module DocumentsHelper
                           : I18n.t('documents.document_status.not_annul')
     label = document.annul ? 'label label-danger' : 'label label-success'
     return text, label
+  end
+
+  def payment_condition(document)
+    result =  case document.payment_condition
+    when "1" then I18n.t("docuements.payment_condition.current_acount")
+    when "2" then I18n.t("docuements.payment_condition.cash")
+    end
+    return result
   end
 
 end

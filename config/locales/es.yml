@@ -67,7 +67,7 @@ es:
       amount: Total
     card_transaction:
       amount_card: Monto Tarjeta
-      card: Tarjeta  
+      card: Tarjeta
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total
@@ -289,11 +289,11 @@ es:
       new: Nueva
     card_type:
       debit: Debito
-      credit: Credito  
+      credit: Credito
     new_card_data:
       save: Guardar
     card_data: Datos de Tarjeta
-    additional_data: Datos Adicionales      
+    additional_data: Datos Adicionales
   checks:
     update_check:
       save: Actualizar
@@ -373,7 +373,7 @@ es:
       expirate_at: Fecha de Vencimiento
       number: Nro. Tarjeta
       type_card: Tipo Tarjeta
-      actions: Acciones  
+      actions: Acciones
     table_check:
       number: Numero
       emmiter: Emisor
@@ -390,7 +390,7 @@ es:
       amount: Total
     card_transaction:
       amount_card: Monto Tarjeta
-      card: Tarjeta   
+      card: Tarjeta
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total
@@ -622,6 +622,9 @@ es:
       balance: Deuda
       payment_condition: Condición
       annul: Estado
+    payment_condition:
+      cash: Contado
+      current_acount: Cuenta Corriente
     options:
       invoice: Factura
       budget: Presupuesto
