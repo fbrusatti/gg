@@ -283,6 +283,9 @@ es:
         stock: Stock
         category_ids: Categoria
   cards:
+    new_card_row:
+      show: Ver
+      delete: Eliminar
     show_card:
       new: Nueva
     card_type:

@@ -5,7 +5,7 @@
       .input
         = f.label :name
         = f.collection_select :name,
-                            Card.all,
+                            Card.select("DISTINCT name"),
                             :name, :name,
                             { :include_blank => true}, class: "pretty-input"
         %a#openBtn-name-card

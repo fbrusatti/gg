@@ -1,26 +1,32 @@
-.data-card
+.show-card
   = form_for(@card) do |f|
     .left
       .title= t('cards.card_data')
       .input
-        = f.label :name
+        .text
+          = f.label :name  
         = label_tag @card.name, nil, class: "pretty-input"
       .input
-        = f.label :type_card
+        .text
+          = f.label :type_card
         = label_tag @card.type_card, nil, class: "pretty-input"
       .input
-        = f.label :amount
+        .text
+          = f.label :amount
         = label_tag @card.amount, nil, class: "pretty-input"
     .right
       .title= t('cards.additional_data')
       .input
-        = f.label :number
+        .text
+          = f.label :number
         = label_tag @card.number, nil, class: "pretty-input"
       .input
-        = f.label :code
+        .text
+          = f.label :code
         = label_tag @card.code, nil, class: "pretty-input"
       .input
-        = f.label :expirate_at
+        .text
+          = f.label :expirate_at
         = label_tag @card.expirate_at, nil, class: "pretty-input"
       .input
         %a.button-new-card

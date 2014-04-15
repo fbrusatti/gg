@@ -159,6 +159,31 @@
 
   }
 
+  .show-card {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      .text {
+        label {
+          @extend .col-lg-3, .control-label;
+        }
+      } 
+      label {
+        @extend .col-lg-6;
+      }
+    }  
+    .input-group-addon {
+      font-size: 19px;
+    }
+  }
+
+  .show-card .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
   .data-check .left, .right {
     @include make-lg-column(6);
     .title { font-size: 15pt;
