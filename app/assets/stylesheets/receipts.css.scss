@@ -24,7 +24,7 @@
      @extend .btn, .btn-xs, .btn-danger;
   }
 
-  .button-save, .button-update, .button-save-card {
+  .button-save, .button-update, .button-save-card, .button-new-card  {
     @extend .btn, .btn-primary;
     margin-right: 5px;
     @extend .col-lg-2, .col-lg-offset-7

@@ -6,7 +6,8 @@
   %td= @card.code
   %td= @card.amount
   %td
-    %a.button-show{ href: @card }
+    %a.button-show{ onclick: "showCard(this)" }
       = t('.show')
-    %a.button-delete{ id: "delete-card", onclick: "deleteRow(this)" }  
+    %a.button-delete{  onclick: "deleteRowCard(this)" }  
       = t('.delete')
+%input{id: "card-amount-row", type: "hidden", value: @card.amount}      

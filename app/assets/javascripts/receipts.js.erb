@@ -109,27 +109,40 @@ $(document).ready(function() {
 
   $(document).on("click", "a.button-save-card", function(){
     $("#receipts #new_card").submit();
+    amountAuxCard = parseFloat($('#card_amount').val());
   });
 
-  var showCardTable = false;
+  $(document).on("click", "a.button-new-card", function(){
+    $.ajax({
+      type: "GET",
+      url: "/cards/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#new-card').html(data);
+      $('#new-card').show('slow');
+    });  
+  });
+
+  var amountAuxCard, showCardTable = false, amountCard = 0;
   $(document).on('ajax:success','#receipts #new_card', function(evt, data, status, xhr){
     $('#receipts #table-of-card').append(data);
     $('#receipts #table-of-card tr:last').effect("highlight", {}, 3000);
     $('#receipts #table-of-card').show("slow");
-    $('#delete-card').attr("onclick", "deleteRow(this)");
+    $('#delete-card').attr("onclick", "deleteRowCard(this)");
     $('#receipts #new_card')[0].reset();
-    var ids = $('#receipt_card_ids').val();
-    if (ids == "") {
-      ids = $(data).data("card-id");
+    var ids_card = $('#receipt_card_ids').val();
+    if (ids_card == "") {
+      ids_card = $(data).data("card-id");
     } else {
-      ids = ids + "," + $(data).data("card-id");
+      ids_card = ids_card + "," + $(data).data("card-id");
     }
-    $('#receipt_card_ids').val(ids);
+    $('#receipt_card_ids').val(ids_card);
     showCardTable = true;
-    // amountCheck = amountCheck + amountAux;
-    // $("#receipts #amount_check").text(amountCheck)
-    // amount = amountCash + amountCheck;
-    // $("#receipts #amount").text(amount);
+    amountCard = amountCard + amountAuxCard;
+    $("#receipts #amount_card").text(amountCard);
+    amount = amountCash + amountCheck + amountCard;
+    $("#receipts #amount").text(amount);
   });
 
   var amountAux, showCheckTable = false, amountCheck = 0;
@@ -149,8 +162,8 @@ $(document).ready(function() {
     $('#receipt_check_ids').val(ids);
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
-    $("#receipts #amount_check").text(amountCheck)
-    amount = amountCash + amountCheck;
+    $("#receipts #amount_check").text(amountCheck);
+    amount = amountCash + amountCheck + amountCard;
     $("#receipts #amount").text(amount);
   });
 
@@ -168,11 +181,18 @@ $(document).ready(function() {
     if (showCheckTable) {
       $('#receipts #table-of-check').show("slow");
     }
+    if ($("#receipts #receipt_card").prop('checked')) {
+      $('#receipts #data-card').show("slow");
+    }
+    if (showCardTable) {
+      $('#receipts #table-of-card').show("slow");
+    }  
   });
 
   $("#data-tab").on('click', function(){
     $('#receipts #data-check').hide();
     $('#receipts #table-of-check').hide();
+    $('#receipts #table-of-card').hide();
   });
 
   var ajaxCardResponded = false;
@@ -206,7 +226,7 @@ $(document).ready(function() {
       $('#receipts #data-card').show("slow");
     } else {
       $('#receipts #data-card').hide("slow");
-      check.parents(".thorizontal").siblings().hide();
+      card.parents(".thorizontal").siblings().hide();
     }
   });
 
@@ -258,7 +278,7 @@ $(document).ready(function() {
   var amountCash = 0, amount = 0;
   $("#receipt_amount_cash").on('change', function(){
     amountCash = parseFloat(this.value);
-    amount = amountCash + amountCheck;
+    amount = amountCash + amountCheck + amountCard;
     $("#receipts #amount").text(amount);
   })
 
@@ -310,6 +330,39 @@ function deleteRow(btn) {
     amount = parseFloat($("#amount").text()) - amountDeleted;
     $("#amount").text(amount);
   });
+}
+
+function deleteRowCard(btn) {
+  var row = btn.parentNode.parentNode;
+  cardDelete = $(row).data('card-id');
+  amountDeletedCard = parseFloat($('#card-amount-row').val());
+  $.ajax({
+    type: "DELETE",
+    url: "/cards/" + cardDelete,
+    dataType: "json",
+  })
+  .done(function(data, textStatus, xhr){
+    row.parentNode.removeChild(row);
+    amountCard = parseFloat($("#amount_card").text());
+    amountCard = amountCard - amountDeletedCard;
+    $("#amount_card").text(amountCard);
+    amount = parseFloat($("#amount").text()) - amountDeletedCard;
+    $("#amount").text(amount);
+  });
+}
+
+function showCard(btn) {
+  var row = btn.parentNode.parentNode;
+  cardShow = $(row).data('card-id');
+  $.ajax({
+    type: "GET",
+    url: "/cards/" + cardShow,
+    dataType: "html",
+  })
+  .done(function(data, textStatus, xhr){
+    $('#new-card').html(data);
+    $('#new-card').show('slow');
+  });  
 }
 
 var checkUpdate;
@@ -381,7 +434,7 @@ function calculateAmount(oTable) {
 }
 
 function hiddenInputs () {
-  var check, cash;
+  var check, cash, card;
   check = $('#receipts #check');
   cash = $('#receipts #cash');
   card = $('#receipts #receipt_card');

@@ -283,6 +283,8 @@ es:
         stock: Stock
         category_ids: Categoria
   cards:
+    show_card:
+      new: Nueva
     card_type:
       debit: Debito
       credit: Credito  

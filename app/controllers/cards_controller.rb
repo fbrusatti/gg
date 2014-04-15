@@ -20,4 +20,19 @@ class CardsController < ApplicationController
     end
   end
 
+  def show
+    @card = Card.find(params[:id])
+    respond_to do |format|
+      format.html { render partial: "show_card" }
+      format.json { render json: @card }
+      format.js
+    end
+  end
+
+  def destroy
+    ids = params[:id].split(",")
+    ids.map { |c| Card.find(c).destroy }
+    respond_with @card
+  end
+
 end
