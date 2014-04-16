@@ -65,6 +65,9 @@ es:
       cash_pay: Pago en Efectivo
       card_pay: Pago en Tarjeta
       amount: Total
+    card_transaction:
+      amount_card: Monto Tarjeta
+      card: Tarjeta  
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total
@@ -144,6 +147,13 @@ es:
         message_name: "no ingresado, ingrese el nombre"
         message_surname: "no ingresado, ingrese el apellido"
     attributes:
+      card:
+        name: Nombre
+        type_card: Tipo
+        amount: Monto
+        code: Código
+        expirate_at: Vencimiento
+        number: Nro. Tarjeta
       check:
         check_number: Número de cheque
         account: Número de cuenta
@@ -272,6 +282,19 @@ es:
         shelf: Estanteria
         stock: Stock
         category_ids: Categoria
+  cards:
+    new_card_row:
+      show: Ver
+      delete: Eliminar
+    show_card:
+      new: Nueva
+    card_type:
+      debit: Debito
+      credit: Credito  
+    new_card_data:
+      save: Guardar
+    card_data: Datos de Tarjeta
+    additional_data: Datos Adicionales      
   checks:
     update_check:
       save: Actualizar
@@ -324,6 +347,10 @@ es:
     hintText_surname: "Ingrese el apellido"
     searchingText: "Buscando"
   receipts:
+    new_name_card:
+      add: Guardar
+      new_name: Nueva Tarjeta
+      name: Nombre de Tarjeta
     errors:
       not_customer: Debe seleccionar un Cliente para realizar el recibo
       not_amount: No puede realizar un recibo con monto nulo. Seleccione pago en cheque o efectivo
@@ -340,6 +367,14 @@ es:
       data: Datos
       pay_form: Forma de Pago
       preview: Vista Previa
+    table_card:
+      name: Tarjeta
+      code: Código
+      amount: Monto
+      expirate_at: Fecha de Vencimiento
+      number: Nro. Tarjeta
+      type_card: Tipo Tarjeta
+      actions: Acciones  
     table_check:
       number: Numero
       emmiter: Emisor
@@ -352,7 +387,11 @@ es:
       amount_check: Monto Cheque
       check_pay: Pago en Cheque
       cash_pay: Pago en Efectivo
+      card_pay: Pago en Tarjeta
       amount: Total
+    card_transaction:
+      amount_card: Monto Tarjeta
+      card: Tarjeta   
     cash_transaction:
       amount_cash: Monto Efectivo
       amount: Total

@@ -11,6 +11,7 @@
     = errors_for(@receipt).html_safe
     = f.hidden_field :check_ids, value: ""
     = f.hidden_field :invoice_ids, value: ""
+    = f.hidden_field :card_ids, value: ""
     .receipts-tabs-content
       #data.tab-pane.active
         = render 'data_receipt', f: f
@@ -18,7 +19,12 @@
         = render 'pay_receipt', f: f
       #preview.tab-pane
     = f.submit hidden: true
+  #data-card
+    #new-card  
+  = render 'table_card'  
   #data-check
     #new-check
   = render 'table_check'
   #bank-modal.modal.fade
+  #card-modal.modal.fade
+    = render 'new_name_card'
