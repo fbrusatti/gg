@@ -31,8 +31,9 @@ class CardsController < ApplicationController
 
   def destroy
     ids = params[:id].split(",")
-    ids.map { |c| Card.find(c).destroy }
-    respond_with @card
+    status =  Card.delete_all(["id in (?)", ids]) ? :ok : :not_found
+    debugger
+    respond_with status
   end
 
 end
