@@ -4,7 +4,7 @@ class Document < ActiveRecord::Base
   attr_accessible :type, :number, :recharge, :amount, :balance, :state,
                   :expiration_date, :payment_condition, :active, :annul,
                   :creation_state, :customer_tokens, :amount_cash, :document_id,
-                  :check_ids, :invoice_ids, :invoice_type
+                  :check_ids, :invoice_ids, :invoice_type, :emission_at
 
   attr_reader :customer_tokens
 

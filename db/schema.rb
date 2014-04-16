@@ -11,6 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+
 ActiveRecord::Schema.define(:version => 20140416142844) do
 
   create_table "active_admin_comments", :force => true do |t|
@@ -128,14 +129,14 @@ ActiveRecord::Schema.define(:version => 20140416142844) do
   create_table "documents", :force => true do |t|
     t.string   "type"
     t.integer  "number"
-    t.decimal  "recharge",          :precision => 8, :scale => 2
-    t.decimal  "amount",            :precision => 8, :scale => 2
-    t.decimal  "balance",           :precision => 8, :scale => 2
+    t.decimal  "recharge",          :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "amount",            :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "balance",           :precision => 8, :scale => 2, :default => 0.0
     t.string   "state"
     t.date     "expiration_date"
     t.string   "payment_condition"
-    t.boolean  "active"
-    t.boolean  "annul"
+    t.boolean  "active",                                          :default => true
+    t.boolean  "annul",                                           :default => false
     t.integer  "customer_id"
     t.integer  "user_id"
     t.integer  "supplier_id"
@@ -145,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20140416142844) do
     t.decimal  "amount_cash",                                     :default => 0.0
     t.decimal  "amount_check",                                    :default => 0.0
     t.string   "invoice_type"
+    t.date     "emission_at"
   end
 
   add_index "documents", ["creation_state"], :name => "index_documents_on_creation_state"

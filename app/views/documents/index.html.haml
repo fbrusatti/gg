@@ -1,0 +1,36 @@
+#documents
+  .index-container
+    .index-row
+      %table#documents_table.display{ "data-source" => documents_url(format: "json") }
+        %thead
+          %tr
+            %th
+            %th= select_tag :document_name,
+                            options_for_select(document_name),
+                            { include_blank: true, class: 'pretty-input-datatable' }
+            %th= select_tag :document_type,
+                            options_for_select(document_type),
+                            { include_blank: true, class: 'pretty-input-datatable' }
+            %th
+            %th
+            %th
+            %th
+            %th=select_tag :balance_type,
+                            options_for_select(balance_type),
+                            { include_blank: true, class: 'pretty-input-datatable' }
+            %th
+            %th=select_tag :annul,
+                            options_for_select(annul_status),
+                            { include_blank: true, class: 'pretty-input-datatable' }
+          %tr
+            %th= t('.id')
+            %th= t('.name')
+            %th= t('.type')
+            %th= t('.number')
+            %th= t('.customer')
+            %th= t('.date')
+            %th= t('.total')
+            %th= t('.balance')
+            %th= t('.payment_condition')
+            %th= t('.annul')
+        %tbody

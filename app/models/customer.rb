@@ -13,8 +13,8 @@ class Customer < ActiveRecord::Base
   belongs_to :user
   has_many :invoices
 
-  def name_to_invoice
-    registered_name || "#{name} #{surname}"
+  def complete_name
+    registered_name || "#{surname}, #{name}"
   end
 
 

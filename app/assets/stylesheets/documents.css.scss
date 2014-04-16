@@ -1,0 +1,65 @@
+@import "bootstrap";
+
+#documents {
+
+  // sub header
+  // ----------
+  .sub-header {
+    display: block;
+    padding: 5px;
+  }
+
+  .title-sub-header {
+    padding-left: 30px;
+    font-size:30px;
+    margin-top: 10px;
+    display: inline
+  }
+
+  .sub-header > a{
+    margin: 5px;
+  }
+
+  // Tabs
+  // ----
+  .documents-tabs {
+    @extend .nav, .nav-tabs;
+    li > a {
+      @extend .btn, .btn-xs, .btn-primary;
+      &:hover {
+        color: #418AE2;
+        background-color: #6BC9F8;
+      }
+    }
+  }
+  .documents-tabs-content { @extend .tab-content }
+
+  .line-separator {
+    height: 1px;
+    background: #717171;
+    border-bottom: 1px solid #313030;
+    margin-bottom: 10px;
+  }
+
+
+  // index document
+  // -------------
+  .index-container { @extend .container; width: 98% }
+  .index-row { @extend .row }
+  .pretty-input-datatable { @extend .form-control }
+  .primary { @extend .label-primary }
+  .success { @extend .label-success }
+  .default { @extend .label-default }
+  .danger { @extend .label-danger }
+  .info { @extend .label-info }
+
+
+  .data-check .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
+  #table-of-check { @extend .table, .table-bordered, .table-striped }
+}
+

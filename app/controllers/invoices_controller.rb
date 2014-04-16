@@ -27,7 +27,7 @@ class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.find params[:id]
     @invoice.update_attributes params[:invoice]
-    respond_with @invoice, location: invoices_path
+    respond_with @invoice, location: documents_path
   end
 
   def destroy
