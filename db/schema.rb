@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-
-ActiveRecord::Schema.define(:version => 20140416142844) do
+ActiveRecord::Schema.define(:version => 20140417231156) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -69,7 +68,10 @@ ActiveRecord::Schema.define(:version => 20140416142844) do
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
     t.boolean  "annul",       :default => false
+    t.integer  "document_id"
   end
+
+  add_index "cards", ["document_id"], :name => "index_cards_on_document_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -95,9 +97,10 @@ ActiveRecord::Schema.define(:version => 20140416142844) do
     t.string   "check_status"
     t.boolean  "is_proper"
     t.integer  "bank_id"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
     t.integer  "document_id"
+    t.boolean  "annul",                                       :default => false
   end
 
   add_index "checks", ["check_number"], :name => "index_checks_on_check_number"
@@ -162,9 +165,10 @@ ActiveRecord::Schema.define(:version => 20140416142844) do
     t.decimal  "price_sale",     :precision => 8,  :scale => 2
     t.decimal  "price_vat",      :precision => 8,  :scale => 2
     t.decimal  "price_descount", :precision => 8,  :scale => 2
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
     t.decimal  "total_price",    :precision => 10, :scale => 2
+    t.boolean  "annul",                                         :default => false
   end
 
   add_index "items", ["document_id", "product_id"], :name => "index_items_on_document_id_and_product_id"
