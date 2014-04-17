@@ -34,8 +34,8 @@ module DocumentsHelper
 
   def payment_condition(document)
     result =  case document.payment_condition
-    when "1" then I18n.t("docuements.payment_condition.current_acount")
-    when "2" then I18n.t("docuements.payment_condition.cash")
+    when "1" then I18n.t("documents.payment_condition.current_acount")
+    when "2" then I18n.t("documents.payment_condition.cash")
     end
     return result
   end

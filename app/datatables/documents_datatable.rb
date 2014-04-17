@@ -29,7 +29,7 @@ private
         print_date(document.emission_at, :date),
         number_to_currency(document.amount, precision: 2),
         state_balance(document),
-        h(document.payment_condition),
+        h(payment_condition(document)),
         h(document_annul(document))
       ]
     end
@@ -69,7 +69,7 @@ private
       sing = params[:sSearch_9] == "annul"
       documents = documents.where(annul: sing)
     end
-    documents
+    documents.includes(:customer)
   end
 
   def page

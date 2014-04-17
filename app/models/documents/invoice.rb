@@ -65,8 +65,8 @@ class Invoice < Document
 
     def is_current_acount
       return false if amount_cash > 0 ||
-                   self.checks.count > 0
-                   # ||  self.cards.count > 0
+                      checks.present? ||
+                      cards.present?
       return true
     end
     def set_balance
