@@ -75,7 +75,7 @@ private
   end
 
   def customer(invoice)
-    name, path = invoice.customer.try(:name_to_invoice) || "", invoice.customer
+    name, path = invoice.customer.try(:complete_name) || "", invoice.customer
     link_to name, path
   end
 

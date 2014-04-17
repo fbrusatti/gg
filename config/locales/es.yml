@@ -79,10 +79,9 @@ es:
       card: Tarjeta
       amount_card: Monto Tarjeta
     states:
-      confirmed: Confirmada
-      paid: Pagada
-      canceled: Cancelada
-      partially_paid: Parcialmente Paga
+      building: Construcción
+      init: Iniciada
+      finish: Confirmada
     index:
       number: Numero
       type: Tipo
@@ -599,6 +598,27 @@ es:
       save: Guardar
       edit: Editar
   documents:
+    document_balance:
+      debts: Debe
+      not_debts: Cancelado
+    document_name:
+      Invoice: Factura
+      Receipt: Recibo
+    document_status:
+      annul: Anulado
+      not_annul: Activo
+    index:
+      id: Id
+      name: Nombre
+      number: Numero
+      type: Tipo
+      customer: Cliente
+      state: Estado
+      total: Monto
+      date: Emisión
+      balance: Deuda
+      payment_condition: Condición
+      annul: Estado
     options:
       invoice: Factura
       budget: Presupuesto
