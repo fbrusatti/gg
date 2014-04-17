@@ -402,9 +402,12 @@ es:
       customer_data: Datos del Cliente
       receipt_data: Datos del Recibo
       id: Id
+      emission_at: Emitida
+      type: Tipo
+      number: Número
       customer_id: Id Cliente
       amount: Monto
-      balance: balance
+      balance: Debe
       type_vat: Tipo de IVA
       registered_name: Razón Social
       date: Fecha

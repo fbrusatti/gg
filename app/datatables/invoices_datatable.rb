@@ -22,7 +22,9 @@ private
     invoices_list.map do |invoice|
       [
         h(invoice.id),
-        h(invoice.customer_id),
+        h(invoice.type),
+        h(invoice.number),
+        h(invoice.emission_at),
         h(invoice.amount),
         h(invoice.balance)
       ]
@@ -37,8 +39,9 @@ private
     invoices_list = @customer.invoices.order("#{sort_column} #{sort_direction}")
     invoices_list = invoices_list.page(page).per_page(per_page)
     if params[:sSearch].present?
-      invoices_list = invoices_list.where("amount ilike :search or balance ilike :search", 
-                                  search: "%#{params[:sSearch]}%")
+      invoices_list = invoices_list.where("amount ilike :search or balance ilike :search
+                                           emission_at ilike :search or number ilike :search", 
+                                           search: "%#{params[:sSearch]}%")
     end
     invoices_list
   end
@@ -52,7 +55,7 @@ private
   end
 
   def sort_column
-    columns = %w[id customer_id amount balance]
+    columns = %w[id type number emission_at amount balance]
     columns[params[:iSortCol_0].to_i]
   end
 
