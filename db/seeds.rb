@@ -61,8 +61,8 @@ def create_product
                    vat_id:         Vat.last.id,
                    cost_price:     Faker::Number.number(2).to_f,
                    minimun_stock:  min_stock,
-                   stock:          min_stock.to_i + 2,
-                   list_price_one: Faker::Number.number(2).to_f)
+                   stock:          min_stock.to_i + 22,
+                   list_price_one: Faker::Number.number(1).to_f)
   end
 end
 
