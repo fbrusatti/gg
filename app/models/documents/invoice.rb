@@ -13,7 +13,9 @@ class Invoice < Document
 
   # == Callbakcs
   before_save :generate_number, :set_dates, :set_payment_condition,
-               :change_state, :set_balance, if: Proc.new { |i| i.creation_state == 'finish' }
+               :change_state, :set_balance, :set_total_price_item ,
+                            if: Proc.new { |i| i.creation_state == 'finish' }
+
   after_save :descount_amount,  if: Proc.new { |i| i.creation_state == 'finish' }
 
 
