@@ -147,7 +147,7 @@ $(document).ready(function() {
     $('#receipts #table-of-card').show("slow");
     $('#delete-card').attr("onclick", "deleteRowCard(this)");
     $('#receipts #new_card')[0].reset();
-    var ids_card = $('#receipt_card_ids').val();
+    ids_card = $('#receipt_card_ids').val();
     if (ids_card == "") {
       ids_card = $(data).data("card-id");
     } else {
@@ -223,6 +223,7 @@ $(document).ready(function() {
     }
     $('#receipt_check_ids').val(ids);
     showCheckTable = true;
+    console.log("Soy amountC "+amountCheck);
     amountCheck = amountCheck + amountAux;
     $("#receipts #amount_check").text(amountCheck);
     amount = amountCash + amountCheck + amountCard;
@@ -338,6 +339,7 @@ function deleteRow(btn) {
     $("#amount_check").text(amountCheck);
     amount = parseFloat($("#amount").text()) - amountDeleted;
     $("#amount").text(amount);
+    console.log("Soy em amountCheck: "+amountCheck);
   });
 }
 
