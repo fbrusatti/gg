@@ -5,7 +5,7 @@ class Receipt < Document
   has_many :invoices, :through => :payments
 
   # == Callbacks
-  before_save :calculate_amounts, :discount_invoices
+  before_create :calculate_amounts, :discount_invoices
 
 
   def calculate_amounts
@@ -14,7 +14,7 @@ class Receipt < Document
     checks_array = self.checks
     checks_array.map { |check| self.amount = self.amount + check.amount }
     self.amount = self.amount + self.amount_cash
-    self.balance = self.amount
+    self.balance = self.amount * (-1)
   end
 
   def discount_invoices
@@ -24,16 +24,16 @@ class Receipt < Document
 
   def verify_conditions(invoice)
     if (invoice.balance > 0) 
-      new_balance = (invoice.balance - self.balance)
+      new_balance = (invoice.balance + self.balance)
       if (new_balance <= 0) 
         invoice.balance = 0
         invoice.annul = true
         invoice.save
-        self.balance = new_balance * (-1)
+        self.balance = new_balance
       elsif (new_balance > 0) 
         invoice.balance = new_balance
         invoice.save
-        self.balance = new_balance
+        self.balance = 0
       end
     end 
   end

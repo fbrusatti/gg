@@ -202,6 +202,17 @@
 
   #items div.dataTables_wrapper { padding-top: 10px }
 
+  // Table of documents
+  // -------------
+  .index-container { @extend .container; width: 98% }
+  .index-row { @extend .row }
+  .pretty-input-datatable { @extend .form-control }
+  .primary { @extend .label-primary }
+  .success { @extend .label-success }
+  .default { @extend .label-default }
+  .danger { @extend .label-danger }
+  .info { @extend .label-info }
+
 
   /* Modals */
   .new-bank {

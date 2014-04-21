@@ -1,6 +1,6 @@
 class InvoicesDatatable
   
-  delegate :params, :h, :link_to, :number_to_currency, to: :@view
+  delegate :simple_format, :params, :h, :link_to, :number_to_currency, to: :@view
 
   def initialize(view, customer)
     @view = view
@@ -22,11 +22,11 @@ private
     invoices_list.map do |invoice|
       [
         h(invoice.id),
-        h(invoice.type),
+        state(invoice),
         h(invoice.number),
         h(invoice.emission_at),
         h(invoice.amount),
-        h(invoice.balance)
+        state_balance(invoice)
       ]
     end
   end
@@ -37,6 +37,7 @@ private
 
   def fetch_invoices
     invoices_list = @customer.invoices.order("#{sort_column} #{sort_direction}")
+    invoices_list = invoices_list.where("balance > 0")
     invoices_list = invoices_list.page(page).per_page(per_page)
     if params[:sSearch].present?
       invoices_list = invoices_list.where("amount ilike :search or balance ilike :search
@@ -62,4 +63,21 @@ private
   def sort_direction
     params[:sSortDir_0] == "desc" ? "desc" : "asc"
   end
+
+  def state(document)
+    name = I18n.t("documents.document_name.#{document.type}")
+    klasses = { init: 'default', building: 'info', finish: 'success'}
+    klass = klasses[document.creation_state.try :to_sym]
+    link_to name, document, class: "label #{klass}"
+  end
+
+  def state_balance(document)
+    number = number_to_currency(document.balance, precision: 2)
+    if document.balance.present? && document.balance > 0
+      simple_format number, class: "label danger"
+    else
+      number
+    end
+  end
+
 end
