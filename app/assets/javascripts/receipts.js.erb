@@ -23,6 +23,7 @@ $(document).ready(function() {
     })
   })
 
+  //Select customer in data tab 
   var invoiceTable;
   $('#receipt_customer_tokens').tokenInput('/customers.json', {
     crossDomain: false,
@@ -49,6 +50,24 @@ $(document).ready(function() {
       $("#registered_name_label").text("");
       $('#invoices-table').hide();
     }
+  });
+
+  // Credit card functionality
+  $(document).on("click", "a.button-save-card", function(){
+    $("#receipts #new_card").submit();
+    amountAuxCard = parseFloat($('#card_amount').val());
+  });
+
+  $(document).on("click", "a.button-new-card", function(){
+    $.ajax({
+      type: "GET",
+      url: "/cards/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#new-card').html(data);
+      $('#new-card').show('slow');
+    });  
   });
 
   $(document).on("click", "a#openBtn-name-card", function(){
@@ -86,115 +105,6 @@ $(document).ready(function() {
     return aReturn;
   }
 
-  $(document).on("click", "a#openBtn-bank", function(){
-    $.ajax({
-      type: "GET",
-      url: "/banks/new",
-      dataType: "html"
-    })
-    .done(function(data, textStatus, xhr){
-      $('#bank-modal').html(data);
-      $('#bank-modal').modal('show');
-    })
-  });
-
-  $(document).on('ajax:success', '#new_bank', function(evt, data, status, xhr){
-    $('#bank-modal').modal('hide');
-    $('#check_bank_id')
-      .append($("<option></option>")
-      .attr("value",data.id)
-      .text(data.name + " (" + data.branch_office_number + ")")
-    );  
-  });
-
-  $(document).on("click", "a.button-save-card", function(){
-    $("#receipts #new_card").submit();
-    amountAuxCard = parseFloat($('#card_amount').val());
-  });
-
-  $(document).on("click", "a.button-new-card", function(){
-    $.ajax({
-      type: "GET",
-      url: "/cards/new",
-      dataType: "html"
-    })
-    .done(function(data, textStatus, xhr){
-      $('#new-card').html(data);
-      $('#new-card').show('slow');
-    });  
-  });
-
-  var amountAuxCard, showCardTable = false, amountCard = 0;
-  $(document).on('ajax:success','#receipts #new_card', function(evt, data, status, xhr){
-    $('#receipts #table-of-card').append(data);
-    $('#receipts #table-of-card tr:last').effect("highlight", {}, 3000);
-    $('#receipts #table-of-card').show("slow");
-    $('#delete-card').attr("onclick", "deleteRowCard(this)");
-    $('#receipts #new_card')[0].reset();
-    var ids_card = $('#receipt_card_ids').val();
-    if (ids_card == "") {
-      ids_card = $(data).data("card-id");
-    } else {
-      ids_card = ids_card + "," + $(data).data("card-id");
-    }
-    $('#receipt_card_ids').val(ids_card);
-    showCardTable = true;
-    amountCard = amountCard + amountAuxCard;
-    $("#receipts #amount_card").text(amountCard);
-    amount = amountCash + amountCheck + amountCard;
-    $("#receipts #amount").text(amount);
-  });
-
-  var amountAux, showCheckTable = false, amountCheck = 0;
-
-  $(document).on('ajax:success','#receipts #new_check', function(evt, data, status, xhr){
-    $('#receipts #table-of-check').append(data);
-    $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
-    $('#receipts #table-of-check').show("slow");
-    $('#delete-check').attr("onclick", "deleteRow(this)");
-    $('#receipts #new_check')[0].reset();
-    var ids = $('#receipt_check_ids').val();
-    if (ids == "") {
-      ids = $(data).data("check-id");
-    } else {
-      ids = ids + "," + $(data).data("check-id");
-    }
-    $('#receipt_check_ids').val(ids);
-    showCheckTable = true;
-    amountCheck = amountCheck + amountAux;
-    $("#receipts #amount_check").text(amountCheck);
-    amount = amountCash + amountCheck + amountCard;
-    $("#receipts #amount").text(amount);
-  });
-
-  hiddenInputs();
-
-  // changes the visibility of transactions inputs
-  $("#receipts #cash").on('click', function(e){
-    $(this).parents(".thorizontal").siblings().toggle("show");
-  });
-
-  $("#receipts #pay-tab").on('click', function(){
-    if ($("#receipts #check").prop('checked')) {
-      $('#receipts #data-check').show("slow");
-    }
-    if (showCheckTable) {
-      $('#receipts #table-of-check').show("slow");
-    }
-    if ($("#receipts #receipt_card").prop('checked')) {
-      $('#receipts #data-card').show("slow");
-    }
-    if (showCardTable) {
-      $('#receipts #table-of-card').show("slow");
-    }  
-  });
-
-  $("#data-tab").on('click', function(){
-    $('#receipts #data-check').hide();
-    $('#receipts #table-of-check').hide();
-    $('#receipts #table-of-card').hide();
-  });
-
   var ajaxCardResponded = false;
   $("#receipts #receipt_card").on('click', function(e){
     var card = $("#receipts #receipt_card");
@@ -229,6 +139,39 @@ $(document).ready(function() {
       card.parents(".thorizontal").siblings().hide();
     }
   });
+
+  var amountAuxCard, showCardTable = false, amountCard = 0;
+  $(document).on('ajax:success','#receipts #new_card', function(evt, data, status, xhr){
+    $('#receipts #table-of-card').append(data);
+    $('#receipts #table-of-card tr:last').effect("highlight", {}, 3000);
+    $('#receipts #table-of-card').show("slow");
+    $('#delete-card').attr("onclick", "deleteRowCard(this)");
+    $('#receipts #new_card')[0].reset();
+    ids_card = $('#receipt_card_ids').val();
+    if (ids_card == "") {
+      ids_card = $(data).data("card-id");
+    } else {
+      ids_card = ids_card + "," + $(data).data("card-id");
+    }
+    $('#receipt_card_ids').val(ids_card);
+    showCardTable = true;
+    amountCard = amountCard + amountAuxCard;
+    $("#receipts #amount_card").text(amountCard);
+    amount = amountCash + amountCheck + amountCard;
+    $("#receipts #amount").text(amount);
+  });
+  //End credit card functionality
+
+  //Check functionality
+  $(document).on("click", "a.button-save", function(){
+    $("#receipts #new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
+  });
+
+  $(document).on("click", "a.button-update", function(){
+    $("#receipts #edit_check_" + checkUpdate).submit();
+    amountAux = parseFloat($('#check_amount').val());
+  });  
 
   var ajaxCheckResponded = false;
   $("#receipts #check").on('click', function(e){
@@ -265,16 +208,82 @@ $(document).ready(function() {
     }
   });
 
-  $(document).on("click", "a.button-save", function(){
-    $("#receipts #new_check").submit();
-    amountAux = parseFloat($('#check_amount').val());
+  var amountAux, showCheckTable = false, amountCheck = 0;
+  $(document).on('ajax:success','#receipts #new_check', function(evt, data, status, xhr){
+    $('#receipts #table-of-check').append(data);
+    $('#receipts #table-of-check tr:last').effect("highlight", {}, 3000);
+    $('#receipts #table-of-check').show("slow");
+    $('#delete-check').attr("onclick", "deleteRow(this)");
+    $('#receipts #new_check')[0].reset();
+    var ids = $('#receipt_check_ids').val();
+    if (ids == "") {
+      ids = $(data).data("check-id");
+    } else {
+      ids = ids + "," + $(data).data("check-id");
+    }
+    $('#receipt_check_ids').val(ids);
+    showCheckTable = true;
+    amountCheck = amountCheck + amountAux;
+    $("#receipts #amount_check").text(amountCheck);
+    amount = amountCash + amountCheck + amountCard;
+    $("#receipts #amount").text(amount);
+  });
+  //End check functionality
+
+  //Bank functionality
+  $(document).on("click", "a#openBtn-bank", function(){
+    $.ajax({
+      type: "GET",
+      url: "/banks/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#bank-modal').html(data);
+      $('#bank-modal').modal('show');
+    })
   });
 
-  $(document).on("click", "a.button-update", function(){
-    $("#receipts #edit_check_" + checkUpdate).submit();
-    amountAux = parseFloat($('#check_amount').val());
-  });  
+  $(document).on('ajax:success', '#new_bank', function(evt, data, status, xhr){
+    $('#bank-modal').modal('hide');
+    $('#check_bank_id')
+      .append($("<option></option>")
+      .attr("value",data.id)
+      .text(data.name + " (" + data.branch_office_number + ")")
+    );  
+  });
+  //End bank functionality
 
+  //Changes the visibility of transactions inputs
+  $("#receipts #cash").on('click', function(e){
+    $(this).parents(".thorizontal").siblings().toggle("show");
+  });
+
+  $("#receipts #pay-tab").on('click', function(){
+    if ($("#receipts #check").prop('checked')) {
+      $('#receipts #data-check').show("slow");
+    }
+    if (showCheckTable) {
+      $('#receipts #table-of-check').show("slow");
+    }
+    if ($("#receipts #receipt_card").prop('checked')) {
+      $('#receipts #data-card').show("slow");
+    }
+    if (showCardTable) {
+      $('#receipts #table-of-card').show("slow");
+    }  
+  });
+
+  $("#data-tab").on('click', function(){
+    $('#receipts #data-check').hide();
+    $('#receipts #data-card').hide();
+    $('#receipts #table-of-check').hide();
+    $('#receipts #table-of-card').hide();
+  });
+
+  hiddenInputs();
+  //End visibility transactions
+
+  //Amount cash
   var amountCash = 0, amount = 0;
   $("#receipt_amount_cash").on('change', function(){
     amountCash = parseFloat(this.value);

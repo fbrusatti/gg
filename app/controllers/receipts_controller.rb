@@ -10,7 +10,9 @@ class ReceiptsController < ApplicationController
 
   def create
     @receipt = Receipt.new(params[:receipt])
-    @receipt.amount = @receipt.amount_cash + @receipt.amount_check
+    @receipt.invoice_ids = params[:receipt][:invoice_ids].split(",").map(&:to_i)
+    @receipt.card_ids = params[:receipt][:card_ids].split(",").map(&:to_i)
+    @receipt.check_ids = params[:receipt][:check_ids].split(",").map(&:to_i)
     if @receipt.save
       flash[:success] = t('flash.receipt', message: t('flash.created'))
     end
