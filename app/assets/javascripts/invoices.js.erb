@@ -254,7 +254,7 @@ $(document).ready(function() {
     bProcessing: true,
     bServerSide: true,
     sAjaxSource: $('#invoices #invoices_table').data('source'),
-    "aaSorting": [[ 5, "desc" ]],
+    "aaSorting": [[ 0, "desc" ]],
     fnInitComplete: function(oSettings, json){
       $("thead th").each( function (i) {
           $('select', this).change( function () {

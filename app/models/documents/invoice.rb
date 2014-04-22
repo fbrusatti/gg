@@ -12,8 +12,10 @@ class Invoice < Document
   #           'partially_paid'
 
   # == Callbakcs
-  before_save :generate_number, :set_dates,
-               :change_state, if: Proc.new { |i| i.creation_state == 'finish' }
+  before_save :generate_number, :set_dates, :set_payment_condition,
+               :change_state, :set_balance, :set_total_price_item ,
+                            if: Proc.new { |i| i.creation_state == 'finish' }
+
   after_save :descount_amount,  if: Proc.new { |i| i.creation_state == 'finish' }
 
 
@@ -43,8 +45,10 @@ class Invoice < Document
     end
 
     def generate_number
-      result = Invoice.connection.execute("SELECT nextval('number_no_seq')")
-      self.number = result[0]['nextval']
+      result = Document.where(invoice_type: self.invoice_type,
+               active: true).maximum("number") || 0
+      # result << (Document.connection.execute("SELECT nextval('number_no_seq')"))[0]['nextval']
+      self.number = result + 1
     end
 
     def change_state
@@ -55,4 +59,21 @@ class Invoice < Document
       self.emission_at = Date.today if !self.emission_at.present?
       self.expiration_date = emission_at + 30.day
     end
+
+    def set_payment_condition
+      self.payment_condition = 1
+      self.payment_condition = 2 if !is_current_acount
+    end
+
+    def is_current_acount
+      return false if amount_cash > 0 ||
+                      checks.present? ||
+                      cards.present?
+      return true
+    end
+    def set_balance
+      self.balance = 0
+      self.balance = amount if is_current_acount
+    end
+
 end

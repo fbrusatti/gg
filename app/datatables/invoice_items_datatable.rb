@@ -24,10 +24,10 @@ private
         h(item.product.code),
         h(item.product.description),
         h(item.amount),
-        h(net_cost(item)),
+        h(item.net_cost),
         h(item.price_descount),
         h(item.price_vat),
-        h(price_total(item)),
+        h(item.total_price),
         h(actions(item))
       ]
     end
@@ -35,19 +35,6 @@ private
 
   def items
     @invoice.items.order(:created_at)
-  end
-
-  def price_total item
-    ncost = net_cost item
-    tprice = ncost - ncost * item.price_descount / 100
-    tprice += tprice * item.price_vat / 100
-    tprice = (tprice * item.amount).round 2
-    item.total_price = tprice
-    tprice
-  end
-
-  def net_cost item
-    item.price_cost + (item.price_sale * item.price_cost) / 100
   end
 
   def actions item
