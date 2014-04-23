@@ -49,6 +49,18 @@ es:
       this_month: Este Mes
       last_month: Ultimo Mes
   invoices:
+    table_card:
+      name: Tarjeta
+      code: Código
+      amount: Monto
+      expirate_at: Fecha de Vencimiento
+      number: Nro. Tarjeta
+      type_card: Tipo Tarjeta
+      actions: Acciones
+    new_name_card:
+      add: Guardar
+      new_name: Nueva Tarjeta
+      name: Nombre de Tarjeta
     data_check:
       save: Guardar
     table_check:

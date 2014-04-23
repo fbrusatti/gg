@@ -32,14 +32,8 @@
     @extend .btn, .btn-xs, .btn-primary
   }
 
-  #openBtn-bank {
+  #openBtn-bank, #openBtn-name-card {
     @extend .btn, .btn-primary
-  }
-
-  .button-save-check {
-    @extend .btn, .btn-primary;
-    margin-right: 5px;
-    @extend .col-lg-2, .col-lg-offset-7
   }
 
   .button-show {
@@ -53,6 +47,14 @@
   .button-delete {
     @extend .btn, .btn-danger;
   }
+
+  .button-save, .button-update, .button-save-card, .button-new-card  {
+    @extend .btn, .btn-primary;
+    margin-right: 5px;
+    @extend .col-lg-2, .col-lg-offset-7
+  }
+
+  form#new_invoice, #data-check, #data-card { @extend .container }
 
   // Tabs
   // ----
@@ -218,8 +220,14 @@
              margin: 20px; }
   }
 
+  .data-card .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
   /*Style of new check*/
-  .data-check, .modal-body {
+  .data-check, .data-card, .modal-body {
     @include make-row();
     @extend .form-horizontal;
     .input {
@@ -247,6 +255,33 @@
              margin: 20px; }
   }
 
+  .show-card {
+    @include make-row();
+    @extend .form-horizontal;
+    .input {
+      @extend .form-group;
+      .text {
+        label {
+          @extend .col-lg-3, .control-label;
+        }
+      } 
+      label {
+        @extend .col-lg-6;
+      }
+    }  
+    .input-group-addon {
+      font-size: 19px;
+    }
+  }
+
+  .show-card .left, .right {
+    @include make-lg-column(6);
+    .title { font-size: 15pt;
+             margin: 20px; }
+  }
+
   #table-of-check { @extend .table, .table-bordered, .table-striped }
+
+  #table-of-card { @extend .table, .table-bordered, .table-striped }
 }
 
