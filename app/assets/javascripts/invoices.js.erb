@@ -279,9 +279,9 @@ $(document).ready(function() {
     } 
     if (card.prop('checked')) {
       $(this).parents(".thorizontal").siblings().toggle("show");
-      $('#invoices invoicedata-card').show("slow");
+      $('#invoices #data-card').show("slow");
     } else {
-      $('#invoices invoicedata-card').hide("slow");
+      $('#invoices #data-card').hide("slow");
       card.parents(".thorizontal").siblings().hide();
     }
   });
@@ -324,13 +324,13 @@ $(document).ready(function() {
     $('#invoices #table-of-card').show("slow");
     $('#delete-card').attr("onclick", "deleteRowCard(this)");
     $('#invoices #new_card')[0].reset();
-    ids_card = $('#receipt_card_ids').val();
+    ids_card = $('#invoice_card_ids').val();
     if (ids_card == "") {
       ids_card = $(data).data("card-id");
     } else {
       ids_card = ids_card + "," + $(data).data("card-id");
     }
-    $('#receipt_card_ids').val(ids_card);
+    $('#invoice_card_ids').val(ids_card);
     showCardInvoiceTable = true;
     amountCard = amountCard + amountAuxCard;
     $("#invoices #amount_card").text(amountCard);
@@ -396,6 +396,11 @@ $(document).ready(function() {
     if (amountCash < 0)
       $("#invoice_amount_cash").val(0);
     $("#invoice_amount_cash").val(amountCash.toFixed(2))
+  });
+
+  $(document).on("click", "a.button-save", function(){
+    $("#invoices #new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
   });
 
   var amountCash = 0, amount = 0;
