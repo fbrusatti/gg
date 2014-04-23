@@ -27,6 +27,8 @@ class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.find params[:id]
     @invoice.update_attributes params[:invoice]
+    @invoice.card_ids = params[:invoice][:card_ids].split(",").map(&:to_i)
+    @invoice.check_ids = params[:invoice][:check_ids].split(",").map(&:to_i)
     respond_with @invoice, location: documents_path
   end
 
