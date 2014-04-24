@@ -241,8 +241,105 @@ $(document).ready(function() {
     }
   }
 
+  //Card Functionality
+  $(document).on("click", "a.button-save-card", function(){
+    $("#invoices #new_card").submit();
+    amountAuxCard = parseFloat($('#card_amount').val());
+  });
 
+  $(document).on("click", "a#openBtn-name-card", function(){
+    $('#card-modal').modal('show');
+  });
 
+  var ajaxCardInvoiceResponded = false;
+  $("#invoices #invoice_card").on('click', function(e){
+    var card = $("#invoices #invoice_card");
+    if (ajaxCardInvoiceResponded == false) {
+      $.ajax({
+        type: "GET",
+        url: "/cards/new",
+        dataType: "html"
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-card').html(data);
+        $('#new-card').show('slow');
+        ajaxCardInvoiceResponded = true;
+        $('.card_date_time_picker').datetimepicker({
+          language: 'es',
+          pickDate: true,
+          pickTime: false,
+          maskInput: true,
+          pick12HourFormat: true,
+          pickSeconds: false,
+          format: 'dd/MM/yyyy',
+          startDate: 1910,
+          endDate: Infinity
+        });
+      })
+    } 
+    if (card.prop('checked')) {
+      $(this).parents(".thorizontal").siblings().toggle("show");
+      $('#invoices #data-card').show("slow");
+    } else {
+      $('#invoices #data-card').hide("slow");
+      card.parents(".thorizontal").siblings().hide();
+    }
+  });
+
+  $('#add-new-name-card').click(function(){
+    $('#card-modal').modal('hide');
+    var sel = document.getElementById('card_name');
+    var name = $('#new-name-card').val().toUpperCase();
+    if (notExistsName(sel, name)){
+      $('#card_name')
+        .append($("<option></option>")
+        .attr("value",name)
+        .text(name)
+      );
+    }
+    selectItemByValue(sel, name )
+    $('#new-name-card').val('');
+  });
+
+  function selectItemByValue(elmnt, value){
+    for(var i=0; i < elmnt.options.length; i++) {
+      if(elmnt.options[i].text == value)
+        elmnt.selectedIndex = i;
+    }
+  }
+
+  function notExistsName(elmnt, value){
+    var aReturn = true
+    for(var i=0; i < elmnt.options.length; i++) {
+      if(elmnt.options[i].text == value)
+        aReturn = false;
+    }
+    return aReturn;
+  }
+
+  var amountAuxCard, showCardInvoiceTable = false, amountCard = 0;
+  $(document).on('ajax:success','#invoices #new_card', function(evt, data, status, xhr){
+    $('#invoices #table-of-card').append(data);
+    $('#invoices #table-of-card tr:last').effect("highlight", {}, 3000);
+    $('#invoices #table-of-card').show("slow");
+    $('#delete-card').attr("onclick", "deleteRowCard(this)");
+    $('#invoices #new_card')[0].reset();
+    ids_card = $('#invoice_card_ids').val();
+    if (ids_card == "") {
+      ids_card = $(data).data("card-id");
+    } else {
+      ids_card = ids_card + "," + $(data).data("card-id");
+    }
+    $('#invoice_card_ids').val(ids_card);
+    showCardInvoiceTable = true;
+    amountCard = amountCard + amountAuxCard;
+    $("#invoices #amount_card").text(amountCard);
+    amountCash = partialSum - amountCheck - amountCard;
+    if (amountCash < 0)
+      $("#invoice_amount_cash").val(0);
+    $("#invoice_amount_cash").val(amountCash.toFixed(2))
+  });
+  //End credit card functionality
 
   // index invoice
   //
@@ -295,10 +392,15 @@ $(document).ready(function() {
     showCheckTable = true;
     amountCheck = amountCheck + amountAux;
     $("#invoices #amount_check").text(amountCheck)
-    amountCash = partialSum - amountCheck;
+    amountCash = partialSum - amountCheck - amountCard;
     if (amountCash < 0)
       $("#invoice_amount_cash").val(0);
     $("#invoice_amount_cash").val(amountCash.toFixed(2))
+  });
+
+  $(document).on("click", "a.button-save", function(){
+    $("#invoices #new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
   });
 
   var amountCash = 0, amount = 0;
@@ -309,13 +411,37 @@ $(document).ready(function() {
   // changes the visibility of transactions inputs
   var partialAmount = 0;
   $("#invoice_cash").on('click', function(e){
-    partialAmount = partialSum - amountCheck;
+    partialAmount = partialSum - amountCheck - amountCard;
     $('#invoice_amount_cash').val(partialAmount);
     $(this).parents(".thorizontal").siblings().toggle("show");
   });
 
+  var ajaxCheckInvoiceResponded = false;
   $("#invoice_check").on('click', function(e){
     var check = $("#invoice_check");
+    if (ajaxCheckInvoiceResponded == false) {
+      $.ajax({
+        type: "GET",
+        url: "/checks/new",
+        dataType: "html"
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-check').html(data);
+        $('#new-check').show('slow');
+        ajaxCheckInvoiceResponded = true;
+        $('.check_date_time_picker').datetimepicker({
+          language: 'es',
+          pickDate: true,
+          pickTime: false,
+          maskInput: true,
+          pick12HourFormat: true,
+          pickSeconds: false,
+          format: 'dd/MM/yyyy',
+          startDate: 1910,
+          endDate: Infinity
+        });
+      })
+    }
     if (check.prop('checked')) {
       $(this).parents(".thorizontal").siblings().toggle("show");
       $('#invoices #data-check').show("slow");
@@ -328,6 +454,9 @@ $(document).ready(function() {
   $("#items-tab").on('click', function(){
     $('#invoices #data-check').hide();
     $('#invoices #table-of-check').hide();
+    $('#invoices #table-of-check').hide();
+    $('#invoices #data-card').hide();
+    $('#invoices #table-of-card').hide();
   });
 
   $("#pay-tab").on('click', function(){
@@ -337,6 +466,12 @@ $(document).ready(function() {
     if (showCheckTable) {
       $('#invoices #table-of-check').show("slow");
     }
+    if ($("#invoice_card").prop('checked')) {
+      $('#invoices #data-card').show("slow");
+    }
+    if (showCardInvoiceTable) {
+      $('#invoices #table-of-card').show("slow");
+    } 
   });
 
   hiddenInputsInvoice();
@@ -375,10 +510,42 @@ function deleteRowInvoice(btn) {
   });
 }
 
+function showCard(btn) {
+  var row = btn.parentNode.parentNode;
+  cardShow = $(row).data('card-id');
+  $.ajax({
+    type: "GET",
+    url: "/cards/" + cardShow,
+    dataType: "html",
+  })
+  .done(function(data, textStatus, xhr){
+    $('#new-card').html(data);
+    $('#new-card').show('slow');
+  });  
+}
+
+function deleteRowCard(btn) {
+  var row = btn.parentNode.parentNode;
+  cardDelete = $(row).data('card-id');
+  amountDeletedCard = parseFloat($('#card-amount-row').val());
+  $.ajax({
+    type: "DELETE",
+    url: "/cards/" + cardDelete,
+    dataType: "json",
+  })
+  .done(function(data, textStatus, xhr){
+    row.parentNode.removeChild(row);
+    amountCard = parseFloat($("#amount_card").text());
+    amountCard = amountCard - amountDeletedCard;
+    $("#amount_card").text(amountCard);
+  });
+}
+
 function hiddenInputsInvoice () {
-  var check, cash;
+  var check, cash, card;
   check = $('#invoice_check');
   cash = $('#invoice_cash');
+  card = $('#invoice_card');
   if (!check.prop('checked')){
     $('#invoices #table-of-check').hide();
     $('#invoices #data-check').hide();
@@ -387,7 +554,12 @@ function hiddenInputsInvoice () {
   if (!cash.prop('checked')) {
     cash.parents(".thorizontal").siblings().hide();
   }
+  if (!card.prop('checked')) {
+    $('#invoices #table-of-card').hide();
+    card.parents(".thorizontal").siblings().hide();
+  }
 }
+
 function isA (type_iva){
   var a_message = "<%= I18n.t 'customers.type_iva.registered_taxpayer' %>"
   if  (type_iva == a_message)

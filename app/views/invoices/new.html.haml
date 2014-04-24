@@ -12,6 +12,7 @@
     = form_for @invoice do |f|
       = errors_for(@invoice).html_safe
       = f.hidden_field :check_ids, value: ""
+      = f.hidden_field :card_ids, value: ""
       .invoices-tabs-content
         #items.tab-pane.active
           = render 'customer', f: f
@@ -35,13 +36,15 @@
         = f.text_field :amount, hidden: true
         = f.text_field :active, value: true ,hidden: true
       = f.submit hidden: true
+    #data-card
+      #new-card
+      = render 'table_card'  
     #data-check
-      = form_for(Check.new, remote: true, format: :html) do |f|
-        #new-check
-          = render 'data_check', f: f
-        = f.submit hidden: true
-    = render 'table_check'
+      #new-check
+      = render 'table_check'  
     #new-item-modal.modal.fade
     #edit-item-modal.modal.fade
     #customer-modal.modal.fade
     #bank-modal.modal.fade
+    #card-modal.modal.fade
+      = render 'new_name_card'
