@@ -412,7 +412,7 @@ $(document).ready(function() {
   var partialAmount = 0;
   $("#invoice_cash").on('click', function(e){
     partialAmount = partialSum - amountCheck - amountCard;
-    $('#invoice_amount_cash').val(partialAmount);
+    $('#invoice_amount_cash').val(partialAmount.toFixed(2));
     $(this).parents(".thorizontal").siblings().toggle("show");
   });
 
