@@ -15,4 +15,10 @@ $(document).ready(function() {
   $("a.customer-save").click( function() {
     $("#new_customer, [id^=edit_customer_]").submit();
   });
+
+  $("#customer_dni").on("change", function(){
+    var dni = $("#customer_dni").val();
+    $("#customer_cuit_cuil").val("XX-" + dni + "-X");
+  });
+
 })  
