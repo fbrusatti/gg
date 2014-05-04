@@ -82,7 +82,7 @@
   .form-container { @extend .container; width: 98% }
   .pretty-input { @extend .form-control }
 
-  #items .data { @extend .row }
+  #items .data { @extend .row; horizontal-align: middle }
   #items .data .label {
     @extend .col-md-2;
     vertical-align: middle;
@@ -109,15 +109,16 @@
     margin-left: 5px;
     padding: 2px;
   }
-  .show-customer .data .label {
-    @extend .col-md-2, .col-md-offset-1;
+  .show-customer .data .customer-label {
+    @extend .col-sm-3, .control-label;
     vertical-align: middle;
     font-weight: bold;
+    float: left;
     color: black;
     font-size: 15px;
   }
 
-  .show-customer .data .information { @extend .col-md-8 }
+  .show-customer .data .information { @extend .col-md-4; float: right; }
   .show-customer .panel-search { @extend .row }
   .show-customer .panel-4 { @extend .col-md-4 }
   .show-customer .panel-6 { @extend .col-md-6 }
@@ -155,7 +156,8 @@
     padding: 4px;
     margin-bottom: 15px;
     label:first-child { display: inline; font-weight:bold }
-    label:nth-of-type(2), input {
+    label:nth-of-type(2){ @extend .col-lg-4, .control-label } 
+    input {
       display: inline;
       border: 1px solid #cccccc;
       border-radius: 4px;
@@ -182,7 +184,7 @@
     @extend .form-horizontal;
     @include make-row();
     .left, .right ,.center{
-      @include make-lg-column(4);
+      @include make-sm-column(4);
       .title { font-size: 15pt; margin: 20px;}
     }
     .input {
@@ -206,10 +208,11 @@
     .transaction { @extend .form-horizontal }
     .topenLabel { @extend .col-lg-2, .col-sm-offset-1 }
     .transaction .thorizontal { @extend .form-group }
-    .transaction .tcheck { @extend .col-lg-2 }
+    .transaction .tcheck { @extend .col-sm-2 }
     .transaction .tcheckbox { @extend .checkbox }
     .transaction .tinput > label { @extend .control-label }
-    .transaction .thorizontal .tlabel { @extend .col-lg-1, .col-sm-offset-1 }
+    .transaction .thorizontal .tlabel { @extend .col-sm-2, .col-sm-offset-1 }
+    .transaction .thorizontal .tlabel-title { @extend .col-lg-1, .col-sm-offset-1 }
     .transaction .thorizontal .tinput { @extend .col-sm-5, .col-sm-offset-1 }
     .transaction .thorizontal .tamount { @extend .col-sm-3, .col-sm-offset-1 }
   }
@@ -226,8 +229,40 @@
              margin: 20px; }
   }
 
-  /*Style of new check*/
-  .data-check, .data-card, .modal-body {
+  // Style of Item modal
+  .data-item .left, .right {
+    @include make-sm-column(6);
+    @extend .form-horizontal;
+    .title { font-size: 15pt;
+             margin: 20px; 
+    }
+    .input-item {
+      @extend .col-lg-6;
+      margin-left: 60px;
+      margin-bottom: 15px;
+      .label {
+        @extend .col-lg-4, .control-label;
+      }
+      .input {
+        @extend .col-lg-3;
+      }
+    }
+  }
+  #current-stock.squarelight {
+    @extend .col-lg-6;
+    @extend .highlight;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 30px !important;
+    color: white !important;
+    margin-bottom: 0px;
+    margin-left: 5px;
+    padding: 2px;
+  }
+
+
+  // Style of new check and card
+  .data-item, .data-check, .data-card, .modal-body {
     @include make-row();
     @extend .form-horizontal;
     .input {
@@ -247,12 +282,6 @@
       font-size: 19px;
     }
 
-  }
-
-  .data-check .left, .right {
-    @include make-lg-column(6);
-    .title { font-size: 15pt;
-             margin: 20px; }
   }
 
   .show-card {
