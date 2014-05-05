@@ -64,15 +64,31 @@ $(document).ready(function() {
     minChars: "3",
     resultsFormatter: function(customer){
       var compleName = customer.surname + " " + customer.name + "(" + customer.registered_name + ")";
-      return "<li> <p style='color: black; font-size:20px' >" + compleName + " </p> </li>"; },
+      return "<li> <p style='color: black' >" + compleName + " </p> </li>"; },
     tokenFormatter: function(item) {
       return "<li><p>" + (item.surname + " " +
       item.name ).substring(0,22)+ " (" + item.registered_name + ") </p> </li>" },
     noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
-    searchicodengText: "<%= I18n.t('.token_input.searchingText')%>",
+    searchigText: "<%= I18n.t('.token_input.searchingText')%>",
     onAdd: function(customer){ fillCustomerData(customer) }
   });
+
+  // Clean customer data
+  // ---------------
+   $("#invoice_customer_tokens").on("change", function(){
+    if (this.value == "") {
+      $("#sr").text("");
+      $("#address").text("");
+      $("#sr").text("");
+      $("#iva").text("");
+      $("#cuit_cuil").text("");
+      $("#gross_income").text("");
+      $("#phone").text("");
+      $("#cellphone").text("");
+    }
+  });
+
 
   // table of items
   // --------------
@@ -115,14 +131,14 @@ $(document).ready(function() {
       code = "<%= I18n.t('activerecord.attributes.product.code') %>: " + item.code;
       description = "<%= I18n.t('activerecord.attributes.product.description') %>: "
                     + item.description;
-      p1 = "<p style='color: black; font-size:20px' >" + code + " </p>";
-      p2 = "<p style='color: black; border-bottom: 1px solid black; font-size:16px'>"
+      p1 = "<p style='color: black; font-size:15px' >" + code + " </p>";
+      p2 = "<p style='color: black; border-bottom: 1px solid black; font-size:13px'>"
             + description + " </p>";
       return '<li>' + p1 + p2 + '</li>';
     },
     propertyToSearch: 'code',
     noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
-    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    hintText: "<%= I18n.t('.token_input.hintText_product')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>"
   });
 

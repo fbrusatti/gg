@@ -32,7 +32,7 @@ $(document).ready(function() {
     tokenLimit: "1",
     minChars: "3",
     noResultsText: "<%= I18n.t('.token_input.noResultsText')%>",
-    hintText: "<%= I18n.t('.token_input.hintText')%>",
+    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
       return "<li><p style='color: black' >" + item.surname
@@ -48,7 +48,7 @@ $(document).ready(function() {
     if (this.value == "") {
       $("#type_vat_label").text("");
       $("#registered_name_label").text("");
-      $('#invoices-table').hide();
+      $('#invoices-table_wrapper').hide();
     }
   });
 

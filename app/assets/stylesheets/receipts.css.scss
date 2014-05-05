@@ -71,21 +71,21 @@
     @extend .form-horizontal;
     @include make-row();
     .left, .right {
-      @include make-lg-column(6);
+      @include make-sm-column(6);
       .title { font-size: 15pt; margin: 20px;}
     }
     .input {
       @extend .form-group;
     }
     .text_label {
-      @extend .col-lg-3, .control-label;
+      @extend .col-sm-3, .control-label;
     }
     .show_label {
       width:50%;
       float:left;
     }
     .input select, input, textarea {
-      @extend .col-lg-6;
+      @extend .col-sm-6;
       resize: none;
     }
     .token_field {
@@ -97,8 +97,8 @@
   .pay-receipt {
     @extend .form-horizontal;
     @include make-row();
-    .left, .right, .center {
-      @include make-lg-column(4);
+    .left, .right,.center {
+      @include make-sm-column(4);
       .title { font-size: 15pt; margin: 20px;}
     }
     .input {
@@ -122,16 +122,17 @@
     .transaction { @extend .form-horizontal }
     .topenLabel { @extend .col-lg-2, .col-sm-offset-1 }
     .transaction .thorizontal { @extend .form-group }
-    .transaction .tcheck { @extend .col-lg-2 }
+    .transaction .tcheck { @extend .col-sm-2 }
     .transaction .tcheckbox { @extend .checkbox }
     .transaction .tinput > label { @extend .control-label }
-    .transaction .thorizontal .tlabel { @extend .col-lg-1, .col-sm-offset-1 }
+    .transaction .thorizontal .tlabel { @extend .col-sm-2, .col-sm-offset-1 }
+    .transaction .thorizontal .tlabel-title { @extend .col-lg-1, .col-sm-offset-1 }
     .transaction .thorizontal .tinput { @extend .col-sm-5, .col-sm-offset-1 }
     .transaction .thorizontal .tamount { @extend .col-sm-3, .col-sm-offset-1 }
   }
 
-  .data-check .left, .right, .center {
-    @include make-lg-column(4);
+  .data-check .left, .right {
+    @include make-lg-column(6);
     .title { font-size: 15pt;
              margin: 20px; }
   }
@@ -179,12 +180,6 @@
   }
 
   .show-card .left, .right {
-    @include make-lg-column(6);
-    .title { font-size: 15pt;
-             margin: 20px; }
-  }
-
-  .data-check .left, .right {
     @include make-lg-column(6);
     .title { font-size: 15pt;
              margin: 20px; }

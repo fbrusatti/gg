@@ -6,13 +6,13 @@
       .tcheckbox
         = check_box_tag "cash"
   .thorizontal
-    .tlabel
+    .tlabel-title
       = f.label :amount_cash
     .tinput
       = f.text_field :amount_cash, class: "pretty-input"     
 .transaction
   .thorizontal      
-    .tlabel
+    .tlabel-title
       = label_tag t('.amount')
     .tamount
       = label_tag "", nil, id: "amount", class: "pretty-input"      

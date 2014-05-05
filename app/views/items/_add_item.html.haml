@@ -5,17 +5,19 @@
       %h3= "#{t('items.modal.title_add')}: #{@product.code}"
     = form_for @item, remote: true, format: :script do |i|
       .modal-body
-        = i.hidden_field :price_cost,  value: @product.cost_price
-        = i.hidden_field :price_vat, value: @product.vat.percentaje
-        = i.hidden_field :document_id, value: @document.id
-        = i.hidden_field :product_id, value: @product.id
-        .stock
-          .input
-            = i.label :amount
-            = i.number_field :amount, value: 0
-          .input
-            = i.label t('items.modal.stock')
-            = i.label "#{@product.stock - @partial_stock}", id: 'current-stock'
+        .data-item
+          = i.hidden_field :price_cost,  value: @product.cost_price
+          = i.hidden_field :price_vat, value: @product.vat.percentaje
+          = i.hidden_field :document_id, value: @document.id
+          = i.hidden_field :product_id, value: @product.id
+          .left
+            .input-item
+              = i.label :amount
+              = i.number_field :amount, value: 0, class: 'pretty-input'
+          .right  
+            .input-item
+              = i.label t('items.modal.stock')
+              .squarelight#current-stock #{@product.stock - @partial_stock}
         .input
           = i.label :price_sale
           = i.select :price_sale, list_prices(@product), {}, class: 'pretty-input'

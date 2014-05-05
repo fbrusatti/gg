@@ -37,7 +37,7 @@ es:
     modal:
       title_add: Agregando
       title_edit: Editando
-      stock: Stock Disponible
+      stock: Stock Disp.
       add_item: Agregar
       edit_item: Editar
   datatables:
@@ -649,7 +649,8 @@ es:
   token_input:
     noResultsText: "No hay resultado"
     hintText: "Ingrese el nombre"
-    hintText_surname: "Ingrese el código del producto"
+    hintText_surname: "Ingrese el nombre del cliente"
+    hintText_product: "Ingrese el código del producto"
     hintText_category: "Ingrese el nombre de la categoria"
     searchingText: "Buscando"
   active_admin:
