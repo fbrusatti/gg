@@ -167,11 +167,18 @@ $(document).ready(function() {
     .done(function(data, textStatus, xhr){
       $('#customer-modal').html(data);
       $('#customer-modal').modal('show');
+      $('#error').hide();
     })
   });
 
   $(document).on('ajax:success','#new_customer', function(evt, data, status, xhr){
     $('#customer-modal').modal('hide');
+  });
+
+  $(document).on('ajax:error', '#new_customer', function(event, xhr, status) {
+    var errors = jQuery.parseJSON(xhr.responseText);
+    $("#error").html(errors.errors[0]);
+    $('#error').show('slow');
   });
 
   $('#invoices #openBtn-bank').click(function(){

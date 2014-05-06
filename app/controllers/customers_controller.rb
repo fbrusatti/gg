@@ -33,8 +33,10 @@ class CustomersController < ApplicationController
     @customer.type_person = 'Cliente'
     if @customer.save
       flash[:success] = t('flash.customer', message: t('flash.created'))
+      respond_with @customer
+    else
+      render :json =>{:errors => @customer.errors.full_messages }, :status => 422
     end
-    respond_with @customer
   end
 
   def show

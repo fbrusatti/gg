@@ -141,6 +141,18 @@
 
   // Modals
   // ------
+  .error {
+    padding: 15px;
+    margin-top: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    text-align: center;
+  }
   .new-customer {
     .title { font-size: 15pt }
   }
