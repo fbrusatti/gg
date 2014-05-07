@@ -1,0 +1,13 @@
+%tr{"data-card-id" => @card.id}
+  %td= @card.name
+  %td= @card.type_card
+  %td= @card.number
+  %td= @card.expirate_at
+  %td= @card.code
+  %td= @card.amount
+  %td
+    %a.button-show{ onclick: "showCard(this)" }
+      = t('.show')
+    %a.button-delete{  onclick: "deleteRowCard(this)" }  
+      = t('.delete')
+%input{id: "card-amount-row", type: "hidden", value: @card.amount}      

@@ -1,28 +1,42 @@
 class CustomersController < ApplicationController
-  
+
   respond_to :html, :js, :json
   before_filter :authenticate_user!
 
   def new
     @customer = Customer.new
+    if request.xhr?
+      render partial: 'new_customer_modal'
+    end  
   end
 
   def index
-    respond = params[:q] ? Customer.where("name ilike ?", "%#{params[:q]}%").map(&:attributes) 
-                         : CustomersDatatable.new(view_context)
     respond_to do |format|
       format.html
-      format.json { render :json =>  respond }
-    end  
+      format.json do
+        if params[:q].present?
+          data = Customer.where("name ILIKE :search or
+                                 surname ILIKE :search or
+                                 dni ILIKE :search or
+                                 registered_name ILIKE :search",
+                                search: "%#{params[:q]}%")
+        else
+          data = CustomersDatatable.new(view_context)
+        end
+        render json: data
+      end
+    end
   end
 
   def create
     @customer = current_user.customers.build(params[:customer])
-    @customer.type_person = 'Cliente' 
+    @customer.type_person = 'Cliente'
     if @customer.save
       flash[:success] = t('flash.customer', message: t('flash.created'))
+      respond_with @customer
+    else
+      render :json =>{:errors => @customer.errors.full_messages }, :status => 422
     end
-    respond_with @customer
   end
 
   def show

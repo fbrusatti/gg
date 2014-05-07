@@ -1,15 +1,19 @@
 class Check < ActiveRecord::Base
 
-  attr_accessible :check_number , :account, :emission_date, :payment_date, :emisor, :amount,
-  :check_status ,:is_proper ,:bank_id
+  # == Accesors
+  attr_accessible :check_number , :account, :emission_date, :payment_date, 
+                  :emisor, :amount, :check_status ,:is_proper ,:bank_id,
+                  :document_id, :annul
 
 
   # ==validations
-  validates_presence_of :check_number, :emisor, :amount, :emission_date, :payment_date
-
+  validates_presence_of :check_number, :emisor, :amount, :emission_date, 
+                        :payment_date
   validate :correct_date
 
+  # ==Associations
   belongs_to :bank
+  belongs_to :document
 
   def correct_date
     if emission_date > payment_date

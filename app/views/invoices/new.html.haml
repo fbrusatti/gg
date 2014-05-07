@@ -1,32 +1,50 @@
 #invoices
-  %ul.invoices-tabs
-    %li
-      %a{'data-toggle' => 'tab', href: '#data'}= t('.data')
-    %li.active
-      %a{'data-toggle' => 'tab', href: '#items'}= t('.list')
-    %li
-      %a{'data-toggle' => 'tab', href: '#pay'}= t('.pay_mode')
-    %li
-      %a{'data-toggle' => 'tab', href: '#preview'}= t('.preview')
+  .form-container
 
-  = form_for @invoice do |f|
-    = errors_for(@invoice).html_safe
-    .invoices-tabs-content
-      #data.tab-pane
-      #items.tab-pane.active
-        .token_field
-          .title= t('.search_products')
-          = text_field_tag :product_tokens,
-                         nil,
-                         class: "pretty-input",
-                         'data-invoice' => @invoice.id
-        .table= render 'current_items_invoice'
-        .total-price
-          .text= t('.total_price')
-          .price 0
-      #pay.tab-pane
-      #preview.tab-pane
-      = f.text_field :creation_state, hidden: true
-    = f.submit hidden: true
-  #new-item-modal.modal.fade
-  #edit-item-modal.modal.fade
+    %ul.invoices-tabs
+      %li.active
+        %a{'data-toggle' => 'tab', href: '#items', id: 'items-tab'}
+          = t('.data')
+      %li
+        %a{'data-toggle' => 'tab', href: '#pay', id: 'pay-tab'}
+          = t('.pay_mode')
+
+    = form_for @invoice do |f|
+      = errors_for(@invoice).html_safe
+      = f.hidden_field :check_ids, value: ""
+      = f.hidden_field :card_ids, value: ""
+      .invoices-tabs-content
+        #items.tab-pane.active
+          = render 'customer', f: f
+          .line-separator
+          .data
+            .label
+              .title= t('.search_products')
+            .information
+              = text_field_tag :product_tokens,
+                             nil,
+                             class: "pretty-input",
+                             'data-invoice' => @invoice.id
+          .table= render 'current_items_invoice'
+          .total-price
+            .text= t('.total_price')
+            .price 0
+        #pay.tab-pane
+          = render 'pay_invoice', f: f
+        = f.text_field :invoice_type, value: 'A', hidden: true
+        = f.text_field :creation_state, hidden: true
+        = f.text_field :amount, hidden: true
+        = f.text_field :active, value: true ,hidden: true
+      = f.submit hidden: true
+    #data-card
+      #new-card
+      = render 'table_card'  
+    #data-check
+      #new-check
+      = render 'table_check'  
+    #new-item-modal.modal.fade
+    #edit-item-modal.modal.fade
+    #customer-modal.modal.fade
+    #bank-modal.modal.fade
+    #card-modal.modal.fade
+      = render 'new_name_card'

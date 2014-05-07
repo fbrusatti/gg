@@ -22,11 +22,13 @@ private
       [
         link_to(product.code, product),
         h(product.description),
+        h(product.categories.first.try :name),
         h(product.stock),
         h(product.minimun_stock),
-        h(product.categories.first.try :name),
         h(product.list_price_one),
         h(product.list_price_two),
+        h(product.gondola),
+        h(product.shelf)
       ]
     end
   end
@@ -45,6 +47,20 @@ private
                                  or products.code ilike :search",
                                  search: "%#{params[:sSearch]}%")
     end
+
+    if params[:search_category].present?
+      products = products.joins(:categories)
+      products = products.where("categories.name ilike :search",
+                                 search: "%#{params[:sSearch_2]}%")
+    end
+    if params[:search_code].present?
+      products = products.where("products.code ilike :search",
+                                 search: "%#{params[:sSearch_0]}%")
+    end
+    if params[:search_description].present?
+      products = products.where("products.description ilike :search",
+                                 search: "%#{params[:sSearch_1]}%")
+    end
     products.includes(:categories)
   end
 
@@ -57,7 +73,7 @@ private
   end
 
   def sort_column
-    columns = %w[code description stock minimun_stock category list_price_one list_price_two]
+    columns = %w[code description category stock minimun_stock list_price_one list_price_two gondola shelf]
     columns[params[:iSortCol_0].to_i]
   end
 

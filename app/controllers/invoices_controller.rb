@@ -10,17 +10,16 @@ class InvoicesController < ApplicationController
     end
   end
 
-
   def index
     respond_to do |format|
       format.html
-      format.json { render json: InvoicesDatatable.new(view_context) }
+      format.json { render json: AllInvoicesDatatable.new(view_context) }
     end
   end
 
   # creation_state: init by default
   def new
-    @invoice = Invoice.create unless request.xhr?
+    @invoice = current_user.invoices.create unless request.xhr?
     respond_with @invoice
   end
 
@@ -28,6 +27,14 @@ class InvoicesController < ApplicationController
   def update
     @invoice = Invoice.find params[:id]
     @invoice.update_attributes params[:invoice]
-    respond_with @invoice, location: invoices_path
+    @invoice.card_ids = params[:invoice][:card_ids].split(",").map(&:to_i)
+    @invoice.check_ids = params[:invoice][:check_ids].split(",").map(&:to_i)
+    respond_with @invoice, location: documents_path
+  end
+
+  def destroy
+    @invoice = Invoice.find params[:id]
+    @invoice.destroy
+    respond_with @invoice
   end
 end

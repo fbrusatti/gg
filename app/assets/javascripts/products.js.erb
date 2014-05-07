@@ -1,3 +1,4 @@
+<%# @encoding: UTF-8 %>
 $(document).ready(function() {
 
     // token to category
@@ -10,21 +11,44 @@ $(document).ready(function() {
     hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>",
     resultsFormatter: function(item){
-      return "<li><p style='color: black' >" + item.name+ item.referrer+ " </p> </li>" },
+      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+      return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
     tokenFormatter: function(item) {
-      return "<li><p>" + item.name+ item.referrer+ " </p> </li>" }
+      var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+      return "<li><p>" + item.name+ referrer+ " </p> </li>" }
   });
 
-  $('#product-table').dataTable({
+  var oTable, search_category, search_description, search_code; 
+  oTable = $('#product-table').dataTable({
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
     },
-    asSorting: [],
+    aaSorting: [[ 0, "desc" ]],
     sPaginationType: "full_numbers",
+    bAutoWidth: false,
     bJQueryUI: true,
     bProcessing: true,
     bServerSide: true,
-    sAjaxSource: $('#product-table').data('source')
+    sAjaxSource: $('#product-table').data('source'),
+    fnInitComplete: function(oSettings, json) {
+      $("thead th").each( function ( i ) {
+        $('select', this).change( function () {
+          oTable.fnFilter( $(this).val(),i);
+        });
+        $('input', this).change( function () {
+          search_category = $('input[name="search_category"]').val();
+          search_code = $('input[name="search_code"]').val();
+          search_description = $('input[name="search_description"]').val();
+          oTable.fnFilter($(this).val(),i);
+        });
+      });
+    },
+    aoColumns: aColumnsOptions,
+    "fnServerParams": function ( aoData ) {
+      aoData.push( { "name": "search_code", "value": search_code } );
+      aoData.push( { "name": "search_description", "value": search_description } );
+      aoData.push( { "name": "search_category", "value": search_category } );
+    }    
   });
 
   $("a.product-save").click( function() {
@@ -53,15 +77,63 @@ $(document).ready(function() {
   });
 
   $(document).on('ajax:success','#new_category', function(evt, data, status, xhr){
+    $('#category_referrer_id').tokenInput("clear");
     $('#category-modal').modal('hide');
   });
 
   $('#openBtn-category').click(function(){
-    $('#category_name').val('');
-    $('#category-modal').modal('show')
+    $.ajax({
+      type: "GET",
+      url: "/categories/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#category_name').val('');
+      $('#category-modal').html(data);
+      $('#category_referrer_id').tokenInput('/categories.json', {
+        crossDomain: false,
+        prePopulate: $('#category_referrer_id').data('pre'),
+        theme: "facebook",
+        tokenLimit: "1",
+        minChars: "3",
+        noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+        hintText: "<%= I18n.t('.token_input.hintText_category')%>",
+        searchingText: "<%= I18n.t('.token_input.searchingText')%>",
+        resultsFormatter: function(item){
+          var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+          return "<li><p style='color: black' >" + item.name+ referrer+ " </p> </li>" },
+        tokenFormatter: function(item) {
+          var referrer = (item.referrer == null ? "" : "("+item.referrer.name+")");
+          return "<li><p>" + item.name+ referrer+ " </p> </li>" }
+      });
+      $('#category-modal').modal('show');
+    })  
   });
+
   $('#openBtn-vat').click(function(){
-    $('#vat-modal').modal('show')
+    $.ajax({
+      type: "GET",
+      url: "/vats/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#vat-modal').html(data);
+      $('#vat-modal').modal('show');
+    })
   });
 
 })// End Document
+
+var aColumnsOptions =
+  [
+    { "sWidth": "1%", "sClass": "center", "bSearchable": true },
+    { "sWidth": "7%", "bSearchable": true },
+    { "sWidth": "5%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true },
+    { "sWidth": "1%", "bSearchable": true }
+  ]
+

@@ -13,4 +13,27 @@ $(document).ready(function() {
     }
   });
 
+  // index document
+  //
+  var documentsTable;
+  documentsTable = $('#documents #documents_table').dataTable({
+    sPaginationType: "full_numbers",
+    bAutoWidth: false,
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    sAjaxSource: $('#documents #documents_table').data('source'),
+    "aaSorting": [[ 1, "desc" ]],
+    fnInitComplete: function(oSettings, json){
+      $("thead th").each( function (i) {
+          $('select', this).change( function () {
+            documentsTable.fnFilter($(this).val(),i);
+           });
+      });
+    },
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    }
+  });
+
 });

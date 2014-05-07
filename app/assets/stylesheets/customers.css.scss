@@ -1,4 +1,4 @@
-@import "twitter/bootstrap";
+@import "bootstrap";
 
 #customers {
   // active color of the tabs
@@ -17,19 +17,19 @@
 
   // sub-header customer
   .customer-new {
-    @extend .btn, .btn-primary;
+    @extend .btn, .btn-xs, .btn-primary;
   }
 
   .customer-print {
-    @extend .btn, .btn-primary, .pull-right;
+    @extend .btn, .btn-primary, .btn-xs, .pull-right;
   }
 
   .customer-danger {
-     @extend .btn, .btn-danger;
+     @extend .btn, .btn-xs, .btn-danger;
   }
 
   .customer-save {
-     @extend .btn, .btn-primary;
+     @extend .btn, .btn-xs, .btn-primary;
   }
 
 
@@ -70,7 +70,7 @@
 
   }
 
-  .new-customer .left, .right, .edit-customer .left, .right {
+  .new-customer .left, .right, .edit-customer .left, .if-right {
     @include make-lg-column(6);
     .title { font-size: 15pt;
              margin: 20px; }
@@ -92,9 +92,15 @@
     @extend .form-horizontal;
     .input {
       @extend .form-group;
-      label {
+      label:first-child {
         @extend .col-lg-3, .control-label;
       }
+
+      label:nth-of-type(2) {
+         @extend .col-lg-6, .control-label;
+        text-align: left;
+      }
+
     }
 
     .left, .right {

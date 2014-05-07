@@ -1,10 +1,14 @@
 .pay-receipt
   .left
     .title 
-      = t('.check_pay')
-    = render 'transactions', f: f
+      = t('.cash_pay')  
+    = render 'cash_transaction', f: f  
+  .center
+    .title
+      = t('.card_pay')
+    = render 'card_transaction', f: f
   .right
     .title
-      = t('.cash_pay')  
-    = render 'cash_transaction', f: f
-
+      = t('.check_pay')
+    = render 'check_transactions', f: f
+  

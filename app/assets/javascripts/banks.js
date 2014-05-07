@@ -36,7 +36,7 @@
   });
 
 
-  $('#openBtn-bank').click(function(){
+  $('#openBtn-bank-name').click(function(){
     $('#bank-modal').modal('show');
   });
 

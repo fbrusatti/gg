@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131111212220) do
+ActiveRecord::Schema.define(:version => 20140421192637) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -58,6 +58,21 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
   add_index "banks", ["branch_office_number"], :name => "index_banks_on_branch_office_number"
   add_index "banks", ["name"], :name => "index_banks_on_name"
 
+  create_table "cards", :force => true do |t|
+    t.string   "type_card"
+    t.decimal  "amount"
+    t.string   "number"
+    t.string   "name"
+    t.string   "code"
+    t.date     "expirate_at"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "annul",       :default => false
+    t.integer  "document_id"
+  end
+
+  add_index "cards", ["document_id"], :name => "index_cards_on_document_id"
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",  :null => false
@@ -82,8 +97,10 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.string   "check_status"
     t.boolean  "is_proper"
     t.integer  "bank_id"
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
+    t.datetime "created_at",                                                     :null => false
+    t.datetime "updated_at",                                                     :null => false
+    t.integer  "document_id"
+    t.boolean  "annul",                                       :default => false
   end
 
   add_index "checks", ["check_number"], :name => "index_checks_on_check_number"
@@ -107,25 +124,31 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.integer  "user_id"
   end
 
+  add_index "customers", ["dni"], :name => "index_customers_on_dni"
+  add_index "customers", ["name"], :name => "index_customers_on_name"
+  add_index "customers", ["surname"], :name => "index_customers_on_surname"
+  add_index "customers", ["user_id"], :name => "index_customers_on_user_id"
+
   create_table "documents", :force => true do |t|
     t.string   "type"
-    t.string   "number"
-    t.decimal  "recharge",          :precision => 8, :scale => 2
-    t.decimal  "amount",            :precision => 8, :scale => 2
-    t.decimal  "balance",           :precision => 8, :scale => 2
+    t.integer  "number"
+    t.decimal  "recharge",          :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "amount",            :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "balance",           :precision => 8, :scale => 2, :default => 0.0
     t.string   "state"
     t.date     "expiration_date"
     t.string   "payment_condition"
-    t.boolean  "active"
-    t.boolean  "annul"
+    t.boolean  "active",                                          :default => true
+    t.boolean  "annul",                                           :default => false
     t.integer  "customer_id"
     t.integer  "user_id"
     t.integer  "supplier_id"
     t.datetime "created_at",                                                          :null => false
     t.datetime "updated_at",                                                          :null => false
-    t.decimal  "amount_cash",       :precision => 8, :scale => 2
-    t.decimal  "amount_check",      :precision => 8, :scale => 2
     t.string   "creation_state",                                  :default => "init"
+    t.decimal  "amount_cash",                                     :default => 0.0
+    t.string   "invoice_type"
+    t.date     "emission_at"
   end
 
   add_index "documents", ["creation_state"], :name => "index_documents_on_creation_state"
@@ -141,9 +164,10 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.decimal  "price_sale",     :precision => 8,  :scale => 2
     t.decimal  "price_vat",      :precision => 8,  :scale => 2
     t.decimal  "price_descount", :precision => 8,  :scale => 2
-    t.datetime "created_at",                                    :null => false
-    t.datetime "updated_at",                                    :null => false
+    t.datetime "created_at",                                                       :null => false
+    t.datetime "updated_at",                                                       :null => false
     t.decimal  "total_price",    :precision => 10, :scale => 2
+    t.boolean  "annul",                                         :default => false
   end
 
   add_index "items", ["document_id", "product_id"], :name => "index_items_on_document_id_and_product_id"
@@ -156,6 +180,7 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.string   "city"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "zipcode"
   end
 
   create_table "money", :force => true do |t|
@@ -166,11 +191,18 @@ ActiveRecord::Schema.define(:version => 20131111212220) do
     t.datetime "updated_at",                               :null => false
   end
 
+  create_table "payments", :force => true do |t|
+    t.decimal  "amount",     :precision => 8, :scale => 2
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.integer  "invoice_id"
+    t.integer  "receipt_id"
+  end
+
   create_table "products", :force => true do |t|
     t.string   "description"
     t.integer  "stock"
     t.integer  "minimun_stock"
-    t.float    "net_cost"
     t.float    "cost_price"
     t.string   "code"
     t.boolean  "active"

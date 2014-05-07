@@ -1,28 +1,98 @@
 <%# @encoding: UTF-8 %>
 $(document).ready(function() {
 
-  // variables
-  // ---------
-  var tItems; // table invoice-items
-  var searchProduct; //token input
-
   // handle buttons sub header
   // -------------------------
   $("a.invoice-save-finish").click(function() {
     $("a.invoice-save-finish").attr("disabled", true);
     $("a.invoice-save-building").attr("disabled", true);
     $('#invoice_creation_state').val('finish');
-    $("[id^=edit_invoice_]").submit();
+    var msg = "<%= I18n.t('invoices.sub_header.confirm_msg_1') %>"
+    msg = msg + "<%= I18n.t('invoices.sub_header.confirm_msg_2') %>"
+    if(confirm(msg)) {
+      $("[id^=edit_invoice_]").submit();
+    }
+    else {
+      $("a.invoice-save-finish").attr("disabled", false);
+      $("a.invoice-save-building").attr("disabled", false);
+      $('#invoice_creation_state').val('init');
+    }
   });
+
   $("a.invoice-save-building").click(function() {
     $("a.invoice-save-building").attr("disabled", true);
     $("a.invoice-save-finish").attr("disabled", true);
     $('#invoice_creation_state').val('building');
     $("[id^=edit_invoice_]").submit();
   });
+
+  // delete the inovice and its items
+  $(document).on('click', 'a#cancel-invoice', function(event){
+    event.preventDefault();
+    var path = this.href;
+    var invoiceId = $('#invoices #product_tokens').data('invoice');
+    $.ajax({
+      type: "DELETE",
+      url: "/invoices/" + invoiceId,
+      dataType: "json"
+    }).done(function(data, textStatus, xhr){
+      if ($('#receipt_check_ids').val() == "") {
+        window.location.href= path;
+        return;
+      }
+      $.ajax({
+        type: "DELETE",
+        url: "/checks/" + $('#receipt_check_ids').val(),
+        dataType: "json",
+      }).done(function(data, textStatus, xhr){
+        window.location.href= path;
+      });
+    });
+  });
+
+  // variables
+  // ---------
+  var tItems; // table invoice-items
+  var searchProduct, searchCustomer; //token input
+
+  // token input to customer
+  // -----------------------
+  searchCustomer = $('#invoices #invoice_customer_tokens');
+  searchCustomer.tokenInput('/customers.json', {
+    theme: 'facebook',
+    tokenLimit: "1",
+    minChars: "3",
+    resultsFormatter: function(customer){
+      var compleName = customer.surname + " " + customer.name + "(" + customer.registered_name + ")";
+      return "<li> <p style='color: black' >" + compleName + " </p> </li>"; },
+    tokenFormatter: function(item) {
+      return "<li><p>" + (item.surname + " " +
+      item.name ).substring(0,22)+ " (" + item.registered_name + ") </p> </li>" },
+    noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
+    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    searchigText: "<%= I18n.t('.token_input.searchingText')%>",
+    onAdd: function(customer){ fillCustomerData(customer) }
+  });
+
+  // Clean customer data
+  // ---------------
+   $("#invoice_customer_tokens").on("change", function(){
+    if (this.value == "") {
+      $("#sr").text("");
+      $("#address").text("");
+      $("#sr").text("");
+      $("#iva").text("");
+      $("#cuit_cuil").text("");
+      $("#gross_income").text("");
+      $("#phone").text("");
+      $("#cellphone").text("");
+    }
+  });
+
+
   // table of items
   // --------------
-  var partialSum;
+  var partialSum = 0;
   tItems = $('#invoices #items-invoice').dataTable({
     bJQueryUI: true,
     bServerSide: true,
@@ -32,23 +102,27 @@ $(document).ready(function() {
     bInfo: false,
     sAjaxSource: $('#invoices #items-invoice').data('source'),
     sScrollY: "300",
-    aoColumns: aColumnsOptions,
+    aoColumns: aColumnsOptionsItem,
     fnCreatedRow: function(nRow, aData, iDataIndex){
       if (iDataIndex == 0)
         partialSum = 0;
       if (iDataIndex < tItems.fnSettings().fnRecordsTotal())
         partialSum += parseFloat(aData[6]);
       // set the price in view
-      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 )
+      if (iDataIndex == tItems.fnSettings().fnRecordsTotal() - 1 ) {
         $('.total-price .price').html(partialSum.toFixed(2));
+        $('#amount').text(partialSum.toFixed(2));
+        // form input to amount
+        $('#invoice_amount').val(partialSum.toFixed(2));
+      }
     },
     oLanguage: {
       sUrl: "/datatables/spanish.txt"
     }
   });
 
-  // token input
-  // -----------
+  // token input to products
+  // -----------------------
   searchProduct = $('#invoices #product_tokens').tokenInput('/products.json', {
     theme: 'facebook',
     tokenLimit: "1",
@@ -57,14 +131,14 @@ $(document).ready(function() {
       code = "<%= I18n.t('activerecord.attributes.product.code') %>: " + item.code;
       description = "<%= I18n.t('activerecord.attributes.product.description') %>: "
                     + item.description;
-      p1 = "<p style='color: black; font-size:20px' >" + code + " </p>";
-      p2 = "<p style='color: black; border-bottom: 1px solid black; font-size:16px'>"
+      p1 = "<p style='color: black; font-size:15px' >" + code + " </p>";
+      p2 = "<p style='color: black; border-bottom: 1px solid black; font-size:13px'>"
             + description + " </p>";
       return '<li>' + p1 + p2 + '</li>';
     },
     propertyToSearch: 'code',
     noResultsText: "<%= I18n.t('.token_input.noResultsText') %>",
-    hintText: "<%= I18n.t('.token_input.hintText_surname')%>",
+    hintText: "<%= I18n.t('.token_input.hintText_product')%>",
     searchingText: "<%= I18n.t('.token_input.searchingText')%>"
   });
 
@@ -84,6 +158,45 @@ $(document).ready(function() {
     });
   });
 
+  $('#openBtn-customer').click(function(){
+    $.ajax({
+      type: "GET",
+      url: "/customers/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#customer-modal').html(data);
+      $('#customer-modal').modal('show');
+      $('#error').hide();
+    })
+  });
+
+  $(document).on('ajax:success','#new_customer', function(evt, data, status, xhr){
+    $('#customer-modal').modal('hide');
+  });
+
+  $(document).on('ajax:error', '#new_customer', function(event, xhr, status) {
+    var errors = jQuery.parseJSON(xhr.responseText);
+    $("#error").html(errors.errors[0]);
+    $('#error').show('slow');
+  });
+
+  $('#invoices #openBtn-bank').click(function(){
+    $.ajax({
+      type: "GET",
+      url: "/banks/new",
+      dataType: "html"
+    })
+    .done(function(data, textStatus, xhr){
+      $('#bank-modal').html(data);
+      $('#bank-modal').modal('show');
+    })
+  });
+
+  $(document).on('ajax:success', '#invoices #new_bank', function(evt, data, status, xhr){
+    $('#bank-modal').modal('hide');
+  });
+
   // Modal add Item
   $(document).on('ajax:success', '#invoices #new_item',
   function(evt, data, status, xhr){
@@ -97,6 +210,7 @@ $(document).ready(function() {
     var htmlNum = $(this).closest('tr').find("td:nth-child(7n)").html();
     partialSum -= parseFloat(htmlNum);
     $('.total-price .price').html(partialSum.toFixed(2));
+    $('#amount').text(partialSum.toFixed(2));
     $(this).closest('tr').fadeOut().remove();
   });
 
@@ -127,9 +241,267 @@ $(document).ready(function() {
     }
   });
 
+  function fillCustomerData(customer){
+    var $scope = $(".show-customer");
+    $("#sr", $scope).html( customer.name + " " + customer.surname );
+    $("#address", $scope).html( customer.address );
+    $("#iva", $scope).html( customer.type_iva );
+    $("#cuit_cuil", $scope).html( customer.cuit_cuil );
+    $("#gross_income", $scope).html( customer.gross_income);
+    $("#phone", $scope).html( customer.phone )
+    $("#cellphone", $scope).html( customer.mobile_phone )
+    setTypeIva(customer);
+  }
+
+  function setTypeIva(customer){
+    var $scope = $(".show-customer");
+    if (isA(customer.type_iva)) {
+      $("#typeIva", $scope).html("A");
+      $("#invoice_invoice_type").val("A");
+    }else{
+      $("#typeIva", $scope).html("B");
+      $("#invoice_invoice_type").val("B");
+    }
+  }
+
+  //Card Functionality
+  $(document).on("click", "a.button-save-card", function(){
+    $("#invoices #new_card").submit();
+    amountAuxCard = parseFloat($('#card_amount').val());
+  });
+
+  $(document).on("click", "a#openBtn-name-card", function(){
+    $('#card-modal').modal('show');
+  });
+
+  var ajaxCardInvoiceResponded = false;
+  $("#invoices #invoice_card").on('click', function(e){
+    var card = $("#invoices #invoice_card");
+    if (ajaxCardInvoiceResponded == false) {
+      $.ajax({
+        type: "GET",
+        url: "/cards/new",
+        dataType: "html"
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-card').html(data);
+        $('#new-card').show('slow');
+        ajaxCardInvoiceResponded = true;
+        $('.card_date_time_picker').datetimepicker({
+          language: 'es',
+          pickDate: true,
+          pickTime: false,
+          maskInput: true,
+          pick12HourFormat: true,
+          pickSeconds: false,
+          format: 'dd/MM/yyyy',
+          startDate: 1910,
+          endDate: Infinity
+        });
+      })
+    } 
+    if (card.prop('checked')) {
+      $(this).parents(".thorizontal").siblings().toggle("show");
+      $('#invoices #data-card').show("slow");
+    } else {
+      $('#invoices #data-card').hide("slow");
+      card.parents(".thorizontal").siblings().hide();
+    }
+  });
+
+  $('#add-new-name-card').click(function(){
+    $('#card-modal').modal('hide');
+    var sel = document.getElementById('card_name');
+    var name = $('#new-name-card').val().toUpperCase();
+    if (notExistsName(sel, name)){
+      $('#card_name')
+        .append($("<option></option>")
+        .attr("value",name)
+        .text(name)
+      );
+    }
+    selectItemByValue(sel, name )
+    $('#new-name-card').val('');
+  });
+
+  function selectItemByValue(elmnt, value){
+    for(var i=0; i < elmnt.options.length; i++) {
+      if(elmnt.options[i].text == value)
+        elmnt.selectedIndex = i;
+    }
+  }
+
+  function notExistsName(elmnt, value){
+    var aReturn = true
+    for(var i=0; i < elmnt.options.length; i++) {
+      if(elmnt.options[i].text == value)
+        aReturn = false;
+    }
+    return aReturn;
+  }
+
+  var amountAuxCard, showCardInvoiceTable = false, amountCard = 0;
+  $(document).on('ajax:success','#invoices #new_card', function(evt, data, status, xhr){
+    $('#invoices #table-of-card').append(data);
+    $('#invoices #table-of-card tr:last').effect("highlight", {}, 3000);
+    $('#invoices #table-of-card').show("slow");
+    $('#delete-card').attr("onclick", "deleteRowCard(this)");
+    $('#invoices #new_card')[0].reset();
+    ids_card = $('#invoice_card_ids').val();
+    if (ids_card == "") {
+      ids_card = $(data).data("card-id");
+    } else {
+      ids_card = ids_card + "," + $(data).data("card-id");
+    }
+    $('#invoice_card_ids').val(ids_card);
+    showCardInvoiceTable = true;
+    amountCard = amountCard + amountAuxCard;
+    $("#invoices #amount_card").text(amountCard);
+    amountCash = partialSum - amountCheck - amountCard;
+    if (amountCash < 0)
+      $("#invoice_amount_cash").val(0);
+    $("#invoice_amount_cash").val(amountCash.toFixed(2))
+  });
+  //End credit card functionality
+
+  // index invoice
+  //
+  var invoicesTable;
+  invoicesTable = $('#invoices #invoices_table').dataTable({
+    sPaginationType: "full_numbers",
+    // bAutoWidth: false,
+    bJQueryUI: true,
+    bProcessing: true,
+    bServerSide: true,
+    sAjaxSource: $('#invoices #invoices_table').data('source'),
+    "aaSorting": [[ 0, "desc" ]],
+    fnInitComplete: function(oSettings, json){
+      $("thead th").each( function (i) {
+          $('select', this).change( function () {
+            invoicesTable.fnFilter($(this).val(),i);
+           });
+      });
+    },
+    oLanguage: {
+      sUrl: "/datatables/spanish.txt"
+    }
+  });
+
+  $('#openBtn-bank').click(function(){
+    $('#bank-modal').modal('show');
+  });
+
+  var amountAux, showCheckTable = false;
+  $('a.button-save-check').click(function(){
+    $('#invoices #new_check').submit();
+    amountAux = parseFloat($('#invoices #check_amount').val());
+  })
+
+  var amountCheck = 0;
+
+  $(document).on('ajax:success', '#invoices #new_check', function(evt, data, status, xhr){
+    $('#invoices #table-of-check').append(data);
+    $('#invoices #table-of-check tr:last').effect("highlight", {}, 3000);
+    $('#invoices #table-of-check').show("slow");
+    $('#delete-check').attr("onclick", "deleteRowInvoice(this)");
+    $('#invoices #new_check')[0].reset();
+    var ids = $('#invoice_check_ids').val();
+    if (ids == "") {
+      ids = $(data).data("check-id");
+    } else {
+      ids = ids + "," + $(data).data("check-id");
+    }
+    $('#invoice_check_ids').val(ids);
+    showCheckTable = true;
+    amountCheck = amountCheck + amountAux;
+    $("#invoices #amount_check").text(amountCheck)
+    amountCash = partialSum - amountCheck - amountCard;
+    if (amountCash < 0)
+      $("#invoice_amount_cash").val(0);
+    $("#invoice_amount_cash").val(amountCash.toFixed(2))
+  });
+
+  $(document).on("click", "a.button-save", function(){
+    $("#invoices #new_check").submit();
+    amountAux = parseFloat($('#check_amount').val());
+  });
+
+  var amountCash = 0, amount = 0;
+  $("#invoice_amount_cash").on('change', function(){
+    amountCash = parseFloat(this.value);
+  })
+
+  // changes the visibility of transactions inputs
+  var partialAmount = 0;
+  $("#invoice_cash").on('click', function(e){
+    partialAmount = partialSum - amountCheck - amountCard;
+    $('#invoice_amount_cash').val(partialAmount.toFixed(2));
+    $(this).parents(".thorizontal").siblings().toggle("show");
+  });
+
+  var ajaxCheckInvoiceResponded = false;
+  $("#invoice_check").on('click', function(e){
+    var check = $("#invoice_check");
+    if (ajaxCheckInvoiceResponded == false) {
+      $.ajax({
+        type: "GET",
+        url: "/checks/new",
+        dataType: "html"
+      })
+      .done(function(data, textStatus, xhr){
+        $('#new-check').html(data);
+        $('#new-check').show('slow');
+        ajaxCheckInvoiceResponded = true;
+        $('.check_date_time_picker').datetimepicker({
+          language: 'es',
+          pickDate: true,
+          pickTime: false,
+          maskInput: true,
+          pick12HourFormat: true,
+          pickSeconds: false,
+          format: 'dd/MM/yyyy',
+          startDate: 1910,
+          endDate: Infinity
+        });
+      })
+    }
+    if (check.prop('checked')) {
+      $(this).parents(".thorizontal").siblings().toggle("show");
+      $('#invoices #data-check').show("slow");
+    } else {
+      $('#invoices #data-check').hide("slow");
+      check.parents(".thorizontal").siblings().hide();
+    }
+  });
+
+  $("#items-tab").on('click', function(){
+    $('#invoices #data-check').hide();
+    $('#invoices #table-of-check').hide();
+    $('#invoices #table-of-check').hide();
+    $('#invoices #data-card').hide();
+    $('#invoices #table-of-card').hide();
+  });
+
+  $("#pay-tab").on('click', function(){
+    if ($("#invoice_check").prop('checked')) {
+      $('#invoices #data-check').show("slow");
+    }
+    if (showCheckTable) {
+      $('#invoices #table-of-check').show("slow");
+    }
+    if ($("#invoice_card").prop('checked')) {
+      $('#invoices #data-card').show("slow");
+    }
+    if (showCardInvoiceTable) {
+      $('#invoices #table-of-card').show("slow");
+    } 
+  });
+
+  hiddenInputsInvoice();
+
 });// document
 
-var aColumnsOptions =
+var aColumnsOptionsItem =
   [
     { "sClass": "center", "bSortable": false },
     { "bSortable": false },
@@ -139,4 +511,82 @@ var aColumnsOptions =
     { "bSortable": false },
     { "sClass": "center", "bSortable": false },
     { "sClass": "center", "bSortable": false }
-  ]
+  ];
+
+function deleteRowInvoice(btn) {
+  var row = btn.parentNode.parentNode;
+  checkDelete = $(row).data('check-id');
+  amountDeleted = parseFloat($('#invoices #check-amount').val());
+  $.ajax({
+    type: "DELETE",
+    url: "/checks/" + checkDelete,
+    dataType: "json",
+  })
+  .done(function(data, textStatus, xhr){
+    row.parentNode.removeChild(row);
+    amountCheck = parseFloat($("#amount_check").text()) ;
+    amountCheck = amountCheck - amountDeleted;
+    $("#amount_check").text(amountCheck);
+    amountCash = parseFloat($("#invoice_amount_cash").val());
+    amountCash = amountCash + amountDeleted;
+    $("#invoice_amount_cash").val(amountCash.toFixed(2));
+  });
+}
+
+function showCard(btn) {
+  var row = btn.parentNode.parentNode;
+  cardShow = $(row).data('card-id');
+  $.ajax({
+    type: "GET",
+    url: "/cards/" + cardShow,
+    dataType: "html",
+  })
+  .done(function(data, textStatus, xhr){
+    $('#new-card').html(data);
+    $('#new-card').show('slow');
+  });  
+}
+
+function deleteRowCard(btn) {
+  var row = btn.parentNode.parentNode;
+  cardDelete = $(row).data('card-id');
+  amountDeletedCard = parseFloat($('#card-amount-row').val());
+  $.ajax({
+    type: "DELETE",
+    url: "/cards/" + cardDelete,
+    dataType: "json",
+  })
+  .done(function(data, textStatus, xhr){
+    row.parentNode.removeChild(row);
+    amountCard = parseFloat($("#amount_card").text());
+    amountCard = amountCard - amountDeletedCard;
+    $("#amount_card").text(amountCard);
+  });
+}
+
+function hiddenInputsInvoice () {
+  var check, cash, card;
+  check = $('#invoice_check');
+  cash = $('#invoice_cash');
+  card = $('#invoice_card');
+  if (!check.prop('checked')){
+    $('#invoices #table-of-check').hide();
+    $('#invoices #data-check').hide();
+    check.parents(".thorizontal").siblings().hide();
+  }
+  if (!cash.prop('checked')) {
+    cash.parents(".thorizontal").siblings().hide();
+  }
+  if (!card.prop('checked')) {
+    $('#invoices #table-of-card').hide();
+    card.parents(".thorizontal").siblings().hide();
+  }
+}
+
+function isA (type_iva){
+  var a_message = "<%= I18n.t 'customers.type_iva.registered_taxpayer' %>"
+  if  (type_iva == a_message)
+    return true
+  else
+    return false
+}

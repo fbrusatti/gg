@@ -1,4 +1,4 @@
-@import "twitter/bootstrap";
+@import "bootstrap";
 
 #banks {
   // sub-header bank
@@ -18,8 +18,8 @@
      @extend .btn, .btn-primary;
   }
 
-  #openBtn-bank,  #openBtn-location,.btn-modal-submit {
-    @extend .btn, .btn-primary
+  #openBtn-bank-name,  #openBtn-location,.btn-modal-submit {
+    @extend .btn, .btn-primary;
   }
 
 
